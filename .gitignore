@@ -1,0 +1,21 @@
+# dependencies and build output
+node_modules/
+dist/
+.astro/
+
+# secrets: never commit (an .env.example may be committed)
+.env*
+!.env.example
+
+# private client and legal documents
+Documentos/
+
+# test and audit output
+test-results/
+playwright-report/
+screenshots/
+.lighthouseci/
+
+# OS / editor
+.DS_Store
+Thumbs.db
