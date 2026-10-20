@@ -3,7 +3,7 @@ route: "servicios/mantenimiento-web"
 name: "Mantenimiento y soporte"
 kicker: "Después del lanzamiento"
 navIcon: "shield-check"
-image: "svc-mantenimiento.webp"
+art: "mantenimiento"
 summary: "Tu sitio al día, seguro y funcionando: actualizaciones, cambios, respaldos y soporte cuando lo necesites."
 tools: ["cloudflare", "wordpress", "github"]
 
@@ -14,6 +14,25 @@ page:
     eyebrow: "Mantenimiento y soporte"
     title: "Tu sitio, ==siempre al día=="
     lead: "Nos encargamos de que tu sitio siga rápido, seguro y actualizado después del lanzamiento, para que tú te enfoques en tu negocio."
+
+  # Signature demo (src/components/demos/DemoMantenimiento.astro). Sample data; promises no frequency (Q11).
+  demo:
+    eyebrow: "En acción"
+    title: "Tu sitio, ==vigilado=="
+    lead: "Respaldos, actualizaciones, seguridad y velocidad: revisamos que todo siga funcionando para que tú no tengas que pensar en eso."
+    note: "Ejemplo ilustrativo. Qué revisamos y cada cuánto lo define tu plan de mantenimiento."
+    ui:
+      title: "Revisión de tunegocio.mx"
+      online: "En línea"
+      sample: "Ejemplo"
+      command: "revisar tunegocio.mx"
+      checks: ["Respaldo completado", "Plataforma y plugins al día", "Certificado de seguridad vigente", "Formularios funcionando", "Velocidad revisada"]
+      done: "Todo en orden."
+      uptimeTitle: "Pulso del sitio"
+      daysTitle: "Últimos 30 días"
+      speedTitle: "Respuesta"
+      speed: "320 ms"
+      speedOk: "Rápido"
 
   capabilities:
     eyebrow: "Lo que hacemos"

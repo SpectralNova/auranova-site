@@ -16,11 +16,15 @@ const pages = [
   '/nosotros/',
   '/contacto/',
   '/no-existe/',
+  '/opciones/', // preview-only review page (CP1.2); never built in production
 ];
 
 for (const path of pages) {
   for (const width of [390, 1440]) {
     test(`axe: ${path} at ${width}px has no serious or critical issues`, async ({ page }) => {
+      // Audit the settled frame: with motion, axe can sample a fade halfway and report its passing colour as a
+      // contrast failure. Reduced motion shows every demo and screen in its final, readable state.
+      await page.emulateMedia({ reducedMotion: 'reduce' });
       await page.setViewportSize({ width, height: 900 });
       await page.goto(path);
       const { violations } = await new AxeBuilder({ page })
@@ -93,6 +97,41 @@ test('process tabs: arrow keys switch steps, autoplay can be paused', async ({ p
   await expect(page.locator('#step-panel-0')).toBeHidden();
   await page.keyboard.press('End');
   await expect(tabs.nth(3)).toHaveAttribute('aria-selected', 'true');
+});
+
+test('animated demos: the pause button stops the animation and says what it will do next (WCAG 2.2.2)', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/servicios/posicionamiento-en-google/');
+  const demo = page.locator('.svc-demo');
+  await demo.scrollIntoViewIfNeeded();
+  await expect(demo).toHaveAttribute('data-playing', 'true');
+  const toggle = demo.locator('.demo-toggle');
+  await expect(toggle).toHaveAttribute('aria-label', 'Pausar animación');
+  await toggle.focus();
+  await page.keyboard.press('Enter');
+  await expect(demo).toHaveAttribute('data-playing', 'false');
+  await expect(toggle).toHaveAttribute('aria-label', 'Reproducir animación');
+});
+
+test('animated demos: nothing plays and no pause button shows with reduced motion', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  await expect(page.locator('[data-demo]').first()).toHaveAttribute('data-playing', 'false');
+  await expect(page.locator('.demo-toggle').first()).toBeHidden();
+});
+
+test('roadmap: pinned on desktop, tabs jump to a step from the keyboard; plain timeline on phones', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/como-trabajamos/');
+  const roadmap = page.locator('[data-roadmap]');
+  await expect(roadmap).toHaveAttribute('data-pinned', '');
+  await page.locator('.rm__tab').nth(3).focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('.rm__cur')).toHaveText('03');
+  await expect(page.locator('.rm__tab').nth(3)).toHaveAttribute('aria-current', 'step');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(roadmap).not.toHaveAttribute('data-pinned', '');
+  await expect(page.locator('.rm__step').nth(4)).toBeVisible();
 });
 
 test('contact form: keyboard only, errors announced, then accepted', async ({ page }) => {

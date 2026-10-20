@@ -1,6 +1,6 @@
 # Open questions
 
-*Seeded 2026-10-19 (Phase 0) from `WEBSITE_PROMPT.md` §16, plus new items found along the way. Batch 1 answered 2026-10-19; CP1 feedback received 2026-10-19 (CP1.1 built).*
+*Seeded 2026-10-19 (Phase 0) from `WEBSITE_PROMPT.md` §16, plus new items found along the way. Batch 1 answered 2026-10-19; CP1 feedback received 2026-10-19 (CP1.1 built); CP1.1 feedback received 2026-10-20 (CP1.2 built).*
 *Protocol: brief §1. When David answers, update the source of truth first (facts → `src/content/business.ts`; terms → `docs/PHILOSOPHY.md`), then the status here and in brief §16.*
 
 ✅ answered · 🟡 proposed default (build with it, not approved) · 🔴 unknown (David must supply)
@@ -24,7 +24,7 @@
 | Q13 | Photos | ✅ none; company, not person | — |
 | Q14 | Voice | ✅ nosotros | — |
 | Q15 | Channels | ✅ email · 🟡 my reading | CP1.1 |
-| Q16 | Booking tool | ✅ Cal.com · 🟡 length/buffers | CP1.1 |
+| Q16 | Booking tool | ✅ Cal.com · ✅ 30 min · 🟡 buffers | CP1.2 |
 | Q17 | Lead magnet | ✅ | — |
 | Q18 | Analytics | 🔴 TBD | before CP2 |
 | Q19 | Domain + hosting | ✅ (purchase after Q23) | — |
@@ -40,10 +40,13 @@
 | Q29 | US positioning | ⏸ on hold | — |
 | Q30 | Design-system fixes found in the build | ✅ done (DS v1.2) | — |
 | Q31 | Service scopes and drafted policies | 🟡 new | CP1.1 |
-| Q32 | Hero tagline + service H1s | 🟡 new | CP1.1 |
-| Q33 | AI image license (Artlist) | 🟡 new | CP1.1 |
+| Q32 | Hero tagline + service H1s | ✅ kept (CP1.1 review raised no change) | — |
+| Q33 | AI image license (Artlist) | 🟡 | CP1.2 |
+| Q34 | Home hero animation (A / B / C) | 🟡 new · A in place | CP1.2 |
+| Q35 | Service illustration style (A / B / C) | 🟡 new · A in place | CP1.2 |
+| Q36 | Is the 30-minute call free? | 🔴 new | CP1.2 |
 
-**Batch for CP1.1** (most blocking first): Q31, Q32, Q12, Q15, Q16, Q10, Q6, Q2, Q33. Before CP2 as well: Q18 (analytics) and Q11 (maintenance plans).
+**Batch for CP1.2** (most blocking first): Q34, Q35, Q36, Q31, Q12, Q15, Q10, Q6, Q2, Q33. Before CP2 as well: Q18 (analytics) and Q11 (maintenance plans).
 
 ---
 
@@ -121,8 +124,8 @@
 - **Consequence:** the `whatsapp_click` event is dropped.
 
 ## Q16 · Booking tool
-- **Answer:** ✅ Cal.com. (2026-10-19)
-- **Still 🟡:** a 30-minute call, 15-minute buffers, Mon–Fri 9:00–17:00 `America/Monterrey`; link out at launch (ADR-004). Cal.com shows each visitor the slots in their own time zone, which matters for US clients. You create the free account in Phase 2.
+- **Answer:** ✅ Cal.com. (2026-10-19) ✅ The call lasts **30 minutes** (2026-10-20; `duracionLlamada` in `business.ts`).
+- **Still 🟡:** 15-minute buffers, Mon–Fri 9:00–17:00 `America/Monterrey`; link out at launch (ADR-004). Cal.com shows each visitor the slots in their own time zone, which matters for US clients. You create the free account in Phase 2.
 
 ## Q17 · Lead magnet
 - **Status:** ✅ · **Answer:** yes, ungated, generated from the same data as /estandar; in both languages (Q4). · **Date:** 2026-10-19
@@ -218,13 +221,31 @@
 - **Question:** OK with the new home H1, "Un sitio web que **trabaja tanto como tú**", and the service H1s (see `docs/pages/servicio.md`)?
 - **Alternatives for the home:** "Tu negocio, **en línea y sin complicaciones**" · "Sitios web profesionales, **sin pagar de más**".
 - **Recommended:** keep the current one; it speaks to the owner, not to the technology.
-- **Status:** 🟡
+- **Status:** ✅ kept: the CP1.1 review (2026-10-20) changed the hero animation, not the headline.
 
 ## Q33 · AI image license (new)
 - **Question:** The site's illustrations were generated with Artlist (GPT Image 2.5) on your AI Suite plan. Can you confirm in your Artlist account terms that AI generations can be used commercially (on our site and in client work)?
 - **Blocks:** the images in production; the "imágenes con IA" offer on Contenido y marca.
 - **Recommended:** confirm (it's your account); I log it in `docs/ASSETS.md`.
 - **Status:** 🟡
+
+## Q34 · Home hero animation (new, CP1.2)
+- **Question:** Which animation shows "your site works for you" best? Compare them live at **`/opciones/`** on the preview (that page never reaches production).
+  - **A · Tu sitio atiende:** a business site takes a quote request while notifications arrive (quote, appointment, message).
+  - **B · Tu sitio no cierra:** a phone goes from day to night and keeps receiving clients at every hour.
+  - **C · Del clic al cliente:** search on Google → the site → a new client's message.
+- **Recommended:** **A**, the most immediate; it is what the home shows now. Changing it is one line (`hero.variant` in `src/content/pages/es/inicio.yaml`).
+- **Status:** 🟡
+
+## Q35 · Service illustration style (new, CP1.2)
+- **Question:** Which 2D style replaces the 3D art on the service cards and the /servicios/ rows? All three are at **`/opciones/`**: **A** Plano bicolor (flat violet + lime, dark outline), **B** Línea y acento (monoline violet, lime accents), **C** Degradado aura (soft lime → violet gradients).
+- **Recommended:** **A**: fully 2D and the sharpest at card size; B is the cleanest; C is the most "aura" but loses detail when small. Changing it is one line (`illustration` in `src/content/pages/es/servicios.yaml`).
+- **Status:** 🟡
+
+## Q36 · Is the 30-minute call free? (new, CP1.2)
+- **Question:** The roadmap on /como-trabajamos/ says what you pay at each stage. For the first call it reads "[[CONFIRMAR: Nada: la llamada no tiene costo.]]". Is the call free, always?
+- **Blocks:** production (the marker); "sin costo" could also go on the CTA note if true.
+- **Status:** 🔴
 
 ---
 

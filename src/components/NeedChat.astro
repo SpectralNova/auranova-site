@@ -1,0 +1,58 @@
+---
+// "¿No sabes cuál necesitas?" as a chat: the visitor's need on the right, our answer (and the service)
+// on the left. Plain list in the markup; bubbles rise in as they scroll into view (motion.css .sd-rise).
+import Icon from './Icon.astro';
+import { getEntry } from 'astro:content';
+import { href, type RouteKey } from '../i18n/routes';
+import { rich } from '../lib/rich';
+import type { Lang } from '../content/business';
+
+interface Props {
+  lang: Lang;
+  copy: { you: string; us: string; items: { need: string; answer: string; route: string }[] };
+}
+
+const { lang, copy } = Astro.props;
+const names: Record<string, string> = {};
+for (const item of copy.items) {
+  const slug = item.route.split('/')[1];
+  const entry = await getEntry('services', `${lang}/${slug}`);
+  names[item.route] = (entry?.data.name as string) ?? slug;
+}
+---
+
+<ol class="chat" role="list">
+  {
+    copy.items.map((item) => (
+      <li class="chat__pair">
+        <p class="chat__msg chat__msg--you sd-rise">
+          <span class="chat__who">{copy.you}</span>
+          <span set:html={rich(item.need, lang)} />
+        </p>
+        <p class="chat__msg chat__msg--us sd-rise">
+          <span class="chat__who">
+            <img src="/auranova-mark.svg" alt="" width="16" height="16" />
+            {copy.us}
+          </span>
+          <span set:html={rich(item.answer, lang)} />
+          <a class="chat__link" href={href(item.route as RouteKey, lang)}>
+            {names[item.route]}
+            <Icon name="arrow-right" size={16} />
+          </a>
+        </p>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .chat { display: grid; gap: var(--space-6); max-width: 46rem; margin: 0 auto; padding: 0; list-style: none; }
+  .chat__pair { display: grid; gap: var(--space-3); }
+  .chat__msg { display: grid; gap: var(--space-2); max-width: min(34rem, 90%); margin: 0; padding: var(--space-4) var(--space-5); border-radius: var(--radius-lg); }
+  .chat__msg--you { justify-self: end; border-bottom-right-radius: var(--radius-sm); background: var(--color-surface-2); }
+  .chat__msg--us { justify-self: start; border: 1px solid var(--color-border); border-bottom-left-radius: var(--radius-sm); background: var(--color-surface); }
+  .chat__who { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--color-text-muted); font-size: var(--text-xs); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+  .chat__link { display: inline-flex; align-items: center; gap: var(--space-2); justify-self: start; color: var(--color-accent); font-weight: var(--weight-strong); text-decoration: none; }
+  .chat__link:hover { text-decoration: underline; }
+  .theme-light .chat__link { color: var(--color-link); }
+</style>

@@ -3,7 +3,7 @@ route: "servicios/asesoria-digital"
 name: "Asesoría digital"
 kicker: "Consultoría"
 navIcon: "compass"
-image: "svc-asesoria.webp"
+art: "asesoria"
 summary: "Te ayudamos a decidir qué necesita tu negocio en línea, y qué no, antes de gastar."
 
 page:
@@ -13,6 +13,28 @@ page:
     eyebrow: "Asesoría digital"
     title: "Decisiones digitales ==sin gastar de más=="
     lead: "Antes de invertir, te ayudamos a decidir qué necesita tu negocio en línea y qué no. Revisamos lo que tienes, comparamos opciones y te damos un plan por escrito."
+
+  # Signature demo (src/components/demos/DemoAsesoria.astro). Illustrative plan. x/y: % on the matrix
+  # (x = cost, left is cheaper; y = from the top, so lower y = more impact); col -1 = "no lo necesitas".
+  demo:
+    eyebrow: "En acción"
+    title: "Qué necesitas, ==y qué no=="
+    lead: "Ordenamos tus opciones por impacto y costo, y te entregamos un plan por escrito: qué hacer ahora, qué después y qué puede esperar."
+    ui:
+      title: "Plan digital · Tu negocio"
+      sample: "Ejemplo"
+      impact: "Impacto"
+      cost: "Costo"
+      sweet: "Empieza aquí"
+      items:
+        - { label: "Perfil de Google", col: 0, x: 12, y: 14 }
+        - { label: "Reseñas y fotos", col: 0, x: 22, y: 33 }
+        - { label: "Sitio nuevo", col: 1, x: 54, y: 20 }
+        - { label: "Tienda en línea", col: 2, x: 58, y: 54 }
+        - { label: "App propia", col: -1, x: 64, y: 80 }
+      columns: ["Ahora", "Después", "Más adelante"]
+      skip: { label: "App propia:", text: "por ahora no la necesitas." }
+      plan: "Plan por escrito, con el costo de cada paso"
 
   capabilities:
     eyebrow: "Lo que hacemos"

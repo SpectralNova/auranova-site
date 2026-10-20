@@ -6,7 +6,10 @@
 |---|---|---|---|
 | Horario: lunes a viernes, 9:00–17:00, hora del centro; sin fines de semana ni feriados | everywhere (`{{horario}}`) | David; PHILOSOPHY §6 | ✅ |
 | Te respondemos en 1 día hábil / tú en 3 días hábiles | Inicio, Cómo trabajamos, Contacto | Q8 | ✅ |
-| Llamada de 30 minutos | Inicio, Servicio, Cómo trabajamos, Contacto | Q16 default | 🟡 |
+| Llamada de 30 minutos | Inicio, Servicio, Cómo trabajamos, Contacto | Q16 (David, 2026-10-20) | ✅ |
+| La llamada no tiene costo | Cómo trabajamos (roadmap, step 00) | not confirmed: shown as `[[CONFIRMAR]]` | 🔴 Q36 |
+| Medimos tu sitio con Lighthouse antes de publicar, como parte de nuestro estándar | Sitios web ("Este sitio, medido") | PHILOSOPHY §7 #3 | ✅ |
+| Demo numbers (KPIs, positions, response time, matrix) | Posicionamiento, Mantenimiento, Asesoría demos | none: **sample data**, labelled "Datos de ejemplo" / "Ejemplo" in the window and in a footnote; never presented as client results | ✅ by rule (ADR-011) |
 | Precio fijo por proyecto; no cobramos por hora; no publicamos precios genéricos | Inicio FAQ, Servicio, Cómo trabajamos | Q6 | ✅ |
 | Pagos 40% / 30% (al aprobar el diseño) / 30% (antes del lanzamiento); MXN + IVA | Inicio, Servicio, Cómo trabajamos | Q7 | ✅ |
 | Facturas vencen a los 15 días | Cómo trabajamos | contract §2.3 | ✅ |
@@ -25,7 +28,7 @@
 | Te dejamos el contenido en un formato editable | Servicio | PHILOSOPHY §7 additions (handover) | ✅ |
 | Conservamos tus direcciones (URL) al rediseñar | Servicio | standard redesign practice; not yet in PHILOSOPHY | 🟡 |
 | Hemos construido sitios con Astro, Next.js y WordPress | Servicio FAQ | Vista (Astro), LOGOS (Next.js), FERREMAG (WordPress): brief §3 | ✅ |
-| Este sitio: Lighthouse 100 / 100 / 100 / 100 (6 pages), contenido visible en ≤ 1.7 s | Inicio hero card + process report mockup | `src/data/site-scores.json`, measured 2026-10-19 on the local preview | 🟡 re-measure on the deployed site |
+| Este sitio: Lighthouse 99 / 100 / 100 / 100 (lowest across 6 pages), contenido principal en ≤ 1.7 s | Sitios web ("Este sitio, medido"), Inicio process tabs and Cómo trabajamos roadmap (report mockups) | `src/data/site-scores.json`, re-measured 2026-10-20 on the local preview | 🟡 re-measure on the deployed site |
 | Vista Consulting: Lighthouse 97 / 100 / 100 / 100 | Inicio, Servicio | `src/data/vista-scores.json`, measured 2026-10-19 on vistaconsulting.mx | ✅ |
 | Vista: "diseñamos y desarrollamos el sitio completo" | Inicio, Servicio | David, Q12 (2026-10-19) | ✅ (Vista's written OK 🟡) |
 | Vista: hecho con Astro, publicado en Cloudflare | Inicio, Servicio | HTTP inspection 2026-10-19 (`Server: cloudflare`, Astro markup) | ✅ |

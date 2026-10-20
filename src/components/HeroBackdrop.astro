@@ -1,0 +1,46 @@
+---
+// Generated background art behind a dark hero (src/assets/generated/bg/, docs/ASSETS.md). The art sits on
+// the right with the copy on its dark left side; on phones it becomes a band above the copy. It follows the
+// pointer a little and recedes as the visitor scrolls away (motion.css). Decorative only.
+import GeneratedImage from './GeneratedImage.astro';
+
+interface Props {
+  file: string;
+  /** object-position on wide screens / on phones (where the band shows the art's right half). */
+  position?: string;
+  mobilePosition?: string;
+}
+
+const { file, position = '100% 50%', mobilePosition = '88% 50%' } = Astro.props;
+---
+
+<div class="backdrop" aria-hidden="true" data-parallax style={`--pos: ${position}; --pos-m: ${mobilePosition}`}>
+  <div class="backdrop__img sd-hero-out">
+    <GeneratedImage file={file} widths={[640, 1088, 1632]} sizes="100vw" priority />
+  </div>
+  <div class="backdrop__fade"></div>
+</div>
+
+<script>
+  import { initPointerParallax } from '../lib/parallax';
+  initPointerParallax();
+</script>
+
+<style>
+  .backdrop { --px: 0; --py: 0; position: absolute; inset: 0; z-index: var(--z-base); overflow: hidden; }
+  .backdrop__img { position: absolute; inset: -4%; translate: calc(var(--px) * var(--space-4) * -1) calc(var(--py) * var(--space-3) * -1); transition: translate var(--dur-slow) var(--ease-out); }
+  .backdrop__img :global(picture), .backdrop__img :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos); }
+  /* Keeps the copy readable: solid on the left, clear on the right, and a soft floor into the next section. */
+  .backdrop__fade {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, var(--color-bg) 0%, color-mix(in oklab, var(--color-bg), transparent 30%) 38%, transparent 62%),
+      linear-gradient(0deg, var(--color-bg) 0%, transparent 22%);
+  }
+  @media (max-width: 1023px) {
+    .backdrop { inset: 0 0 auto 0; height: min(62vw, 26rem); }
+    .backdrop__img { inset: 0; }
+    .backdrop__img :global(img) { object-position: var(--pos-m); }
+    .backdrop__fade { background: linear-gradient(0deg, var(--color-bg) 0%, color-mix(in oklab, var(--color-bg), transparent 60%) 45%, transparent 100%); }
+  }
+</style>

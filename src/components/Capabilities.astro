@@ -19,7 +19,7 @@ const { lang, items } = Astro.props;
         <span class="icon-tile">
           <Icon name={item.icon} />
         </span>
-        <h3 class="cap__title">{item.title}</h3>
+        <h3 class="cap__title" set:html={rich(item.title, lang)} />
         <p class="muted" set:html={rich(item.text, lang)} />
       </li>
     ))

@@ -3,7 +3,7 @@ route: "servicios/contenido-y-marca"
 name: "Contenido y marca"
 kicker: "Textos, imágenes y video"
 navIcon: "sparkles"
-image: "svc-contenido.webp"
+art: "contenido"
 summary: "Textos que venden, imágenes y video para tu sitio y tus redes, y una identidad visual que se ve como una sola marca."
 
 page:
@@ -13,6 +13,22 @@ page:
     eyebrow: "Contenido y marca"
     title: "Contenido que ==habla por tu negocio=="
     lead: "Escribimos los textos de tu sitio, creamos imágenes y video para tu sitio y tus redes, y ordenamos tu identidad visual para que todo se vea como una sola marca."
+
+  # Signature demo (src/components/demos/DemoContenido.astro). Illustrative reel.
+  demo:
+    eyebrow: "En acción"
+    title: "Tu contenido, ==en producción=="
+    lead: "Editamos tu video, escribimos los subtítulos y diseñamos las portadas con los colores de tu marca. Así se ve un reel mientras lo armamos."
+    ui:
+      file: "reel_lanzamiento"
+      formats: ["9:16", "1:1", "16:9"]
+      captions: ["Pasteles para cada ocasión", "Hechos a mano, todos los días", "Pide el tuyo hoy"]
+      times: ["00:03", "00:08", "00:13"]
+      total: "00:15"
+      tracks: ["Video", "Gráficos", "Subtítulos", "Música"]
+      ruler: ["00:00", "00:05", "00:10", "00:15"]
+      thumbsTitle: "Portadas"
+      paletteTitle: "Tu marca"
 
   capabilities:
     eyebrow: "Lo que hacemos"

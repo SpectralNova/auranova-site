@@ -66,7 +66,11 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   integrations: [
-    sitemap({ i18n: { defaultLocale: 'es', locales: { es: 'es-MX', en: 'en-US' } } }),
+    sitemap({
+      i18n: { defaultLocale: 'es', locales: { es: 'es-MX', en: 'en-US' } },
+      // /opciones/ is a preview-only review page (never built in production); keep it out regardless.
+      filter: (page) => !page.includes('/opciones/'),
+    }),
     siteFiles(),
   ],
   // Never inline scripts or assets: the CSP allows only same-origin files (script-src 'self').

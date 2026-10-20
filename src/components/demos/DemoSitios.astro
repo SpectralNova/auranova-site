@@ -1,0 +1,129 @@
+---
+// Sitios web: "del código a tu sitio". Code types itself line by line in an editor while the preview
+// builds the matching block, then the site is published. Illustrative ("Tu negocio"), no numbers.
+import Icon from '../Icon.astro';
+import DemoToggle from '../DemoToggle.astro';
+
+interface Props {
+  copy: any;
+}
+
+const { copy } = Astro.props;
+const d = copy.demo;
+---
+
+<div class="svc-demo demo-dark sw" data-demo>
+  <div class="sw__scene" aria-hidden="true">
+    <div class="demo-window__bar">
+      <span class="demo-window__dots"><span></span><span></span><span></span></span>
+      <span class="svc-demo__title"><Icon name="file-code" size={14} />{d.file}</span>
+      <span class="svc-demo__bar-end demo-window__url sw__url"><Icon name="lock" size={12} />{d.url}</span>
+    </div>
+    <div class="sw__body">
+      <ol class="sw__code demo-mono">
+        <li class="sw__line sw__line--1"><span class="t-tag">&lt;Encabezado</span> <span class="t-attr">logo</span>=<span class="t-str">"{d.brand}"</span> <span class="t-tag">/&gt;</span></li>
+        <li class="sw__line sw__line--2"><span class="t-tag">&lt;Portada</span> <span class="t-attr">titulo</span>=<span class="t-str">"{d.headline}"</span><span class="t-tag">&gt;</span></li>
+        <li class="sw__line sw__line--3 sw__indent"><span class="t-tag">&lt;Boton&gt;</span>{d.button}<span class="t-tag">&lt;/Boton&gt;</span></li>
+        <li class="sw__line sw__line--4"><span class="t-tag">&lt;/Portada&gt;</span></li>
+        <li class="sw__line sw__line--5"><span class="t-tag">&lt;Servicios</span> <span class="t-attr">columnas</span>=<span class="t-num">{'{3}'}</span> <span class="t-tag">/&gt;</span></li>
+        <li class="sw__line sw__line--6"><span class="t-tag">&lt;Opiniones</span> <span class="t-tag">/&gt;</span></li>
+        <li class="sw__line sw__line--7"><span class="t-tag">&lt;Contacto</span> <span class="t-attr">formulario</span> <span class="t-tag">/&gt;</span></li>
+      </ol>
+      <div class="sw__preview">
+        <div class="sw__site">
+          <div class="sw__b sw__b--1 sw__nav">
+            <span class="sw__logo"></span><strong>{d.brand}</strong>
+            <span class="mock-line"></span><span class="mock-line"></span><span class="mock-line"></span>
+          </div>
+          <div class="sw__b sw__b--2 sw__hero">
+            <span class="sw__headline">{d.headline}</span>
+            <span class="mock-line mock-line--w70"></span>
+            <span class="sw__b sw__b--3 sw__btn">{d.button}</span>
+          </div>
+          <div class="sw__b sw__b--5 sw__cards"><span></span><span></span><span></span></div>
+          <div class="sw__b sw__b--6 sw__reviews">
+            <span class="sw__stars"><Icon name="star" size={12} /><Icon name="star" size={12} /><Icon name="star" size={12} /><Icon name="star" size={12} /><Icon name="star" size={12} /></span>
+            <span class="mock-line mock-line--w50"></span>
+          </div>
+          <div class="sw__b sw__b--7 sw__form"><span></span><span></span><b>{d.send}</b></div>
+        </div>
+      </div>
+    </div>
+    <p class="demo-toast sw__toast">
+      <span class="demo-toast__icon"><Icon name="rocket" size={18} /></span>
+      <span><strong>{d.published}</strong><small>{d.url}</small></span>
+    </p>
+  </div>
+  <DemoToggle pause={copy.pause} play={copy.play} />
+</div>
+
+<style>
+  .sw__url { flex: 0 1 auto; max-width: 14rem; }
+  .sw__body { display: grid; grid-template-columns: minmax(0, 1fr); min-height: 24rem; }
+  @media (min-width: 768px) {
+    .sw__body { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+  }
+  .sw__code { counter-reset: line; display: grid; align-content: start; gap: var(--space-2); margin: 0; padding: var(--space-5) var(--space-4) var(--space-5) 0; list-style: none; background: var(--color-bg); font-size: var(--text-xs); line-height: 1.5; }
+  .sw__line { position: relative; padding-left: calc(var(--space-7) + var(--space-1)); white-space: nowrap; overflow: hidden; }
+  .sw__line::before { counter-increment: line; content: counter(line); position: absolute; left: 0; width: var(--space-6); text-align: right; color: var(--gray-5); }
+  .sw__indent { padding-left: calc(var(--space-8) + var(--space-2)); }
+  /* The "typing" cover: shrinks to the right to reveal the line (transform only). */
+  .sw__line::after { content: ""; position: absolute; inset: 0 0 0 calc(var(--space-7) + var(--space-1)); background: var(--color-bg); transform-origin: right; transform: scaleX(0); }
+  .t-tag { color: var(--violet-3); }
+  .t-attr { color: var(--lime-2); }
+  .t-str { color: var(--gray-1); }
+  .t-num { color: var(--lime-1); }
+  .sw__preview { display: grid; place-items: center; padding: var(--space-5); border-left: 1px solid var(--color-border); background: radial-gradient(circle at 70% 20%, color-mix(in oklab, var(--violet-5), transparent 78%), transparent 60%), var(--color-surface); }
+  @media (max-width: 767px) {
+    .sw__code { padding-block: var(--space-4); }
+    .sw__preview { border-left: 0; border-top: 1px solid var(--color-border); }
+  }
+  .sw__site { display: grid; gap: var(--space-3); width: min(100%, 26rem); padding: var(--space-4); border-radius: var(--radius-lg); background: var(--violet-1); color: var(--gray-7); box-shadow: var(--shadow-lg); }
+  .sw__nav { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-xs); }
+  .sw__nav strong { margin-right: auto; }
+  .sw__nav .mock-line { width: var(--space-6); }
+  .sw__logo { width: var(--space-4); height: var(--space-4); border-radius: 50%; background: var(--violet-5); }
+  .sw__hero { display: grid; gap: var(--space-2); padding: var(--space-4); border-radius: var(--radius-md); background: linear-gradient(135deg, var(--violet-2), var(--violet-1)); color: var(--violet-7); }
+  .sw__headline { font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-xl); line-height: var(--leading-tight); }
+  .sw__btn { justify-self: start; padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); background: var(--gray-7); color: var(--lime-1); font-size: var(--text-xs); font-weight: var(--weight-strong); }
+  .sw__cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); }
+  .sw__cards span { height: 3rem; border: 1px solid var(--gray-1); border-radius: var(--radius-sm); background: var(--white); }
+  .sw__reviews { display: flex; align-items: center; gap: var(--space-3); }
+  .sw__stars { display: inline-flex; color: var(--violet-5); }
+  .sw__stars :global(svg) { fill: currentColor; }
+  .sw__form { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: var(--space-2); align-items: center; }
+  .sw__form span { height: var(--space-6); border: 1px solid var(--gray-2); border-radius: var(--radius-sm); background: var(--white); }
+  .sw__form b { padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); background: var(--lime-1); color: var(--lime-7); font-size: var(--text-xs); }
+  .sw__toast { position: absolute; left: var(--space-5); bottom: var(--space-5); margin: 0; }
+
+  @keyframes sw-l1 { 0%, 3% { transform: scaleX(1); } 8%, 90% { transform: scaleX(0); } 95%, 100% { transform: scaleX(1); } }
+  @keyframes sw-l2 { 0%, 11% { transform: scaleX(1); } 16%, 90% { transform: scaleX(0); } 95%, 100% { transform: scaleX(1); } }
+  @keyframes sw-l3 { 0%, 19% { transform: scaleX(1); } 23%, 90% { transform: scaleX(0); } 95%, 100% { transform: scaleX(1); } }
+  @keyframes sw-l4 { 0%, 25% { transform: scaleX(1); } 28%, 90% { transform: scaleX(0); } 95%, 100% { transform: scaleX(1); } }
+  @keyframes sw-l5 { 0%, 31% { transform: scaleX(1); } 37%, 90% { transform: scaleX(0); } 95%, 100% { transform: scaleX(1); } }
+  @keyframes sw-l6 { 0%, 40% { transform: scaleX(1); } 44%, 90% { transform: scaleX(0); } 95%, 100% { transform: scaleX(1); } }
+  @keyframes sw-l7 { 0%, 47% { transform: scaleX(1); } 53%, 90% { transform: scaleX(0); } 95%, 100% { transform: scaleX(1); } }
+  @keyframes sw-b1 { 0%, 7% { opacity: 0; transform: translateY(var(--space-3)); } 11%, 90% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; } }
+  @keyframes sw-b2 { 0%, 15% { opacity: 0; transform: translateY(var(--space-3)); } 19%, 90% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; } }
+  @keyframes sw-b3 { 0%, 22% { opacity: 0; transform: scale(0.6); } 26%, 90% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; } }
+  @keyframes sw-b5 { 0%, 36% { opacity: 0; transform: translateY(var(--space-3)); } 40%, 90% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; } }
+  @keyframes sw-b6 { 0%, 43% { opacity: 0; transform: translateY(var(--space-3)); } 47%, 90% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; } }
+  @keyframes sw-b7 { 0%, 52% { opacity: 0; transform: translateY(var(--space-3)); } 56%, 90% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; } }
+  @keyframes sw-toast { 0%, 62% { opacity: 0; transform: translateY(var(--space-4)); } 66%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; transform: translateY(var(--space-2)); } }
+  @media (prefers-reduced-motion: no-preference) {
+    .sw__line--1::after { animation: sw-l1 var(--cycle) linear infinite both; }
+    .sw__line--2::after { animation: sw-l2 var(--cycle) linear infinite both; }
+    .sw__line--3::after { animation: sw-l3 var(--cycle) linear infinite both; }
+    .sw__line--4::after { animation: sw-l4 var(--cycle) linear infinite both; }
+    .sw__line--5::after { animation: sw-l5 var(--cycle) linear infinite both; }
+    .sw__line--6::after { animation: sw-l6 var(--cycle) linear infinite both; }
+    .sw__line--7::after { animation: sw-l7 var(--cycle) linear infinite both; }
+    .sw__b--1 { animation: sw-b1 var(--cycle) var(--ease-out) infinite both; }
+    .sw__b--2 { animation: sw-b2 var(--cycle) var(--ease-out) infinite both; }
+    .sw__b--3 { animation: sw-b3 var(--cycle) var(--ease-out) infinite both; }
+    .sw__b--5 { animation: sw-b5 var(--cycle) var(--ease-out) infinite both; }
+    .sw__b--6 { animation: sw-b6 var(--cycle) var(--ease-out) infinite both; }
+    .sw__b--7 { animation: sw-b7 var(--cycle) var(--ease-out) infinite both; }
+    .sw__toast { animation: sw-toast var(--cycle) var(--ease-out) infinite both; }
+  }
+</style>

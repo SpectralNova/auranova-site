@@ -1,0 +1,47 @@
+/* ==========================================================================
+   AuraNova: scroll storytelling (CP1.2, ADR-011). Native scroll only: nothing
+   is pinned against the visitor's will and nothing hijacks the wheel. Effects
+   are tied to the scroll position (CSS scroll-driven animations), so they move
+   only when the visitor moves. Browsers without support, and visitors who ask
+   for reduced motion, get the static final layout. Transform/opacity only.
+   ========================================================================== */
+
+@keyframes sd-rise { from { opacity: 0; transform: translateY(var(--space-7)); } to { opacity: 1; transform: none; } }
+@keyframes sd-scale { from { opacity: 0.35; transform: translateY(var(--space-8)) scale(0.9); } to { opacity: 1; transform: none; } }
+@keyframes sd-drift { from { transform: translateY(var(--sd-from, var(--space-7))); } to { transform: translateY(var(--sd-to, calc(var(--space-7) * -1))); } }
+@keyframes sd-slide { from { transform: translateX(var(--sd-x-from, 0%)); } to { transform: translateX(var(--sd-x-to, -25%)); } }
+@keyframes sd-reveal { from { opacity: 0; } to { opacity: 1; } }
+@keyframes sd-grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes sd-grow-y { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes sd-hero-out { to { opacity: 0.4; transform: scale(1.08) translateY(var(--space-8)); } }
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* Rises in as it enters the viewport. */
+    .sd-rise { animation: sd-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 80%; }
+    /* A big panel that grows into place (TypeSomething-style product window). */
+    .sd-scale { animation: sd-scale linear both; animation-timeline: view(); animation-range: entry 0% cover 35%; }
+    /* Moves a little slower or faster than the page (parallax). Tune with --sd-from / --sd-to. */
+    .sd-drift { animation: sd-drift linear both; animation-timeline: view(); animation-range: cover; }
+    /* A long row that slides sideways while the section crosses the screen (ticker). */
+    .sd-slide { animation: sd-slide linear both; animation-timeline: view(); animation-range: cover; }
+    /* A hero background that recedes as the visitor scrolls away from it. */
+    .sd-hero-out { animation: sd-hero-out linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+  }
+}
+
+/* Statement: words light up one by one as the line crosses the screen (Pier Gorelli-style).
+   The real text is the muted base (passes contrast on its own); the bright copy is a pseudo-element
+   with empty alternative text, so screen readers read each word once. */
+.statement { margin: 0; max-width: 22ch; font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-4xl); line-height: var(--leading-tight); letter-spacing: var(--tracking-display); view-timeline-name: --statement; }
+.statement--wide { max-width: 30ch; }
+/* inline-block: the word's box is exactly one line tall, so the bright copy lands on the same baseline. */
+.statement .w { position: relative; display: inline-block; color: var(--color-text-muted); }
+.statement .w::after { content: attr(data-w) / ""; position: absolute; inset: 0; color: var(--color-text); white-space: nowrap; }
+.statement .w--hl::after { color: var(--color-accent); }
+.theme-light .statement .w--hl::after { color: var(--color-link); }
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .statement .w::after { animation: sd-reveal linear both; animation-timeline: --statement; animation-range: cover var(--a) cover var(--b); }
+  }
+}

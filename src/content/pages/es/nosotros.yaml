@@ -5,14 +5,12 @@ hero:
   eyebrow: "Nosotros"
   title: "Un estudio pequeño, ==para negocios como el tuyo=="
   lead: "AuraNova es un estudio de diseño y desarrollo web con base en Monterrey, Nuevo León. Trabajamos a distancia con pequeños y medianos negocios de todo México."
-  imageAlt: ""
-
-name:
-  eyebrow: "El nombre"
-  title: "Aura + Nova"
-  text:
-    - "Una **nova** es una estrella que de pronto brilla mucho más y se ve desde lejos. El **aura** es lo que algo transmite antes de que leas una sola palabra."
-    - "Eso hacemos: que tu negocio brille en línea. Y ese brillo viene del método, no del adorno: un propósito claro para cada página, todo por escrito y calidad que se mide."
+  name:
+    - term: "Aura"
+      text: "Lo que tu negocio transmite antes de que leas una sola palabra."
+    - term: "Nova"
+      text: "Una estrella que de pronto brilla mucho más y se ve desde lejos."
+  closing: "Eso hacemos: que tu negocio brille en línea. Y ese brillo viene del método, no del adorno."
 
 purpose:
   eyebrow: "Misión y visión"
@@ -47,7 +45,3 @@ boundaries:
     - "No tocamos tu sitio en producción sin tu aprobación por escrito."
     - "No trabajamos fuera del alcance sin una solicitud de cambio aprobada."
     - "No te recomendamos herramientas que no necesitas."
-
-cta:
-  title: "¿Platicamos de ==tu negocio==?"
-  text: "Agenda una llamada de {{duracionLlamada}}. Atendemos {{horario}}."

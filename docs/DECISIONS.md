@@ -60,7 +60,7 @@
 - **Timing:** Q26. The routes are wired at CP1; English copy comes at CP2.
 
 ## ADR-008 · Media and motion (CP1 feedback: "more images, icons and animations, like atomato.co")
-- **Status:** Implemented for CP1.1 · 2026-10-19
+- **Status:** Implemented for CP1.1 · 2026-10-19 · **CP1.2:** the 3D art and the floating motion are retired (David); see ADR-011 and docs/ASSETS.md.
 - **Images:** brand illustrations generated with Artlist (GPT Image 2.5, transparent backgrounds) in one 3D glass/ceramic style and the brand palette. They're served as AVIF/WebP at the needed sizes (`docs/ASSETS.md`). No stock photos, no AI people or fake places.
 - **Icons:** Lucide (UI) and Simple Icons (tool logos), inlined at build time. That adds 0 KB of JavaScript.
 - **Motion:** only `transform` and `opacity` (DESIGN_SYSTEM §5), all disabled with `prefers-reduced-motion`:
@@ -75,3 +75,22 @@
 - **Status:** Implemented for CP1.1 · 2026-10-19 (David's CP1 feedback)
 - **Decision:** the home has only the essentials, like backdoor.com.mx: hero → what we do (6 service cards) → how we do it (process tabs) → book a call. The problems, the standard, "todo por escrito" and the FAQ moved to the service pages and Cómo trabajamos. The nav's "Servicios" opens a menu with each service's page.
 - **Positioning:** small and mid-sized business owners looking for fast, affordable, reliable websites **and advice**. The city appears only on Nosotros; the hero carries no city or country.
+
+## ADR-010 · The violet CTA band is retired
+- **Status:** Implemented for CP1.2 · 2026-10-20 (David's CP1.1 feedback)
+- **Decision:** no page ends in a violet band. The closing call to action lives inside the last section (`CtaBlock`: an optional title line, the button, a short note). On the home it replaces the "Conoce todos los detalles" link, with "Te decimos qué necesitas y qué no." under it.
+- **Consequence:** the DS still has `.theme-violet`; the site no longer uses it. Section.astro keeps the option.
+
+## ADR-011 · Scroll storytelling without scroll-jacking; every demo pausable
+- **Status:** Implemented for CP1.2 · 2026-10-20 (David: TypeSomething's product page for Servicios, piergorelli.com for Cómo trabajamos)
+- **Native scroll, always:** effects follow the scroll position through CSS scroll-driven animations (`src/styles/motion.css`): rise-ins, the mosaic that grows into place, parallax art, the capability ticker, the process rail that fills, the statement whose words light up. They move only when the visitor scrolls. Browsers without support and `prefers-reduced-motion` get the static layout.
+- **The roadmap pins, it doesn't hijack:** on desktop (≥1024 × ≥700 px, JavaScript on) Cómo trabajamos keeps a stage in view with `position: sticky` while the page scrolls past it; the step follows the scroll position. The page never moves by itself; the stage tabs are buttons that jump to a step. Phones, short screens and no-JS get a plain timeline with every step.
+- **Timed animation = pausable:** the hero and service demos loop, so each one plays only while on screen, has a pause button whose label says what it will do (WCAG 2.2.2), and shows its final frame with reduced motion (`src/lib/demo.ts`). Nothing else runs longer than 5 s: the Nosotros stars twinkle ~4.5 s and rest; its sky moves with the pointer and the scroll only.
+- **Honesty:** demos use a generic "Tu negocio". Any demo with numbers is labelled "Datos de ejemplo"/"Ejemplo" and carries a footnote (docs/CLAIMS.md). The quality report on Sitios web is the only real number set, and it comes from `npm run measure`.
+- **Cost:** about 6 KB of JavaScript in total (demos, roadmap, parallax, menu, tabs). Lighthouse mobile: 99–100 performance on every page.
+
+## ADR-012 · Design-system proposals from CP1.2 (DS v1.3, not applied upstream yet)
+- **Status:** Proposed · 2026-10-20 — approve at CP1.2, then change upstream first (brief rule), bump the changelog and re-sync.
+  1. **`.tag` on light backgrounds** measures 4.43:1 (violet-5 on its own 20% tint, 12 px). Fix: `--color-link-hover` (violet-6) for `.theme-light .tag` text. Applied locally in `site.css` until then.
+  2. **`.theme-dark` utility** to force the dark semantic tokens inside a light section (the service demos are dark product windows). Local stand-in: `.demo-dark` in `demos.css`.
+  3. **`--font-mono`** (system monospace stack, no download) for code and terminal demos. Local stand-in: `.demo-mono`.

@@ -1,0 +1,74 @@
+---
+// /servicios/ hero: the six services as a bento of their generated backgrounds (src/assets/generated/bg/),
+// each tile a link to its page. Grows into place as the visitor scrolls (motion.css .sd-scale).
+import { getCollection } from 'astro:content';
+import GeneratedImage from './GeneratedImage.astro';
+import Icon from './Icon.astro';
+import { href, type RouteKey } from '../i18n/routes';
+import type { Lang } from '../content/business';
+
+interface Props {
+  lang: Lang;
+  label: string;
+}
+
+const { lang, label } = Astro.props;
+const services = (await getCollection('services', (s) => s.id.startsWith(`${lang}/`))).sort((a, b) => a.data.order - b.data.order);
+---
+
+<ul class="mosaic sd-scale" role="list" aria-label={label}>
+  {
+    services.map(({ data }, i) => (
+      <li class={`mosaic__tile mosaic__tile--${i + 1}`}>
+        <a class="mosaic__link" href={href(data.route as RouteKey, lang)}>
+          <span class="mosaic__img" aria-hidden="true">
+            <GeneratedImage file={`bg/${data.art}.webp`} widths={[480, 800, 1088]} sizes="(min-width: 1024px) 50vw, 100vw" />
+          </span>
+          <span class="mosaic__text">
+            <span class="mosaic__num" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <strong class="mosaic__name">{data.name}</strong>
+            <span class="mosaic__kicker">{data.kicker}</span>
+          </span>
+          <span class="mosaic__go" aria-hidden="true">
+            <Icon name="arrow-up-right" size={18} />
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .mosaic { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); margin: var(--space-8) 0 0; padding: 0; list-style: none; text-align: left; }
+  @media (min-width: 1024px) {
+    .mosaic { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 15rem; gap: var(--grid-gap); }
+    .mosaic__tile--1, .mosaic__tile--6 { grid-column: span 2; }
+  }
+  @media (max-width: 479px) {
+    .mosaic { grid-template-columns: minmax(0, 1fr); }
+  }
+  .mosaic__link {
+    position: relative; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; min-height: 11rem; padding: var(--space-5);
+    overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--gray-7); color: var(--gray-1); text-decoration: none;
+    transition: border-color var(--dur-base) var(--ease-out);
+  }
+  .mosaic__link:hover { border-color: var(--color-border-strong); }
+  .mosaic__link:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+  .mosaic__img { position: absolute; inset: 0; }
+  .mosaic__img :global(picture), .mosaic__img :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 85% 50%; transition: transform var(--dur-slow) var(--ease-out); }
+  .mosaic__link:hover .mosaic__img :global(img) { transform: scale(1.06); }
+  /* Text on the dark lower-left of each tile, always readable over the art. */
+  .mosaic__img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(20deg, var(--gray-7) 15%, color-mix(in oklab, var(--gray-7), transparent 45%) 50%, transparent 80%); }
+  .mosaic__text { position: relative; display: grid; gap: var(--space-1); }
+  .mosaic__num { font-family: var(--font-display); font-weight: var(--weight-display); color: var(--lime-1); }
+  .mosaic__name { font-family: var(--font-heading); font-weight: var(--weight-heading); font-size: var(--text-xl); line-height: var(--leading-snug); }
+  .mosaic__kicker { color: var(--gray-3); font-size: var(--text-sm); }
+  .mosaic__go {
+    position: absolute; top: var(--space-4); right: var(--space-4); display: grid; place-items: center; width: var(--space-7); height: var(--space-7);
+    border: 1px solid color-mix(in oklab, var(--gray-7), white 20%); border-radius: 50%; background: color-mix(in oklab, var(--gray-7), transparent 30%); color: var(--gray-1);
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+  .mosaic__link:hover .mosaic__go { transform: rotate(45deg); background: var(--lime-1); color: var(--lime-7); }
+</style>

@@ -1,0 +1,94 @@
+---
+// "Este sitio, medido" (Sitios web page): what we measure, in plain words, next to THIS site's real Lighthouse
+// results (src/data/site-scores.json, written by `npm run measure`; never typed by hand). The bars fill as
+// the card scrolls in. Moved here from the home hero in CP1.2.
+import Icon from './Icon.astro';
+import { loadScores, lowest, seconds, formatDate } from '../lib/scores';
+import { rich } from '../lib/rich';
+import { t } from '../i18n/ui';
+import type { Lang } from '../content/business';
+
+interface Props {
+  lang: Lang;
+  copy: { reportTitle: string; lcpLabel: string; caption: string; items: { title: string; text: string }[] };
+}
+
+const { lang, copy } = Astro.props;
+const scores = loadScores('site-scores');
+const low = scores && lowest(scores);
+const values = low ? [low.performance, low.accessibility, low.bestPractices, low.seo] : [];
+---
+
+{
+  low && scores && (
+    <div class="quality">
+      <ul class="quality__list" role="list">
+        {copy.items.map((item, i) => (
+          <li>
+            <span class="quality__num" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div>
+              <h3 class="quality__item-title">{item.title}</h3>
+              <p class="muted" set:html={rich(item.text, lang)} />
+            </div>
+          </li>
+        ))}
+      </ul>
+      <figure class="quality__card sd-scale">
+        <figcaption class="quality__title">
+          <Icon name="gauge" size={20} />
+          {copy.reportTitle}
+        </figcaption>
+        <ul class="bars" role="list">
+          {copy.items.map((item, i) => (
+            <li class="bar" style={`--value: ${values[i] / 100}; --i: ${i}`}>
+              <span class="bar__label">{item.title}</span>
+              <span class="bar__value">{values[i]}</span>
+              <span class="bar__track" aria-hidden="true">
+                <span class="bar__fill" />
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p class="quality__lcp">
+          <Icon name="zap" size={16} />
+          {copy.lcpLabel} <strong>{seconds(low.lcpMs, lang)}</strong>
+        </p>
+        <p class="quality__meta">
+          {t(lang).measuredOn} {formatDate(scores.measuredAt, lang)}. {copy.caption} {scores.note && <Fragment set:html={rich(scores.note, lang)} />}
+        </p>
+      </figure>
+    </div>
+  )
+}
+
+<style>
+  .quality { display: grid; gap: var(--space-7); align-items: center; }
+  @media (min-width: 1024px) {
+    .quality { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: var(--space-9); }
+  }
+  .quality__list { display: grid; gap: var(--space-5); margin: 0; padding: 0; list-style: none; }
+  .quality__list li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-4); align-items: start; padding-bottom: var(--space-5); border-bottom: 1px solid var(--color-border); }
+  .quality__list li:last-child { padding-bottom: 0; border-bottom: 0; }
+  .quality__num { font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-xl); color: var(--color-link); }
+  .quality__item-title { margin: 0 0 var(--space-1); font-size: var(--text-lg); }
+  .quality__list p { margin: 0; }
+  .quality__card {
+    margin: 0; padding: var(--space-6); border-radius: var(--radius-xl);
+    background: var(--gray-7); color: var(--gray-1); box-shadow: var(--shadow-lg), var(--glow-secondary);
+  }
+  .quality__title { display: flex; align-items: center; gap: var(--space-2); margin: 0 0 var(--space-5); font-family: var(--font-heading); font-weight: var(--weight-heading); font-size: var(--text-lg); }
+  .quality__title :global(.icon), .quality__lcp :global(.icon) { color: var(--lime-1); }
+  .quality__card :global(.bar__value) { color: var(--lime-1); }
+  .quality__card :global(.bar__track) { background: color-mix(in oklab, var(--gray-4), transparent 55%); }
+  .quality__card :global(.bar__fill) { background: var(--lime-1); }
+  .quality__lcp { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin: var(--space-5) 0 0; padding: var(--space-3) var(--space-4); border-radius: var(--radius-pill); background: color-mix(in oklab, var(--gray-7), white 8%); font-size: var(--text-sm); }
+  .quality__lcp strong { color: var(--lime-1); }
+  .quality__meta { margin: var(--space-4) 0 0; color: var(--gray-3); font-size: var(--text-xs); }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .quality__card :global(.bar__fill) { animation: fill linear both; animation-timeline: view(); animation-range: entry 100% cover 45%; animation-delay: initial; }
+    }
+  }
+</style>

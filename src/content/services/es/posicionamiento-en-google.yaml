@@ -3,7 +3,7 @@ route: "servicios/posicionamiento-en-google"
 name: "Posicionamiento en Google"
 kicker: "SEO y analítica"
 navIcon: "search-check"
-image: "svc-posicionamiento.webp"
+art: "posicionamiento"
 summary: "Que te encuentren cuando te buscan: SEO, tu perfil de negocio en Google y reportes claros de lo que funciona."
 tools: ["googlesearchconsole", "googleanalytics", "google", "cloudflare"]
 
@@ -14,6 +14,36 @@ page:
     eyebrow: "Posicionamiento en Google"
     title: "Que tus clientes ==te encuentren en Google=="
     lead: "Optimizamos tu sitio y tu perfil de negocio para que aparezcas cuando te buscan, y te mostramos con números claros qué está funcionando."
+
+  # Signature demo (src/components/demos/DemoSeo.astro). EVERY number is sample data, labelled as such.
+  demo:
+    eyebrow: "Lo que medimos"
+    title: "Tus resultados, ==en números claros=="
+    lead: "Medimos clics, apariciones en Google, llamadas desde Maps y contactos, para saber qué páginas y qué búsquedas sí te traen clientes."
+    note: "Datos de ejemplo, sólo para ilustrar lo que medimos. No son resultados de un cliente."
+    ui:
+      title: "Tablero de resultados"
+      period: "Últimos 28 días"
+      sample: "Datos de ejemplo"
+      kpis:
+        - { label: "Clics desde Google", count: true, delta: "+18%" }
+        - { label: "Apariciones en Google", value: "12.4 mil", delta: "+12%" }
+        - { label: "Llamadas desde Maps", count: true, delta: "+9%" }
+        - { label: "Contactos del sitio", count: true, delta: "+22%" }
+      chartTitle: "Clics por semana"
+      tip: "234 clics"
+      axis: ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"]
+      queriesTitle: "Búsquedas que te traen visitas"
+      queries:
+        - { pos: 3, term: "pastelería cerca de mí", up: 2 }
+        - { pos: 5, term: "pasteles personalizados", up: 4 }
+        - { pos: 7, term: "pastel de cumpleaños", up: 3 }
+        - { pos: 9, term: "postres para eventos", up: 6 }
+      vitalsTitle: "Velocidad en celular"
+      vitals:
+        - { label: "Carga (LCP)", value: "1.8 s" }
+        - { label: "Respuesta (INP)", value: "120 ms" }
+        - { label: "Estabilidad (CLS)", value: "0.02" }
 
   capabilities:
     eyebrow: "Lo que hacemos"

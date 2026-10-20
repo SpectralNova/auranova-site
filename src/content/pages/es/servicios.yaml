@@ -1,4 +1,6 @@
 # The /servicios/ page, plus blocks shared by every service page (price, process, tools).
+# Service illustrations: "a" Plano bicolor · "b" Línea y acento · "c" Degradado aura (compare at /opciones/)
+illustration: "a"
 title: "Servicios · AuraNova"
 description: "Sitios web, plataformas a la medida, posicionamiento en Google, contenido y marca, mantenimiento y asesoría digital para pequeños y medianos negocios."
 
@@ -6,8 +8,32 @@ hero:
   eyebrow: "Servicios"
   title: "Todo lo que tu negocio necesita ==en línea=="
   lead: "Seis servicios para pequeños y medianos negocios. Contratas sólo lo que necesitas, con precio fijo y todo por escrito."
+  secondary: "Ayúdame a elegir"
   linkLabel: "Ver servicio"
   listTitle: "Nuestros servicios"
+
+rows:
+  eyebrow: "Los seis servicios"
+  title: "Contratas sólo ==lo que necesitas=="
+  lead: "Cada servicio funciona solo o junto con los demás, con precio fijo y todo por escrito."
+
+chooser:
+  eyebrow: "¿No sabes cuál necesitas?"
+  title: "Cuéntanos qué te falta y ==te decimos qué te sirve=="
+  lead: "Éstas son las dudas más comunes. Si la tuya no está, la resolvemos en la llamada."
+  you: "Tú"
+  us: "AuraNova"
+  items:
+    - { need: "Quiero que más clientes me contacten desde internet.", answer: "Empieza por un sitio web hecho para que te contacten.", route: "servicios/sitios-web" }
+    - { need: "Mis clientes o mi equipo necesitan entrar con su propia cuenta.", answer: "Eso es una plataforma a la medida: cada quien entra y ve sólo lo suyo.", route: "servicios/plataformas-a-la-medida" }
+    - { need: "Quiero aparecer en Google y en Maps cuando me buscan.", answer: "Te conviene trabajar tu posicionamiento en Google, y medirlo.", route: "servicios/posicionamiento-en-google" }
+    - { need: "Necesito textos, imágenes o videos que se vean profesionales.", answer: "Lo resolvemos con contenido y una identidad visual que se vea como una sola marca.", route: "servicios/contenido-y-marca" }
+    - { need: "Ya tengo sitio, pero está lento o desactualizado.", answer: "Lo revisamos y lo cuidamos con mantenimiento y soporte.", route: "servicios/mantenimiento-web" }
+    - { need: "No sé por dónde empezar ni cuánto invertir.", answer: "Empieza con una asesoría: un plan claro, por escrito, antes de gastar.", route: "servicios/asesoria-digital" }
+
+# Shared by every service page.
+heroSecondary: "Ver qué incluye"
+demoControls: { pause: "Pausar animación", play: "Reproducir animación" }
 
 tools:
   eyebrow: "Herramientas"

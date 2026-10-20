@@ -1,0 +1,65 @@
+---
+// The four stages on one rail (/servicios/ and every service page): numbered stops on a line that fills
+// as the visitor scrolls past it (motion.css); vertical on phones. The full detail lives on /como-trabajamos/.
+import { rich } from '../lib/rich';
+import type { Lang } from '../content/business';
+
+interface Props {
+  lang: Lang;
+  steps: { title: string; text: string }[];
+}
+
+const { lang, steps } = Astro.props;
+---
+
+<ol class="pline" role="list" style={`--n: ${steps.length}`}>
+  {
+    steps.map((s, i) => (
+      <li class="pline__step">
+        <span class="pline__num" aria-hidden="true">
+          {String(i + 1).padStart(2, '0')}
+        </span>
+        <h3 class="pline__title" set:html={rich(s.title, lang)} />
+        <p class="muted" set:html={rich(s.text, lang)} />
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .pline { --dot: calc(var(--space-7) + var(--space-2)); position: relative; display: grid; gap: var(--space-6); margin: 0; padding: 0; list-style: none; }
+  /* The rail and its fill (behind the stops). */
+  .pline::before, .pline::after { content: ""; position: absolute; left: calc(var(--dot) / 2 - 1px); top: var(--space-2); bottom: var(--space-2); width: 2px; border-radius: var(--radius-pill); background: var(--color-border); }
+  .pline::after { background: var(--color-accent); transform-origin: top; }
+  .theme-light .pline::after { background: var(--color-secondary); }
+  .pline__step { position: relative; display: grid; grid-template-columns: var(--dot) minmax(0, 1fr); column-gap: var(--space-4); align-items: start; }
+  .pline__step > :not(.pline__num) { grid-column: 2; }
+  .pline__num {
+    position: relative; z-index: var(--z-raised); grid-row: span 2; display: grid; place-items: center; width: var(--dot); aspect-ratio: 1;
+    border: 1px solid var(--color-border); border-radius: 50%; background: var(--color-surface);
+    font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-lg); color: var(--color-text);
+  }
+  .pline__title { margin: var(--space-2) 0 var(--space-2); font-size: var(--text-xl); }
+  .pline__step p { margin: 0; }
+  @media (min-width: 1024px) {
+    .pline { grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: var(--grid-gap); }
+    /* From the first stop's centre to the last one's: the last column's width minus half a stop. */
+    .pline::before, .pline::after { left: calc(var(--dot) / 2); right: calc((100% - (var(--n) - 1) * var(--grid-gap)) / var(--n) - var(--dot) / 2); top: calc(var(--dot) / 2 - 1px); bottom: auto; width: auto; height: 2px; }
+    .pline::after { transform-origin: left; }
+    .pline__step { grid-template-columns: minmax(0, 1fr); row-gap: var(--space-2); }
+    .pline__step > :not(.pline__num) { grid-column: 1; }
+    .pline__num { grid-row: auto; }
+    .pline__title { margin-top: var(--space-4); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .pline::after { animation: sd-grow-y linear both; animation-timeline: view(); animation-range: entry 60% cover 70%; }
+      .pline__step { animation: sd-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 90%; }
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
+    @supports (animation-timeline: view()) {
+      .pline::after { animation-name: sd-grow-x; animation-range: entry 100% cover 60%; }
+    }
+  }
+</style>

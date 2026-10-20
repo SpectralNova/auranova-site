@@ -8,5 +8,4 @@ hero:
   listTitle: "Proyectos publicados"
 
 cta:
-  title: "¿Tu negocio es ==el siguiente==?"
-  text: "Agenda una llamada de {{duracionLlamada}}. Atendemos {{horario}}."
+  note: "¿Tu negocio es el siguiente? Te decimos qué necesitas y qué no."

@@ -1,11 +1,13 @@
 ---
 // The only page that names the city (David, CP1 feedback). The studio presents as a company (Q13).
+// CP1.2: the constellation is the banner's animated background; Aura + Nova lives in the banner.
 import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Section from '../components/Section.astro';
 import CTA from '../components/CTA.astro';
+import CtaBlock from '../components/CtaBlock.astro';
 import Icon from '../components/Icon.astro';
-import GeneratedImage from '../components/GeneratedImage.astro';
+import NovaBackground from '../components/NovaBackground.astro';
 import { href } from '../i18n/routes';
 import { t } from '../i18n/ui';
 import { rich } from '../lib/rich';
@@ -23,24 +25,35 @@ const crumbs = breadcrumbJsonLd([
 ---
 
 <Layout lang={lang} route="nosotros" title={c.title} description={c.description} jsonLd={[crumbs]}>
-  <section class="section hero" aria-labelledby="hero-title">
-    <div class="bg-grid hero__grid" aria-hidden="true"></div>
+  <section class="section hero hero--nova" aria-labelledby="hero-title">
+    <NovaBackground />
     <div class="container">
       <span class="eyebrow">{c.hero.eyebrow}</span>
       <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
       <p class="lead" set:html={rich(c.hero.lead, lang)} />
+      <dl class="nova-name">
+        {
+          c.hero.name.map((n: { term: string; text: string }, i: number) => (
+            <div class="nova-name__item">
+              <dt>
+                {n.term}
+                {i === 0 && (
+                  <span class="nova-name__plus" aria-hidden="true">
+                    +
+                  </span>
+                )}
+              </dt>
+              <dd set:html={rich(n.text, lang)} />
+            </div>
+          ))
+        }
+      </dl>
+      <p class="nova-name__closing" set:html={rich(c.hero.closing, lang)} />
       <div class="hero__actions"><CTA lang={lang} location="nosotros" /></div>
-      <div class="hero-band">
-        <GeneratedImage file="constelacion.webp" widths={[640, 960, 1440]} sizes="(min-width: 1280px) 75rem, 100vw" priority />
-      </div>
     </div>
   </section>
 
-  <Section lang={lang} theme="light" id="nombre" eyebrow={c.name.eyebrow} title={c.name.title}>
-    <div class="prose">{c.name.text.map((p: string) => <p set:html={rich(p, lang)} />)}</div>
-  </Section>
-
-  <Section lang={lang} id="mision" eyebrow={c.purpose.eyebrow} title={c.purpose.title}>
+  <Section lang={lang} theme="light" id="mision" eyebrow={c.purpose.eyebrow} title={c.purpose.title}>
     <ul class="card-grid card-grid--2" role="list">
       {
         c.purpose.items.map((item: any) => (
@@ -53,7 +66,7 @@ const crumbs = breadcrumbJsonLd([
     </ul>
   </Section>
 
-  <Section lang={lang} theme="light" id="valores" eyebrow={c.values.eyebrow} title={c.values.title}>
+  <Section lang={lang} id="valores" eyebrow={c.values.eyebrow} title={c.values.title}>
     <ul class="ledger" role="list">
       {
         c.values.items.map((v: any) => (
@@ -76,13 +89,29 @@ const crumbs = breadcrumbJsonLd([
     </ul>
   </Section>
 
-  <Section lang={lang} id="lo-que-no-hacemos" eyebrow={c.boundaries.eyebrow} title={c.boundaries.title}>
+  <Section lang={lang} theme="light" id="lo-que-no-hacemos" eyebrow={c.boundaries.eyebrow} title={c.boundaries.title}>
     <ul class="check-list check-list--no boundary-list">
       {c.boundaries.items.map((li: string) => <li set:html={rich(li, lang)} />)}
     </ul>
-  </Section>
-
-  <Section lang={lang} theme="violet" id="agenda-final" title={c.cta.title} lead={c.cta.text} center>
-    <p class="center"><CTA lang={lang} location="final" /></p>
+    <CtaBlock lang={lang} />
   </Section>
 </Layout>
+
+<style>
+  .hero--nova { min-height: min(52rem, 100svh); display: flex; align-items: center; }
+  .hero--nova .container { position: relative; z-index: var(--z-raised); }
+  .nova-name { display: grid; gap: var(--space-4); max-width: 44rem; margin: var(--space-6) 0 0; }
+  @media (min-width: 768px) {
+    .nova-name { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  .nova-name__item {
+    padding: var(--space-4) var(--space-5); border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+    background: color-mix(in oklab, var(--color-surface), transparent 30%); backdrop-filter: var(--nav-blur); -webkit-backdrop-filter: var(--nav-blur);
+  }
+  .nova-name dt { font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-2xl); line-height: 1; }
+  .nova-name__item:first-child dt { color: var(--color-accent); }
+  .nova-name__item:last-child dt { color: var(--violet-3); }
+  .nova-name__plus { margin-left: var(--space-2); color: var(--color-text-muted); }
+  .nova-name dd { margin: var(--space-2) 0 0; color: var(--color-text-muted); font-size: var(--text-sm); }
+  .nova-name__closing { max-width: 44rem; margin: var(--space-5) 0 0; }
+</style>

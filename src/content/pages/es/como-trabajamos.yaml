@@ -6,28 +6,88 @@ hero:
   title: "Así trabajamos: ==todo por escrito=="
   lead: "Antes de agendar, conoce nuestro proceso, horario, pagos y lo que nos toca a cada quien. Es un resumen, en español claro, del contrato que firmamos contigo."
   contract: "Versión del contrato: [[PENDIENTE: versión y fecha del contrato actualizado (Q20)]]"
+  ctaNote: "Una llamada de {{duracionLlamada}} para conocer tu negocio. Te decimos qué necesitas y qué no."
 
-process:
+# Big statement between the hero and the roadmap; words light up with the scroll.
+statement: "Primero lo ves. Luego lo apruebas. ==Y sólo entonces lo construimos.=="
+
+# The scroll roadmap (src/components/Roadmap.astro): the call, then the four contract stages.
+# `paid` = % paid once that stage is approved (Q7: 40 / 30 / 30). `screen` picks the step's mockup.
+roadmap:
   eyebrow: "El proceso"
-  title: "Cuatro etapas, ==sin sorpresas=="
-  labels: { what: "Qué pasa", approve: "Qué apruebas", pay: "Qué pagas" }
+  title: "De la llamada al lanzamiento, ==sin sorpresas=="
+  lead: "Una llamada y cuatro etapas. En cada una sabes qué pasa, qué apruebas, qué pagas y cómo te cuidamos."
+  paid: "Pagado"
+  goTo: "Ir a la etapa"
+  labels: { approve: "Qué apruebas", pay: "Qué pagas", care: "Cómo te cuidamos" }
   steps:
-    - title: "Descubrimiento"
+    - num: "00"
+      nav: "La llamada"
+      title: "Una llamada de {{duracionLlamada}}"
+      what: "Platicamos tu negocio, a quién le vendes y qué quieres lograr. Te decimos con honestidad qué necesitas, y qué no."
+      approve: "Nada todavía: sólo decides si quieres una propuesta."
+      pay: "[[CONFIRMAR: Nada: la llamada no tiene costo.]]"
+      care: "Atendemos {{horario}} y te respondemos en {{respuesta}}."
+      paid: 0
+      screen: "call"
+    - num: "01"
+      nav: "Descubrimiento"
+      title: "Descubrimiento"
       what: "Platicamos tu objetivo, tu cliente ideal y lo que debe lograr el sitio. Te enviamos una propuesta con alcance, calendario y precio fijo."
       approve: "La propuesta y el Anexo A, el detalle de todo lo que incluye."
       pay: "40% para apartar tu fecha."
-    - title: "Primero lo ves"
+      care: "Precio fijo por escrito, según el alcance que apruebas. No cobramos por hora."
+      paid: 40
+      screen: "proposal"
+    - num: "02"
+      nav: "Primero lo ves"
+      title: "Primero lo ves"
       what: "Construimos una vista previa real, en una liga privada, para que la revises en tu teléfono antes de la construcción completa."
       approve: "El diseño, la estructura y el tono."
       pay: "30% al aprobar el diseño."
-    - title: "Construcción"
+      care: "Ves tu sitio real antes de que lo construyamos a fondo, y nada avanza sin tu aprobación."
+      paid: 70
+      screen: "preview"
+    - num: "03"
+      nav: "Construcción"
+      title: "Construcción"
       what: "Construimos todas las páginas, formularios, SEO y analítica, con el contenido final."
       approve: "El contenido terminado, en una ronda de revisión."
       pay: "Nada en esta etapa."
-    - title: "Lanzamiento medido"
+      care: "Si pides algo fuera de lo acordado, antes de hacerlo te decimos por escrito cuánto cuesta y cuánto mueve la fecha."
+      paid: 70
+      screen: "build"
+    - num: "04"
+      nav: "Lanzamiento"
+      title: "Lanzamiento medido"
       what: "Revisamos tu sitio contra nuestro estándar de calidad y te entregamos el reporte. Publicamos y te damos acceso a todo."
       approve: "El sitio, antes de publicarlo."
       pay: "30% antes del lanzamiento."
+      care: "Te entregamos el código, los accesos y la documentación. Tu dominio y tus cuentas siempre están a tu nombre."
+      paid: 100
+      screen: "launch"
+  screens:
+    call: { title: "Llamada de {{duracionLlamada}}", days: ["L", "M", "M", "J", "V"], slots: ["10:00", "11:30", "13:00", "16:00"], confirm: "Confirmar", confirmed: "Llamada agendada", when: "Jueves · 11:30" }
+    proposal: { title: "Propuesta", items: ["Qué incluye, página por página", "Calendario por etapa", "Precio fijo", "Anexo A, por escrito"], stamp: "Aprobada" }
+    preview: { link: "Liga privada", button: "Aprobar diseño" }
+    build: { items: ["Páginas", "Formularios", "SEO", "Analítica"], round: "Una ronda de revisión" }
+    launch: { title: "Reporte de calidad", handover: ["Código", "Accesos", "Documentación"] }
+
+# "Así te cuidamos": the commitments that run through every stage (from the contract summary below).
+care:
+  eyebrow: "Así te cuidamos"
+  title: "Lo que puedes ==esperar de nosotros=="
+  items:
+    - { icon: "message-circle", title: "Respuesta en {{respuesta}}", text: "Dentro de nuestro horario: {{horario}}." }
+    - { icon: "file-check", title: "Todo por escrito", text: "Alcance, calendario y precio antes de empezar, y el costo de cualquier cambio antes de hacerlo." }
+    - { icon: "eye", title: "Primero lo ves", text: "Tu sitio real, en una liga privada, antes de la construcción completa." }
+    - { icon: "wallet", title: "Ningún gasto sorpresa", text: "Los gastos de terceros, como licencias o servicios, sólo con tu aprobación previa por escrito." }
+    - { icon: "key-round", title: "Lo tuyo es tuyo", text: "Dominio y cuentas a tu nombre desde el primer día; código, accesos y documentación con el pago final." }
+    - { icon: "shield-check", title: "{{garantia}} de garantía", text: "Después del lanzamiento corregimos sin costo cualquier error, e incluimos una sesión de capacitación." }
+
+details:
+  eyebrow: "Los detalles"
+  title: "El resumen de ==nuestro contrato=="
 
 sections:
   - id: "horario"

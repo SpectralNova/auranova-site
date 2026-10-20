@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-10-20T05:27:16.122Z",
+  "measuredAt": "2026-10-20T15:30:19.124Z",
   "baseUrl": "http://localhost:4329",
   "lighthouseVersion": "13.5.0",
   "formFactor": "mobile",
@@ -12,27 +12,27 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1662,
+      "lcpMs": 1528,
       "cls": 0,
       "tbtMs": 0
     },
     {
       "path": "/servicios/",
-      "performance": 100,
+      "performance": 99,
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1509,
-      "cls": 0,
+      "lcpMs": 1674,
+      "cls": 0.002,
       "tbtMs": 0
     },
     {
       "path": "/servicios/sitios-web/",
-      "performance": 100,
+      "performance": 99,
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1509,
+      "lcpMs": 1666,
       "cls": 0,
       "tbtMs": 0
     },
@@ -42,7 +42,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1432,
+      "lcpMs": 1512,
       "cls": 0,
       "tbtMs": 0
     },
@@ -52,7 +52,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1508,
+      "lcpMs": 1661,
       "cls": 0,
       "tbtMs": 0
     },
@@ -62,7 +62,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1433,
+      "lcpMs": 1512,
       "cls": 0,
       "tbtMs": 0
     }

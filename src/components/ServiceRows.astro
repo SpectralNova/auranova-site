@@ -1,0 +1,76 @@
+---
+// /servicios/: one row per service, art and text alternating sides. The 2D illustration (style picked in
+// pages/<lang>/servicios.yaml) drifts a little against the scroll (motion.css .sd-drift).
+import { getCollection, getEntry } from 'astro:content';
+import GeneratedImage from './GeneratedImage.astro';
+import { href, type RouteKey } from '../i18n/routes';
+import type { Lang } from '../content/business';
+
+interface Props {
+  lang: Lang;
+  linkLabel: string;
+}
+
+const { lang, linkLabel } = Astro.props;
+const shared = (await getEntry('pages', `${lang}/servicios`))?.data as { illustration?: string } | undefined;
+const style = shared?.illustration ?? 'a';
+const services = (await getCollection('services', (s) => s.id.startsWith(`${lang}/`))).sort((a, b) => a.data.order - b.data.order);
+---
+
+<ol class="srows" role="list">
+  {
+    services.map(({ data }, i) => {
+      const caps = ((data.page as any).capabilities.items as { title: string }[]).slice(0, 4);
+      return (
+        <li class="srow" id={data.art}>
+          <div class="srow__art" aria-hidden="true">
+            <div class="srow__halo sd-drift">
+              <GeneratedImage file={`services/${style}/${data.art}.webp`} widths={[320, 480, 640]} sizes="(min-width: 1024px) 22rem, 70vw" />
+            </div>
+          </div>
+          <div class="srow__copy">
+            <p class="srow__meta">
+              <span class="srow__num" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <span class="tag">{data.kicker}</span>
+            </p>
+            <h3 class="srow__name">{data.name}</h3>
+            <p class="srow__summary">{data.summary}</p>
+            <ul class="srow__chips" role="list">
+              {caps.map((cap) => (
+                <li>{cap.title}</li>
+              ))}
+            </ul>
+            <a class="btn btn--secondary" href={href(data.route as RouteKey, lang)}>
+              {linkLabel}
+              <span class="sr-only">: {data.name}</span> <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </li>
+      );
+    })
+  }
+</ol>
+
+<style>
+  .srows { display: grid; gap: var(--space-9); margin: 0; padding: 0; list-style: none; }
+  .srow { display: grid; gap: var(--space-6); align-items: center; scroll-margin-top: var(--space-9); }
+  @media (min-width: 768px) {
+    .srow { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-8); }
+    .srow:nth-child(even) .srow__art { order: 2; }
+  }
+  .srow__art { display: grid; place-items: center; }
+  .srow__halo {
+    --sd-from: var(--space-6); --sd-to: calc(var(--space-6) * -1);
+    display: grid; place-items: center; width: min(100%, 24rem); aspect-ratio: 1; border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in oklab, var(--violet-2), transparent 35%) 0%, transparent 68%);
+  }
+  .srow__halo :global(img) { width: 82%; height: auto; }
+  .srow__meta { display: flex; align-items: center; gap: var(--space-3); margin: 0 0 var(--space-3); }
+  .srow__num { font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-3xl); line-height: 1; color: var(--color-link); }
+  .srow__name { margin: 0 0 var(--space-3); font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-3xl); line-height: var(--leading-tight); letter-spacing: var(--tracking-display); }
+  .srow__summary { max-width: 48ch; margin: 0 0 var(--space-5); font-size: var(--text-lg); }
+  .srow__chips { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0 0 var(--space-6); padding: 0; list-style: none; }
+  .srow__chips li { padding: var(--space-1) var(--space-3); border: 1px solid var(--color-border-strong); border-radius: var(--radius-pill); font-size: var(--text-sm); }
+</style>

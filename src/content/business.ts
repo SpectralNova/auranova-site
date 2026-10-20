@@ -48,7 +48,7 @@ export const textFacts = {
   horarioCorto: ok({ es: 'Lunes a viernes · 9:00 a 17:00', en: 'Mon–Fri · 9 a.m.–5 p.m. (UTC−6)' }),
   respuesta: ok({ es: '1 día hábil', en: '1 business day' }), // Q8
   respuestaCliente: ok({ es: '3 días hábiles', en: '3 business days' }), // Q8
-  duracionLlamada: confirm({ es: '30 minutos', en: '30 minutes' }, 'Q16'),
+  duracionLlamada: ok({ es: '30 minutos', en: '30 minutes' }), // Q16 ✅ (David, 2026-10-20)
   pagos: ok({
     es: '40% para apartar tu fecha, 30% al aprobar el diseño y 30% antes del lanzamiento',
     en: '40% to book your start date, 30% at design approval and 30% before launch',

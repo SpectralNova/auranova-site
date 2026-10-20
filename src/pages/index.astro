@@ -1,13 +1,14 @@
 ---
 // Home: only the essentials (David, CP1): what we do, how we do it, book a call.
+// CP1.2: hero animation shows the site working for the client (options at /opciones/); no violet band.
 import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Section from '../components/Section.astro';
 import CTA from '../components/CTA.astro';
-import HeroVisual from '../components/HeroVisual.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import HeroWorks from '../components/HeroWorks.astro';
 import ServiceGrid from '../components/ServiceGrid.astro';
 import ProcessTabs from '../components/ProcessTabs.astro';
-import MoreLink from '../components/MoreLink.astro';
 import { href } from '../i18n/routes';
 import { rich } from '../lib/rich';
 
@@ -31,7 +32,7 @@ const c = page.data as any;
         </div>
         <p class="hero__note muted" set:html={rich(c.hero.note, lang)} />
       </div>
-      <HeroVisual lang={lang} copy={c.hero.visual} />
+      <HeroWorks variant={c.hero.variant} copy={c.hero.works} />
     </div>
   </section>
 
@@ -41,10 +42,6 @@ const c = page.data as any;
 
   <Section lang={lang} id="proceso" eyebrow={c.process.eyebrow} title={c.process.title} lead={c.process.lead} center>
     <ProcessTabs lang={lang} copy={c.process} />
-    <MoreLink lang={lang} link={c.process.link} />
-  </Section>
-
-  <Section lang={lang} theme="violet" id="agenda-final" title={c.cta.title} lead={c.cta.text} center>
-    <p class="center"><CTA lang={lang} location="final" /></p>
+    <CtaBlock lang={lang} location="proceso" note={c.process.ctaNote} center />
   </Section>
 </Layout>

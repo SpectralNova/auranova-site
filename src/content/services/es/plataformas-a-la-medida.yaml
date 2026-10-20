@@ -3,7 +3,7 @@ route: "servicios/plataformas-a-la-medida"
 name: "Plataformas a la medida"
 kicker: "Portales y sistemas"
 navIcon: "layout-dashboard"
-image: "svc-plataformas.webp"
+art: "plataformas"
 summary: "Cuando un sitio no basta: portales para tus clientes, alumnos o equipo, con usuarios, permisos y datos protegidos."
 tools: ["nextdotjs", "render", "cloudflare", "github", "caldotcom"]
 
@@ -14,6 +14,31 @@ page:
     eyebrow: "Plataformas a la medida"
     title: "Portales y sistemas ==hechos para tu forma de trabajar=="
     lead: "Cuando las hojas de cálculo y los mensajes ya no alcanzan: portales para tus clientes, alumnos o empleados, con acceso seguro y la información en un solo lugar."
+
+  # Signature demo (src/components/demos/DemoPlataformas.astro). Illustrative names and portal.
+  demo:
+    eyebrow: "En acción"
+    title: "Cada quien ==ve lo suyo=="
+    lead: "Tu equipo administra usuarios y permisos sin tocar código, y cada cliente entra a su cuenta y ve sólo su información."
+    ui:
+      url: "portal.tunegocio.mx"
+      admin: "Administración"
+      title: "Usuarios"
+      invite: "Invitar"
+      users:
+        - { name: "Ana", role: "Administración", tone: "admin" }
+        - { name: "Luis", role: "Equipo", tone: "team" }
+        - { name: "Marta", role: "Cliente", tone: "client" }
+        - { name: "Jorge", role: "Cliente", tone: "client" }
+      drawerTitle: "Permisos de Marta"
+      perms:
+        - { label: "Ver sus pedidos", on: true }
+        - { label: "Descargar sus facturas", on: true }
+        - { label: "Ver a otros clientes", on: false }
+        - { label: "Cambiar precios", on: false }
+      save: "Guardar"
+      toastTitle: "Permisos guardados"
+      toastText: "Marta ve sólo lo suyo"
 
   capabilities:
     eyebrow: "Lo que hacemos"

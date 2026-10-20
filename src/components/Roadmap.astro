@@ -1,0 +1,399 @@
+---
+// Cómo trabajamos: the process as a scroll roadmap (CP1.2, inspired by piergorelli.com).
+// Desktop (≥1024 × ≥700, with JavaScript): a stage stays in view while the visitor scrolls through the
+// steps; a big counter ("02 / 04"), stage tabs with progress, a "paid so far" meter and one screen per
+// step. Native scroll only: the page never moves by itself, the tabs just jump to a step (ADR-011).
+// Phones, short screens and no JavaScript: a plain vertical timeline with every step and its screen.
+// Screens are decorative; every fact is in the step text.
+import Icon from './Icon.astro';
+import { loadScores, lowest } from '../lib/scores';
+import { rich } from '../lib/rich';
+import type { Lang } from '../content/business';
+
+interface Props {
+  lang: Lang;
+  copy: any;
+}
+
+const { lang, copy } = Astro.props;
+const steps = copy.steps as any[];
+const sc = copy.screens;
+const last = steps[steps.length - 1].num;
+const scores = loadScores('site-scores');
+const low = scores && lowest(scores);
+const rings: [string, number][] = low
+  ? [
+      ['Rendimiento', low.performance],
+      ['Accesibilidad', low.accessibility],
+      ['Buenas prácticas', low.bestPractices],
+      ['SEO', low.seo],
+    ]
+  : [];
+---
+
+<div class="rm" data-roadmap style={`--n: ${steps.length}`}>
+  <div class="rm__stage">
+    <div class="rm__chrome" aria-hidden="true">
+      <p class="rm__count"><span class="rm__cur">{steps[0].num}</span><span class="rm__tot">/{last}</span></p>
+      <div class="rm__paid">
+        <span class="rm__paid-label">{copy.paid} <b class="rm__paid-value">0%</b></span>
+        <span class="rm__paid-bar"><i class="rm__paid-fill"></i></span>
+      </div>
+    </div>
+
+    <ol class="rm__steps" role="list">
+      {
+        steps.map((s, i) => (
+          <li class:list={['rm__step', { 'is-active': i === 0 }]} data-step={i} data-paid={s.paid} data-num={s.num}>
+            <div class="rm__text">
+              <span class="rm__num" aria-hidden="true">{s.num}</span>
+              <h3 class="rm__title" set:html={rich(s.title, lang)} />
+              <p class="rm__what" set:html={rich(s.what, lang)} />
+              <dl class="rm__facts">
+                <div>
+                  <dt>{copy.labels.approve}</dt>
+                  <dd set:html={rich(s.approve, lang)} />
+                </div>
+                <div>
+                  <dt>{copy.labels.pay}</dt>
+                  <dd set:html={rich(s.pay, lang)} />
+                </div>
+                <div class="rm__care">
+                  <dt>
+                    <Icon name="heart-handshake" size={16} />
+                    {copy.labels.care}
+                  </dt>
+                  <dd set:html={rich(s.care, lang)} />
+                </div>
+              </dl>
+            </div>
+
+            <div class="rm__screen" aria-hidden="true">
+              <div class="bg-grid rm__grid" />
+              {s.screen === 'call' && (
+                <div class="rm-call">
+                  <p class="rm-call__title">
+                    <Icon name="video" size={18} />
+                    <span set:html={rich(sc.call.title, lang)} />
+                  </p>
+                  <div class="rm-call__days">
+                    {sc.call.days.map((d: string, j: number) => (
+                      <span class:list={{ 'is-on': j === 3 }}>{d}</span>
+                    ))}
+                  </div>
+                  <ul class="rm-call__slots">
+                    {sc.call.slots.map((t: string, j: number) => (
+                      <li class:list={{ 'is-on': j === 1 }} style={`--i: ${j}`}>{t}</li>
+                    ))}
+                  </ul>
+                  <span class="rm-call__btn">{sc.call.confirm}</span>
+                  <span class="demo-toast rm-call__toast">
+                    <span class="demo-toast__icon">
+                      <Icon name="calendar-check" size={18} />
+                    </span>
+                    <span>
+                      <strong>{sc.call.confirmed}</strong>
+                      <small>{sc.call.when}</small>
+                    </span>
+                  </span>
+                </div>
+              )}
+              {s.screen === 'proposal' && (
+                <div class="mock-doc rm-doc">
+                  <p class="mock-doc__title">
+                    <Icon name="file-text" size={20} />
+                    {sc.proposal.title}
+                  </p>
+                  <ul class="mock-list">
+                    {sc.proposal.items.map((item: string, j: number) => (
+                      <li style={`--i: ${j}`}>
+                        <span class="mock-check">
+                          <Icon name="check" size={14} />
+                        </span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <span class="rm-doc__stamp">{sc.proposal.stamp}</span>
+                </div>
+              )}
+              {s.screen === 'preview' && (
+                <div class="mock-phone">
+                  <div class="mock-phone__screen">
+                    <span class="mock-url">
+                      <Icon name="lock" size={12} />
+                      {sc.preview.link}
+                    </span>
+                    <span class="mock-block mock-block--hero" />
+                    <span class="mock-block mock-block--line" />
+                    <span class="mock-block mock-block--line mock-block--short" />
+                    <span class="mock-row">
+                      <span class="mock-block mock-block--tile" />
+                      <span class="mock-block mock-block--tile" />
+                    </span>
+                    <span class="mock-btn">{sc.preview.button}</span>
+                  </div>
+                  <span class="mock-cursor">
+                    <Icon name="mouse-pointer-2" size={28} />
+                  </span>
+                </div>
+              )}
+              {s.screen === 'build' && (
+                <div class="rm-build">
+                  <ul class="bars mock-build" role="list">
+                    {sc.build.items.map((item: string, j: number) => (
+                      <li class="bar" style={`--value: 1; --i: ${j * 2}`}>
+                        <span class="bar__label">{item}</span>
+                        <span class="mock-check mock-check--late" style={`--i: ${j * 2}`}>
+                          <Icon name="check" size={14} />
+                        </span>
+                        <span class="bar__track">
+                          <span class="bar__fill" />
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <span class="rm-chip">
+                    <Icon name="refresh-cw" size={14} />
+                    {sc.build.round}
+                  </span>
+                </div>
+              )}
+              {s.screen === 'launch' && (
+                <div class="rm-launch">
+                  {low && (
+                    <div class="mock-report">
+                      <p class="mock-report__title">
+                        <Icon name="badge-check" size={20} />
+                        {sc.launch.title}
+                      </p>
+                      <ul class="rings" role="list">
+                        {rings.map(([label, value], j) => (
+                          <li style={`--value: ${value}; --i: ${j}`}>
+                            <span class="ring">{value}</span>
+                            <span class="ring__label">{label}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  <ul class="rm-handover" role="list">
+                    {sc.launch.handover.map((h: string, j: number) => (
+                      <li style={`--i: ${j}`}>
+                        <Icon name="check" size={14} />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="rm__nav">
+      {
+        steps.map((s, i) => (
+          <button class="rm__tab" type="button" data-go={i}>
+            <span class="sr-only">{copy.goTo} </span>
+            <span class="rm__tab-num">{s.num}</span>
+            <span class="rm__tab-label">{s.nav}</span>
+            <span class="rm__tab-track" aria-hidden="true">
+              <span class="rm__tab-fill" />
+            </span>
+          </button>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  // One controller per roadmap. Pinned mode only where it fits; elsewhere the timeline just highlights the
+  // step in the middle of the screen. Nothing ever scrolls unless the visitor presses a tab.
+  document.querySelectorAll<HTMLElement>('[data-roadmap]').forEach((root) => {
+    const stage = root.querySelector<HTMLElement>('.rm__stage')!;
+    const steps = Array.from(root.querySelectorAll<HTMLElement>('.rm__step'));
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('.rm__tab'));
+    const cur = root.querySelector<HTMLElement>('.rm__cur');
+    const paid = root.querySelector<HTMLElement>('.rm__paid-value');
+    const fill = root.querySelector<HTMLElement>('.rm__paid-fill');
+    const fit = window.matchMedia('(min-width: 1024px) and (min-height: 700px)');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const n = steps.length;
+    let active = -1;
+    let frame = 0;
+
+    const setActive = (i: number) => {
+      if (i === active) return;
+      active = i;
+      steps.forEach((s, j) => s.classList.toggle('is-active', j === i));
+      tabs.forEach((t, j) => {
+        t.classList.toggle('is-active', j === i);
+        if (j === i) t.setAttribute('aria-current', 'step');
+        else t.removeAttribute('aria-current');
+      });
+      if (cur) cur.textContent = steps[i].dataset.num ?? '';
+      const amount = Number(steps[i].dataset.paid ?? 0);
+      if (paid) paid.textContent = `${amount}%`;
+      if (fill) fill.style.transform = `scaleX(${amount / 100})`;
+    };
+
+    // Pinned mode: progress through the tall wrapper picks the step; each tab's bar fills with it.
+    const stickyTop = () => parseFloat(getComputedStyle(stage).top) || 0;
+    const onScroll = () => {
+      frame = 0;
+      const r = root.getBoundingClientRect();
+      const travel = r.height - stage.offsetHeight;
+      const p = Math.min(1, Math.max(0, (stickyTop() - r.top) / Math.max(1, travel)));
+      setActive(Math.min(n - 1, Math.floor(p * n)));
+      tabs.forEach((t, j) => {
+        const local = Math.min(1, Math.max(0, p * n - j));
+        t.style.setProperty('--fill', local.toFixed(3));
+      });
+    };
+    const queue = () => {
+      if (!frame) frame = requestAnimationFrame(onScroll);
+    };
+
+    // Timeline mode: the step crossing the middle of the screen is the active one.
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) if (e.isIntersecting) setActive(steps.indexOf(e.target as HTMLElement));
+      },
+      { rootMargin: '-45% 0px -45% 0px' },
+    );
+
+    const apply = () => {
+      const pinned = fit.matches;
+      root.toggleAttribute('data-pinned', pinned);
+      if (pinned) {
+        steps.forEach((s) => io.unobserve(s));
+        window.addEventListener('scroll', queue, { passive: true });
+        window.addEventListener('resize', queue);
+        onScroll();
+      } else {
+        window.removeEventListener('scroll', queue);
+        window.removeEventListener('resize', queue);
+        steps.forEach((s) => io.observe(s));
+      }
+    };
+
+    tabs.forEach((t, i) =>
+      t.addEventListener('click', () => {
+        const r = root.getBoundingClientRect();
+        const travel = r.height - stage.offsetHeight;
+        const y = window.scrollY + r.top - stickyTop() + ((i + 0.35) / n) * travel;
+        window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+      }),
+    );
+    fit.addEventListener('change', apply);
+    setActive(0);
+    apply();
+  });
+</script>
+
+<style>
+  /* ---------- Timeline (default: phones, short screens, no JavaScript) ---------- */
+  .rm__chrome, .rm__nav { display: none; }
+  .rm__steps { position: relative; display: grid; gap: var(--space-8); margin: 0; padding: 0 0 0 var(--space-7); list-style: none; }
+  .rm__steps::before { content: ""; position: absolute; left: calc(var(--space-3) - 1px); top: var(--space-2); bottom: var(--space-2); width: 2px; border-radius: var(--radius-pill); background: var(--color-border); }
+  .rm__step { position: relative; display: grid; gap: var(--space-6); }
+  .rm__step::before { content: ""; position: absolute; left: calc(var(--space-7) * -1 + var(--space-3) - var(--space-2)); top: var(--space-3); width: var(--space-4); height: var(--space-4); border: 2px solid var(--color-border-strong); border-radius: 50%; background: var(--color-bg); }
+  .rm__step.is-active::before { border-color: var(--color-accent); background: var(--color-accent); box-shadow: var(--glow-accent); }
+  .rm__num { font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-3xl); line-height: 1; color: var(--color-accent); }
+  .rm__title { margin: var(--space-3) 0; font-size: var(--text-2xl); }
+  .rm__what { margin: 0 0 var(--space-5); max-width: 52ch; }
+  .rm__facts { display: grid; gap: var(--space-4); margin: 0; }
+  .rm__facts dt { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-xs); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--color-text-muted); }
+  .rm__facts dd { margin: var(--space-1) 0 0; }
+  .rm__care { padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); }
+  .rm__care dt { color: var(--color-accent); }
+  .rm__screen { position: relative; display: grid; place-items: center; min-height: 22rem; padding: var(--space-6); overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-xl); background: var(--color-surface); }
+  .rm__grid { position: absolute; inset: 0; }
+  .rm__screen > :not(.rm__grid) { position: relative; }
+
+  /* ---------- Pinned stage (set by the script where it fits) ---------- */
+  .rm[data-pinned] { height: calc(var(--n) * 75svh + 100svh); }
+  .rm[data-pinned] .rm__stage {
+    position: sticky; top: var(--space-9); height: calc(100svh - var(--space-9) - var(--space-4));
+    display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: var(--space-5);
+  }
+  .rm[data-pinned] .rm__chrome { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-6); }
+  .rm[data-pinned] .rm__nav { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: var(--space-3); }
+  .rm[data-pinned] .rm__steps { position: relative; display: block; padding: 0; }
+  .rm[data-pinned] .rm__steps::before { display: none; }
+  .rm[data-pinned] .rm__step {
+    position: absolute; inset: 0; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-8); align-items: center;
+    opacity: 0; transform: translateY(var(--space-5)); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+  }
+  .rm[data-pinned] .rm__step::before { display: none; }
+  .rm[data-pinned] .rm__step.is-active { opacity: 1; transform: none; }
+  .rm[data-pinned] .rm__num { display: none; }
+  .rm[data-pinned] .rm__screen { height: 100%; min-height: 0; }
+  .rm__count { margin: 0; font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-5xl); line-height: 0.9; letter-spacing: var(--tracking-display); }
+  .rm__cur { color: var(--color-text); }
+  .rm__tot { color: var(--color-border-strong); }
+  .rm__paid { display: grid; gap: var(--space-2); width: min(18rem, 40%); text-align: right; }
+  .rm__paid-label { color: var(--color-text-muted); font-size: var(--text-sm); }
+  .rm__paid-label b { color: var(--color-accent); font-family: var(--font-display); font-size: var(--text-xl); }
+  .rm__paid-bar { position: relative; height: var(--space-2); overflow: hidden; border-radius: var(--radius-pill); background: color-mix(in oklab, var(--gray-4), transparent 55%); }
+  /* 40 / 30 / 30 ticks on the meter */
+  .rm__paid-bar::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 40%, var(--color-bg) 40% calc(40% + 2px), transparent calc(40% + 2px) 70%, var(--color-bg) 70% calc(70% + 2px), transparent calc(70% + 2px)); }
+  .rm__paid-fill { position: absolute; inset: 0; border-radius: inherit; background: var(--color-accent); transform: scaleX(0); transform-origin: left; transition: transform var(--dur-slow) var(--ease-out); }
+  .rm__tab { --fill: 0; display: grid; gap: var(--space-2); padding: var(--space-2) 0; border: 0; background: none; color: var(--color-text-muted); font: inherit; text-align: left; cursor: pointer; }
+  .rm__tab:hover, .rm__tab.is-active { color: var(--color-text); }
+  .rm__tab:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; border-radius: var(--radius-sm); }
+  .rm__tab-num { font-size: var(--text-xs); font-weight: var(--weight-strong); color: var(--color-accent); }
+  .rm__tab-label { font-size: var(--text-sm); font-weight: var(--weight-strong); }
+  .rm__tab-track { position: relative; height: 2px; overflow: hidden; border-radius: var(--radius-pill); background: var(--color-border); }
+  .rm__tab-fill { position: absolute; inset: 0; background: var(--color-accent); transform: scaleX(var(--fill)); transform-origin: left; }
+
+  /* ---------- Screens ---------- */
+  .rm-call { display: grid; gap: var(--space-3); width: min(100%, 20rem); padding: var(--space-5); border-radius: var(--radius-lg); background: var(--violet-1); color: var(--gray-7); box-shadow: var(--shadow-lg); }
+  .rm-call__title { display: flex; align-items: center; gap: var(--space-2); margin: 0; font-family: var(--font-heading); font-weight: var(--weight-heading); }
+  .rm-call__title :global(.icon) { color: var(--violet-5); }
+  .rm-call__days { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-1); }
+  .rm-call__days span { display: grid; place-items: center; height: var(--space-7); border-radius: var(--radius-sm); background: var(--white); font-size: var(--text-sm); font-weight: var(--weight-strong); }
+  .rm-call__days .is-on { background: var(--violet-5); color: var(--violet-1); }
+  .rm-call__slots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+  .rm-call__slots li { padding: var(--space-2); border: 1px solid var(--gray-2); border-radius: var(--radius-sm); background: var(--white); text-align: center; font-size: var(--text-sm); }
+  .rm-call__slots .is-on { border-color: var(--gray-7); background: var(--lime-1); color: var(--lime-7); font-weight: var(--weight-strong); }
+  .rm-call__btn { padding: var(--space-2); border-radius: var(--radius-pill); background: var(--gray-7); color: var(--lime-1); text-align: center; font-size: var(--text-sm); font-weight: var(--weight-strong); }
+  .rm-call__toast { position: absolute; right: calc(var(--space-8) * -1); bottom: calc(var(--space-6) * -1); color: var(--color-text); }
+  .rm-doc { position: relative; }
+  .rm-doc__stamp { position: absolute; right: calc(var(--space-4) * -1); top: calc(var(--space-4) * -1); padding: var(--space-2) var(--space-4); border: 2px solid var(--violet-5); border-radius: var(--radius-sm); background: var(--violet-1); color: var(--violet-5); font-family: var(--font-display); font-weight: var(--weight-display); letter-spacing: var(--tracking-caps); text-transform: uppercase; transform: rotate(-8deg); }
+  .rm-build { display: grid; justify-items: start; gap: var(--space-4); }
+  .rm-chip { display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-surface-2); font-size: var(--text-sm); }
+  .rm-chip :global(.icon) { color: var(--color-accent); }
+  .rm-launch { display: grid; justify-items: center; gap: var(--space-4); }
+  .rm-handover { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+  .rm-handover li { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); background: var(--lime-1); color: var(--lime-7); font-size: var(--text-sm); font-weight: var(--weight-strong); }
+  @media (max-width: 767px) {
+    .rm-call__toast { right: 0; bottom: calc(var(--space-4) * -1); }
+    .rm-doc__stamp { right: 0; }
+  }
+
+  /* Screen animations replay each time a step becomes active. */
+  @keyframes rm-pop { from { opacity: 0; transform: scale(0.85); } }
+  @keyframes rm-up { from { opacity: 0; transform: translateY(var(--space-4)); } }
+  @keyframes rm-stamp { 0%, 55% { opacity: 0; transform: rotate(-8deg) scale(1.6); } 70%, 100% { opacity: 1; transform: rotate(-8deg); } }
+  /* Own name (not site.css "fill"): a new animation name is what makes the bars replay on activation. */
+  @keyframes rm-fill { from { transform: scaleX(0); } }
+  @media (prefers-reduced-motion: no-preference) {
+    .rm__step.is-active .rm-call__slots li { animation: rm-up var(--dur-slow) var(--ease-out) both; animation-delay: calc(var(--dur-base) * var(--i)); }
+    .rm__step.is-active .rm-call__slots .is-on { animation: rm-pop var(--dur-slow) var(--ease-out) both; animation-delay: calc(var(--dur-base) * 4); }
+    .rm__step.is-active .rm-call__toast { animation: rm-up var(--dur-slow) var(--ease-out) both; animation-delay: calc(var(--dur-slow) * 3); }
+    .rm__step.is-active .mock-list li { animation: rise var(--dur-slow) var(--ease-out) both; animation-delay: calc(var(--dur-base) * var(--i)); }
+    .rm__step.is-active .mock-list .mock-check { animation: pop var(--dur-base) var(--ease-out) both; animation-delay: calc(var(--dur-base) * var(--i) + var(--dur-slow)); }
+    .rm__step.is-active .rm-doc__stamp { animation: rm-stamp calc(var(--dur-slow) * 5) var(--ease-out) both; }
+    .rm__step.is-active .mock-cursor { animation: cursor calc(var(--dur-slow) * 8) var(--ease-out) var(--dur-slow) both; }
+    .rm__step.is-active .mock-btn { animation: press calc(var(--dur-slow) * 8) var(--ease-out) var(--dur-slow) both; }
+    .rm__step.is-active .bar__fill { animation: rm-fill calc(var(--dur-slow) * 3) var(--ease-out) both; animation-delay: calc(var(--dur-base) * (var(--i, 0) + 2)); }
+    .rm__step.is-active .mock-check--late { animation: pop var(--dur-base) var(--ease-out) both; animation-delay: calc(var(--dur-base) * (var(--i) + 2) + var(--dur-slow) * 3); }
+    .rm__step.is-active .rings li { animation: pop var(--dur-slow) var(--ease-out) both; animation-delay: calc(var(--dur-base) * var(--i)); }
+    .rm__step.is-active .rm-handover li { animation: rm-pop var(--dur-slow) var(--ease-out) both; animation-delay: calc(var(--dur-slow) * 2 + var(--dur-base) * var(--i)); }
+  }
+</style>

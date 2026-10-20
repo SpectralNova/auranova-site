@@ -49,6 +49,8 @@ export const ui = {
     measuredOn: 'Medido el',
     allServices: 'Ver todos los servicios',
     servicesMenu: 'Servicios',
+    ctaNote: 'Te decimos qué necesitas y qué no.',
+    example: 'Ejemplo',
   },
   en: {
     htmlLang: 'en-US',
@@ -96,6 +98,8 @@ export const ui = {
     measuredOn: 'Measured on',
     allServices: 'See all services',
     servicesMenu: 'Services',
+    ctaNote: 'We tell you what you need, and what you don’t.',
+    example: 'Example',
   },
 } satisfies Record<Lang, unknown>;
 

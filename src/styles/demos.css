@@ -1,0 +1,108 @@
+/* ==========================================================================
+   AuraNova: shared language for animated demos (hero options, service demos,
+   the roadmap). Tokens only. Motion = transform/opacity; paused off-screen,
+   pausable (WCAG 2.2.2), and still for prefers-reduced-motion.
+   ========================================================================== */
+
+/* Service demos are dark product windows, also inside light sections: restore the dark semantic tokens
+   (same values as the DS dark theme; a `.theme-dark` utility is proposed upstream for DS v1.3). */
+.demo-dark {
+  --color-bg: var(--gray-7);
+  --color-surface: color-mix(in oklab, var(--gray-7), white 4%);
+  --color-surface-2: color-mix(in oklab, var(--gray-7), white 8%);
+  --color-border: color-mix(in oklab, var(--gray-7), white 12%);
+  --color-border-strong: var(--gray-4);
+  --color-text: var(--gray-1);
+  --color-text-muted: var(--gray-3);
+  --color-accent: var(--lime-1);
+  --color-on-accent: var(--lime-7);
+  --color-link: var(--violet-3);
+  --color-focus: var(--lime-1);
+  color-scheme: dark;
+  color: var(--color-text);
+}
+
+/* A service page's signature demo: one big window, centred under the section heading. */
+.svc-demo {
+  --cycle: calc(var(--dur-slow) * 28);
+  position: relative; width: min(100%, 64rem); margin-inline: auto; text-align: left;
+  border: 1px solid var(--color-border); border-radius: var(--radius-xl); background: var(--color-bg);
+  box-shadow: var(--shadow-lg), var(--glow-secondary); overflow: hidden;
+}
+.svc-demo .demo-window__bar { padding: var(--space-3) var(--space-4); background: var(--color-surface); }
+.svc-demo .demo-window__dots { flex: none; }
+/* On narrow screens the title gives way (ellipsis) so the chips on the right always fit. */
+.svc-demo__title { display: inline-flex; align-items: center; gap: var(--space-2); min-width: 0; margin-left: var(--space-2); overflow: hidden; font-size: var(--text-xs); font-weight: var(--weight-strong); color: var(--color-text-muted); white-space: nowrap; text-overflow: ellipsis; }
+.svc-demo__title .icon { flex: none; }
+.svc-demo__bar-end { display: inline-flex; flex: none; align-items: center; gap: var(--space-2); margin-left: auto; }
+/* A status strip along the bottom holds the pause button, so it never covers the demo. */
+.svc-demo { padding-bottom: calc(var(--space-6) + var(--space-5)); }
+.svc-demo .demo-toggle { right: var(--space-3); bottom: var(--space-2); }
+.demo-mono { font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace; }
+.demo-foot { margin: var(--space-4) 0 0; text-align: center; color: var(--color-text-muted); font-size: var(--text-sm); }
+
+/* Paused until on screen, or when the visitor pauses it (src/lib/demo.ts). */
+[data-demo]:not([data-playing="true"]) *,
+[data-demo]:not([data-playing="true"]) *::before,
+[data-demo]:not([data-playing="true"]) *::after { animation-play-state: paused !important; }
+
+[data-demo] { position: relative; }
+.demo-toggle {
+  position: absolute; z-index: var(--z-raised); right: var(--space-3); bottom: var(--space-3);
+  display: inline-grid; place-items: center; width: calc(var(--space-6) + var(--space-3)); height: calc(var(--space-6) + var(--space-3));
+  border: 1px solid var(--color-border); border-radius: 50%;
+  background: color-mix(in oklab, var(--color-surface), transparent 10%); color: var(--color-text); cursor: pointer;
+  backdrop-filter: var(--nav-blur); -webkit-backdrop-filter: var(--nav-blur);
+}
+.demo-toggle:hover { border-color: var(--color-border-strong); }
+.demo-toggle[hidden] { display: none; }
+.demo-toggle__play, .demo-toggle[data-paused="true"] .demo-toggle__pause { display: none; }
+.demo-toggle[data-paused="true"] .demo-toggle__play { display: block; }
+
+/* Window frame (browser / app) */
+.demo-window {
+  overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+  background: var(--color-surface); box-shadow: var(--shadow-lg);
+}
+.demo-window__bar { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-border); }
+.demo-window__dots { display: flex; gap: var(--space-1); }
+.demo-window__dots span { width: var(--space-2); height: var(--space-2); border-radius: 50%; background: var(--gray-5); }
+.demo-window__dots span:first-child { background: var(--lime-3); }
+.demo-window__url {
+  flex: 1; display: inline-flex; align-items: center; gap: var(--space-1); min-width: 0; margin-left: var(--space-2);
+  padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); background: var(--color-surface-2);
+  color: var(--color-text-muted); font-size: var(--text-xs); white-space: nowrap; overflow: hidden;
+}
+.demo-window--light { background: var(--violet-1); color: var(--gray-7); border-color: var(--gray-2); }
+.demo-window--light .demo-window__bar { border-color: var(--gray-1); background: var(--white); }
+.demo-window--light .demo-window__url { background: var(--gray-1); color: var(--gray-5); }
+
+/* Toast / notification */
+.demo-toast {
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  background: color-mix(in oklab, var(--color-surface-2), transparent 6%); box-shadow: var(--shadow-lg);
+  backdrop-filter: var(--nav-blur); -webkit-backdrop-filter: var(--nav-blur);
+  font-size: var(--text-sm); line-height: 1.3;
+}
+.demo-toast strong { display: block; font-weight: var(--weight-strong); }
+.demo-toast small { display: block; color: var(--color-text-muted); font-size: var(--text-xs); }
+.demo-toast__icon {
+  display: inline-grid; place-items: center; flex: none; width: calc(var(--space-6) + var(--space-1)); height: calc(var(--space-6) + var(--space-1));
+  border-radius: var(--radius-sm); background: var(--lime-1); color: var(--lime-7);
+}
+.demo-toast__icon--violet { background: var(--violet-5); color: var(--violet-1); }
+
+/* "Ejemplo" tag on demos that show numbers (never presented as real results) */
+.demo-tag {
+  display: inline-flex; align-items: center; gap: var(--space-1); padding: 0 var(--space-2);
+  border: 1px dashed var(--color-border-strong); border-radius: var(--radius-pill);
+  color: var(--color-text-muted); font-size: var(--text-xs); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase;
+}
+
+/* Generic placeholder blocks inside mock sites */
+.mock-line { display: block; height: var(--space-2); border-radius: var(--radius-pill); background: currentColor; opacity: 0.18; }
+.mock-line--strong { opacity: 0.55; height: var(--space-3); }
+.mock-line--w70 { width: 70%; }
+.mock-line--w50 { width: 50%; }
+.mock-line--w35 { width: 35%; }

@@ -1,0 +1,21 @@
+---
+// Pause/play for an animated demo (WCAG 2.2.2). Wired by src/lib/demo.ts.
+import Icon from './Icon.astro';
+
+interface Props {
+  pause: string;
+  play: string;
+}
+
+const { pause, play } = Astro.props;
+---
+
+<button class="demo-toggle" type="button" aria-label={pause} data-paused="false" data-pause={pause} data-play={play}>
+  <Icon name="pause" size={14} class="demo-toggle__pause" />
+  <Icon name="play" size={14} class="demo-toggle__play" />
+</button>
+
+<script>
+  import { initDemos } from '../lib/demo';
+  initDemos();
+</script>

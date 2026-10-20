@@ -1,0 +1,32 @@
+---
+// A large statement whose words light up with the scroll (src/styles/motion.css). Text is plain copy
+// with ==highlight== marks; each word becomes a span carrying its own slice of the scroll range.
+interface Props {
+  text: string;
+  as?: 'p' | 'h2';
+  id?: string;
+  wide?: boolean;
+}
+
+const { text, as: Tag = 'p', id, wide = false } = Astro.props;
+const words: { word: string; hl: boolean }[] = [];
+text.split('==').forEach((part, i) => {
+  for (const word of part.split(/\s+/).filter(Boolean)) words.push({ word, hl: i % 2 === 1 });
+});
+// The line lights up between 15% and 55% of its trip across the screen, one word after another.
+const start = 15;
+const span = 40;
+const step = span / words.length;
+---
+
+<Tag class:list={['statement', { 'statement--wide': wide }]} id={id}>
+  {
+    words.map((w, i) => (
+      <>
+        <span class:list={['w', { 'w--hl': w.hl }]} data-w={w.word} style={`--a: ${(start + i * step).toFixed(1)}%; --b: ${(start + (i + 1.5) * step).toFixed(1)}%`}>
+          {w.word}
+        </span>{' '}
+      </>
+    ))
+  }
+</Tag>

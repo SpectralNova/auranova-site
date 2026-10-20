@@ -1,0 +1,131 @@
+---
+// Asesoría digital: "qué necesitas y qué no". Options land on an impact × cost matrix, then file into a
+// plan (Ahora / Después / Más adelante); one is set aside as unnecessary, and the plan is written down.
+// Illustrative (labelled "Ejemplo").
+import Icon from '../Icon.astro';
+import DemoToggle from '../DemoToggle.astro';
+
+interface Props {
+  copy: any;
+}
+
+const { copy } = Astro.props;
+const d = copy.demo;
+const items = d.items as { label: string; col: number; x: number; y: number }[];
+---
+
+<div class="svc-demo demo-dark ad" data-demo>
+  <div class="ad__scene" aria-hidden="true">
+    <div class="demo-window__bar">
+      <span class="demo-window__dots"><span></span><span></span><span></span></span>
+      <span class="svc-demo__title"><Icon name="map" size={14} />{d.title}</span>
+      <span class="svc-demo__bar-end"><span class="demo-tag">{d.sample}</span></span>
+    </div>
+    <div class="ad__body">
+      <figure class="ad__matrix">
+        <span class="ad__axis ad__axis--y">{d.impact} <Icon name="arrow-up" size={12} /></span>
+        <span class="ad__axis ad__axis--x">{d.cost} <Icon name="arrow-right" size={12} /></span>
+        <div class="ad__plane">
+          <span class="ad__sweet">{d.sweet}</span>
+          {
+            items.map((it, i) => (
+              <span class={`ad__pt ad__pt--${i + 1}`} style={`--x: ${it.x}%; --y: ${it.y}%`}>
+                <i />
+                <b>{it.label}</b>
+              </span>
+            ))
+          }
+        </div>
+      </figure>
+      <div class="ad__board">
+        {
+          d.columns.map((col: string, c: number) => (
+            <div class="ad__col">
+              <p class="ad__col-title">{col}</p>
+              {items.map((it, i) =>
+                it.col === c ? (
+                  <span class={`ad__card ad__card--${i + 1}`}>
+                    <Icon name="check" size={12} />
+                    {it.label}
+                  </span>
+                ) : null,
+              )}
+            </div>
+          ))
+        }
+        <p class="ad__skip">
+          <Icon name="x" size={14} />
+          <span><strong>{d.skip.label}</strong> {d.skip.text}</span>
+        </p>
+        <p class="ad__plan">
+          <Icon name="file-check" size={16} />
+          {d.plan}
+        </p>
+      </div>
+    </div>
+  </div>
+  <DemoToggle pause={copy.pause} play={copy.play} />
+</div>
+
+<style>
+  .ad__body { display: grid; gap: var(--space-5); padding: var(--space-5); }
+  @media (min-width: 768px) {
+    .ad__body { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+  }
+  .ad__matrix { position: relative; margin: 0; padding: 0 0 var(--space-5) var(--space-5); }
+  .ad__axis { position: absolute; display: inline-flex; align-items: center; gap: var(--space-1); color: var(--color-text-muted); font-size: var(--text-xs); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+  .ad__axis--y { left: 0; top: 0; writing-mode: vertical-rl; transform: rotate(180deg); }
+  .ad__axis--x { right: 0; bottom: 0; }
+  .ad__plane {
+    position: relative; aspect-ratio: 1 / 0.9; border: 1px solid var(--color-border); border-radius: var(--radius-md);
+    background:
+      linear-gradient(var(--color-border), var(--color-border)) 50% 0 / 1px 100% no-repeat,
+      linear-gradient(var(--color-border), var(--color-border)) 0 50% / 100% 1px no-repeat,
+      var(--color-surface);
+  }
+  .ad__sweet { position: absolute; left: 0; top: 0; width: 50%; height: 50%; padding: var(--space-2); border-radius: var(--radius-md) 0 0 0; background: color-mix(in oklab, var(--lime-1), transparent 88%); color: var(--lime-1); font-size: var(--text-xs); font-weight: var(--weight-strong); }
+  .ad__pt { position: absolute; left: var(--x); top: var(--y); display: inline-flex; align-items: center; gap: var(--space-2); white-space: nowrap; font-size: var(--text-xs); }
+  .ad__pt i { flex: none; width: var(--space-3); height: var(--space-3); margin-left: calc(var(--space-3) / -2); border-radius: 50%; background: var(--violet-3); box-shadow: 0 0 0 var(--space-1) color-mix(in oklab, var(--violet-3), transparent 75%); }
+  .ad__pt--1 i, .ad__pt--2 i { background: var(--lime-1); box-shadow: 0 0 0 var(--space-1) color-mix(in oklab, var(--lime-1), transparent 75%); }
+  .ad__pt--5 i { background: var(--gray-4); box-shadow: none; }
+  .ad__pt--5 b { color: var(--color-text-muted); text-decoration: line-through; }
+  .ad__pt b { font-weight: var(--weight-strong); }
+  .ad__board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); align-content: start; }
+  .ad__col { display: grid; align-content: start; gap: var(--space-2); min-height: 9rem; padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); }
+  .ad__col-title { margin: 0 0 var(--space-1); color: var(--color-text-muted); font-size: var(--text-xs); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+  .ad__col:first-child .ad__col-title { color: var(--lime-1); }
+  .ad__card { display: flex; align-items: center; gap: var(--space-1); padding: var(--space-2); border-radius: var(--radius-sm); background: var(--color-surface-2); font-size: var(--text-xs); font-weight: var(--weight-strong); line-height: 1.25; }
+  .ad__card :global(.icon) { flex: none; color: var(--lime-1); }
+  .ad__skip { grid-column: 1 / -1; display: flex; align-items: center; gap: var(--space-2); margin: 0; padding: var(--space-3); border: 1px dashed var(--color-border-strong); border-radius: var(--radius-md); color: var(--color-text-muted); font-size: var(--text-sm); }
+  .ad__skip strong { color: var(--color-text); text-decoration: line-through; }
+  .ad__plan { grid-column: 1 / -1; justify-self: start; display: inline-flex; align-items: center; gap: var(--space-2); margin: 0; padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill); background: var(--lime-1); color: var(--lime-7); font-size: var(--text-sm); font-weight: var(--weight-strong); }
+  @media (max-width: 479px) {
+    .ad__board { grid-template-columns: minmax(0, 1fr); }
+    .ad__col { min-height: 0; }
+  }
+
+  @keyframes ad-p1 { 0%, 4% { opacity: 0; transform: scale(0.4); } 8%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; } }
+  @keyframes ad-p2 { 0%, 13% { opacity: 0; transform: scale(0.4); } 17%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; } }
+  @keyframes ad-p3 { 0%, 22% { opacity: 0; transform: scale(0.4); } 26%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; } }
+  @keyframes ad-p4 { 0%, 31% { opacity: 0; transform: scale(0.4); } 35%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; } }
+  @keyframes ad-p5 { 0%, 40% { opacity: 0; transform: scale(0.4); } 44%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; } }
+  @keyframes ad-c1 { 0%, 8% { opacity: 0; transform: translateY(var(--space-3)); } 12%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; } }
+  @keyframes ad-c2 { 0%, 17% { opacity: 0; transform: translateY(var(--space-3)); } 21%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; } }
+  @keyframes ad-c3 { 0%, 26% { opacity: 0; transform: translateY(var(--space-3)); } 30%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; } }
+  @keyframes ad-c4 { 0%, 35% { opacity: 0; transform: translateY(var(--space-3)); } 39%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; } }
+  @keyframes ad-skip { 0%, 50% { opacity: 0; transform: translateY(var(--space-3)); } 54%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; } }
+  @keyframes ad-plan { 0%, 62% { opacity: 0; transform: scale(0.8); } 66%, 88% { opacity: 1; transform: none; } 93%, 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: no-preference) {
+    .ad__pt--1 { animation: ad-p1 var(--cycle) var(--ease-out) infinite both; }
+    .ad__pt--2 { animation: ad-p2 var(--cycle) var(--ease-out) infinite both; }
+    .ad__pt--3 { animation: ad-p3 var(--cycle) var(--ease-out) infinite both; }
+    .ad__pt--4 { animation: ad-p4 var(--cycle) var(--ease-out) infinite both; }
+    .ad__pt--5 { animation: ad-p5 var(--cycle) var(--ease-out) infinite both; }
+    .ad__card--1 { animation: ad-c1 var(--cycle) var(--ease-out) infinite both; }
+    .ad__card--2 { animation: ad-c2 var(--cycle) var(--ease-out) infinite both; }
+    .ad__card--3 { animation: ad-c3 var(--cycle) var(--ease-out) infinite both; }
+    .ad__card--4 { animation: ad-c4 var(--cycle) var(--ease-out) infinite both; }
+    .ad__skip { animation: ad-skip var(--cycle) var(--ease-out) infinite both; }
+    .ad__plan { animation: ad-plan var(--cycle) var(--ease-out) infinite both; }
+  }
+</style>

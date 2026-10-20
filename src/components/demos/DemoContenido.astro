@@ -1,0 +1,147 @@
+---
+// Contenido y marca: a reel in the editor. The playhead runs along the timeline (video, graphics,
+// subtitles, music) while the preview's subtitles change in step; a cover is picked and the brand palette
+// sits beside it. Illustrative.
+import Icon from '../Icon.astro';
+import DemoToggle from '../DemoToggle.astro';
+
+interface Props {
+  copy: any;
+}
+
+const { copy } = Astro.props;
+const d = copy.demo;
+// A fixed, hand-shaped waveform (no randomness: the page must build the same every time).
+const wave = [30, 55, 40, 70, 90, 60, 45, 75, 95, 65, 50, 35, 60, 85, 70, 40, 55, 80, 100, 72, 48, 36, 58, 76, 62, 44, 30, 52, 68, 40];
+---
+
+<div class="svc-demo demo-dark ce" data-demo>
+  <div class="ce__scene" aria-hidden="true">
+    <div class="demo-window__bar">
+      <span class="demo-window__dots"><span></span><span></span><span></span></span>
+      <span class="svc-demo__title"><Icon name="clapperboard" size={14} />{d.file}</span>
+      <span class="svc-demo__bar-end ce__formats">{d.formats.map((f: string, i: number) => <span class:list={['ce__format', { 'is-on': i === 0 }]}>{f}</span>)}</span>
+    </div>
+    <div class="ce__top">
+      <div class="ce__monitor">
+        <div class="ce__frame">
+          <span class="ce__blob ce__blob--a"></span>
+          <span class="ce__blob ce__blob--b"></span>
+          <p class="ce__caps">{d.captions.map((c: string, i: number) => <span class={`ce__cap ce__cap--${i + 1}`}>{c}</span>)}</p>
+        </div>
+        <div class="ce__transport demo-mono">
+          <Icon name="play" size={14} />
+          <span class="ce__times">{d.times.map((t: string, i: number) => <span class={`ce__time ce__time--${i + 1}`}>{t}</span>)}</span>
+          <span class="ce__total">/ {d.total}</span>
+          <Icon name="captions" size={14} />
+        </div>
+      </div>
+      <div class="ce__side">
+        <p class="ce__label">{d.thumbsTitle}</p>
+        <div class="ce__thumbs">
+          <span class="ce__thumb ce__thumb--1"><b>{d.captions[0]}</b></span>
+          <span class="ce__thumb ce__thumb--2"><b>{d.captions[2]}</b></span>
+          <span class="ce__thumb ce__thumb--3"><b>{d.captions[1]}</b></span>
+        </div>
+        <p class="ce__label">{d.paletteTitle}</p>
+        <div class="ce__palette"><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+    <div class="ce__timeline">
+      <div class="ce__ruler demo-mono">{d.ruler.map((r: string) => <span>{r}</span>)}</div>
+      <div class="ce__tracks">
+        <div class="ce__track"><span class="ce__name">{d.tracks[0]}</span><span class="ce__lane"><i class="ce__clip ce__clip--v1"></i><i class="ce__clip ce__clip--v2"></i><i class="ce__clip ce__clip--v3"></i></span></div>
+        <div class="ce__track"><span class="ce__name">{d.tracks[1]}</span><span class="ce__lane"><i class="ce__clip ce__clip--g1"></i><i class="ce__clip ce__clip--g2"></i></span></div>
+        <div class="ce__track"><span class="ce__name">{d.tracks[2]}</span><span class="ce__lane"><i class="ce__clip ce__clip--s1">Aa</i><i class="ce__clip ce__clip--s2">Aa</i><i class="ce__clip ce__clip--s3">Aa</i></span></div>
+        <div class="ce__track"><span class="ce__name">{d.tracks[3]}</span><span class="ce__lane ce__wave">{wave.map((h) => <i style={`--h: ${h}%`}></i>)}</span></div>
+        <div class="ce__head-track"><span class="ce__head"></span></div>
+      </div>
+    </div>
+  </div>
+  <DemoToggle pause={copy.pause} play={copy.play} />
+</div>
+
+<style>
+  .ce__formats { gap: var(--space-1); }
+  .ce__format { padding: 0 var(--space-2); border-radius: var(--radius-pill); color: var(--color-text-muted); font-size: var(--text-xs); }
+  .ce__format.is-on { background: var(--color-surface-2); color: var(--color-text); }
+  .ce__top { display: grid; gap: var(--space-4); padding: var(--space-5) var(--space-5) var(--space-4); }
+  @media (min-width: 768px) {
+    .ce__top { grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); }
+  }
+  .ce__monitor { display: grid; gap: var(--space-2); }
+  .ce__frame { position: relative; display: grid; place-items: end center; aspect-ratio: 16 / 8; overflow: hidden; border-radius: var(--radius-md); background: radial-gradient(circle at 75% 25%, color-mix(in oklab, var(--lime-1), transparent 70%), transparent 45%), linear-gradient(135deg, var(--violet-7), var(--violet-5)); }
+  .ce__blob { position: absolute; border-radius: 50%; }
+  .ce__blob--a { width: 34%; aspect-ratio: 1; left: 12%; top: 14%; background: radial-gradient(circle at 35% 35%, var(--violet-2), var(--violet-4)); opacity: 0.8; }
+  .ce__blob--b { width: 18%; aspect-ratio: 1; right: 18%; top: 30%; background: radial-gradient(circle at 35% 35%, var(--lime-1), var(--lime-3)); }
+  .ce__caps { position: relative; display: grid; margin: 0 0 var(--space-4); }
+  .ce__cap { grid-area: 1 / 1; justify-self: center; padding: var(--space-1) var(--space-3); border-radius: var(--radius-sm); background: color-mix(in oklab, var(--gray-7), transparent 25%); color: var(--white); font-size: var(--text-sm); font-weight: var(--weight-strong); white-space: nowrap; opacity: 0; }
+  .ce__cap--3 { opacity: 1; }
+  .ce__transport { display: flex; align-items: center; gap: var(--space-2); color: var(--color-text-muted); font-size: var(--text-xs); }
+  .ce__transport :global(.icon:first-child) { color: var(--lime-1); }
+  .ce__times { display: grid; color: var(--color-text); }
+  .ce__time { grid-area: 1 / 1; opacity: 0; }
+  .ce__time--3 { opacity: 1; }
+  .ce__total { margin-right: auto; }
+  .ce__side { display: none; align-content: start; gap: var(--space-3); }
+  @media (min-width: 768px) {
+    .ce__side { display: grid; }
+  }
+  .ce__label { margin: 0; color: var(--color-text-muted); font-size: var(--text-xs); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+  .ce__thumbs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); }
+  .ce__thumb { position: relative; display: grid; align-items: end; aspect-ratio: 9 / 14; padding: var(--space-2); overflow: hidden; border-radius: var(--radius-sm); background: linear-gradient(160deg, var(--violet-5), var(--violet-7)); font-size: var(--text-xs); line-height: 1.15; }
+  .ce__thumb b { font-family: var(--font-display); font-weight: var(--weight-display); color: var(--white); }
+  .ce__thumb--2 { background: linear-gradient(160deg, var(--lime-1), var(--lime-4)); }
+  .ce__thumb--2 b { color: var(--lime-7); }
+  .ce__thumb--3 { background: linear-gradient(160deg, var(--gray-5), var(--gray-7)); }
+  .ce__thumb::after { content: ""; position: absolute; inset: 0; border: 2px solid var(--lime-1); border-radius: inherit; opacity: 0; }
+  .ce__thumb--2::after { opacity: 1; }
+  .ce__palette { display: flex; gap: var(--space-2); }
+  .ce__palette i { width: var(--space-6); height: var(--space-6); border: 1px solid var(--color-border); border-radius: 50%; }
+  .ce__palette i:nth-child(1) { background: var(--lime-1); }
+  .ce__palette i:nth-child(2) { background: var(--violet-5); }
+  .ce__palette i:nth-child(3) { background: var(--violet-2); }
+  .ce__palette i:nth-child(4) { background: var(--gray-7); }
+  .ce__palette i:nth-child(5) { background: var(--white); }
+  .ce__timeline { padding: var(--space-3) var(--space-5) var(--space-9); border-top: 1px solid var(--color-border); background: var(--color-surface); }
+  .ce__ruler { display: flex; justify-content: space-between; margin: 0 0 var(--space-2) calc(var(--space-9) - var(--space-2)); color: var(--color-text-muted); font-size: var(--text-xs); }
+  .ce__tracks { position: relative; display: grid; gap: var(--space-2); }
+  .ce__track { display: grid; grid-template-columns: calc(var(--space-9) - var(--space-2)) minmax(0, 1fr); align-items: center; }
+  .ce__name { color: var(--color-text-muted); font-size: var(--text-xs); }
+  .ce__lane { position: relative; display: flex; gap: var(--space-1); height: var(--space-6); }
+  .ce__clip { display: grid; place-items: center; height: 100%; border-radius: var(--radius-sm); font-style: normal; font-size: var(--text-xs); font-weight: var(--weight-strong); }
+  .ce__clip--v1 { flex: 3; background: linear-gradient(90deg, var(--violet-4), var(--violet-5)); }
+  .ce__clip--v2 { flex: 4; background: linear-gradient(90deg, var(--violet-5), var(--violet-6)); }
+  .ce__clip--v3 { flex: 3; background: linear-gradient(90deg, var(--violet-3), var(--violet-5)); }
+  .ce__clip--g1 { flex: 2; margin-left: 8%; background: var(--lime-1); }
+  .ce__clip--g2 { flex: 3; margin: 0 6% 0 30%; background: var(--lime-2); }
+  .ce__clip--s1, .ce__clip--s2, .ce__clip--s3 { flex: 1; background: var(--color-surface-2); color: var(--color-text); }
+  .ce__wave { align-items: center; gap: 2px; }
+  .ce__wave i { flex: 1; height: var(--h); border-radius: var(--radius-pill); background: var(--violet-3); }
+  /* The playhead: a full-width track that slides by its own width, carrying the line on its left edge. */
+  .ce__head-track { position: absolute; top: calc(var(--space-2) * -1); bottom: calc(var(--space-2) * -1); left: calc(var(--space-9) - var(--space-2)); right: 0; pointer-events: none; transform: translateX(100%); }
+  .ce__head { position: absolute; top: 0; bottom: 0; left: 0; width: 2px; background: var(--lime-1); box-shadow: var(--glow-accent); }
+  .ce__head::before { content: ""; position: absolute; top: calc(var(--space-2) * -1); left: calc(var(--space-2) * -1 + 1px); width: var(--space-4); height: var(--space-3); border-radius: var(--radius-sm) var(--radius-sm) 50% 50%; background: var(--lime-1); }
+
+  @keyframes ce-head { from { transform: translateX(0); } to { transform: translateX(100%); } }
+  @keyframes ce-c1 { 0%, 31% { opacity: 1; } 34%, 100% { opacity: 0; } }
+  @keyframes ce-c2 { 0%, 32% { opacity: 0; } 35%, 64% { opacity: 1; } 67%, 100% { opacity: 0; } }
+  @keyframes ce-c3 { 0%, 65% { opacity: 0; } 68%, 97% { opacity: 1; } 100% { opacity: 0; } }
+  @keyframes ce-pick { 0%, 70% { opacity: 0; } 74%, 96% { opacity: 1; } 100% { opacity: 0; } }
+  @keyframes ce-swatch { 0%, 4% { transform: scale(0); } 10%, 100% { transform: none; } }
+  @keyframes ce-blob { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(8%, -6%) scale(1.06); } }
+  @media (prefers-reduced-motion: no-preference) {
+    .ce__head-track { animation: ce-head var(--cycle) linear infinite both; }
+    .ce__cap--1, .ce__time--1 { animation: ce-c1 var(--cycle) linear infinite both; }
+    .ce__cap--2, .ce__time--2 { animation: ce-c2 var(--cycle) linear infinite both; }
+    .ce__cap--3, .ce__time--3 { animation: ce-c3 var(--cycle) linear infinite both; }
+    .ce__thumb--2::after { animation: ce-pick var(--cycle) linear infinite both; }
+    .ce__palette i { animation: ce-swatch var(--cycle) var(--ease-out) infinite both; }
+    .ce__palette i:nth-child(2) { animation-delay: calc(var(--cycle) * 0.015); }
+    .ce__palette i:nth-child(3) { animation-delay: calc(var(--cycle) * 0.03); }
+    .ce__palette i:nth-child(4) { animation-delay: calc(var(--cycle) * 0.045); }
+    .ce__palette i:nth-child(5) { animation-delay: calc(var(--cycle) * 0.06); }
+    .ce__blob--a { animation: ce-blob calc(var(--cycle) / 2) ease-in-out infinite both; }
+    .ce__blob--b { animation: ce-blob calc(var(--cycle) / 2) ease-in-out calc(var(--cycle) / -4) infinite both; }
+  }
+</style>

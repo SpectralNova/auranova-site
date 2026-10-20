@@ -13,12 +13,9 @@
 
 | # | Section | Theme | Content |
 |---|---|---|---|
-| 1 | Hero | dark | What AuraNova is, in one sentence + [Agenda una llamada] |
-| 2 | El nombre | light | Aura + Nova (🟡) in two lines: the shine is earned through method |
-| 3 | Misión y visión | dark | PHILOSOPHY §2–3 (🟡 wording) |
-| 4 | Valores | light | The 7 values; each card = the value + "cómo lo compruebas" (the checkable behavior from PHILOSOPHY §4) |
-| 5 | Lo que no hacemos | dark | PHILOSOPHY §8, as a short list |
-| 6 | El estándar | dark | One line + link → /estandar (no repeated scores) |
-| 7 | CTA final | violet | [Agenda una llamada] + hours |
+| 1 | Hero | dark, **animated constellation background** (CP1.2) | What AuraNova is + the city (only here) → **Aura + Nova** as two glass cards and a closing line (the name section moved into the banner) → [Agenda una llamada]. The sky follows the pointer and the scroll; the stars twinkle ~4.5 s and rest (WCAG 2.2.2). |
+| 2 | Misión y visión | light | PHILOSOPHY §2–3 (🟡 wording) |
+| 3 | Valores | dark | The 7 values; each = the value + "cómo lo compruebas" (the checkable behavior from PHILOSOPHY §4) |
+| 4 | Lo que no hacemos + CTA | light | PHILOSOPHY §8, as a short list, then the closing call to action (no violet band, ADR-010) |
 
 **Avoid** (INSPIRATION §A): a page with only names and job titles. No numbers until they're real (Q21).

@@ -390,7 +390,7 @@ Before designing any page, write its **page brief** in `docs/pages/{slug}.md`: g
 | Q13 | Photos | None; AuraNova presents as a company | ✅ |
 | Q14 | Voice | "Nosotros" | ✅ |
 | Q15 | Channels | Business email on the domain (after purchase); WhatsApp later in the relationship | ✅ |
-| Q16 | Booking tool | Cal.com | ✅ |
+| Q16 | Booking tool | Cal.com; 30-minute calls (2026-10-20) | ✅ |
 | Q17 | Lead magnet | Yes, ungated | ✅ |
 | Q18 | Analytics | TBD | 🔴 |
 | Q19 | Domain, hosting | auranova.mx + Cloudflare Pages (purchase after the trademark check + OK on price) | ✅ |

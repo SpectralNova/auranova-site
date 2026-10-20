@@ -1,0 +1,29 @@
+---
+// Each service page's signature demo (CP1.2): one coded, pausable animation that shows the service doing
+// its job. Picked by the service's art slug; copy lives in the service YAML under `page.demo`.
+import DemoSitios from './demos/DemoSitios.astro';
+import DemoPlataformas from './demos/DemoPlataformas.astro';
+import DemoSeo from './demos/DemoSeo.astro';
+import DemoContenido from './demos/DemoContenido.astro';
+import DemoMantenimiento from './demos/DemoMantenimiento.astro';
+import DemoAsesoria from './demos/DemoAsesoria.astro';
+
+interface Props {
+  art: string;
+  copy: any;
+}
+
+const { art, copy } = Astro.props;
+const demos: Record<string, any> = {
+  'sitios-web': DemoSitios,
+  plataformas: DemoPlataformas,
+  posicionamiento: DemoSeo,
+  contenido: DemoContenido,
+  mantenimiento: DemoMantenimiento,
+  asesoria: DemoAsesoria,
+};
+const Demo = demos[art];
+if (!Demo) throw new Error(`No demo for service art "${art}"`);
+---
+
+<Demo copy={copy} />

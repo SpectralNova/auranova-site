@@ -1,0 +1,74 @@
+---
+// Animated constellation behind the Nosotros banner (David, CP1.2 feedback): the generated image follows
+// the pointer (desktop) and drifts with the scroll, and two star layers twinkle for a few seconds after
+// the page opens, then rest. No timed motion runs longer than 5 s (WCAG 2.2.2); everything else moves only
+// when the visitor moves. Decorative; nothing moves with prefers-reduced-motion.
+import GeneratedImage from './GeneratedImage.astro';
+---
+
+<div class="nova-bg" aria-hidden="true" data-parallax>
+  <div class="nova-bg__img">
+    <GeneratedImage file="constelacion.webp" widths={[768, 1280, 1536]} sizes="100vw" priority />
+  </div>
+  <div class="nova-bg__stars nova-bg__stars--a"></div>
+  <div class="nova-bg__stars nova-bg__stars--b"></div>
+  <div class="nova-bg__fade"></div>
+</div>
+
+<script>
+  import { initPointerParallax } from '../lib/parallax';
+  initPointerParallax();
+</script>
+
+<style>
+  .nova-bg { --px: 0; --py: 0; position: absolute; inset: 0; overflow: hidden; z-index: var(--z-base); }
+  .nova-bg__img, .nova-bg__stars { position: absolute; inset: -6%; }
+  .nova-bg__img { translate: calc(var(--px) * var(--space-4) * -1) calc(var(--py) * var(--space-3) * -1); transition: translate var(--dur-slow) var(--ease-out); }
+  .nova-bg__img :global(picture), .nova-bg__img :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 72% 38%; }
+  .nova-bg__img :global(picture) { transform: scale(1.02); }
+  .nova-bg__stars { translate: calc(var(--px) * var(--space-6) * -1) calc(var(--py) * var(--space-5) * -1); transition: translate var(--dur-slow) var(--ease-out); }
+  .nova-bg__stars--a {
+    background-image:
+      radial-gradient(circle at 8% 22%, var(--white) 0 1px, transparent 2px),
+      radial-gradient(circle at 21% 71%, var(--lime-2) 0 1px, transparent 2px),
+      radial-gradient(circle at 37% 14%, var(--white) 0 1px, transparent 2px),
+      radial-gradient(circle at 46% 83%, var(--violet-3) 0 1px, transparent 2px),
+      radial-gradient(circle at 63% 9%, var(--white) 0 1px, transparent 2px),
+      radial-gradient(circle at 74% 64%, var(--violet-2) 0 1px, transparent 2px),
+      radial-gradient(circle at 88% 21%, var(--white) 0 1px, transparent 2px),
+      radial-gradient(circle at 93% 78%, var(--lime-1) 0 1px, transparent 2px);
+  }
+  .nova-bg__stars--b {
+    background-image:
+      radial-gradient(circle at 14% 48%, var(--violet-2) 0 1px, transparent 2px),
+      radial-gradient(circle at 29% 33%, var(--white) 0 1px, transparent 2px),
+      radial-gradient(circle at 52% 57%, var(--lime-2) 0 1px, transparent 2px),
+      radial-gradient(circle at 57% 26%, var(--white) 0 1px, transparent 2px),
+      radial-gradient(circle at 69% 88%, var(--white) 0 1px, transparent 2px),
+      radial-gradient(circle at 81% 46%, var(--violet-3) 0 1px, transparent 2px),
+      radial-gradient(circle at 97% 12%, var(--white) 0 1px, transparent 2px);
+  }
+  /* Keeps the copy readable: dark on the left and at the bottom, the nova stays bright on the right. */
+  .nova-bg__fade {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, color-mix(in oklab, var(--color-bg), transparent 15%) 0%, color-mix(in oklab, var(--color-bg), transparent 55%) 45%, transparent 75%),
+      linear-gradient(0deg, var(--color-bg) 0%, transparent 30%);
+  }
+  @media (max-width: 767px) {
+    .nova-bg__img :global(img) { object-position: 82% 36%; }
+    .nova-bg__fade { background: linear-gradient(0deg, var(--color-bg) 8%, color-mix(in oklab, var(--color-bg), transparent 35%) 60%, color-mix(in oklab, var(--color-bg), transparent 55%) 100%); }
+  }
+
+  /* Twinkle: three short pulses (≈ 4.5 s), ending bright. */
+  @keyframes nova-twinkle { from { opacity: 0.2; } to { opacity: 1; } }
+  /* Scroll: the sky slides down and opens up as the visitor scrolls past the banner. */
+  @keyframes nova-scroll { to { transform: translateY(12%) scale(1.08); } }
+  @media (prefers-reduced-motion: no-preference) {
+    .nova-bg__stars--a { animation: nova-twinkle calc(var(--dur-slow) * 3) ease-in-out 3 alternate both; }
+    .nova-bg__stars--b { animation: nova-twinkle calc(var(--dur-slow) * 2) ease-in-out var(--dur-slow) 3 alternate both; }
+    @supports (animation-timeline: scroll()) {
+      .nova-bg__img :global(picture) { animation: nova-scroll linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+    }
+  }
+</style>

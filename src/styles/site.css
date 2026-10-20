@@ -83,17 +83,18 @@ main:focus { outline: none; }
 .card__link:focus-visible { outline: none; }
 .card:has(.card__link:focus-visible) { outline: 2px solid var(--color-focus); outline-offset: 3px; }
 
-/* Service card: 3D illustration on a soft violet halo, then kicker, name, summary. */
+/* Service card: 2D illustration on a soft halo, then kicker, name, summary. */
 .svc-card { display: flex; flex-direction: column; gap: var(--space-3); overflow: hidden; }
 .svc-card .tag { align-self: flex-start; }
 .svc-card .card__title { margin: 0; }
 .svc-card p { margin: 0; }
 .svc-card__art {
-  display: grid; place-items: center; aspect-ratio: 16 / 9;
+  display: grid; place-items: center;
   margin: calc(var(--space-6) * -1) calc(var(--space-6) * -1) var(--space-2);
-  background: radial-gradient(circle at 50% 60%, color-mix(in oklab, var(--violet-5), transparent 80%), transparent 68%);
+  padding: var(--space-6) 0 var(--space-4);
+  background: radial-gradient(circle at 50% 55%, color-mix(in oklab, var(--violet-2), transparent 55%), transparent 62%);
 }
-.svc-card__art img { width: 70%; height: auto; transition: transform var(--dur-slow) var(--ease-out); }
+.svc-card__art img { width: min(66%, 13rem); height: auto; transition: transform var(--dur-slow) var(--ease-out); }
 .svc-card:hover .svc-card__art img { transform: translateY(calc(var(--space-2) * -1)) scale(1.04); }
 .svc-card__more {
   margin-top: auto; padding-top: var(--space-3);
@@ -101,6 +102,10 @@ main:focus { outline: none; }
   letter-spacing: var(--tracking-caps); text-transform: uppercase;
 }
 .theme-light .svc-card__more { color: var(--color-link); }
+
+/* DS v1.2 .tag on a light section background measures 4.43:1 (violet-5 on its own 20% tint): darker text
+   here; proposed upstream for DS v1.3 (docs/DECISIONS.md, ADR-012). */
+.theme-light .tag { color: var(--violet-6); }
 
 .check-list { list-style: none; margin: 0; padding: 0; }
 .check-list li { position: relative; padding-left: var(--space-6); margin-bottom: var(--space-2); }
@@ -147,7 +152,7 @@ main:focus { outline: none; }
 .toc a:hover { border-color: var(--color-border-strong); }
 
 .doc > * + * { margin-top: var(--space-8); padding-top: var(--space-8); border-top: 1px solid var(--color-border); }
-.doc h2 { max-width: 24ch; }
+.doc :is(h2, h3) { max-width: 24ch; }
 .doc__body > :last-child { margin-bottom: 0; }
 .doc__body > ul:not([class]), .doc__body > ol:not([class]) { max-width: var(--measure); margin: 0 0 var(--space-4); padding-left: var(--space-6); }
 .doc__body li { margin-bottom: var(--space-2); }
@@ -155,7 +160,7 @@ main:focus { outline: none; }
 /* Desktop: heading in the left 4 columns, text in the right 8 (keeps lines within the measure). */
 @media (min-width: 1024px) {
   .doc > section { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--grid-gap); align-items: start; }
-  .doc > section > h2 { margin: 0; font-size: var(--text-2xl); }
+  .doc > section > :is(h2, h3) { margin: 0; font-size: var(--text-2xl); }
 }
 
 .step-facts { margin: var(--space-4) 0 0; }
@@ -216,12 +221,11 @@ main:focus { outline: none; }
 .case-list > * + * { margin-top: var(--grid-gap); }
 
 /* ==========================================================================
-   v1.1 visuals: generated art, floating cards, "buffer" bars, process tabs,
-   capability tiles, tools grid, services menu. Motion = transform/opacity only,
-   and none of it runs with prefers-reduced-motion.
+   v1.1 visuals: "buffer" bars, process tabs, capability tiles, tools grid,
+   services menu. Motion = transform/opacity only, and none of it runs with
+   prefers-reduced-motion. (CP1.2 scroll storytelling: motion.css; demos: demos.css.)
    ========================================================================== */
 
-@keyframes float { to { transform: translateY(calc(var(--space-3) * -1)); } }
 @keyframes rise { from { opacity: 0; transform: translateY(var(--space-5)); } to { opacity: 1; transform: none; } }
 @keyframes fill { from { transform: scaleX(0); } }
 @keyframes pop { from { opacity: 0; transform: scale(0.6); } }
@@ -236,8 +240,6 @@ main:focus { outline: none; }
 @keyframes press { 0%, 62% { transform: none; } 66% { transform: scale(0.94); } 72%, 100% { transform: none; } }
 
 @media (prefers-reduced-motion: no-preference) {
-  .float { animation: float calc(var(--dur-slow) * 7) ease-in-out infinite alternate; }
-  .float--slow { animation-duration: calc(var(--dur-slow) * 10); }
   /* Scroll reveal (no JavaScript): browsers without scroll-driven animations simply show everything. */
   @supports (animation-timeline: view()) {
     .section-head, .card-grid > li, .cap-grid > li, .ledger__row, .tools > li {
@@ -250,48 +252,6 @@ main:focus { outline: none; }
 .hero--split .container { display: grid; gap: var(--space-7); align-items: center; }
 @media (min-width: 1024px) {
   .hero--split .container { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
-}
-.hero-art { width: min(100%, 28rem); margin-inline: auto; }
-.hero-art img { width: 100%; height: auto; }
-.hero-band { margin-top: var(--space-8); aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-xl); }
-.hero-band picture, .hero-band img { display: block; width: 100%; height: 100%; object-fit: cover; }
-@media (min-width: 768px) {
-  .hero-band { aspect-ratio: 16 / 5; }
-}
-
-/* Home hero visual: the nova + floating glass cards */
-.hero-visual { position: relative; width: min(100%, 34rem); margin-inline: auto; aspect-ratio: 1 / 1.05; }
-.hero-visual__orb { position: absolute; top: 0; right: 0; width: 82%; }
-.hero-visual__orb img { width: 100%; height: auto; }
-.hero-visual__notice { position: absolute; top: 10%; left: 0; max-width: 72%; }
-.hero-visual__report { position: absolute; left: 4%; bottom: 0; width: min(17rem, 64%); }
-.hero-visual__chip { position: absolute; right: 0; bottom: 20%; }
-.float-card {
-  display: flex; gap: var(--space-3); align-items: center;
-  padding: var(--space-4) var(--space-5);
-  border: 1px solid var(--color-border); border-radius: var(--radius-lg);
-  background: color-mix(in oklab, var(--color-surface), transparent 12%);
-  backdrop-filter: var(--nav-blur); -webkit-backdrop-filter: var(--nav-blur);
-  box-shadow: var(--shadow-lg);
-  font-size: var(--text-sm);
-}
-.hero-visual__report .float-card { display: block; }
-.float-card strong { display: block; }
-.float-card__title { display: flex; align-items: center; gap: var(--space-2); margin: 0; font-weight: var(--weight-strong); }
-.float-card__title .icon { color: var(--color-accent); }
-.float-card__sub { display: block; margin: 0; color: var(--color-text-muted); font-size: var(--text-xs); }
-.float-chip {
-  display: inline-flex; align-items: center; gap: var(--space-2); margin: 0;
-  padding: var(--space-2) var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-pill);
-  background: var(--color-surface-2); font-size: var(--text-sm); white-space: nowrap;
-}
-.float-chip .icon, .float-chip strong { color: var(--color-accent); }
-/* Small screens: the nova with the measured card overlapping its lower edge; no other cards. */
-@media (max-width: 767px) {
-  .hero-visual { display: grid; justify-items: center; aspect-ratio: auto; }
-  .hero-visual__orb { position: relative; width: min(80%, 22rem); }
-  .hero-visual__notice, .hero-visual__chip { display: none; }
-  .hero-visual__report { position: relative; left: auto; bottom: auto; width: min(100%, 20rem); margin-top: calc(var(--space-9) * -1); }
 }
 
 /* Notification bell with badge */

@@ -1,13 +1,18 @@
 ---
+// /servicios/ (CP1.2, TypeSomething-inspired): a centred hero whose service mosaic grows into place as you
+// scroll, one row per service with its illustration, a "help me choose" chat, the tools, the process rail,
+// and price with the closing call to action (no violet band, ADR-010).
 import { getEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Section from '../../components/Section.astro';
 import CTA from '../../components/CTA.astro';
-import Cards from '../../components/Cards.astro';
-import ServiceGrid from '../../components/ServiceGrid.astro';
+import CtaBlock from '../../components/CtaBlock.astro';
+import ServiceMosaic from '../../components/ServiceMosaic.astro';
+import ServiceRows from '../../components/ServiceRows.astro';
+import NeedChat from '../../components/NeedChat.astro';
 import ToolsGrid from '../../components/ToolsGrid.astro';
+import ProcessLine from '../../components/ProcessLine.astro';
 import MoreLink from '../../components/MoreLink.astro';
-import GeneratedImage from '../../components/GeneratedImage.astro';
 import { href } from '../../i18n/routes';
 import { t } from '../../i18n/ui';
 import { rich } from '../../lib/rich';
@@ -25,39 +30,54 @@ const crumbs = breadcrumbJsonLd([
 ---
 
 <Layout lang={lang} route="servicios" title={c.title} description={c.description} jsonLd={[crumbs]}>
-  <section class="section hero hero--split" aria-labelledby="hero-title">
-    <div class="bg-grid hero__grid" aria-hidden="true"></div>
+  <section class="section hero hero--aura" aria-labelledby="hero-title">
+    <div class="aura" aria-hidden="true"><span class="aura__a sd-drift"></span><span class="aura__b sd-drift"></span></div>
     <div class="container">
-      <div class="hero__copy">
+      <div class="hero__center">
         <span class="eyebrow">{c.hero.eyebrow}</span>
         <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
         <p class="lead" set:html={rich(c.hero.lead, lang)} />
-        <div class="hero__actions"><CTA lang={lang} location="servicios" /></div>
+        <div class="hero__actions">
+          <CTA lang={lang} location="servicios" />
+          <a class="btn btn--secondary" href="#elige">{c.hero.secondary}</a>
+        </div>
       </div>
-      <div class="hero-art float float--slow">
-        <GeneratedImage file="orb-alt.webp" widths={[320, 480, 720]} sizes="(min-width: 1024px) 28rem, 70vw" priority />
-      </div>
+      <ServiceMosaic lang={lang} label={c.hero.listTitle} />
     </div>
   </section>
 
-  <Section lang={lang} theme="light" id="lista" srTitle={c.hero.listTitle}>
-    <ServiceGrid lang={lang} linkLabel={c.hero.linkLabel} />
+  <Section lang={lang} theme="light" id="lista" eyebrow={c.rows.eyebrow} title={c.rows.title} lead={c.rows.lead}>
+    <ServiceRows lang={lang} linkLabel={c.hero.linkLabel} />
   </Section>
 
-  <Section lang={lang} id="herramientas" eyebrow={c.tools.eyebrow} title={c.tools.title} lead={c.tools.lead} center>
+  <Section lang={lang} id="elige" eyebrow={c.chooser.eyebrow} title={c.chooser.title} lead={c.chooser.lead} center>
+    <NeedChat lang={lang} copy={c.chooser} />
+  </Section>
+
+  <Section lang={lang} theme="light" id="herramientas" eyebrow={c.tools.eyebrow} title={c.tools.title} lead={c.tools.lead} center>
     <ToolsGrid slugs={c.tools.order} labels={c.tools.items} />
   </Section>
 
-  <Section lang={lang} theme="light" id="proceso" eyebrow={c.process.eyebrow} title={c.process.title}>
-    <Cards lang={lang} items={c.process.steps} cols={4} numbered />
+  <Section lang={lang} id="proceso" eyebrow={c.process.eyebrow} title={c.process.title}>
+    <ProcessLine lang={lang} steps={c.process.steps} />
     <MoreLink lang={lang} link={c.process.link} />
   </Section>
 
-  <Section lang={lang} id="precio" eyebrow={c.price.eyebrow} title={c.price.title}>
-    {c.price.text.map((p: string) => <p set:html={rich(p, lang)} />)}
-  </Section>
-
-  <Section lang={lang} theme="violet" id="agenda-final" title={c.cta.title} lead={c.cta.text} center>
-    <p class="center"><CTA lang={lang} location="final" /></p>
+  <Section lang={lang} theme="light" id="precio" eyebrow={c.price.eyebrow} title={c.price.title}>
+    <div class="prose">{c.price.text.map((p: string) => <p set:html={rich(p, lang)} />)}</div>
+    <CtaBlock lang={lang} title={c.cta.title} note={c.cta.text} />
   </Section>
 </Layout>
+
+<style>
+  .hero--aura { padding-bottom: var(--space-9); }
+  .hero__center { max-width: 52rem; margin-inline: auto; text-align: center; }
+  .hero__center h1 { max-width: 18ch; margin-inline: auto; }
+  .hero__center .lead { margin-inline: auto; }
+  .hero__center .hero__actions { justify-content: center; }
+  /* Two soft lights (lime and violet), the "aura" behind the headline; they drift with the scroll. */
+  .aura { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .aura span { position: absolute; width: 46rem; aspect-ratio: 1; border-radius: 50%; }
+  .aura__a { --sd-from: 0%; --sd-to: 30%; left: -14rem; top: -18rem; background: radial-gradient(circle, color-mix(in oklab, var(--violet-5), transparent 62%), transparent 65%); }
+  .aura__b { --sd-from: 0%; --sd-to: -20%; right: -16rem; top: -6rem; background: radial-gradient(circle, color-mix(in oklab, var(--lime-1), transparent 82%), transparent 62%); }
+</style>

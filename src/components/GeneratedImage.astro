@@ -4,6 +4,7 @@ import { Picture } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
+  /** Path inside src/assets/generated/, e.g. "bg/sitios-web.webp" or "services/c/asesoria.webp". */
   file: string;
   alt?: string;
   widths: number[];
@@ -14,7 +15,7 @@ interface Props {
 }
 
 const { file, alt = '', widths, sizes, class: className, priority = false } = Astro.props;
-const images = import.meta.glob<ImageMetadata>('../assets/generated/*', { eager: true, import: 'default' });
+const images = import.meta.glob<ImageMetadata>('../assets/generated/**/*', { eager: true, import: 'default' });
 const src = images[`../assets/generated/${file}`];
 if (!src) throw new Error(`Missing generated image ${file}`);
 ---
