@@ -154,10 +154,9 @@ if not CHOICE:
 if CHOICE:
     tk, bar = CHOICE
     for pk in PEOPLE:
+        # One line, no wrapper: paste it as-is into Zoho's "Insert HTML" (stray newlines can become blank lines).
         (OUT / f"firma-{pk}-{'oscura' if tk == 'a' else 'clara'}.html").write_text(
-            "<!doctype html><html><head><meta charset=\"utf-8\"><title>Firma</title></head>"
-            f"<body style=\"margin:24px;\">\n{signature(tk, pk, BASE, bar)}\n</body></html>",
-            encoding="utf-8",
+            signature(tk, pk, BASE, bar).replace("\n", ""), encoding="utf-8"
         )
 
 if not CHOICE:
