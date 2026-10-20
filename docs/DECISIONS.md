@@ -22,6 +22,7 @@
   - **Netlify:** comparable; no advantage here over Cloudflare.
 - **Why:** one free account covers hosting, headers and the form function. The domain can be registered anywhere and pointed at it.
 - **Needs from David:** a Cloudflare account (free) connected to the GitHub repo. That's a dashboard step; there's no CLI on this machine.
+- **Update 2026-10-20:** David connected the repo as a Cloudflare **Workers** project (deploy command `npx wrangler deploy`), the successor to Pages. With no config in the repo, Wrangler auto-installed Astro's server adapter, and its prerender crashed. Fix: a committed `wrangler.jsonc` declares a **static-assets-only Worker** (`assets.directory: ./dist`, `404-page`, `force-trailing-slash`), so nothing gets added. Verified locally with `wrangler deploy --dry-run` and `wrangler dev`: headers from `_headers` applied, 404 page with a 404 status, `/x` → `/x/`.
 
 ## ADR-003 · Contact form: own function + transactional email
 - **Status:** Proposed (CP0) · 2026-10-19 · depends on Q15, Q19

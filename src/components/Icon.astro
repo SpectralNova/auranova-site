@@ -1,9 +1,10 @@
 ---
 // Lucide icon (ISC), inlined at build time: no client JS, inherits currentColor (DESIGN_SYSTEM §7).
-import { readFileSync } from 'node:fs';
-import { createRequire } from 'node:module';
+// Icons come from the package's string exports (no file-system access, so it renders in any runtime).
+import * as lucide from 'lucide-static';
 
 interface Props {
+  /** Kebab-case Lucide name, e.g. "chevron-down". */
   name: string;
   size?: number;
   class?: string;
@@ -12,9 +13,12 @@ interface Props {
 }
 
 const { name, size = 24, class: className, label } = Astro.props;
-const require = createRequire(import.meta.url);
-const raw = readFileSync(require.resolve(`lucide-static/icons/${name}.svg`), 'utf8');
-// The files start with a license comment; keep only what's inside the <svg> element.
+const exportName = name
+  .split('-')
+  .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+  .join('');
+const raw = (lucide as Record<string, unknown>)[exportName];
+if (typeof raw !== 'string') throw new Error(`Unknown Lucide icon: ${name}`);
 const open = raw.indexOf('<svg');
 const inner = raw.slice(raw.indexOf('>', open) + 1, raw.lastIndexOf('</svg>')).trim();
 ---
