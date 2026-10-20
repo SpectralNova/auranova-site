@@ -135,9 +135,22 @@ main:focus { outline: none; }
 }
 .theme-light .case-card__scores dd { color: var(--color-text); }
 .case-card__stack { font-size: var(--text-sm); }
-.case-card__details { margin: var(--space-4) 0; padding: var(--space-4); border-radius: var(--radius-md); background: var(--color-surface-2); }
-.case-card__details-title { margin: 0 0 var(--space-2); font-size: var(--text-base); }
-.case-card__details p { margin: 0; }
+/* "Lo que hicimos" (Proyectos only): a full-width band under the screenshot and the summary. */
+.case-card__details { display: grid; gap: var(--space-6); padding: var(--space-4); border-radius: var(--radius-lg); background: var(--color-surface-2); }
+@media (min-width: 768px) {
+  .case-card__details { padding: var(--space-6); }
+}
+@media (min-width: 1024px) {
+  .case-card__details { grid-column: 1 / -1; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: start; }
+}
+.case-card__details-title { margin: 0 0 var(--space-3); font-size: var(--text-xl); }
+.case-card__details p { margin: 0 0 var(--space-4); max-width: var(--measure); }
+.case-card__details .check-list { max-width: var(--measure); }
+.case-card__facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5) var(--space-4); margin: 0; }
+.case-card__facts div { padding-top: var(--space-3); border-top: 1px solid var(--color-border-strong); }
+.case-card__facts dd { order: -1; margin: 0; font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-4xl); line-height: 1; font-variant-numeric: tabular-nums; }
+.case-card__facts dt { margin-top: var(--space-2); color: var(--color-text-muted); font-size: var(--text-sm); }
+.case-card__facts div { display: flex; flex-direction: column; }
 
 /* ---------- Long-form pages (Cómo trabajamos) ---------- */
 .toc { margin-top: var(--space-6); }

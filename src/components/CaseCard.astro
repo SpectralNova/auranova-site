@@ -43,14 +43,6 @@ const visit = lang === 'es' ? 'Ver el sitio en vivo' : 'Visit the live site';
     <p class="muted">{p.sector}</p>
     <p set:html={rich(p.summary, lang)} />
     {
-      showDetails && p.details && (
-        <div class="case-card__details">
-          <h4 class="case-card__details-title">{lang === 'es' ? 'Lo que hicimos' : 'What we did'}</h4>
-          <p set:html={rich(p.details, lang)} />
-        </div>
-      )
-    }
-    {
       scores && low && (
         <dl class="case-card__scores">
           <div>
@@ -87,4 +79,29 @@ const visit = lang === 'es' ? 'Ver el sitio en vivo' : 'Visit the live site';
       {visit} <span aria-hidden="true">↗</span>
     </a>
   </div>
+  {
+    showDetails && p.details && (
+      <div class="case-card__details">
+        <div>
+          <h4 class="case-card__details-title">{lang === 'es' ? 'Lo que hicimos' : 'What we did'}</h4>
+          <p set:html={rich(p.details.intro, lang)} />
+          <ul class="check-list">
+            {p.details.items.map((item) => (
+              <li set:html={rich(item, lang)} />
+            ))}
+          </ul>
+        </div>
+        {p.details.facts && (
+          <dl class="case-card__facts">
+            {p.details.facts.map((f) => (
+              <div>
+                <dt>{f.label}</dt>
+                <dd>{f.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+      </div>
+    )
+  }
 </article>

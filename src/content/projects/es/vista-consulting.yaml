@@ -1,14 +1,29 @@
 # Permission: David, 2026-10-19 (Q12). Pending: Vista's OK in writing.
+# "Lo que hicimos" comes from David's project report (Informe del proyecto web, Oct 2026). Public facts only:
+# no Pixel ID, no internal reviewers, no figures Vista still has to confirm.
 order: 1
 client: "Vista Consulting"
 sector: "Planeación patrimonial"
 city: "Monterrey"
 url: "https://www.vistaconsulting.mx"
-summary: "Diseñamos y desarrollamos el sitio completo, de la estructura a la publicación."
-# "Lo que hicimos", shown on /proyectos/ only. David will send the technical description (2026-10-20).
-details: "[[PENDIENTE: descripción técnica de lo que hicimos para Vista Consulting (David)]]"
-tags: ["Sitio web", "Diseño", "Desarrollo"]
-stack: "Hecho con Astro · publicado en Cloudflare"
+summary: "Llevamos su sitio de ClickFunnels a un sitio propio, lo rediseñamos completo y lo conectamos con su CRM y sus anuncios."
+details:
+  intro: "En siete semanas, con una revisión de Vista en cada etapa, pasamos su sitio de páginas armadas con plantillas a un sitio propio, hecho con su marca y conectado a su forma de vender."
+  items:
+    - "24 páginas: una para cada tipo de cliente (ejecutivos, empresarios, independientes, empresas y papás) y todas llevan a la llamada de claridad de 30 minutos."
+    - "Tres ejercicios interactivos que no piden datos: una calculadora de retiro, siete preguntas sobre la sucesión de la empresa y una línea de tiempo para la universidad."
+    - "Conexión con GoHighLevel: 5 formularios integrados que guardan de qué anuncio llegó cada persona, y automatizaciones de seguimiento."
+    - "Medición con permiso: aviso de cookies, el mismo Pixel de Meta con su historial y sus audiencias, conversiones por campaña y una prueba A/B de su landing de webinar."
+    - "29 imágenes hechas a la medida para Vista, en lugar de fotos de banco."
+    - "Cambio de dominio sin un minuto fuera de servicio, con 25 redirecciones permanentes para no perder lo ganado en Google."
+    - "Comprobaciones automáticas de contraste, accesibilidad y diseño antes de cada publicación."
+  facts:
+    - { value: "24", label: "páginas publicadas" }
+    - { value: "5", label: "formularios conectados al CRM" }
+    - { value: "25", label: "redirecciones permanentes" }
+    - { value: "0", label: "minutos sin servicio al cambiar de dominio" }
+tags: ["Sitio web", "Migración", "Diseño", "Desarrollo", "CRM"]
+stack: "Hecho con Astro · publicado en Cloudflare · conectado a GoHighLevel"
 image: "vista-consulting-desktop.png"
 imageAlt: "Página de inicio de vistaconsulting.mx en una pantalla de escritorio"
 scores: "vista-scores"

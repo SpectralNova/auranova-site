@@ -36,6 +36,7 @@
 | Este sitio: Lighthouse 99 / 100 / 100 / 100 (lowest across 6 pages), contenido principal en ≤ 1.9 s | Sitios web ("Este sitio, medido"), Inicio process tabs and Cómo trabajamos roadmap (report mockups) | `src/data/site-scores.json`, re-measured 2026-10-20 on the local preview | 🟡 re-measure on the deployed site |
 | Vista Consulting: Lighthouse 97 / 100 / 100 / 100 | Inicio, Servicio | `src/data/vista-scores.json`, measured 2026-10-19 on vistaconsulting.mx | ✅ |
 | Vista: "diseñamos y desarrollamos el sitio completo" | Inicio, Servicio | David, Q12 (2026-10-19) | ✅ (Vista's written OK 🟡) |
+| Vista, "Lo que hicimos": migración desde ClickFunnels en siete semanas; 24 páginas; 3 ejercicios interactivos; 5 formularios de GoHighLevel; mismo Pixel de Meta con consentimiento; prueba A/B; 29 imágenes a la medida; 25 redirecciones 301; 0 minutos sin servicio | Proyectos | David's project report (Informe del proyecto web, Oct 2026) | ✅ (Vista's written OK 🟡, Q12) |
 | Vista: hecho con Astro, publicado en Cloudflare | Inicio, Servicio | HTTP inspection 2026-10-19 (`Server: cloudflare`, Astro markup) | ✅ |
 | Ves los horarios en tu propia zona horaria | Contacto | Cal.com behavior (Q16) | ✅ |
 | Precio pensado para negocios pequeños / "a un precio pensado para negocios como el tuyo" | Inicio, Servicios, every service page | David's positioning, CP1 feedback 2026-10-19 | ✅ |
