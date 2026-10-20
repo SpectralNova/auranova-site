@@ -1,0 +1,33 @@
+---
+// A generated brand illustration from src/assets/generated/ (docs/ASSETS.md), as AVIF/WebP.
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  file: string;
+  alt?: string;
+  widths: number[];
+  sizes: string;
+  class?: string;
+  /** Above the fold: load eagerly with high priority. */
+  priority?: boolean;
+}
+
+const { file, alt = '', widths, sizes, class: className, priority = false } = Astro.props;
+const images = import.meta.glob<ImageMetadata>('../assets/generated/*', { eager: true, import: 'default' });
+const src = images[`../assets/generated/${file}`];
+if (!src) throw new Error(`Missing generated image ${file}`);
+---
+
+<Picture
+  src={src}
+  formats={['avif', 'webp']}
+  fallbackFormat="webp"
+  widths={widths}
+  sizes={sizes}
+  alt={alt}
+  class={className}
+  loading={priority ? 'eager' : 'lazy'}
+  fetchpriority={priority ? 'high' : undefined}
+  decoding={priority ? 'sync' : 'async'}
+/>

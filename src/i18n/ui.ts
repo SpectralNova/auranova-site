@@ -21,7 +21,7 @@ export const ui = {
       ['nosotros', 'Nosotros'],
     ] as [RouteKey, string][],
     footer: {
-      tagline: 'Diseño y desarrollo web en Monterrey, para negocios de todo México y de Estados Unidos.',
+      tagline: 'Sitios web, contenido y asesoría digital para pequeños y medianos negocios.',
       site: 'Sitio',
       trust: 'Confianza',
       contact: 'Contacto',
@@ -47,6 +47,8 @@ export const ui = {
     breadcrumbHome: 'Inicio',
     onThisPage: 'En esta página',
     measuredOn: 'Medido el',
+    allServices: 'Ver todos los servicios',
+    servicesMenu: 'Servicios',
   },
   en: {
     htmlLang: 'en-US',
@@ -92,6 +94,8 @@ export const ui = {
     breadcrumbHome: 'Home',
     onThisPage: 'On this page',
     measuredOn: 'Measured on',
+    allServices: 'See all services',
+    servicesMenu: 'Services',
   },
 } satisfies Record<Lang, unknown>;
 

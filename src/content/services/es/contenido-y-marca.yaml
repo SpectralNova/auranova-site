@@ -1,0 +1,65 @@
+order: 4
+route: "servicios/contenido-y-marca"
+name: "Contenido y marca"
+kicker: "Textos, imágenes y video"
+navIcon: "sparkles"
+image: "svc-contenido.webp"
+summary: "Textos que venden, imágenes y video para tu sitio y tus redes, y una identidad visual que se ve como una sola marca."
+
+page:
+  title: "Contenido, video e identidad visual para negocios · AuraNova"
+  description: "Textos para tu sitio, imágenes creadas con IA, edición de video y reels, miniaturas, subtítulos, identidad visual y presentaciones para pequeños y medianos negocios."
+  hero:
+    eyebrow: "Contenido y marca"
+    title: "Contenido que ==habla por tu negocio=="
+    lead: "Escribimos los textos de tu sitio, creamos imágenes y video para tu sitio y tus redes, y ordenamos tu identidad visual para que todo se vea como una sola marca."
+
+  capabilities:
+    eyebrow: "Lo que hacemos"
+    title: "Todo lo que ==se ve y se lee=="
+    items:
+      - { icon: "pen-line", title: "Textos para tu sitio", text: "En español claro, con las palabras que usan tus clientes, y pensados para que te contacten." }
+      - { icon: "image", title: "Imágenes con IA", text: "Imágenes e ilustraciones originales para tu sitio y tus campañas, creadas con inteligencia artificial y revisadas por nosotros." }
+      - { icon: "clapperboard", title: "Video y reels", text: "Edición de video para redes: cortes, gráficos animados, música y color." }
+      - { icon: "captions", title: "Subtítulos", text: "Subtítulos precisos y limpios para que tus videos se entiendan sin sonido." }
+      - { icon: "image-play", title: "Miniaturas y portadas", text: "Portadas para YouTube, reels y publicaciones que invitan a dar clic." }
+      - { icon: "swatch-book", title: "Identidad visual", text: "Paleta de colores, tipografías, logotipo listo para web y una guía sencilla de uso." }
+      - { icon: "presentation", title: "Presentaciones y documentos", text: "Presentaciones, propuestas y documentos con tu marca, listos para enviar." }
+
+  includes:
+    eyebrow: "Qué incluye"
+    title: "Contenido a la medida, ==con tu voz=="
+    lead: "Cotizamos cada pieza o paquete por separado, según lo que necesites. [[CONFIRMAR: entregables, aportaciones y exclusiones de este servicio]]"
+    columns:
+      - title: "Incluye"
+        list:
+          - "Una propuesta de tono y estilo antes de producir"
+          - "Las piezas acordadas, en los formatos que necesitas"
+          - "Una ronda de revisión por entrega"
+          - "Archivos finales a tu nombre"
+      - title: "Tú aportas"
+        list:
+          - "Información de tu negocio y de tus clientes"
+          - "El material de video que grabes, si es video"
+          - "Tu logo y tus colores, si ya los tienes"
+      - title: "No incluye"
+        negative: true
+        list:
+          - "Sesiones de fotografía o grabación en sitio"
+          - "Administración diaria de tus redes sociales"
+          - "Pauta publicitaria"
+
+  faq:
+    eyebrow: "Preguntas frecuentes"
+    title: "Dudas sobre ==contenido=="
+    items:
+      - q: "¿Las imágenes hechas con IA se pueden usar en mi negocio?"
+        a: "Sí. Las creamos con herramientas que permiten el uso comercial, las revisamos antes de entregarlas y nunca las presentamos como fotos reales de tu negocio. [[CONFIRMAR: términos de licencia de la herramienta de imágenes]]"
+      - q: "¿Ustedes graban el video?"
+        a: "Trabajamos con el material que nos compartes y lo convertimos en piezas listas para publicar. Si necesitas grabación, lo platicamos."
+      - q: "¿Puedo pedir sólo una parte?"
+        a: "Sí. Puedes pedir sólo textos, sólo video o sólo tu identidad visual."
+
+  cta:
+    title: "¿Tu marca necesita ==verse como una sola==?"
+    text: "Agenda una llamada de {{duracionLlamada}} y te decimos por dónde empezar."

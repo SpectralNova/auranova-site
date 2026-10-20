@@ -1,11 +1,14 @@
 ---
-// Floating pill nav (DESIGN_SYSTEM §6). On narrow screens the links move into a full-height
-// <dialog> sheet: showModal() traps focus and Esc closes it natively.
+// Floating pill nav (DESIGN_SYSTEM §6). "Servicios" opens a panel with every service page.
+// On narrow screens everything moves into a full-height <dialog> sheet: showModal() traps focus
+// and Esc closes it natively.
+import { getCollection } from 'astro:content';
 import CTA from './CTA.astro';
+import Icon from './Icon.astro';
 import type { Lang } from '../content/business';
-import { rich } from '../lib/rich';
 import { built, href, routes, type RouteKey } from '../i18n/routes';
 import { t } from '../i18n/ui';
+import { rich } from '../lib/rich';
 
 interface Props {
   lang: Lang;
@@ -18,6 +21,9 @@ const other: Lang = lang === 'es' ? 'en' : 'es';
 const otherUrl = route && built[other].includes(route) ? routes[route][other] : undefined;
 const current = route?.split('/')[0];
 const links = ui.nav.map(([key, label]) => ({ key, label, url: href(key, lang), current: key === current }));
+const services = (await getCollection('services', (s) => s.id.startsWith(`${lang}/`)))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(({ data }) => ({ ...data, url: href(data.route as RouteKey, lang), current: data.route === route }));
 ---
 
 <header class="site-header container">
@@ -27,13 +33,42 @@ const links = ui.nav.map(([key, label]) => ({ key, label, url: href(key, lang), 
     </a>
     <ul class="nav__links">
       {
-        links.map((l) => (
-          <li>
-            <a href={l.url} aria-current={l.current ? 'page' : undefined}>
-              {l.label}
-            </a>
-          </li>
-        ))
+        links.map((l) =>
+          l.key === 'servicios' ? (
+            <li class="nav__menu">
+              <button class:list={['nav__menu-btn', { 'is-current': l.current }]} type="button" aria-expanded="false" aria-controls="nav-services">
+                {l.label}
+                <Icon name="chevron-down" size={16} />
+              </button>
+              <div class="nav__panel" id="nav-services" hidden>
+                <ul class="nav__panel-list">
+                  {services.map((s) => (
+                    <li>
+                      <a class="nav__panel-link" href={s.url} aria-current={s.current ? 'page' : undefined}>
+                        <span class="icon-tile">
+                          <Icon name={s.navIcon} size={20} />
+                        </span>
+                        <span>
+                          <strong>{s.name}</strong>
+                          <span class="nav__panel-kicker">{s.kicker}</span>
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <a class="nav__panel-all" href={l.url} aria-current={route === 'servicios' ? 'page' : undefined}>
+                  {ui.allServices} <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </li>
+          ) : (
+            <li>
+              <a href={l.url} aria-current={l.current ? 'page' : undefined}>
+                {l.label}
+              </a>
+            </li>
+          ),
+        )
       }
     </ul>
     <div class="nav__actions">
@@ -46,9 +81,7 @@ const links = ui.nav.map(([key, label]) => ({ key, label, url: href(key, lang), 
       }
       <CTA lang={lang} location="nav" class="nav__cta" />
       <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label={ui.menuOpen}>
-        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"
-          ><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg
-        >
+        <Icon name="menu" size={18} />
       </button>
     </div>
   </nav>
@@ -59,20 +92,42 @@ const links = ui.nav.map(([key, label]) => ({ key, label, url: href(key, lang), 
         <img src="/auranova-mark.svg" alt="" width="36" height="36" />AuraNova
       </a>
       <button class="menu-sheet__close" type="button" aria-label={ui.menuClose}>
-        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"
-          ><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg
-        >
+        <Icon name="x" size={18} />
       </button>
     </div>
     <ul class="menu-sheet__links">
       {
-        links.map((l) => (
-          <li>
-            <a href={l.url} aria-current={l.current ? 'page' : undefined}>
-              {l.label}
-            </a>
-          </li>
-        ))
+        links.map((l) =>
+          l.key === 'servicios' ? (
+            <li>
+              <details class="menu-sheet__group" open={l.current}>
+                <summary>
+                  {l.label}
+                  <Icon name="chevron-down" size={20} />
+                </summary>
+                <ul>
+                  {services.map((s) => (
+                    <li>
+                      <a href={s.url} aria-current={s.current ? 'page' : undefined}>
+                        <Icon name={s.navIcon} size={20} />
+                        {s.name}
+                      </a>
+                    </li>
+                  ))}
+                  <li>
+                    <a href={l.url}>{ui.allServices} →</a>
+                  </li>
+                </ul>
+              </details>
+            </li>
+          ) : (
+            <li>
+              <a href={l.url} aria-current={l.current ? 'page' : undefined}>
+                {l.label}
+              </a>
+            </li>
+          ),
+        )
       }
       {
         otherUrl && (
@@ -90,6 +145,7 @@ const links = ui.nav.map(([key, label]) => ({ key, label, url: href(key, lang), 
 </header>
 
 <script>
+  // Mobile sheet
   const toggle = document.querySelector<HTMLButtonElement>('.nav__toggle');
   const sheet = document.querySelector<HTMLDialogElement>('#menu');
   const close = sheet?.querySelector<HTMLButtonElement>('.menu-sheet__close');
@@ -103,9 +159,32 @@ const links = ui.nav.map(([key, label]) => ({ key, label, url: href(key, lang), 
       toggle.setAttribute('aria-expanded', 'false');
       toggle.focus();
     });
-    // Close when a link inside is followed (same-page anchors included).
     sheet.addEventListener('click', (e) => {
       if ((e.target as Element).closest('a')) sheet.close();
+    });
+  }
+
+  // Desktop "Servicios" disclosure: click to open; Esc, outside click or leaving it closes it.
+  const menuBtn = document.querySelector<HTMLButtonElement>('.nav__menu-btn');
+  const panel = document.querySelector<HTMLElement>('#nav-services');
+  const item = menuBtn?.closest<HTMLElement>('.nav__menu');
+  if (menuBtn && panel && item) {
+    const setOpen = (open: boolean) => {
+      menuBtn.setAttribute('aria-expanded', String(open));
+      panel.hidden = !open;
+    };
+    menuBtn.addEventListener('click', () => setOpen(menuBtn.getAttribute('aria-expanded') !== 'true'));
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.hidden) {
+        setOpen(false);
+        menuBtn.focus();
+      }
+    });
+    item.addEventListener('focusout', (e) => {
+      if (!item.contains(e.relatedTarget as Node | null)) setOpen(false);
+    });
+    document.addEventListener('click', (e) => {
+      if (!item.contains(e.target as Node)) setOpen(false);
     });
   }
 </script>

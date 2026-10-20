@@ -21,8 +21,15 @@ const services = defineCollection({
     name: z.string(),
     kicker: z.string(),
     summary: z.string(),
-    // The full service page; services without it get only a card (CP1 builds one service page).
-    page: z.looseObject({ title: z.string(), description: z.string() }).optional(),
+    /** Lucide icon for the nav menu. */
+    navIcon: z.string(),
+    /** Generated 3D illustration in src/assets/generated/ (docs/ASSETS.md). */
+    image: z.string(),
+    /** Simple Icons slugs shown in the page's tools grid (labels live in pages/es/servicios.yaml). */
+    tools: z.array(z.string()).optional(),
+    /** Show the published projects on this service page. */
+    proof: z.boolean().optional(),
+    page: z.looseObject({ title: z.string(), description: z.string() }),
   }),
 });
 

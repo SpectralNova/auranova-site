@@ -2,5 +2,70 @@ order: 2
 route: "servicios/plataformas-a-la-medida"
 name: "Plataformas a la medida"
 kicker: "Portales y sistemas"
+navIcon: "layout-dashboard"
+image: "svc-plataformas.webp"
 summary: "Cuando un sitio no basta: portales para tus clientes, alumnos o equipo, con usuarios, permisos y datos protegidos."
-# Full page: Phase 2.
+tools: ["nextdotjs", "render", "cloudflare", "github", "caldotcom"]
+
+page:
+  title: "Plataformas y sistemas web a la medida · AuraNova"
+  description: "Portales para clientes, alumnos o empleados, paneles de administración, reservas y automatizaciones para pequeños y medianos negocios."
+  hero:
+    eyebrow: "Plataformas a la medida"
+    title: "Portales y sistemas ==hechos para tu forma de trabajar=="
+    lead: "Cuando las hojas de cálculo y los mensajes ya no alcanzan: portales para tus clientes, alumnos o empleados, con acceso seguro y la información en un solo lugar."
+
+  capabilities:
+    eyebrow: "Lo que hacemos"
+    title: "Tu operación, ==en una sola plataforma=="
+    items:
+      - { icon: "users", title: "Portales con cuentas", text: "Cada usuario entra con su cuenta y ve sólo lo suyo: pedidos, calificaciones o documentos." }
+      - { icon: "layout-dashboard", title: "Paneles de administración", text: "Tu equipo administra usuarios, contenido y datos sin tocar código." }
+      - { icon: "shield-check", title: "Roles y permisos", text: "Quién puede ver y hacer qué, definido por escrito y probado antes de usar datos reales." }
+      - { icon: "calendar", title: "Reservas y citas", text: "Agenda en línea conectada a tu calendario, con confirmaciones automáticas." }
+      - { icon: "zap", title: "Automatizaciones", text: "Correos, avisos y reportes que se envían solos, para que dejes de hacerlo a mano." }
+      - { icon: "plug", title: "Integraciones", text: "Conectamos tu sistema con lo que ya usas: correo, calendario y hojas de cálculo." }
+      - { icon: "chart-column", title: "Reportes y tableros", text: "Tus números importantes en una sola pantalla, siempre al día." }
+      - { icon: "lock", title: "Seguridad", text: "Accesos protegidos, conexión cifrada y respaldos de tu información." }
+
+  includes:
+    eyebrow: "Qué incluye"
+    title: "Primero lo definimos, ==luego lo construimos=="
+    lead: "Cada plataforma es distinta; el Anexo A de tu propuesta la describe pantalla por pantalla. [[CONFIRMAR: entregables, aportaciones y exclusiones de este servicio]]"
+    columns:
+      - title: "Incluye"
+        list:
+          - "Levantamiento de requisitos por escrito"
+          - "Vista previa real de las pantallas principales"
+          - "Desarrollo de las funciones acordadas"
+          - "Pruebas de permisos antes de cargar datos reales"
+          - "Capacitación para quien la administre"
+          - "Documentación de uso"
+          - "Una ronda de revisión por etapa"
+      - title: "Tú aportas"
+        list:
+          - "Cómo trabajan hoy: procesos, formatos y ejemplos"
+          - "La información inicial que se va a cargar"
+          - "Una persona que revise y apruebe"
+      - title: "No incluye"
+        negative: true
+        list:
+          - "Captura manual de información existente"
+          - "El costo de servidores, servicios y licencias: van a tu nombre"
+
+  faq:
+    eyebrow: "Preguntas frecuentes"
+    title: "Dudas sobre ==tu plataforma=="
+    items:
+      - q: "¿Necesito una plataforma o me basta un sitio web?"
+        a: "Si tus clientes o tu equipo necesitan entrar con su propia cuenta, necesitas una plataforma. Si sólo quieres que te encuentren y te contacten, te basta un sitio. Te lo decimos con honestidad en la llamada."
+      - q: "¿Mi información está segura?"
+        a: "Definimos por escrito quién puede ver qué, y lo probamos antes de cargar datos reales. Las conexiones van cifradas y los accesos quedan a tu nombre."
+      - q: "¿Puedo empezar con algo pequeño?"
+        a: "Sí, y lo recomendamos. Empezamos con lo indispensable y agregamos funciones cuando las necesites."
+      - q: "¿Cuánto cuesta?"
+        a: "Depende de las funciones. Después de la llamada te enviamos una cotización a precio fijo, por escrito."
+
+  cta:
+    title: "¿Tu negocio ya ==necesita su propio sistema==?"
+    text: "Agenda una llamada de {{duracionLlamada}} y lo revisamos juntos."

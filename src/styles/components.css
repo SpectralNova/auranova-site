@@ -1,7 +1,7 @@
 /* Synced from Resources/AuraNova/Design System/components.css by scripts/sync-design-system.mjs.
    Do not edit here: change upstream, bump its changelog, then run `npm run sync:ds`. */
 /* ==========================================================================
-   AuraNova — reference components v1.1
+   AuraNova — reference components v1.2
    Requires tokens.css. Framework-agnostic: port these to Astro/React
    components, Tailwind @apply, etc. Keep names + behaviour; never hard-code
    values that exist as tokens.
@@ -117,8 +117,12 @@ h4 { font-size: var(--text-xl); }
 .theme-light .btn--ghost, [data-theme="light"] .btn--ghost { color: var(--color-link); }
 
 /* ---------- Floating nav ---------- */
+/* The header wrapper is the sticky element (a sticky child can't stick past its own parent).
+   Its transparent strip above the pill never blocks clicks. */
+.site-header { position: sticky; top: 0; z-index: var(--z-nav); padding-top: var(--space-3); pointer-events: none; }
+.site-header > * { pointer-events: auto; }
 .nav {
-  position: sticky; top: var(--space-3); z-index: var(--z-nav);
+  position: relative;
   display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
   padding: var(--space-2) var(--space-2) var(--space-2) var(--space-5);
   border: 1px solid var(--color-border); border-radius: var(--radius-lg);
@@ -131,12 +135,12 @@ h4 { font-size: var(--text-xl); }
 .nav__links a { color: var(--color-text); text-decoration: none; font-size: var(--text-sm); font-weight: var(--weight-strong); }
 .nav__links a:hover, .nav__links a[aria-current="page"] { color: var(--color-accent); }
 .nav__actions { display: flex; align-items: center; gap: var(--space-2); }
-/* Menu toggle: shown < 768px. Opens a full-height sheet with the links + primary CTA (aria-expanded, Esc closes, focus trapped). */
+/* Menu toggle: shown < 1024px (4 links + a long CTA don't fit below that). Opens a full-height sheet with the links + primary CTA (aria-expanded, Esc closes, focus trapped). */
 .nav__toggle {
   display: none; width: 44px; height: 44px; place-items: center;
   border: 1px solid var(--color-border); border-radius: 50%; background: var(--color-surface); color: var(--color-text); cursor: pointer;
 }
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .nav__links { display: none; }
   .nav__toggle { display: inline-grid; }
 }

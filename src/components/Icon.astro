@@ -1,0 +1,37 @@
+---
+// Lucide icon (ISC), inlined at build time: no client JS, inherits currentColor (DESIGN_SYSTEM §7).
+import { readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
+
+interface Props {
+  name: string;
+  size?: number;
+  class?: string;
+  /** Accessible label; omit for decorative icons (aria-hidden). */
+  label?: string;
+}
+
+const { name, size = 24, class: className, label } = Astro.props;
+const require = createRequire(import.meta.url);
+const raw = readFileSync(require.resolve(`lucide-static/icons/${name}.svg`), 'utf8');
+// The files start with a license comment; keep only what's inside the <svg> element.
+const open = raw.indexOf('<svg');
+const inner = raw.slice(raw.indexOf('>', open) + 1, raw.lastIndexOf('</svg>')).trim();
+---
+
+<svg
+  class:list={['icon', className]}
+  xmlns="http://www.w3.org/2000/svg"
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden={label ? undefined : 'true'}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  set:html={inner}
+/>

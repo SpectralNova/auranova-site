@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-10-20T00:47:22.081Z",
+  "measuredAt": "2026-10-20T05:27:16.122Z",
   "baseUrl": "http://localhost:4329",
   "lighthouseVersion": "13.5.0",
   "formFactor": "mobile",
@@ -12,7 +12,27 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1439,
+      "lcpMs": 1662,
+      "cls": 0,
+      "tbtMs": 0
+    },
+    {
+      "path": "/servicios/",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 1509,
+      "cls": 0,
+      "tbtMs": 0
+    },
+    {
+      "path": "/servicios/sitios-web/",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 1509,
       "cls": 0,
       "tbtMs": 0
     },
@@ -27,12 +47,12 @@
       "tbtMs": 0
     },
     {
-      "path": "/servicios/sitios-web/",
+      "path": "/nosotros/",
       "performance": 100,
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1436,
+      "lcpMs": 1508,
       "cls": 0,
       "tbtMs": 0
     },
@@ -42,7 +62,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1510,
+      "lcpMs": 1433,
       "cls": 0,
       "tbtMs": 0
     }

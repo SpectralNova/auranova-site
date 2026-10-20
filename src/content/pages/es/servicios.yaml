@@ -1,0 +1,57 @@
+# The /servicios/ page, plus blocks shared by every service page (price, process, tools).
+title: "Servicios · AuraNova"
+description: "Sitios web, plataformas a la medida, posicionamiento en Google, contenido y marca, mantenimiento y asesoría digital para pequeños y medianos negocios."
+
+hero:
+  eyebrow: "Servicios"
+  title: "Todo lo que tu negocio necesita ==en línea=="
+  lead: "Seis servicios para pequeños y medianos negocios. Contratas sólo lo que necesitas, con precio fijo y todo por escrito."
+  linkLabel: "Ver servicio"
+  listTitle: "Nuestros servicios"
+
+tools:
+  eyebrow: "Herramientas"
+  title: "Herramientas probadas, ==sin amarrarte a ninguna=="
+  lead: "Elegimos la herramienta según tu proyecto, no al revés. Las cuentas y el código quedan a tu nombre."
+  items:
+    astro: { name: "Astro", text: "Sitios muy rápidos y fáciles de mantener" }
+    nextdotjs: { name: "Next.js", text: "Plataformas y portales con usuarios" }
+    wordpress: { name: "WordPress", text: "Sitios que tu equipo puede editar" }
+    woocommerce: { name: "WooCommerce", text: "Tiendas y catálogos en línea" }
+    cloudflare: { name: "Cloudflare", text: "Hosting rápido y seguro" }
+    render: { name: "Render", text: "Servidores para plataformas" }
+    github: { name: "GitHub", text: "Tu código, respaldado y a tu nombre" }
+    googlesearchconsole: { name: "Search Console", text: "Cómo te encuentran en Google" }
+    googleanalytics: { name: "Google Analytics", text: "Visitas y contactos, medidos" }
+    google: { name: "Perfil de negocio", text: "Tu ficha en Google Maps" }
+    caldotcom: { name: "Cal.com", text: "Agenda de citas en línea" }
+  order: ["astro", "nextdotjs", "wordpress", "woocommerce", "cloudflare", "render", "github", "googlesearchconsole", "googleanalytics", "google", "caldotcom"]
+
+process:
+  eyebrow: "El proceso"
+  title: "==Primero lo ves==, luego lo construimos"
+  link: { label: "Así trabajamos, a detalle", route: "como" }
+  steps:
+    - title: "Descubrimiento"
+      text: "Objetivo, público y alcance por escrito, con precio fijo."
+    - title: "Primero lo ves"
+      text: "Una vista previa real en tu teléfono, antes de construir a fondo."
+    - title: "Construcción"
+      text: "Todo lo acordado, con una ronda de revisión por etapa."
+    - title: "Lanzamiento medido"
+      text: "Reporte de calidad y entrega de código, dominio y accesos."
+
+proof:
+  eyebrow: "Proyectos"
+  title: "Un sitio que ==ya está en línea=="
+
+price:
+  eyebrow: "Precio"
+  title: "Precios ==claros, sin sorpresas=="
+  text:
+    - "No publicamos precios genéricos porque cada negocio necesita algo distinto. Después de la llamada te enviamos una cotización a precio fijo, por escrito, pensada para el presupuesto de un negocio pequeño."
+    - "Pagas en tres partes: {{pagos}}. Montos en {{moneda}}."
+
+cta:
+  title: "¿No sabes cuál ==necesitas==?"
+  text: "Agenda una llamada de {{duracionLlamada}} y te recomendamos sólo lo que tu negocio necesita."

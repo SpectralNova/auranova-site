@@ -1,0 +1,71 @@
+order: 3
+route: "servicios/posicionamiento-en-google"
+name: "Posicionamiento en Google"
+kicker: "SEO y analítica"
+navIcon: "search-check"
+image: "svc-posicionamiento.webp"
+summary: "Que te encuentren cuando te buscan: SEO, tu perfil de negocio en Google y reportes claros de lo que funciona."
+tools: ["googlesearchconsole", "googleanalytics", "google", "cloudflare"]
+
+page:
+  title: "Posicionamiento en Google (SEO) para negocios · AuraNova"
+  description: "SEO técnico, perfil de negocio en Google, velocidad y analítica para pequeños y medianos negocios, con reportes en español claro."
+  hero:
+    eyebrow: "Posicionamiento en Google"
+    title: "Que tus clientes ==te encuentren en Google=="
+    lead: "Optimizamos tu sitio y tu perfil de negocio para que aparezcas cuando te buscan, y te mostramos con números claros qué está funcionando."
+
+  capabilities:
+    eyebrow: "Lo que hacemos"
+    title: "Visibilidad que ==se puede medir=="
+    items:
+      - { icon: "file-search", title: "SEO técnico", text: "Títulos, descripciones, mapa del sitio, datos estructurados y direcciones limpias." }
+      - { icon: "map-pin", title: "Perfil de negocio en Google", text: "Alta y optimización de tu ficha para aparecer en Google Maps y en búsquedas cercanas." }
+      - { icon: "gauge", title: "Velocidad", text: "Medimos y mejoramos la velocidad de tu sitio con las métricas que usa Google." }
+      - { icon: "search", title: "Search Console", text: "Lo configuramos para saber cómo te encuentran y corregir errores a tiempo." }
+      - { icon: "chart-column", title: "Analítica y contactos", text: "Medimos visitas, clics y contactos para saber qué páginas sí traen clientes." }
+      - { icon: "list-checks", title: "Auditoría SEO", text: "Revisamos tu sitio actual y te damos una lista de mejoras ordenada por prioridad." }
+      - { icon: "file-text", title: "Reportes claros", text: "Un reporte sencillo, en español, con lo que pasó y lo que sigue." }
+
+  note:
+    title: "Lo que no prometemos"
+    text: "Nadie puede garantizarte el primer lugar en Google, y desconfía de quien lo haga. Lo que sí hacemos es todo lo que depende de tu sitio y de tu perfil, y medirlo."
+
+  includes:
+    eyebrow: "Qué incluye"
+    title: "Un plan claro, ==por escrito=="
+    lead: "El alcance exacto depende de dónde estás hoy; lo detallamos en tu propuesta. [[CONFIRMAR: entregables, aportaciones y exclusiones de este servicio]]"
+    columns:
+      - title: "Incluye"
+        list:
+          - "Auditoría inicial de tu sitio y tu perfil"
+          - "Correcciones de SEO técnico"
+          - "Alta u optimización de tu perfil de negocio en Google"
+          - "Configuración de Search Console y analítica"
+          - "Reporte de resultados en español claro"
+      - title: "Tú aportas"
+        list:
+          - "Accesos a tu sitio, dominio y perfil de Google"
+          - "Datos de tu negocio: horarios, servicios y fotos"
+      - title: "No incluye"
+        negative: true
+        list:
+          - "Publicidad pagada en Google"
+          - "Garantía de posiciones"
+
+  faq:
+    eyebrow: "Preguntas frecuentes"
+    title: "Dudas sobre ==Google=="
+    items:
+      - q: "¿Me garantizan el primer lugar?"
+        a: "No, y nadie puede hacerlo honestamente. Hacemos bien todo lo que depende de tu sitio y de tu perfil, y te mostramos el avance con números."
+      - q: "¿Cuánto tarda en verse?"
+        a: "Las correcciones técnicas se notan pronto en las herramientas de Google; subir en los resultados suele tomar más tiempo y depende de tu competencia."
+      - q: "¿Sirve si mi negocio es local?"
+        a: "Sí, sobre todo tu perfil de negocio en Google: es lo que aparece en Maps cuando alguien busca cerca de ti."
+      - q: "¿Necesito un sitio nuevo?"
+        a: "No siempre. Primero revisamos el que tienes; si se puede mejorar, lo mejoramos."
+
+  cta:
+    title: "¿Quieres que ==te encuentren==?"
+    text: "Agenda una llamada de {{duracionLlamada}} y revisamos cómo apareces hoy."

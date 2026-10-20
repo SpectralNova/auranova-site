@@ -1,0 +1,232 @@
+---
+// "Cómo lo hacemos": auto-advancing tabs with a progress bar under the active tab and a pause
+// button (WCAG 2.2.2). No autoplay with prefers-reduced-motion; manual choice stops autoplay.
+// Without JavaScript every step is shown, one after another. Mockups are decorative.
+import Icon from './Icon.astro';
+import { loadScores, lowest } from '../lib/scores';
+import { rich } from '../lib/rich';
+import type { Lang } from '../content/business';
+
+interface Step {
+  tab: string;
+  title: string;
+  text: string;
+  mock: 'doc' | 'phone' | 'build' | 'report';
+}
+interface Props {
+  lang: Lang;
+  copy: {
+    pause: string;
+    play: string;
+    tablistLabel: string;
+    steps: Step[];
+    mockText: { docTitle: string; docItems: string[]; phoneLink: string; phoneButton: string; buildItems: string[]; reportTitle: string };
+  };
+}
+
+const { lang, copy } = Astro.props;
+const m = copy.mockText;
+const scores = loadScores('site-scores');
+const low = scores && lowest(scores);
+const rings: [string, number][] = low
+  ? [
+      [lang === 'es' ? 'Rendimiento' : 'Performance', low.performance],
+      [lang === 'es' ? 'Accesibilidad' : 'Accessibility', low.accessibility],
+      [lang === 'es' ? 'Buenas prácticas' : 'Best practices', low.bestPractices],
+      ['SEO', low.seo],
+    ]
+  : [];
+const stage = lang === 'es' ? 'Etapa' : 'Step';
+---
+
+<div class="tabs" data-tabs>
+  <div class="tabs__bar">
+    <div class="tabs__list" role="tablist" aria-label={copy.tablistLabel}>
+      {
+        copy.steps.map((s, i) => (
+          <button
+            class="tabs__tab"
+            type="button"
+            role="tab"
+            id={`step-tab-${i}`}
+            aria-controls={`step-panel-${i}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}>
+            <span class="tabs__num">{String(i + 1).padStart(2, '0')}</span>
+            {s.tab}
+            <span class="tabs__progress" aria-hidden="true" />
+          </button>
+        ))
+      }
+    </div>
+    <button class="tabs__pause" type="button" aria-label={copy.pause} data-pause={copy.pause} data-play={copy.play}>
+      <Icon name="pause" size={16} class="icon-pause" />
+      <Icon name="play" size={16} class="icon-play" />
+    </button>
+  </div>
+
+  {
+    copy.steps.map((s, i) => (
+      <div class="tabs__panel" role="tabpanel" id={`step-panel-${i}`} aria-labelledby={`step-tab-${i}`} tabindex="0">
+        <div class="tabs__text">
+          <span class="tag">
+            {stage} {i + 1}
+          </span>
+          <h3 set:html={rich(s.title, lang)} />
+          <p class="muted" set:html={rich(s.text, lang)} />
+        </div>
+        <div class="tabs__mock" aria-hidden="true">
+          <div class="bg-grid tabs__grid" />
+          {s.mock === 'doc' && (
+            <div class="mock-doc">
+              <p class="mock-doc__title">
+                <Icon name="file-text" size={20} />
+                {m.docTitle}
+              </p>
+              <ul class="mock-list">
+                {m.docItems.map((item, j) => (
+                  <li style={`--i: ${j}`}>
+                    <span class="mock-check">
+                      <Icon name="check" size={14} />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {s.mock === 'phone' && (
+            <div class="mock-phone">
+              <div class="mock-phone__screen">
+                <span class="mock-url">
+                  <Icon name="lock" size={12} />
+                  {m.phoneLink}
+                </span>
+                <span class="mock-block mock-block--hero" />
+                <span class="mock-block mock-block--line" />
+                <span class="mock-block mock-block--line mock-block--short" />
+                <span class="mock-row">
+                  <span class="mock-block mock-block--tile" />
+                  <span class="mock-block mock-block--tile" />
+                </span>
+                <span class="mock-btn">{m.phoneButton}</span>
+              </div>
+              <span class="bell mock-phone__bell">
+                <Icon name="bell" size={20} />
+                <span class="bell__badge">1</span>
+              </span>
+              <span class="mock-cursor">
+                <Icon name="mouse-pointer-2" size={28} />
+              </span>
+            </div>
+          )}
+          {s.mock === 'build' && (
+            <ul class="bars mock-build" role="list">
+              {m.buildItems.map((item, j) => (
+                <li class="bar" style={`--value: 1; --i: ${j * 2}`}>
+                  <span class="bar__label">{item}</span>
+                  <span class="mock-check mock-check--late" style={`--i: ${j * 2}`}>
+                    <Icon name="check" size={14} />
+                  </span>
+                  <span class="bar__track">
+                    <span class="bar__fill" />
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {s.mock === 'report' && low && (
+            <div class="mock-report">
+              <p class="mock-report__title">
+                <Icon name="badge-check" size={20} />
+                {m.reportTitle}
+              </p>
+              <ul class="rings" role="list">
+                {rings.map(([label, value], j) => (
+                  <li style={`--value: ${value}; --i: ${j}`}>
+                    <span class="ring">{value}</span>
+                    <span class="ring__label">{label}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+    const panels = tabs.map((t) => document.getElementById(t.getAttribute('aria-controls') ?? '') as HTMLElement);
+    const pause = root.querySelector<HTMLButtonElement>('.tabs__pause');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let index = 0;
+    let playing = !reduce;
+    let inView = false;
+
+    const sync = () => {
+      const running = playing && inView;
+      root.dataset.paused = String(!running);
+      if (pause) pause.setAttribute('aria-label', (playing ? pause.dataset.pause : pause.dataset.play) ?? '');
+    };
+    const select = (i: number, focus = false) => {
+      index = (i + tabs.length) % tabs.length;
+      tabs.forEach((tab, j) => {
+        const on = j === index;
+        tab.setAttribute('aria-selected', String(on));
+        tab.tabIndex = on ? 0 : -1;
+        panels[j].hidden = !on;
+      });
+      if (focus) tabs[index].focus();
+      // Keep the active tab visible inside the scrollable pill bar (horizontal only: the page never moves).
+      const list = tabs[index].parentElement;
+      if (list && list.scrollWidth > list.clientWidth) {
+        list.scrollTo({ left: tabs[index].offsetLeft - list.clientWidth / 2 + tabs[index].offsetWidth / 2, behavior: reduce ? 'auto' : 'smooth' });
+      }
+    };
+    const stop = () => {
+      playing = false;
+      root.dataset.stopped = '';
+      sync();
+    };
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        stop();
+        select(i);
+      });
+      tab.querySelector('.tabs__progress')?.addEventListener('animationend', () => {
+        if (playing && inView) select(index + 1);
+      });
+    });
+    root.querySelector('[role="tablist"]')?.addEventListener('keydown', (event) => {
+      const e = event as KeyboardEvent;
+      const moves: Record<string, number> = { ArrowRight: index + 1, ArrowLeft: index - 1, Home: 0, End: tabs.length - 1 };
+      if (!(e.key in moves)) return;
+      e.preventDefault();
+      stop();
+      select(moves[e.key], true);
+    });
+    pause?.addEventListener('click', () => {
+      playing = !playing;
+      if (playing) delete root.dataset.stopped;
+      else root.dataset.stopped = '';
+      sync();
+    });
+    new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      sync();
+    }).observe(root);
+
+    if (reduce) {
+      root.dataset.stopped = '';
+      pause?.setAttribute('hidden', '');
+    }
+    select(0);
+    sync();
+    root.dataset.ready = '';
+  });
+</script>

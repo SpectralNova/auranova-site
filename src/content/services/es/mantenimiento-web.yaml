@@ -1,6 +1,68 @@
-order: 3
+order: 5
 route: "servicios/mantenimiento-web"
 name: "Mantenimiento y soporte"
 kicker: "Después del lanzamiento"
-summary: "Cambios, actualizaciones y soporte técnico para que tu sitio siga al día después del lanzamiento."
-# Full page: Phase 2, once the maintenance plans are defined (Q11).
+navIcon: "shield-check"
+image: "svc-mantenimiento.webp"
+summary: "Tu sitio al día, seguro y funcionando: actualizaciones, cambios, respaldos y soporte cuando lo necesites."
+tools: ["cloudflare", "wordpress", "github"]
+
+page:
+  title: "Mantenimiento y soporte de páginas web · AuraNova"
+  description: "Actualizaciones, seguridad, respaldos, cambios, dominio, hosting y correo para que tu sitio siga rápido y funcionando después del lanzamiento."
+  hero:
+    eyebrow: "Mantenimiento y soporte"
+    title: "Tu sitio, ==siempre al día=="
+    lead: "Nos encargamos de que tu sitio siga rápido, seguro y actualizado después del lanzamiento, para que tú te enfoques en tu negocio."
+
+  capabilities:
+    eyebrow: "Lo que hacemos"
+    title: "Cuidamos tu sitio ==para que tú no tengas que hacerlo=="
+    items:
+      - { icon: "shield", title: "Actualizaciones y seguridad", text: "Actualizamos plataforma, plugins y dependencias, y revisamos que todo siga funcionando." }
+      - { icon: "archive", title: "Respaldos", text: "Copias de seguridad para recuperar tu sitio si algo sale mal." }
+      - { icon: "file-pen", title: "Cambios y contenido nuevo", text: "Textos, fotos, precios o páginas nuevas cuando los necesites." }
+      - { icon: "globe", title: "Dominio y hosting", text: "Configuramos y cuidamos tu dominio y tu hosting, siempre a tu nombre." }
+      - { icon: "mail", title: "Correo con tu dominio", text: "Configuramos correos como contacto@tunegocio.com para que te veas profesional." }
+      - { icon: "activity", title: "Monitoreo", text: "Revisamos que tu sitio esté en línea y siga cargando rápido." }
+      - { icon: "arrow-left-right", title: "Migraciones", text: "Cambiamos tu sitio de hosting o de plataforma sin perder información." }
+      - { icon: "life-buoy", title: "Soporte técnico", text: "Te respondemos en {{respuesta}} dentro de nuestro horario." }
+
+  note:
+    title: "Planes de mantenimiento"
+    text: "[[PENDIENTE: planes de mantenimiento: alcance, precio y tiempo de respuesta (Q11)]]"
+
+  includes:
+    eyebrow: "Qué incluye"
+    title: "Lo que cubre ==tu plan=="
+    lead: "Cada sitio terminado con nosotros incluye {{garantia}} de garantía y una sesión de capacitación. [[CONFIRMAR: entregables, aportaciones y exclusiones de este servicio]]"
+    columns:
+      - title: "Incluye"
+        list:
+          - "Corrección de errores durante {{garantia}} después del lanzamiento"
+          - "Una sesión de capacitación"
+          - "Lo que defina tu plan de mantenimiento"
+      - title: "Tú aportas"
+        list:
+          - "Accesos con los permisos necesarios"
+          - "Tus cambios, por escrito"
+      - title: "No incluye"
+        negative: true
+        list:
+          - "El costo del dominio, el hosting y las licencias: van a tu nombre"
+          - "Funciones nuevas grandes: se cotizan como proyecto"
+
+  faq:
+    eyebrow: "Preguntas frecuentes"
+    title: "Dudas sobre ==mantenimiento=="
+    items:
+      - q: "¿Qué cubre la garantía de {{garantia}}?"
+        a: "Cualquier error en lo que entregamos, corregido sin costo durante {{garantia}} después del lanzamiento."
+      - q: "¿Dan soporte a sitios que no hicieron ustedes?"
+        a: "[[CONFIRMAR: Sí, después de revisarlo y decirte por escrito en qué estado está.]]"
+      - q: "¿En cuánto tiempo responden?"
+        a: "Te respondemos en {{respuesta}}, {{horario}}."
+
+  cta:
+    title: "¿Tu sitio necesita ==quien lo cuide==?"
+    text: "Agenda una llamada de {{duracionLlamada}} y revisamos cómo está hoy."

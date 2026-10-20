@@ -1,0 +1,63 @@
+---
+import { getEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Section from '../../components/Section.astro';
+import CTA from '../../components/CTA.astro';
+import Cards from '../../components/Cards.astro';
+import ServiceGrid from '../../components/ServiceGrid.astro';
+import ToolsGrid from '../../components/ToolsGrid.astro';
+import MoreLink from '../../components/MoreLink.astro';
+import GeneratedImage from '../../components/GeneratedImage.astro';
+import { href } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import { rich } from '../../lib/rich';
+import { breadcrumbJsonLd } from '../../lib/jsonld';
+
+const lang = 'es';
+const page = await getEntry('pages', 'es/servicios');
+if (!page) throw new Error('Missing src/content/pages/es/servicios.yaml');
+const c = page.data as any;
+const site = Astro.site!;
+const crumbs = breadcrumbJsonLd([
+  { name: t(lang).breadcrumbHome, url: new URL(href('inicio', lang), site).href },
+  { name: c.hero.eyebrow, url: new URL(href('servicios', lang), site).href },
+]);
+---
+
+<Layout lang={lang} route="servicios" title={c.title} description={c.description} jsonLd={[crumbs]}>
+  <section class="section hero hero--split" aria-labelledby="hero-title">
+    <div class="bg-grid hero__grid" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero__copy">
+        <span class="eyebrow">{c.hero.eyebrow}</span>
+        <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
+        <p class="lead" set:html={rich(c.hero.lead, lang)} />
+        <div class="hero__actions"><CTA lang={lang} location="servicios" /></div>
+      </div>
+      <div class="hero-art float float--slow">
+        <GeneratedImage file="orb-alt.webp" widths={[320, 480, 720]} sizes="(min-width: 1024px) 28rem, 70vw" priority />
+      </div>
+    </div>
+  </section>
+
+  <Section lang={lang} theme="light" id="lista" srTitle={c.hero.listTitle}>
+    <ServiceGrid lang={lang} linkLabel={c.hero.linkLabel} />
+  </Section>
+
+  <Section lang={lang} id="herramientas" eyebrow={c.tools.eyebrow} title={c.tools.title} lead={c.tools.lead} center>
+    <ToolsGrid slugs={c.tools.order} labels={c.tools.items} />
+  </Section>
+
+  <Section lang={lang} theme="light" id="proceso" eyebrow={c.process.eyebrow} title={c.process.title}>
+    <Cards lang={lang} items={c.process.steps} cols={4} numbered />
+    <MoreLink lang={lang} link={c.process.link} />
+  </Section>
+
+  <Section lang={lang} id="precio" eyebrow={c.price.eyebrow} title={c.price.title}>
+    {c.price.text.map((p: string) => <p set:html={rich(p, lang)} />)}
+  </Section>
+
+  <Section lang={lang} theme="violet" id="agenda-final" title={c.cta.title} lead={c.cta.text} center>
+    <p class="center"><CTA lang={lang} location="final" /></p>
+  </Section>
+</Layout>

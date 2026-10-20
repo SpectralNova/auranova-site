@@ -377,9 +377,9 @@ Before designing any page, write its **page brief** in `docs/pages/{slug}.md`: g
 |---|---|---|---|
 | Q1 | Brand name / wordmark | AuraNova; type lockup in Roboto Condensed 800 beside the mark | ✅ |
 | Q2 | Legal identity | Persona física. Domicilio for the aviso still needed | ✅ · 🔴 domicilio |
-| Q3 | Base city and service area | Monterrey, N.L. + remote across Mexico + US remote | ✅ |
-| Q4 | Audience details and language | Spanish **and** English; MX and US clients | ✅ |
-| Q5 | Services | 3: Sitios web (nuevos y rediseños) · Plataformas a la medida · Mantenimiento y soporte | ✅ |
+| Q3 | Base city and service area | Monterrey, N.L. + remote across Mexico; the city appears only on Nosotros (CP1) | ✅ |
+| Q4 | Audience details and language | ES + EN, MX + US → **on hold** (CP1): es-MX only | ⏸ |
+| Q5 | Services | **6** (CP1): Sitios web · Plataformas a la medida · Posicionamiento en Google · Contenido y marca · Mantenimiento y soporte · Asesoría digital | ✅ |
 | Q6 | Pricing model | Fixed per project; budget ranges in the form; no public prices. Brackets pending | ✅ · 🔴 brackets |
 | Q7 | Payment schedule, IVA | 40 / 30 / 30; MXN + IVA | ✅ |
 | Q8 | Response times | ≤ 1 business day (us) / ≤ 3 (client) | ✅ |

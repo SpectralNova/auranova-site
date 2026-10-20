@@ -1,6 +1,6 @@
 # Open questions
 
-*Seeded 2026-10-19 (Phase 0) from `WEBSITE_PROMPT.md` §16, plus new items found along the way. Batch 1 answered by David on 2026-10-19.*
+*Seeded 2026-10-19 (Phase 0) from `WEBSITE_PROMPT.md` §16, plus new items found along the way. Batch 1 answered 2026-10-19; CP1 feedback received 2026-10-19 (CP1.1 built).*
 *Protocol: brief §1. When David answers, update the source of truth first (facts → `src/content/business.ts`; terms → `docs/PHILOSOPHY.md`), then the status here and in brief §16.*
 
 ✅ answered · 🟡 proposed default (build with it, not approved) · 🔴 unknown (David must supply)
@@ -10,21 +10,21 @@
 | ID | Topic | Status | Next ask |
 |---|---|---|---|
 | Q1 | Brand name / wordmark | ✅ | — |
-| Q2 | Legal identity | ✅ persona física · 🔴 domicilio | CP1 |
-| Q3 | City and service area | ✅ | — |
-| Q4 | Audience scope + language | ✅ ES + EN, MX + US | → Q26–Q29 |
-| Q5 | Services list | ✅ | — |
-| Q6 | Pricing model | ✅ model · 🔴 budget brackets | CP1 |
+| Q2 | Legal identity | ✅ persona física · 🔴 domicilio | CP1.1 |
+| Q3 | City and service area | ✅ (city only on Nosotros) | — |
+| Q4 | Audience scope + language | ⏸ EN + US on hold | — |
+| Q5 | Services list | ✅ 6 services (CP1) | — |
+| Q6 | Pricing model | ✅ model · 🔴 budget brackets | CP1.1 |
 | Q7 | Payment schedule + IVA | ✅ | — |
 | Q8 | Response times | ✅ | — |
 | Q9 | Revision rounds | ✅ | — |
-| Q10 | Late payment, pause, cancellation | ✅ late payment · 🟡 rest | CP1 |
+| Q10 | Late payment, pause, cancellation | ✅ late payment · 🟡 rest | CP1.1 |
 | Q11 | Warranty, training, maintenance | ✅ warranty/training · 🔴 plans | CP2 |
-| Q12 | Portfolio permissions | ✅ · 🟡 Vista in writing | CP1 |
+| Q12 | Portfolio permissions | ✅ · 🟡 Vista in writing | CP1.1 |
 | Q13 | Photos | ✅ none; company, not person | — |
 | Q14 | Voice | ✅ nosotros | — |
-| Q15 | Channels | ✅ email · 🟡 my reading | CP1 |
-| Q16 | Booking tool | ✅ Cal.com · 🟡 length/buffers | CP2 |
+| Q15 | Channels | ✅ email · 🟡 my reading | CP1.1 |
+| Q16 | Booking tool | ✅ Cal.com · 🟡 length/buffers | CP1.1 |
 | Q17 | Lead magnet | ✅ | — |
 | Q18 | Analytics | 🔴 TBD | before CP2 |
 | Q19 | Domain + hosting | ✅ (purchase after Q23) | — |
@@ -34,13 +34,16 @@
 | Q23 | Trademark check | ✅ run | see result |
 | Q24 | Upstream docs: logo file names | ✅ fixed | — |
 | Q25 | Typical timelines | ✅ interim answer · 🔴 details later | — |
-| Q26 | English: when | 🟡 new | CP1 |
-| Q27 | US clients: currency, contract, invoicing | 🔴 new | CP1 |
-| Q28 | Domain vs. US search | 🟡 new | CP1 |
-| Q29 | US positioning | 🟡 new | CP1 |
-| Q30 | Design-system fixes found in the build | 🟡 new | CP1 |
+| Q26 | English: when | ⏸ on hold | — |
+| Q27 | US clients: currency, contract, invoicing | ⏸ on hold | — |
+| Q28 | Domain vs. US search | ⏸ on hold (keep .mx) | — |
+| Q29 | US positioning | ⏸ on hold | — |
+| Q30 | Design-system fixes found in the build | ✅ done (DS v1.2) | — |
+| Q31 | Service scopes and drafted policies | 🟡 new | CP1.1 |
+| Q32 | Hero tagline + service H1s | 🟡 new | CP1.1 |
+| Q33 | AI image license (Artlist) | 🟡 new | CP1.1 |
 
-**Batch for CP1** (most blocking first): Q26, Q27, Q29, Q12, Q15, Q10, Q6, Q16, Q2, Q30. Before CP2 as well: Q18 (analytics) and Q11 (maintenance plans).
+**Batch for CP1.1** (most blocking first): Q31, Q32, Q12, Q15, Q16, Q10, Q6, Q2, Q33. Before CP2 as well: Q18 (analytics) and Q11 (maintenance plans).
 
 ---
 
@@ -55,14 +58,22 @@
 - **Consequence:** as a persona física, the aviso and the términos name **you** (David Contreras Morales) as the responsible party, with "AuraNova" as the commercial name, even though every marketing page speaks as a company (Q13, Q14). The lawyer confirms the exact wording.
 
 ## Q3 · City and service area
-- **Status:** ✅ · **Answer:** Monterrey, N.L. + remote across Mexico; plus remote work for US clients (Q4). JSON-LD `areaServed`: Monterrey, Mexico, United States. · **Date:** 2026-10-19
+- **Status:** ✅ · **Answer:** Monterrey, N.L. + remote across Mexico. · **Date:** 2026-10-19
+- **CP1 feedback (2026-10-19):** the city and country appear **only on Nosotros**: not in the hero, titles, service H1s, footer or FAQ. The invisible JSON-LD address keeps Monterrey for local search. Hours say "hora del centro".
 
 ## Q4 · Audience scope and language
-- **Status:** ✅ · **Answer:** Spanish **and** English. David is fully bilingual; the studio is open to remote work for Mexican and US clients. · **Date:** 2026-10-19
-- **Consequence:** the site is bilingual at launch: Spanish at `/`, English at `/en/` (ADR-007). Follow-ups: Q26–Q29.
+- **Answer (CP0):** Spanish and English, MX and US clients. · **Update (CP1 feedback, 2026-10-19):** ⏸ **English and everything US-related are on hold**, because the .mx domain is Mexico-targeted (Q28).
+- **Consequence:** the site is es-MX only. The `/en/` routing stays wired with no pages (ADR-007 on hold). Audience: owners of small and mid-sized businesses in Mexico.
 
 ## Q5 · Services list
-- **Status:** ✅ · **Answer:** A, three services led by Sitios web: (1) Sitios web, nuevos y rediseños · (2) Plataformas a la medida · (3) Mantenimiento y soporte. · **Date:** 2026-10-19
+- **Answer (CP0):** three services. · **Update (CP1 feedback, 2026-10-19):** ✅ "include our whole capabilities". There are now **six services**, each with its own page and a place in the nav menu:
+  1. Sitios web (nuevos, rediseños, tiendas)
+  2. Plataformas a la medida
+  3. Posicionamiento en Google
+  4. Contenido y marca
+  5. Mantenimiento y soporte
+  6. Asesoría digital (the "counsel")
+- **Positioning ✅:** small and mid-sized business owners looking for fast, affordable, reliable quality websites and advice. No big corporate clients.
 
 ## Q6 · Pricing model
 - **Answer:** ✅ fixed price per project against Anexo A; budget ranges in the form; no public prices at launch. (2026-10-19)
@@ -152,37 +163,67 @@
 - **Answer:** ✅ interim: the FAQ says the schedule is agreed in writing in each proposal; timelines vary by project. (2026-10-19)
 - **Later 🔴:** David will add more detailed ranges.
 
-## Q26 · English: when (new)
+## Q26 · English: when
+- ⏸ **On hold** (David, CP1 feedback 2026-10-19: English/US work paused; keep .mx).
 - **Question:** English is in scope (Q4). When should the English copy be written?
 - **Blocks:** the scope of CP1 vs. CP2.
 - **Recommended:** the bilingual routes, hreflang and language switcher are wired now. **CP1 is reviewed in Spanish.** English is written at CP2 from the *approved* Spanish copy, adapted for US readers rather than translated word for word, so the voice gets fixed once, not twice.
 - **Options:** A English at CP2 (recommended) · B English pages already at CP1.
 - **Status:** 🟡
 
-## Q27 · US clients: currency, contract, invoicing (new)
+## Q27 · US clients: currency, contract, invoicing
+- ⏸ **On hold** (David, CP1 feedback 2026-10-19: English/US work paused; keep .mx).
 - **Question:** For US clients: quote in USD? Contract in English, under which law? How do you invoice a foreign client?
 - **Blocks:** English Cómo trabajamos (payments, law), English form budget ranges, the English terms.
 - **Recommended:** quote in USD; an English version of the updated contract, governed by Mexican law (the lawyer confirms); your accountant confirms the CFDI and IVA treatment for clients abroad. The English pages say "USD" and don't mention IVA until that's confirmed.
 - **Status:** 🔴
 
-## Q28 · Domain vs. US search (new)
+## Q28 · Domain vs. US search
+- ⏸ **On hold** (David, CP1 feedback 2026-10-19: English/US work paused; keep .mx).
 - **Question:** Google treats .mx as a Mexico-targeted domain, so English pages on auranova.mx rank less well in US search than on a generic domain. Keep auranova.mx anyway?
 - **Blocks:** nothing yet (purchase waits for Q23).
 - **Recommended:** keep **auranova.mx**. Most clients are in Mexico, and US clients are more likely to arrive through referrals than through search. Revisit a generic domain if US search becomes a goal (auranova.com is taken; auranova.co appeared free).
 - **Status:** 🟡
 
-## Q29 · US positioning (new)
+## Q29 · US positioning
+- ⏸ **On hold** (David, CP1 feedback 2026-10-19: English/US work paused; keep .mx).
 - **Question:** Which US clients are we talking to?
 - **Blocks:** the English hero, service-page angles, English keywords.
 - **Recommended:** US small businesses that need a bilingual (EN/ES) site or serve Spanish-speaking customers, plus the practical angle: a Monterrey studio working in US-friendly hours (UTC−6, the same as US Central in winter, one hour behind in summer). No price claims.
 - **Status:** 🟡
 
-## Q30 · Design-system fixes found in the build (new)
+## Q30 · Design-system fixes found in the build
+- **Status:** ✅ approved and done 2026-10-19: DESIGN_SYSTEM v1.2 (`.site-header` sticky wrapper; nav collapses below 1024 px), re-synced; local overrides removed.
+
+<details><summary>Original question</summary>
+
 - **Question:** Building the real nav surfaced two issues in `components.css`. They're fixed locally in `src/styles/site.css`; OK to move the fixes upstream (DESIGN_SYSTEM v1.2)?
   1. **Collapse point.** With 4 links + "Agenda una llamada", the nav doesn't fit between 768 and 1023 px. The site collapses to the menu below **1024 px** instead of 768.
   2. **Sticky nav.** `.nav` is sticky inside `<header>`, but a sticky element only sticks within its parent, so it never sticks. The site makes the header wrapper sticky instead.
 - **Blocks:** nothing (fixed locally); upstream accuracy.
 - **Recommended:** yes to both, as a v1.2 component change.
+
+</details>
+
+## Q31 · Service scopes and drafted policies (new)
+- **Question:** The six service pages list what each service **includes / what you provide / what's not included**, and I drafted three policies. All are marked `[[CONFIRMAR]]`. Do they match how you want to sell?
+  - Asesoría: "no te obliga a contratarnos; el plan es tuyo".
+  - Mantenimiento: "sí damos soporte a sitios que no hicimos, después de revisarlos".
+  - Contenido: "imágenes con IA con uso comercial, nunca presentadas como fotos reales" (license: Q33).
+- **Blocks:** production (the markers).
+- **Recommended:** review each page's "Qué incluye" block and reply with changes; the policies as drafted.
+- **Status:** 🟡
+
+## Q32 · Hero tagline and service H1s (new)
+- **Question:** OK with the new home H1, "Un sitio web que **trabaja tanto como tú**", and the service H1s (see `docs/pages/servicio.md`)?
+- **Alternatives for the home:** "Tu negocio, **en línea y sin complicaciones**" · "Sitios web profesionales, **sin pagar de más**".
+- **Recommended:** keep the current one; it speaks to the owner, not to the technology.
+- **Status:** 🟡
+
+## Q33 · AI image license (new)
+- **Question:** The site's illustrations were generated with Artlist (GPT Image 2.5) on your AI Suite plan. Can you confirm in your Artlist account terms that AI generations can be used commercially (on our site and in client work)?
+- **Blocks:** the images in production; the "imágenes con IA" offer on Contenido y marca.
+- **Recommended:** confirm (it's your account); I log it in `docs/ASSETS.md`.
 - **Status:** 🟡
 
 ---
@@ -199,4 +240,4 @@
 | 6 | Screenshot widths 320/390/768/1024/1440 vs. PHILOSOPHY's 320/375/… | Two lists | Capture both: 320/375/390/768/1024/1440 |
 | 7 | AuraNova domain to be chosen | auranova.com and auranova.com.mx are held by others | Q23, Q28 |
 | 8 | Aviso "under the current LFPDPPP" | A new LFPDPPP replaced the 2010 law in March 2025 | Lawyer review (Phase 2) |
-| 9 | i18n: es-MX only at launch | ✅ Q4: Spanish and English at launch | ADR-007, Q26 |
+| 9 | i18n: es-MX only at launch | Q4 said ES + EN; then on hold (CP1) | ADR-007 on hold |

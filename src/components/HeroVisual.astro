@@ -1,0 +1,80 @@
+---
+// Home hero visual: the generated "nova" + floating cards. The quality card shows THIS site's
+// measured scores (src/data/site-scores.json), never typed numbers. The notification is an illustration.
+import GeneratedImage from './GeneratedImage.astro';
+import Icon from './Icon.astro';
+import { loadScores, lowest, seconds } from '../lib/scores';
+import { rich } from '../lib/rich';
+import type { Lang } from '../content/business';
+
+interface Props {
+  lang: Lang;
+  copy: { reportTitle: string; reportCaption: string; lcpLabel: string; previewTitle: string; previewText: string };
+}
+
+const { lang, copy } = Astro.props;
+const scores = loadScores('site-scores');
+const low = scores && lowest(scores);
+const rows: [string, number][] = low
+  ? [
+      [lang === 'es' ? 'Rendimiento' : 'Performance', low.performance],
+      [lang === 'es' ? 'Accesibilidad' : 'Accessibility', low.accessibility],
+      [lang === 'es' ? 'Buenas prácticas' : 'Best practices', low.bestPractices],
+      ['SEO', low.seo],
+    ]
+  : [];
+---
+
+<div class="hero-visual">
+  <div class="hero-visual__orb float float--slow">
+    <GeneratedImage file="hero-orb.webp" widths={[360, 560, 840]} sizes="(min-width: 1024px) 34rem, 85vw" priority />
+  </div>
+
+  <div class="hero-visual__notice">
+    <div class="float-card float" aria-hidden="true">
+      <span class="bell"><Icon name="bell" size={20} /><span class="bell__badge">1</span></span>
+      <span>
+        <strong>{copy.previewTitle}</strong>
+        <span class="float-card__sub">{copy.previewText}</span>
+      </span>
+    </div>
+  </div>
+
+  {
+    low && (
+      <div class="hero-visual__report">
+        <div class="float-card float float--slow">
+          <p class="float-card__title">
+            <Icon name="gauge" size={18} />
+            {copy.reportTitle}
+          </p>
+          <ul class="bars" role="list">
+            {rows.map(([label, value], i) => (
+              <li class="bar" style={`--value: ${value / 100}; --i: ${i}`}>
+                <span class="bar__label">{label}</span>
+                <span class="bar__value">{value}</span>
+                <span class="bar__track" aria-hidden="true">
+                  <span class="bar__fill" />
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p class="float-card__sub">
+            {copy.reportCaption} {scores.note && <Fragment set:html={rich(scores.note, lang)} />}
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    low && (
+      <div class="hero-visual__chip">
+        <p class="float-chip float">
+          <Icon name="zap" size={16} />
+          {copy.lcpLabel} <strong>{seconds(low.lcpMs, lang)}</strong>
+        </p>
+      </div>
+    )
+  }
+</div>

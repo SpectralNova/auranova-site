@@ -28,9 +28,10 @@ export const business = {
   domicilio: pending({ es: 'domicilio para el aviso de privacidad (Q2)', en: 'address for the privacy notice (Q2)' }),
 
   siteUrl: ok('https://auranova.mx'), // Q19 approved; not bought yet
+  // The city appears only on Nosotros (David, CP1 feedback 2026-10-19).
   city: ok({ es: 'Monterrey, N.L.', en: 'Monterrey, Mexico' }),
-  areaServed: ok(['Monterrey', 'México', 'United States']), // Q3, Q4
-  languages: ok(['es', 'en']),
+  areaServed: ok(['México']), // Q3; US on hold (Q4)
+  languages: ok(['es']), // English on hold (Q4, Q26)
   timezone: ok('America/Monterrey'),
   hours: ok({ days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '17:00' }),
 
@@ -41,7 +42,7 @@ export const business = {
 // Facts that copy can use as {{key}} (see src/content/README.md).
 export const textFacts = {
   horario: ok({
-    es: 'de lunes a viernes, de 9:00 a 17:00 (hora de Monterrey)',
+    es: 'de lunes a viernes, de 9:00 a 17:00 (hora del centro)',
     en: 'Monday to Friday, 9 a.m. to 5 p.m. Monterrey time (UTC−6)',
   }),
   horarioCorto: ok({ es: 'Lunes a viernes · 9:00 a 17:00', en: 'Mon–Fri · 9 a.m.–5 p.m. (UTC−6)' }),

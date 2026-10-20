@@ -1,6 +1,6 @@
 # Audience profile
 
-*v2 · 2026-10-19 · Markets ✅ (Q3, Q4): Monterrey, remote across Mexico, and remote for US clients. The US profile is 🟡 (Q29). The "words they use" are hypotheses to check on the first calls.*
+*v3 · 2026-10-19 · CP1 feedback ✅: owners of **small and mid-sized businesses** (no big corporate clients) who want **fast, affordable, reliable** websites **and advice**. Mexico only; the US is on hold (Q4). The "words they use" are hypotheses to check on the first calls.*
 
 ## Primary: the owner who decides
 
@@ -44,11 +44,12 @@ Owner or manager of a **small or mid-sized business** in **Monterrey / Mexico** 
 "página web", "que me lleguen clientes", "cotización", "que se vea profesional", "que cargue rápido", "que salga en Google", "que yo pueda cambiarle cosas".
 We avoid jargon ("CMS", "Core Web Vitals", "SEO técnico") in headlines; when a term is needed, we explain it in one line.
 
-## Second market (🟡 Q29): US small businesses, in English
+## What they're buying (CP1 ✅)
 
-- US small businesses that need a **bilingual (EN/ES) site** or serve Spanish-speaking customers; and owners who want a nearby studio working US-friendly hours (Monterrey is UTC−6).
-- They read in English, expect USD quotes (Q27), and judge by the same things: clarity, speed, ownership, everything in writing.
-- They likely arrive through referrals more than search (Q28), so the English pages must convince fast once someone sends the link.
+- **Fast:** a site that loads fast, and a studio that answers fast (1 día hábil).
+- **Affordable:** a fixed price that fits a small business's budget, paid in stages. No public prices, but the message is clear.
+- **Reliable:** everything in writing, measured quality, and the accounts in their name.
+- **Advice:** someone who tells them what they need, and what they don't, before they spend.
 
 ## Secondary readers
 

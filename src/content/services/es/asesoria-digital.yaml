@@ -1,0 +1,61 @@
+order: 6
+route: "servicios/asesoria-digital"
+name: "Asesoría digital"
+kicker: "Consultoría"
+navIcon: "compass"
+image: "svc-asesoria.webp"
+summary: "Te ayudamos a decidir qué necesita tu negocio en línea, y qué no, antes de gastar."
+
+page:
+  title: "Asesoría digital para pequeños negocios · AuraNova"
+  description: "Auditoría de tu sitio, plan digital, elección de herramientas, análisis de competencia y revisión de cotizaciones para pequeños y medianos negocios."
+  hero:
+    eyebrow: "Asesoría digital"
+    title: "Decisiones digitales ==sin gastar de más=="
+    lead: "Antes de invertir, te ayudamos a decidir qué necesita tu negocio en línea y qué no. Revisamos lo que tienes, comparamos opciones y te damos un plan por escrito."
+
+  capabilities:
+    eyebrow: "Lo que hacemos"
+    title: "Claridad antes de ==invertir=="
+    items:
+      - { icon: "clipboard-check", title: "Auditoría de tu sitio", text: "Velocidad, accesibilidad, SEO y seguridad, con una lista de mejoras por prioridad." }
+      - { icon: "map", title: "Plan digital", text: "Qué hacer primero, qué después y cuánto cuesta cada paso." }
+      - { icon: "wrench", title: "Elegir herramientas", text: "Plataformas, hosting y servicios que sí te convienen, y las que no necesitas." }
+      - { icon: "binoculars", title: "Análisis de competencia", text: "Qué anuncios y qué contenido publican tus competidores, y qué les funciona." }
+      - { icon: "file-search", title: "Revisión de cotizaciones", text: "¿Te cotizó otro proveedor? Te ayudamos a entender qué incluye y qué falta." }
+      - { icon: "messages-square", title: "Acompañamiento", text: "Sesiones para resolver dudas y tomar decisiones con calma." }
+
+  includes:
+    eyebrow: "Qué incluye"
+    title: "Un plan que ==puedes usar=="
+    lead: "Cada asesoría termina en algo concreto y por escrito. [[CONFIRMAR: entregables, aportaciones y exclusiones de este servicio]]"
+    columns:
+      - title: "Incluye"
+        list:
+          - "Una llamada para entender tu negocio"
+          - "Revisión de lo que tienes hoy"
+          - "Un documento con recomendaciones por prioridad"
+          - "Una llamada para explicarlo"
+      - title: "Tú aportas"
+        list:
+          - "Accesos de sólo lectura a tu sitio y tus herramientas"
+          - "Tus metas y tu presupuesto aproximado"
+      - title: "No incluye"
+        negative: true
+        list:
+          - "La implementación: se cotiza aparte, si la quieres con nosotros"
+
+  faq:
+    eyebrow: "Preguntas frecuentes"
+    title: "Dudas sobre ==la asesoría=="
+    items:
+      - q: "¿La asesoría me obliga a contratarlos?"
+        a: "[[CONFIRMAR: No. El plan es tuyo y puedes implementarlo con quien quieras.]]"
+      - q: "¿Cómo me entregan las recomendaciones?"
+        a: "En un documento claro y en español, y en una llamada para resolver tus dudas."
+      - q: "¿Me sirve si todavía no tengo sitio?"
+        a: "Sí. Es el mejor momento: decides con información antes de gastar."
+
+  cta:
+    title: "¿No sabes ==por dónde empezar==?"
+    text: "Agenda una llamada de {{duracionLlamada}}. Te decimos qué necesitas, y qué no."

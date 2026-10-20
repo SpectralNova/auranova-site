@@ -1,0 +1,25 @@
+---
+// Tools we work with (labels in src/content/pages/es/servicios.yaml). Logos: Simple Icons, monochrome.
+import BrandIcon from './BrandIcon.astro';
+
+interface Props {
+  slugs: string[];
+  labels: Record<string, { name: string; text: string }>;
+}
+
+const { slugs, labels } = Astro.props;
+---
+
+<ul class="tools" role="list">
+  {
+    slugs.map((slug) => (
+      <li class="tool">
+        <span class="icon-tile icon-tile--brand">
+          <BrandIcon slug={slug} />
+        </span>
+        <strong class="tool__name">{labels[slug]?.name ?? slug}</strong>
+        <span class="tool__text">{labels[slug]?.text}</span>
+      </li>
+    ))
+  }
+</ul>

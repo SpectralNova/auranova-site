@@ -6,7 +6,9 @@
 >
 > **Presentation.** ✅ AuraNova presents itself as a **company, not a person** (Q13): studio voice, no personal photos. Legally it operates as a **persona física** (Q2), so David's name appears only where the law requires it (aviso de privacidad, términos, contracts, invoices).
 >
-> **Markets.** ✅ Monterrey, remote across Mexico, and remote for US clients; the site is in Spanish and English (Q3, Q4).
+> **Markets.** ✅ Small and mid-sized businesses, based in Monterrey and working remotely across Mexico (Q3). English and US work are on hold (Q4). The city is named only on the Nosotros page.
+>
+> **Positioning.** ✅ (CP1 feedback) Fast, affordable, reliable quality websites, **plus advice**: we tell owners what they need and what they don't.
 
 **How to read this.** Public statements are in Spanish (es-MX), written as they would appear on the site. The notes are in English and explain intent and where each idea came from. Status tags:
 
@@ -49,9 +51,9 @@ Tagline candidates (es-MX):
 
 ## 3. Visión 🟡
 
-> **Ser el estudio de desarrollo web de confianza para negocios de Monterrey, de todo México y de Estados Unidos: el que se recomienda porque cumple lo que firma, entrega a tiempo y deja a cada cliente con un sitio que es completamente suyo.**
+> **Ser el estudio de desarrollo web de confianza para los pequeños y medianos negocios: el que se recomienda porque cumple lo que firma, entrega a tiempo y deja a cada cliente con un sitio que es completamente suyo.**
 
-*Area ✅ (Q3, Q4); wording 🟡. "Desarrollador" became "estudio" because AuraNova presents as a company (Q13).*
+*Audience ✅ (CP1); wording 🟡. "Desarrollador" became "estudio" because AuraNova presents as a company (Q13).*
 
 ---
 

@@ -7,7 +7,7 @@
 | **Primary CTA** | **Agenda una llamada**. |
 | **Success metric** | `cta_click` (location = nosotros) ÷ sessions. |
 | **SEO** | Title "Nosotros: estudio de diseño y desarrollo web en Monterrey · AuraNova". `BreadcrumbList`. |
-| **Rule** | AuraNova presents as a **company** (Q13): no personal photos or personal story; no team size, years or numbers (Q21). |
+| **Rule** | AuraNova presents as a **company** (Q13): no personal photos or personal story; no team size, years or numbers (Q21). **This is the only page that names the city** (Monterrey, Nuevo León) (CP1 feedback). |
 
 ## Outline
 

@@ -1,0 +1,27 @@
+---
+// "Lo que hacemos" on a service page: icon tiles (Lucide) + title + one line each.
+import Icon from './Icon.astro';
+import { rich } from '../lib/rich';
+import type { Lang } from '../content/business';
+
+interface Props {
+  lang: Lang;
+  items: { icon: string; title: string; text: string }[];
+}
+
+const { lang, items } = Astro.props;
+---
+
+<ul class="cap-grid" role="list">
+  {
+    items.map((item) => (
+      <li class="cap">
+        <span class="icon-tile">
+          <Icon name={item.icon} />
+        </span>
+        <h3 class="cap__title">{item.title}</h3>
+        <p class="muted" set:html={rich(item.text, lang)} />
+      </li>
+    ))
+  }
+</ul>

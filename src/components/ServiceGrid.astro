@@ -1,0 +1,37 @@
+---
+// The six services as cards with their 3D illustration; each links to its own page.
+import { getCollection } from 'astro:content';
+import GeneratedImage from './GeneratedImage.astro';
+import { href, type RouteKey } from '../i18n/routes';
+import type { Lang } from '../content/business';
+
+interface Props {
+  lang: Lang;
+  linkLabel: string;
+}
+
+const { lang, linkLabel } = Astro.props;
+const services = (await getCollection('services', (s) => s.id.startsWith(`${lang}/`))).sort((a, b) => a.data.order - b.data.order);
+---
+
+<ul class="card-grid card-grid--3" role="list">
+  {
+    services.map(({ data }) => (
+      <li class="card card--interactive svc-card">
+        <div class="svc-card__art">
+          <GeneratedImage file={data.image} widths={[200, 300, 400]} sizes="(min-width: 1024px) 12rem, 40vw" />
+        </div>
+        <span class="tag">{data.kicker}</span>
+        <h3 class="card__title">
+          <a class="card__link" href={href(data.route as RouteKey, lang)}>
+            {data.name}
+          </a>
+        </h3>
+        <p class="muted">{data.summary}</p>
+        <span class="svc-card__more" aria-hidden="true">
+          {linkLabel} →
+        </span>
+      </li>
+    ))
+  }
+</ul>

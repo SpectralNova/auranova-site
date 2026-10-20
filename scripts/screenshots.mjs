@@ -10,7 +10,10 @@ const opt = (name, fallback) => {
   const i = args.indexOf(`--${name}`);
   return i >= 0 ? args[i + 1] : fallback;
 };
-const paths = opt('paths', '/,/como-trabajamos/,/servicios/sitios-web/,/contacto/,/no-existe/').split(',');
+const paths = opt(
+  'paths',
+  '/,/servicios/,/servicios/sitios-web/,/servicios/plataformas-a-la-medida/,/servicios/posicionamiento-en-google/,/servicios/contenido-y-marca/,/servicios/mantenimiento-web/,/servicios/asesoria-digital/,/como-trabajamos/,/proyectos/,/nosotros/,/contacto/,/no-existe/',
+).split(',');
 const widths = opt('widths', '320,375,390,768,1024,1440').split(',').map(Number);
 const name = (path) => (path === '/' ? 'inicio' : path.replace(/^\/|\/$/g, '').replaceAll('/', '_'));
 
@@ -36,6 +39,7 @@ try {
         }
         window.scrollTo(0, 0);
       });
+      await page.waitForTimeout(3000); // let entrance animations (bars, mockups) finish
       const scroll = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
       if (scroll > 0) {
         overflow++;

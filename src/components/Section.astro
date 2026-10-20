@@ -12,10 +12,12 @@ interface Props {
   lead?: string;
   /** Center the heading block (final CTA band). */
   center?: boolean;
+  /** A heading only screen readers hear, for sections without a visible title (keeps heading order). */
+  srTitle?: string;
   class?: string;
 }
 
-const { lang, theme = 'dark', id, eyebrow, title, lead, center = false, class: className } = Astro.props;
+const { lang, theme = 'dark', id, eyebrow, title, lead, center = false, srTitle, class: className } = Astro.props;
 const headingId = id ? `${id}-title` : undefined;
 ---
 
@@ -24,6 +26,7 @@ const headingId = id ? `${id}-title` : undefined;
   id={id}
   aria-labelledby={title ? headingId : undefined}>
   <div class="container">
+    {srTitle && <h2 class="sr-only">{srTitle}</h2>}
     {
       (eyebrow || title || lead) && (
         <div class:list={['section-head', { 'section-head--center': center }]}>

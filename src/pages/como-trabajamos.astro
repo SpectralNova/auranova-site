@@ -6,7 +6,8 @@ import CTA from '../components/CTA.astro';
 import { href } from '../i18n/routes';
 import { t } from '../i18n/ui';
 import { rich } from '../lib/rich';
-import { breadcrumbJsonLd } from '../lib/jsonld';
+import FAQ from '../components/FAQ.astro';
+import { breadcrumbJsonLd, faqJsonLd } from '../lib/jsonld';
 
 const lang = 'es';
 const page = await getEntry('pages', 'es/como-trabajamos');
@@ -20,7 +21,7 @@ const crumbs = breadcrumbJsonLd([
 ]);
 ---
 
-<Layout lang={lang} route="como" title={c.title} description={c.description} jsonLd={[crumbs]}>
+<Layout lang={lang} route="como" title={c.title} description={c.description} jsonLd={[crumbs, faqJsonLd(c.faq.items, lang)]}>
   <section class="section hero" aria-labelledby="hero-title">
     <div class="bg-grid hero__grid" aria-hidden="true"></div>
     <div class="container">
@@ -33,6 +34,7 @@ const crumbs = breadcrumbJsonLd([
         <ul>
           <li><a href="#proceso">{c.process.eyebrow}</a></li>
           {c.sections.map((s: any) => <li><a href={`#${s.id}`}>{s.nav}</a></li>)}
+          <li><a href="#preguntas">{c.faq.eyebrow}</a></li>
         </ul>
       </nav>
     </div>
@@ -98,6 +100,10 @@ const crumbs = breadcrumbJsonLd([
       }
     </div>
   </section>
+
+  <Section lang={lang} id="preguntas" eyebrow={c.faq.eyebrow} title={c.faq.title}>
+    <FAQ lang={lang} items={c.faq.items} />
+  </Section>
 
   <Section lang={lang} theme="violet" id="agenda-final" title={c.cta.title} lead={c.cta.text} center>
     <p class="center"><CTA lang={lang} location="final" /></p>

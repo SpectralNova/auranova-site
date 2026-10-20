@@ -1,0 +1,12 @@
+title: "Proyectos · AuraNova"
+description: "Proyectos publicados por AuraNova, con permiso de cada cliente y números medidos."
+
+hero:
+  eyebrow: "Proyectos"
+  title: "Trabajo ==publicado y con permiso=="
+  lead: "Sólo mostramos proyectos en línea y con autorización de cada cliente. Los números son medidos, nunca inventados."
+  listTitle: "Proyectos publicados"
+
+cta:
+  title: "¿Tu negocio es ==el siguiente==?"
+  text: "Agenda una llamada de {{duracionLlamada}}. Atendemos {{horario}}."

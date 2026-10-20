@@ -1,0 +1,19 @@
+---
+// Tool logos from Simple Icons (CC0), monochrome (currentColor). Nominative use only:
+// "tools we work with", never implying endorsement (docs/ASSETS.md).
+import * as icons from 'simple-icons';
+
+interface Props {
+  slug: string;
+  size?: number;
+}
+
+const { slug, size = 28 } = Astro.props;
+const key = `si${slug.charAt(0).toUpperCase()}${slug.slice(1)}` as keyof typeof icons;
+const icon = icons[key] as { path: string; title: string } | undefined;
+if (!icon) throw new Error(`Unknown Simple Icons slug: ${slug}`);
+---
+
+<svg class="brand-icon" xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+  <path d={icon.path}></path>
+</svg>

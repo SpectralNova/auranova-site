@@ -1,41 +1,34 @@
 order: 1
 route: "servicios/sitios-web"
 name: "Sitios web"
-kicker: "Nuevos y rediseños"
-summary: "Para negocios que necesitan un sitio que se vea profesional, cargue rápido en el celular y lleve a la gente a contactarte."
+kicker: "Nuevos, rediseños y tiendas"
+navIcon: "monitor-smartphone"
+image: "svc-sitios-web.webp"
+summary: "Un sitio profesional que carga rápido, se ve bien en el celular y lleva a tus clientes a contactarte."
+tools: ["astro", "nextdotjs", "wordpress", "woocommerce", "cloudflare"]
+proof: true
 
 page:
-  title: "Diseño de páginas web en Monterrey · AuraNova"
-  description: "Sitios web nuevos y rediseños para negocios de Monterrey y de todo México: rápidos en el celular, claros y tuyos desde el primer día. Cotización a precio fijo."
+  title: "Diseño de páginas web para negocios · AuraNova"
+  description: "Sitios web nuevos, rediseños, páginas de aterrizaje y tiendas en línea para pequeños y medianos negocios. Rápidos, claros y tuyos desde el primer día."
   hero:
-    eyebrow: "Sitios web · Monterrey"
-    title: "Diseño de páginas web en Monterrey que ==trabajan para tu negocio=="
-    lead: "Sitios nuevos y rediseños, hechos para que tus clientes entiendan qué haces y te contacten. Rápidos en el celular, fáciles de usar y tuyos desde el primer día."
+    eyebrow: "Sitios web"
+    title: "Sitios web hechos para ==que te contacten=="
+    lead: "Sitios nuevos, rediseños, páginas de aterrizaje y tiendas en línea para pequeños y medianos negocios. Rápidos en el celular, fáciles de actualizar y tuyos desde el primer día."
 
-  problem:
-    eyebrow: "El problema"
-    title: "¿Te ==suena familiar==?"
+  capabilities:
+    eyebrow: "Lo que hacemos"
+    title: "Todo lo que lleva ==un buen sitio=="
     items:
-      - title: "Te da pena mandarlo"
-        text: "Tu sitio se ve viejo, y prefieres mandar fotos por WhatsApp antes que la liga."
-      - title: "Entran, pero nadie escribe"
-        text: "Hay visitas, pero ninguna llamada ni mensaje. Después de leer, no queda claro qué hacer."
-      - title: "Dependes de alguien más"
-        text: "Para cambiar un texto o un precio tienes que esperar a alguien que ya no contesta."
-
-  solution:
-    eyebrow: "Cómo lo resolvemos"
-    title: "Un sitio con ==un propósito claro=="
-    items:
-      - title: "Cada página con un objetivo"
-        text: "Antes de diseñar, definimos qué debe lograr cada página y a quién le habla. Un botón principal, claro, en cada pantalla."
-      - title: "Rápido y claro en el celular"
-        text: "Diseñamos primero para el teléfono y medimos la velocidad con las herramientas de Google antes de publicar."
-      - title: "Fácil de actualizar"
-        text: "Te dejamos el contenido en un formato que puedes editar, y te enseñamos a hacerlo en una sesión de capacitación."
-    redesign:
-      title: "¿Ya tienes sitio?"
-      text: "Partimos de lo que ya funciona: medimos tu sitio actual, conservamos tus direcciones para no perder lo que ya ganaste en Google y mejoramos el resto."
+      - { icon: "layout-template", title: "Sitios informativos", text: "Las páginas que tu negocio necesita: inicio, servicios, nosotros y contacto, cada una con un objetivo claro." }
+      - { icon: "mouse-pointer-click", title: "Páginas de aterrizaje", text: "Una página enfocada en una sola acción para tu campaña, promoción o lanzamiento." }
+      - { icon: "shopping-bag", title: "Tiendas y catálogos", text: "Catálogos de productos y tiendas en línea con WooCommerce, con pagos y envíos configurados." }
+      - { icon: "refresh-cw", title: "Rediseños y migraciones", text: "Renovamos tu sitio o lo pasamos a una plataforma más rápida sin perder lo que ya ganaste en Google." }
+      - { icon: "calendar-check", title: "Formularios y citas", text: "Formularios de contacto, cotizaciones y agenda de citas que llegan directo a tu correo." }
+      - { icon: "palette", title: "Diseño para tu marca", text: "Un diseño hecho para tu negocio, con tus colores y tu tono, no una plantilla genérica." }
+      - { icon: "gauge", title: "Rápido desde el inicio", text: "Carga rápido en cualquier celular y está listo para Google desde el primer día." }
+      - { icon: "pencil", title: "Fácil de actualizar", text: "Te dejamos una forma sencilla de cambiar textos, fotos y precios, y te enseñamos a usarla." }
+      - { icon: "accessibility", title: "Accesible para todos", text: "Funciona con teclado y lectores de pantalla, para que nadie se quede fuera." }
 
   includes:
     eyebrow: "Qué incluye"
@@ -65,22 +58,6 @@ page:
           - "Fotografía o video profesional"
           - "Campañas de anuncios"
           - "El costo del dominio, el hosting y las licencias: van a tu nombre y los pagas directo"
-
-  process:
-    eyebrow: "El proceso"
-    title: "==Primero lo ves==, luego lo construimos"
-    link: { label: "Así trabajamos, a detalle", route: "como" }
-
-  proof:
-    eyebrow: "Proyectos"
-    title: "Un sitio que ==ya está en línea=="
-
-  price:
-    eyebrow: "Precio"
-    title: "¿Cuánto ==cuesta==?"
-    text:
-      - "Cada sitio es distinto, así que no publicamos precios genéricos. Después de la llamada te enviamos una cotización a precio fijo, por escrito, con todo lo que incluye."
-      - "Pagas en tres partes: {{pagos}}. Montos en {{moneda}}."
 
   faq:
     eyebrow: "Preguntas frecuentes"

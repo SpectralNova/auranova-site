@@ -38,7 +38,7 @@ const visit = lang === 'es' ? 'Ver el sitio en vivo' : 'Visit the live site';
   <div class="case-card__body">
     <ul class="case-card__tags" role="list">{p.tags.map((tag) => <li class="tag">{tag}</li>)}</ul>
     <h3 class="card__title">{p.client}</h3>
-    <p class="muted">{p.sector} · {p.city}</p>
+    <p class="muted">{p.sector}</p>
     <p set:html={rich(p.summary, lang)} />
     {
       scores && low && (

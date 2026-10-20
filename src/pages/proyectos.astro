@@ -1,0 +1,42 @@
+---
+// Only published, permitted work (Q12): Vista Consulting now; LOGOS and FERREMAG once published.
+import { getCollection, getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import CTA from '../components/CTA.astro';
+import CaseCard from '../components/CaseCard.astro';
+import { href } from '../i18n/routes';
+import { t } from '../i18n/ui';
+import { rich } from '../lib/rich';
+import { breadcrumbJsonLd } from '../lib/jsonld';
+
+const lang = 'es';
+const page = await getEntry('pages', 'es/proyectos');
+if (!page) throw new Error('Missing src/content/pages/es/proyectos.yaml');
+const c = page.data as any;
+const projects = (await getCollection('projects', (p) => p.id.startsWith('es/'))).sort((a, b) => a.data.order - b.data.order);
+const site = Astro.site!;
+const crumbs = breadcrumbJsonLd([
+  { name: t(lang).breadcrumbHome, url: new URL(href('inicio', lang), site).href },
+  { name: c.hero.eyebrow, url: new URL(href('proyectos', lang), site).href },
+]);
+---
+
+<Layout lang={lang} route="proyectos" title={c.title} description={c.description} jsonLd={[crumbs]}>
+  <section class="section hero" aria-labelledby="hero-title">
+    <div class="bg-grid hero__grid" aria-hidden="true"></div>
+    <div class="container">
+      <span class="eyebrow">{c.hero.eyebrow}</span>
+      <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
+      <p class="lead" set:html={rich(c.hero.lead, lang)} />
+    </div>
+  </section>
+
+  <Section lang={lang} theme="light" id="lista" srTitle={c.hero.listTitle}>
+    <div class="case-list">{projects.map((p) => <CaseCard lang={lang} project={p} />)}</div>
+  </Section>
+
+  <Section lang={lang} theme="violet" id="agenda-final" title={c.cta.title} lead={c.cta.text} center>
+    <p class="center"><CTA lang={lang} location="final" /></p>
+  </Section>
+</Layout>

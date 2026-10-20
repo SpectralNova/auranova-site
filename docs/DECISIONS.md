@@ -52,8 +52,25 @@
 - **Why:** an answer from David changes one line and propagates everywhere, and no unapproved fact can ship.
 
 ## ADR-007 · Bilingual site: Spanish at `/`, English at `/en/`
-- **Status:** Proposed (CP1) · 2026-10-19 · from Q4
+- **Status:** ⏸ **On hold** (David, CP1 feedback 2026-10-19: English and US work on hold). The routing stays wired, with no English pages built, so it costs nothing until it's needed.
 - **Decision:** Astro's built-in i18n routing, with `es` as the default locale (no prefix) and `en` under `/en/`. English slugs are translated (`/en/how-we-work`). Each page declares its counterpart, so the language link and the `hreflang` pairs (`es-MX`, `en-US`, `x-default` → Spanish) always point to the real equivalent. Copy lives in one content file per page per language; facts (hours, email, services) come from `business.ts` with a label per language. There's no redirect by browser language: it annoys visitors and confuses crawlers.
 - **Options:** **one domain, path prefix** ✓ · subdomain (`en.`) · a separate English domain. The prefix keeps one site, one deploy and one domain's authority (see Q28 on .mx and US search).
 - **Hours in English:** "Mon–Fri, 9 a.m.–5 p.m. Monterrey time (UTC−6)". Monterrey has no daylight saving time since 2022, so it matches US Central only in winter; Cal.com converts slots for each visitor.
 - **Timing:** Q26. The routes are wired at CP1; English copy comes at CP2.
+
+## ADR-008 · Media and motion (CP1 feedback: "more images, icons and animations, like atomato.co")
+- **Status:** Implemented for CP1.1 · 2026-10-19
+- **Images:** brand illustrations generated with Artlist (GPT Image 2.5, transparent backgrounds) in one 3D glass/ceramic style and the brand palette. They're served as AVIF/WebP at the needed sizes (`docs/ASSETS.md`). No stock photos, no AI people or fake places.
+- **Icons:** Lucide (UI) and Simple Icons (tool logos), inlined at build time. That adds 0 KB of JavaScript.
+- **Motion:** only `transform` and `opacity` (DESIGN_SYSTEM §5), all disabled with `prefers-reduced-motion`:
+  - floating art;
+  - "buffer" bars that fill to the real measured values;
+  - section reveal driven by scroll position (pure CSS; browsers without support simply show everything);
+  - mockups animated inside the process tabs.
+- **Autoplay:** the process tabs auto-advance only while visible. They have a progress bar, a pause button and keyboard support; choosing a step stops autoplay (WCAG 2.2.2, non-negotiable #13). There's no autoplay video anywhere.
+- **Cost:** the whole site ships about 3 KB of JavaScript. Lighthouse stays at 100 ×4 (`src/data/site-scores.json`).
+
+## ADR-009 · A short home; one page per service
+- **Status:** Implemented for CP1.1 · 2026-10-19 (David's CP1 feedback)
+- **Decision:** the home has only the essentials, like backdoor.com.mx: hero → what we do (6 service cards) → how we do it (process tabs) → book a call. The problems, the standard, "todo por escrito" and the FAQ moved to the service pages and Cómo trabajamos. The nav's "Servicios" opens a menu with each service's page.
+- **Positioning:** small and mid-sized business owners looking for fast, affordable, reliable websites **and advice**. The city appears only on Nosotros; the hero carries no city or country.

@@ -1,5 +1,5 @@
 title: "Contacto: agenda una llamada · AuraNova"
-description: "Agenda una llamada para platicar de tu sitio web, o escríbenos. Atendemos de lunes a viernes, de 9:00 a 17:00, hora de Monterrey."
+description: "Agenda una llamada para platicar de tu sitio web, o escríbenos. Atendemos de lunes a viernes, de 9:00 a 17:00."
 
 hero:
   eyebrow: "Contacto"
@@ -31,9 +31,12 @@ form:
     websiteHint: "Si ya tienes uno."
     type: "¿Qué necesitas?"
     typeOptions:
-      - "Sitio web nuevo o rediseño"
+      - "Sitio web nuevo, rediseño o tienda"
       - "Plataforma a la medida"
+      - "Posicionamiento en Google"
+      - "Contenido y marca"
       - "Mantenimiento y soporte"
+      - "Asesoría digital"
       - "No estoy seguro"
     budget: "Presupuesto aproximado"
     budgetHint: "[[PENDIENTE: rangos de presupuesto en MXN (Q6)]]"

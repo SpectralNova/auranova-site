@@ -1,77 +1,47 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
+// Home: only the essentials (David, CP1): what we do, how we do it, book a call.
+import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Section from '../components/Section.astro';
 import CTA from '../components/CTA.astro';
-import Cards from '../components/Cards.astro';
-import ServiceCards from '../components/ServiceCards.astro';
-import CaseCard from '../components/CaseCard.astro';
-import ScoreCards from '../components/ScoreCards.astro';
-import FAQ from '../components/FAQ.astro';
+import HeroVisual from '../components/HeroVisual.astro';
+import ServiceGrid from '../components/ServiceGrid.astro';
+import ProcessTabs from '../components/ProcessTabs.astro';
 import MoreLink from '../components/MoreLink.astro';
 import { href } from '../i18n/routes';
 import { rich } from '../lib/rich';
-import { faqJsonLd } from '../lib/jsonld';
 
 const lang = 'es';
 const page = await getEntry('pages', 'es/inicio');
 if (!page) throw new Error('Missing src/content/pages/es/inicio.yaml');
 const c = page.data as any;
-const projects = (await getCollection('projects', (p) => p.id.startsWith('es/'))).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Layout lang={lang} route="inicio" title={c.title} description={c.description} jsonLd={[faqJsonLd(c.faq.items, lang)]}>
-  <section class="section hero" aria-labelledby="hero-title">
+<Layout lang={lang} route="inicio" title={c.title} description={c.description}>
+  <section class="section hero hero--split" aria-labelledby="hero-title">
     <div class="bg-grid hero__grid" aria-hidden="true"></div>
-    <div class="orb" aria-hidden="true"></div>
     <div class="container">
-      <span class="eyebrow">{c.hero.eyebrow}</span>
-      <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
-      <p class="lead" set:html={rich(c.hero.lead, lang)} />
-      <div class="hero__actions">
-        <CTA lang={lang} location="hero" />
-        <a class="btn btn--secondary" href={href('como', lang)}>{c.hero.secondary}</a>
+      <div class="hero__copy">
+        <span class="eyebrow">{c.hero.eyebrow}</span>
+        <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
+        <p class="lead" set:html={rich(c.hero.lead, lang)} />
+        <div class="hero__actions">
+          <CTA lang={lang} location="hero" />
+          <a class="btn btn--secondary" href={href('servicios', lang)}>{c.hero.secondary}</a>
+        </div>
+        <p class="hero__note muted" set:html={rich(c.hero.note, lang)} />
       </div>
-      <p class="hero__note muted" set:html={rich(c.hero.note, lang)} />
+      <HeroVisual lang={lang} copy={c.hero.visual} />
     </div>
   </section>
 
-  <Section lang={lang} theme="light" id="problemas" eyebrow={c.problems.eyebrow} title={c.problems.title} lead={c.problems.lead}>
-    <Cards lang={lang} items={c.problems.items} cols={2} />
-    <MoreLink lang={lang} link={c.problems.link} />
+  <Section lang={lang} theme="light" id="servicios" eyebrow={c.services.eyebrow} title={c.services.title} lead={c.services.lead}>
+    <ServiceGrid lang={lang} linkLabel={c.services.linkLabel} />
   </Section>
 
-  <Section lang={lang} id="servicios" eyebrow={c.services.eyebrow} title={c.services.title} lead={c.services.lead}>
-    <ServiceCards lang={lang} linkLabel={c.services.linkLabel} />
-  </Section>
-
-  <Section lang={lang} id="proceso" eyebrow={c.process.eyebrow} title={c.process.title}>
-    <Cards lang={lang} items={c.process.steps} cols={4} numbered />
+  <Section lang={lang} id="proceso" eyebrow={c.process.eyebrow} title={c.process.title} lead={c.process.lead} center>
+    <ProcessTabs lang={lang} copy={c.process} />
     <MoreLink lang={lang} link={c.process.link} />
-  </Section>
-
-  {
-    projects.length > 0 && (
-      <Section lang={lang} theme="light" id="proyectos" eyebrow={c.projects.eyebrow} title={c.projects.title}>
-        {projects.map((p) => (
-          <CaseCard lang={lang} project={p} />
-        ))}
-      </Section>
-    )
-  }
-
-  <Section lang={lang} id="estandar" eyebrow={c.standard.eyebrow} title={c.standard.title} lead={c.standard.lead}>
-    <ScoreCards lang={lang} />
-    <MoreLink lang={lang} link={c.standard.link} />
-  </Section>
-
-  <Section lang={lang} theme="light" id="por-escrito" eyebrow={c.writing.eyebrow} title={c.writing.title}>
-    <Cards lang={lang} items={c.writing.items} cols={3} />
-    <MoreLink lang={lang} link={c.writing.link} />
-  </Section>
-
-  <Section lang={lang} id="preguntas" eyebrow={c.faq.eyebrow} title={c.faq.title}>
-    <FAQ lang={lang} items={c.faq.items} />
   </Section>
 
   <Section lang={lang} theme="violet" id="agenda-final" title={c.cta.title} lead={c.cta.text} center>

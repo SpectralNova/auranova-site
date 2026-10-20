@@ -1,0 +1,53 @@
+title: "Nosotros: estudio de diseño y desarrollo web · AuraNova"
+description: "AuraNova es un estudio de diseño y desarrollo web con base en Monterrey, Nuevo León, que trabaja a distancia con pequeños y medianos negocios de todo México."
+
+hero:
+  eyebrow: "Nosotros"
+  title: "Un estudio pequeño, ==para negocios como el tuyo=="
+  lead: "AuraNova es un estudio de diseño y desarrollo web con base en Monterrey, Nuevo León. Trabajamos a distancia con pequeños y medianos negocios de todo México."
+  imageAlt: ""
+
+name:
+  eyebrow: "El nombre"
+  title: "Aura + Nova"
+  text:
+    - "Una **nova** es una estrella que de pronto brilla mucho más y se ve desde lejos. El **aura** es lo que algo transmite antes de que leas una sola palabra."
+    - "Eso hacemos: que tu negocio brille en línea. Y ese brillo viene del método, no del adorno: un propósito claro para cada página, todo por escrito y calidad que se mide."
+
+purpose:
+  eyebrow: "Misión y visión"
+  title: "Para qué ==existimos=="
+  items:
+    - title: "Misión"
+      text: "Diseñamos y desarrollamos sitios web con un propósito de negocio claro: rápidos, fáciles de usar, accesibles y medibles. Trabajamos con un proceso transparente en el que ves tu sitio desde el principio y siempre sabes qué sigue, cuánto cuesta y quién es responsable de qué."
+    - title: "Visión"
+      text: "Ser el estudio de desarrollo web de confianza para los pequeños y medianos negocios: el que se recomienda porque cumple lo que firma, entrega a tiempo y deja a cada cliente con un sitio que es completamente suyo."
+
+values:
+  eyebrow: "Valores"
+  title: "Lo que creemos, y ==cómo lo compruebas=="
+  checkLabel: "Cómo lo compruebas"
+  items:
+    - { icon: "target", title: "Propósito antes que decoración", text: "Cada página existe para que alguien haga algo.", check: "Cada página tiene por escrito su objetivo, su público y una sola acción principal." }
+    - { icon: "users", title: "Diseñamos para quien te visita", text: "Tu sitio es para tus clientes; nuestro gusto, y el tuyo, van después.", check: "Definimos tu público al inicio y cada decisión de diseño dice a quién sirve." }
+    - { icon: "eye", title: "Primero lo ves", text: "Antes de construir a fondo, ves tu sitio real en tu teléfono.", check: "Vista previa real en una liga privada, antes de la construcción completa." }
+    - { icon: "file-text", title: "Todo por escrito", text: "Si no está escrito, no está acordado. Y si está escrito, se cumple.", check: "Alcance, cambios y decisiones quedan por escrito, con costo y fecha." }
+    - { icon: "gauge", title: "Calidad que se mide", text: "No decimos «rápido» ni «accesible»: lo demostramos con números.", check: "Cada entrega incluye un reporte de velocidad, accesibilidad y pruebas en celular." }
+    - { icon: "badge-check", title: "Lo tuyo es tuyo", text: "Cuando terminas de pagar, el sitio, el código, el dominio y los accesos son tuyos.", check: "Cuentas a tu nombre desde el primer día y entrega completa con el pago final." }
+    - { icon: "clock", title: "Respeto al tiempo", text: "Cumplimos horarios y fechas, y pedimos lo mismo.", check: "Horario fijo y tiempos de respuesta por escrito, de ambos lados." }
+
+boundaries:
+  eyebrow: "Lo que no hacemos"
+  title: "Lo que ==nunca== vas a ver con nosotros"
+  items:
+    - "No inventamos cifras, reseñas ni logos de clientes."
+    - "No retenemos dominios, accesos ni archivos como rehenes."
+    - "No usamos plantillas, fuentes, fotos ni plugins sin licencia."
+    - "No ponemos pop-ups, autoplay ni trucos que molesten a tus visitantes."
+    - "No tocamos tu sitio en producción sin tu aprobación por escrito."
+    - "No trabajamos fuera del alcance sin una solicitud de cambio aprobada."
+    - "No te recomendamos herramientas que no necesitas."
+
+cta:
+  title: "¿Platicamos de ==tu negocio==?"
+  text: "Agenda una llamada de {{duracionLlamada}}. Atendemos {{horario}}."

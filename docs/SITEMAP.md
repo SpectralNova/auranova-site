@@ -1,59 +1,52 @@
 # Sitemap and navigation
 
-*v2 · 2026-10-19, after the CP0 answers (bilingual per Q4; Proyectos kept per Q12; email-only contact per Q15). Page briefs with each page's content outline are in `docs/pages/`.*
+*v3 · 2026-10-19, after the CP1 feedback: a short home, one page per service, the city only on Nosotros, English on hold. Page briefs are in `docs/pages/`.*
 
-## Tree
+## Tree (Spanish, `es-MX`)
 
-| Spanish (default, `es-MX`) | English (`en-US`, ADR-007) | Brief |
+| URL | Page | Status |
 |---|---|---|
-| `/` | `/en/` | pages/inicio.md |
-| `/servicios` | `/en/services` | pages/servicios.md |
-| `/servicios/sitios-web` | `/en/services/websites` | pages/servicio.md |
-| `/servicios/plataformas-a-la-medida` | `/en/services/custom-platforms` | pages/servicio.md |
-| `/servicios/mantenimiento-web` | `/en/services/website-maintenance` | pages/servicio.md |
-| `/como-trabajamos` | `/en/how-we-work` | pages/como-trabajamos.md |
-| `/proyectos` | `/en/projects` | pages/proyectos.md |
-| `/proyectos/vista-consulting` | `/en/projects/vista-consulting` | pages/proyectos.md (LOGOS and FERREMAG added once published) |
-| `/nosotros` | `/en/about` | pages/nosotros.md |
-| `/estandar` | `/en/standard` | pages/estandar.md |
-| `/recursos` | `/en/resources` | pages/recursos.md |
-| `/contacto` | `/en/contact` | pages/contacto.md |
-| `/aviso-de-privacidad` | `/en/privacy` | pages/aviso-de-privacidad.md |
-| `/terminos` | `/en/terms` | pages/terminos.md |
-| 404 (bilingual message) | — | pages/404.md |
+| `/` | Inicio: hero · qué hacemos · cómo lo hacemos · CTA | built |
+| `/servicios/` | Servicios: index + tools + process + price | built |
+| `/servicios/sitios-web/` | Sitios web (nuevos, rediseños, tiendas) | built |
+| `/servicios/plataformas-a-la-medida/` | Plataformas a la medida | built |
+| `/servicios/posicionamiento-en-google/` | Posicionamiento en Google (SEO y analítica) | built |
+| `/servicios/contenido-y-marca/` | Contenido y marca (textos, imágenes, video, identidad) | built |
+| `/servicios/mantenimiento-web/` | Mantenimiento y soporte | built |
+| `/servicios/asesoria-digital/` | Asesoría digital | built |
+| `/como-trabajamos/` | Cómo trabajamos (+ FAQ) | built |
+| `/proyectos/` | Proyectos (Vista Consulting) | built |
+| `/nosotros/` | Nosotros: **the only page that names the city** | built |
+| `/contacto/` | Contacto (form interface; delivery in Phase 2) | built |
+| `/estandar/`, `/recursos/`, `/aviso-de-privacidad/`, `/terminos/` | Footer pages | Phase 2 |
+| 404 | Recovery page | built |
 
-Reserved, not built at launch: `/blog` (Q22).
+English (`/en/…`) is on hold (Q4, ADR-007); the routes stay reserved. `/blog` stays reserved (Q22).
 
-**URL rules:** lowercase slugs without accents (`rediseno`, not `rediseño`); a trailing slash on every page URL (`/servicios/`); one canonical per page plus `hreflang` pairs (`es-MX`, `en-US`, `x-default` → Spanish); a sitemap.xml generated at build. No automatic redirect by browser language: the visitor picks with the language link.
+**URL rules:** lowercase slugs without accents; a trailing slash on every page; one canonical per page; sitemap.xml at build.
 
-## Primary nav (4 links + language + 1 CTA)
+## Primary nav
 
-Logo (→ home) · **Servicios** · **Cómo trabajamos** · **Proyectos** · **Nosotros** · `EN` · **[Agenda una llamada]**
+Logo · **Servicios ▾** · Cómo trabajamos · Proyectos · Nosotros · **[Agenda una llamada]**
 
-- English: Services · How we work · Projects · About · `ES` · **[Book a call]**.
-- The language link goes to the same page in the other language. It's a plain link labeled with the language's name for screen readers ("English" / "Español"), not a dropdown.
-- "Agenda una llamada" opens the Cal.com booking page (ADR-004). Until that account exists, it goes to `/contacto/#agenda`.
-- The current page is marked with `aria-current="page"`.
+- **Servicios ▾** opens a panel with the 6 service pages (icon + name + one line) and "Ver todos los servicios". It's a disclosure button: click or Enter opens it; Esc, clicking outside or tabbing away closes it.
+- Below 1024 px everything moves into the menu sheet, where Servicios is an expandable group.
+- "Agenda una llamada" goes to Cal.com once the link exists (ADR-004); until then it goes to `/contacto/#agenda`.
 
 ## Footer (every page)
 
 | Sitio | Confianza | Contacto |
 |---|---|---|
-| Inicio · Servicios · Cómo trabajamos · Proyectos · Nosotros · Contacto | Nuestro estándar · Recursos · Aviso de privacidad · Términos de uso | Business email (Q15, after the domain) · **Lunes a viernes, 9:00–17:00, hora de Monterrey (UTC−6)** ✅ |
+| Inicio · Servicios · Cómo trabajamos · Proyectos · Nosotros · Contacto | Nuestro estándar · Recursos · Aviso de privacidad · Términos de uso | Business email (Q15) · **lunes a viernes, de 9:00 a 17:00 (hora del centro)** ✅ |
 
-Plus the logo, a one-line description, and © {año} AuraNova. No WhatsApp, phone, street address or social icons at launch (Q15).
+The footer tagline has no city: "Sitios web, contenido y asesoría digital para pequeños y medianos negocios."
 
-## Click depth (non-negotiable #6: ≤ 3)
+## Click depth
 
-| Page | Clicks from home | Path |
-|---|---|---|
-| Servicios, Cómo trabajamos, Proyectos, Nosotros, Contacto | 1 | nav |
-| Estándar, Recursos, Aviso, Términos | 1 | footer |
-| Each service, each case study | 2 | Servicios / Proyectos → card |
-| The other language's version of any page | +1 | language link |
+Every page is 1 click from home (nav or footer); each service is 1 click through the Servicios menu, or 2 through /servicios/.
 
 ## Structured data
 
-- **Site-wide:** `ProfessionalService` (name, url, logo, `areaServed` Monterrey · México · United States, `openingHoursSpecification` Mo–Fr 09:00–17:00, `contactPoint` email once it exists, `availableLanguage` es, en).
-- **Inicio + each service page:** `FAQPage`.
+- **Site-wide:** `ProfessionalService` (`areaServed` México, `openingHoursSpecification` Mo–Fr 09:00–17:00). Its invisible `address` keeps the city (Monterrey, N.L.) for local search, even though visible copy only names it on Nosotros.
+- **Every service page + Cómo trabajamos:** `FAQPage`.
 - **Every page except Inicio:** `BreadcrumbList`.

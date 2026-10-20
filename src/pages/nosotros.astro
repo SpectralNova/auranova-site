@@ -1,0 +1,88 @@
+---
+// The only page that names the city (David, CP1 feedback). The studio presents as a company (Q13).
+import { getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import CTA from '../components/CTA.astro';
+import Icon from '../components/Icon.astro';
+import GeneratedImage from '../components/GeneratedImage.astro';
+import { href } from '../i18n/routes';
+import { t } from '../i18n/ui';
+import { rich } from '../lib/rich';
+import { breadcrumbJsonLd } from '../lib/jsonld';
+
+const lang = 'es';
+const page = await getEntry('pages', 'es/nosotros');
+if (!page) throw new Error('Missing src/content/pages/es/nosotros.yaml');
+const c = page.data as any;
+const site = Astro.site!;
+const crumbs = breadcrumbJsonLd([
+  { name: t(lang).breadcrumbHome, url: new URL(href('inicio', lang), site).href },
+  { name: c.hero.eyebrow, url: new URL(href('nosotros', lang), site).href },
+]);
+---
+
+<Layout lang={lang} route="nosotros" title={c.title} description={c.description} jsonLd={[crumbs]}>
+  <section class="section hero" aria-labelledby="hero-title">
+    <div class="bg-grid hero__grid" aria-hidden="true"></div>
+    <div class="container">
+      <span class="eyebrow">{c.hero.eyebrow}</span>
+      <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
+      <p class="lead" set:html={rich(c.hero.lead, lang)} />
+      <div class="hero__actions"><CTA lang={lang} location="nosotros" /></div>
+      <div class="hero-band">
+        <GeneratedImage file="constelacion.webp" widths={[640, 960, 1440]} sizes="(min-width: 1280px) 75rem, 100vw" priority />
+      </div>
+    </div>
+  </section>
+
+  <Section lang={lang} theme="light" id="nombre" eyebrow={c.name.eyebrow} title={c.name.title}>
+    <div class="prose">{c.name.text.map((p: string) => <p set:html={rich(p, lang)} />)}</div>
+  </Section>
+
+  <Section lang={lang} id="mision" eyebrow={c.purpose.eyebrow} title={c.purpose.title}>
+    <ul class="card-grid card-grid--2" role="list">
+      {
+        c.purpose.items.map((item: any) => (
+          <li class="card">
+            <h3 class="card__title">{item.title}</h3>
+            <p class="muted" set:html={rich(item.text, lang)} />
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section lang={lang} theme="light" id="valores" eyebrow={c.values.eyebrow} title={c.values.title}>
+    <ul class="ledger" role="list">
+      {
+        c.values.items.map((v: any) => (
+          <li class="ledger__row">
+            <div class="ledger__head">
+              <span class="icon-tile">
+                <Icon name={v.icon} />
+              </span>
+              <h3 class="cap__title">{v.title}</h3>
+            </div>
+            <div>
+              <p set:html={rich(v.text, lang)} />
+              <p class="muted ledger__check">
+                <strong>{c.values.checkLabel}:</strong> <Fragment set:html={rich(v.check, lang)} />
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section lang={lang} id="lo-que-no-hacemos" eyebrow={c.boundaries.eyebrow} title={c.boundaries.title}>
+    <ul class="check-list check-list--no boundary-list">
+      {c.boundaries.items.map((li: string) => <li set:html={rich(li, lang)} />)}
+    </ul>
+  </Section>
+
+  <Section lang={lang} theme="violet" id="agenda-final" title={c.cta.title} lead={c.cta.text} center>
+    <p class="center"><CTA lang={lang} location="final" /></p>
+  </Section>
+</Layout>
