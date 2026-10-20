@@ -10,6 +10,7 @@
 | Lucide icons (`lucide-static`) | UI icons, inlined at build (`src/components/Icon.astro`) | ISC | One icon set only (DESIGN_SYSTEM §7) |
 | Simple Icons (`simple-icons`) | Tool logos in the "Herramientas" grids (`src/components/BrandIcon.astro`) | CC0 1.0 | The logos are trademarks of their owners. Used only to say which tools we work with (nominative use), monochrome, never implying endorsement. |
 | AuraNova mark, favicons, PWA icons | `public/` | AuraNova's own | Synced from `Resources/AuraNova/Design System/logo/` |
+| Email signature images: the mark at 120 px, the lime→violet divider | `public/firma/` (served at `/firma/`; the signatures load them from there) | AuraNova's own | Made by `brand/firmas/build_firmas.py` from the mark master and the brand gradient (2026-10-20) |
 
 ## Generated images (AI)
 

@@ -7,7 +7,7 @@
 | **Primary CTA** | **Agenda una llamada** (Cal.com, ADR-004). Alternatives: the form, the business email (Q15). |
 | **Success metric** | `booking_open` · `form_submit` per session. |
 | **SEO** | Title "Contacto: agenda una llamada · AuraNova". `BreadcrumbList`. |
-| **Blanks** | Q6 budget brackets · Q15 email address (after the domain) · Q16 Cal.com link + call length |
+| **Blanks** | Q6 budget brackets · Q16 Cal.com link (call length ✅ 30 min; email ✅ contacto@auranova.mx) |
 
 ## Outline
 

@@ -27,7 +27,7 @@ export const business = {
   legalName: ok('David Contreras Morales'),
   domicilio: pending({ es: 'domicilio para el aviso de privacidad (Q2)', en: 'address for the privacy notice (Q2)' }),
 
-  siteUrl: ok('https://auranova.mx'), // Q19 approved; not bought yet
+  siteUrl: ok('https://auranova.mx'), // Q19; registered 2026-10-20 (Cloudflare Registrar)
   // The city appears only on Nosotros (David, CP1 feedback 2026-10-19).
   city: ok({ es: 'Monterrey, N.L.', en: 'Monterrey, Mexico' }),
   areaServed: ok(['México']), // Q3; US on hold (Q4)
@@ -35,7 +35,7 @@ export const business = {
   timezone: ok('America/Monterrey'),
   hours: ok({ days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '17:00' }),
 
-  email: pending({ es: 'correo del negocio, tras comprar el dominio (Q15)', en: 'business email, after the domain purchase (Q15)' }),
+  email: ok('contacto@auranova.mx'), // Q15 ✅ Zoho Mail, set up 2026-10-20
   bookingUrl: pending({ es: 'liga de Cal.com (Q16)', en: 'Cal.com link (Q16)' }),
 };
 

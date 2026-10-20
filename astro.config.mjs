@@ -8,7 +8,7 @@ import { writeFile } from 'node:fs/promises';
 const SITE_ENV = process.env.SITE_ENV ?? 'preview';
 const PRODUCTION = SITE_ENV === 'production';
 const INDEXABLE = PRODUCTION || process.env.SITE_INDEXABLE === '1';
-// Domain approved (Q19) but not bought yet; previews override SITE_URL with their own URL.
+// Domain auranova.mx (Q19), registered 2026-10-20 in Cloudflare Registrar; previews override SITE_URL with their own URL.
 const SITE_URL = process.env.SITE_URL ?? 'https://auranova.mx';
 
 /** Writes Cloudflare Pages `_headers` and `robots.txt` for the current SITE_ENV. */

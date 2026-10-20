@@ -27,7 +27,7 @@
 | Q16 | Booking tool | ✅ Cal.com · ✅ 30 min · 🟡 buffers | CP1.2 |
 | Q17 | Lead magnet | ✅ | — |
 | Q18 | Analytics | 🔴 TBD | before CP2 |
-| Q19 | Domain + hosting | ✅ (purchase after Q23) | — |
+| Q19 | Domain + hosting | ✅ (bought 2026-10-20) | — |
 | Q20 | Contract update | ✅ will update · 🔴 version | CP2 |
 | Q21 | Social-proof numbers | ✅ omit | — |
 | Q22 | Blog at launch | ✅ no | — |
@@ -46,7 +46,7 @@
 | Q35 | Service illustration style (A / B / C) | ✅ A | — |
 | Q36 | Is the 30-minute call free? | ✅ yes | — |
 
-**Still open after CP1.2** (most blocking first): Q12 (Vista's OK in writing), Q15 (my reading: no WhatsApp/socials at launch), Q6 (budget brackets for the form), Q2 (domicilio for the aviso). Before CP2 as well: Q18 (analytics). Phase 2: Q16 Cal.com link, Q20 contract version, the business email (Q15) once the domain is bought.
+**Still open after CP1.2** (most blocking first): Q12 (Vista's OK in writing), Q15 (my reading: no WhatsApp/socials at launch), Q6 (budget brackets for the form), Q2 (domicilio for the aviso). Before CP2 as well: Q18 (analytics). Phase 2: Q16 Cal.com link, Q20 contract version. (Business email ✅ contacto@auranova.mx, 2026-10-20.)
 
 ---
 
@@ -117,6 +117,7 @@
 
 ## Q15 · Channels
 - **Answer:** ✅ the website's channel is a **business email on the domain**, set up once the domain is bought. WhatsApp is an option later in the relationship. (2026-10-19)
+- **Set up (2026-10-20):** public address **contacto@auranova.mx** (Zoho Mail Forever Free; MX, SPF, DKIM `zmail` verified, DMARC p=none). In `business.ts` as ✅.
 - **My reading (🟡, confirm at CP1):** the site shows **no WhatsApp button** at launch, only the email + booking + form. No phone, no street address, and no social networks at launch (you didn't name any).
 - **Consequence:** the `whatsapp_click` event is dropped.
 
@@ -133,6 +134,7 @@
 
 ## Q19 · Domain and hosting
 - **Status:** ✅ · **Answer:** domain **auranova.mx**; host **Cloudflare Pages** (ADR-002). · **Date:** 2026-10-19
+- **Bought (2026-10-20):** auranova.mx in Cloudflare Registrar (registry sponsor Key-Systems), expires 2027-10-20, auto-renew on, US$30.70/yr. Nameservers jeremy + kayleigh.ns.cloudflare.com. Not attached to the Worker until CP3.
 - **Before buying:** the Q23 search, a fresh availability + price check (in MXN), and your explicit OK. See Q28 for the effect on US search.
 - **Domain findings (2026-10-19):** taken: auranova.com (since 2021), auranova.com.mx (since 2026-05-24, "Coming Soon"), auranova.dev, auranova.studio and other .com variants. auranova.mx appeared free in NIC México WHOIS.
 
