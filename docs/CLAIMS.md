@@ -8,7 +8,7 @@
 | Te respondemos en 1 día hábil / tú en 3 días hábiles | Inicio, Cómo trabajamos, Contacto | Q8 | ✅ |
 | Llamada de 30 minutos | Inicio, Servicio, Cómo trabajamos, Contacto | Q16 (David, 2026-10-20) | ✅ |
 | La llamada no tiene costo | Cómo trabajamos (roadmap step 00, hero note) | Q36 (David, 2026-10-20) | ✅ |
-| Una ronda de revisión extra sin costo y cambios de texto ilimitados durante los 30 días posteriores a la entrega final; después, se cotiza | Cómo trabajamos (#cambios) | Q9 (David, 2026-10-20) | ✅ |
+| Una ronda de revisión extra sin costo y cambios de texto ilimitados durante los 30 días hábiles posteriores a la entrega final; después, se cotiza | Cómo trabajamos (#cambios) | Q9 (David, 2026-10-20) | ✅ |
 | Plan de mantenimiento fijo con tarifa preferencial, al final de tu proyecto | Mantenimiento, Cómo trabajamos (#garantia, FAQ) | Q11 (David, 2026-10-20) | ✅ |
 | "Ponernos en contacto contigo y acompañarte en cada etapa" | Cómo trabajamos (nuestros compromisos) | David, 2026-10-20 (he handles every call) | ✅ |
 | Imágenes con licencia comercial: sitio, redes, anuncios pagados, podcasts, televisión | Contenido y marca (FAQ) | Q33 (David, 2026-10-20) | ✅ |
@@ -21,10 +21,10 @@
 | Gastos de terceros sólo con aprobación previa por escrito | Cómo trabajamos | contract §2.2 | ✅ |
 | Un pago atrasado pausa el proyecto hasta recibirlo | Cómo trabajamos | Q10 | ✅ |
 | Una ronda de revisión por etapa | Inicio, Servicio, Cómo trabajamos | Q9 | ✅ |
-| Después de los 30 días, rondas y cambios se cotizan | Cómo trabajamos | Q9 (David, 2026-10-20) | ✅ |
+| Después de los 30 días hábiles, rondas y cambios se cotizan | Cómo trabajamos | Q9 (David, 2026-10-20) | ✅ |
 | Cambios: por escrito → costo e impacto → aprobación → se agenda | Inicio FAQ, Cómo trabajamos | Q20 (CONTRACT_INSIGHTS §3.5) | ✅ (contract text pending) |
 | 15 días para reportar diferencias; después se da por aceptada | Cómo trabajamos | contract §4 | ✅ |
-| Garantía de 30 días + 1 sesión de capacitación | Inicio FAQ, Servicio, Cómo trabajamos | Q11 | ✅ |
+| Garantía de 30 días hábiles + 1 sesión de capacitación | Inicio FAQ, Servicio, Cómo trabajamos | Q11 | ✅ |
 | Dominio y cuentas a tu nombre desde el primer día; cesión de derechos con el pago final; derecho de portafolio; herramientas previas licenciadas; licencias de terceros | Inicio, Servicio, Cómo trabajamos | PHILOSOPHY §4.6; Q20 (CONTRACT_INSIGHTS §3.6, §3.8) | ✅ (contract text pending) |
 | Accesos compartidos con un gestor de contraseñas | Cómo trabajamos | PHILOSOPHY §4.6 | ✅ |
 | Cancelación con 15 días de aviso; pagas el trabajo realizado | Cómo trabajamos | contract §3 | ✅ |

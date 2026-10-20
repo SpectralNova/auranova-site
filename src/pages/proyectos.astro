@@ -33,7 +33,12 @@ const crumbs = breadcrumbJsonLd([
   </section>
 
   <Section lang={lang} theme="light" id="lista" srTitle={c.hero.listTitle}>
-    <div class="case-list">{projects.map((p) => <CaseCard lang={lang} project={p} />)}</div>
+    <div class="case-list">{projects.map((p) => <CaseCard lang={lang} project={p} showDetails />)}</div>
     <CtaBlock lang={lang} note={c.cta.note} />
   </Section>
 </Layout>
+
+<style>
+  /* A longer headline than other pages (David, CP1.3): give it a wider line. */
+  .hero h1 { max-width: 22ch; }
+</style>

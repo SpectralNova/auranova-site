@@ -23,8 +23,8 @@ const items = d.items as { label: string; col: number; x: number; y: number }[];
     </div>
     <div class="ad__body">
       <figure class="ad__matrix">
-        <span class="ad__axis ad__axis--y">{d.impact} <Icon name="arrow-up" size={12} /></span>
-        <span class="ad__axis ad__axis--x">{d.cost} <Icon name="arrow-right" size={12} /></span>
+        {/* Rotated to read bottom-to-top, so the down arrow ends up pointing up (more impact). */}
+        <span class="ad__axis ad__axis--y">{d.impact} <Icon name="arrow-down" size={12} /></span>
         <div class="ad__plane">
           <span class="ad__sweet">{d.sweet}</span>
           {
@@ -36,6 +36,7 @@ const items = d.items as { label: string; col: number; x: number; y: number }[];
             ))
           }
         </div>
+        <span class="ad__axis ad__axis--x">{d.cost} <Icon name="arrow-right" size={12} /></span>
       </figure>
       <div class="ad__board">
         {
@@ -72,10 +73,12 @@ const items = d.items as { label: string; col: number; x: number; y: number }[];
   @media (min-width: 768px) {
     .ad__body { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
   }
-  .ad__matrix { position: relative; margin: 0; padding: 0 0 var(--space-5) var(--space-5); }
-  .ad__axis { position: absolute; display: inline-flex; align-items: center; gap: var(--space-1); color: var(--color-text-muted); font-size: var(--text-xs); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
-  .ad__axis--y { left: 0; top: 0; writing-mode: vertical-rl; transform: rotate(180deg); }
-  .ad__axis--x { right: 0; bottom: 0; }
+  /* A small chart: the Y label centred on the left axis, the X label centred under the plane. */
+  .ad__matrix { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto; gap: var(--space-2); margin: 0; }
+  .ad__axis { display: inline-flex; align-items: center; gap: var(--space-1); color: var(--color-text-muted); font-size: var(--text-xs); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+  .ad__axis--y { grid-column: 1; grid-row: 1; align-self: center; writing-mode: vertical-rl; transform: rotate(180deg); }
+  .ad__axis--x { grid-column: 2; grid-row: 2; justify-self: center; }
+  .ad__plane { grid-column: 2; grid-row: 1; }
   .ad__plane {
     position: relative; aspect-ratio: 1 / 0.9; border: 1px solid var(--color-border); border-radius: var(--radius-md);
     background:
@@ -84,8 +87,12 @@ const items = d.items as { label: string; col: number; x: number; y: number }[];
       var(--color-surface);
   }
   .ad__sweet { position: absolute; left: 0; top: 0; width: 50%; height: 50%; padding: var(--space-2); border-radius: var(--radius-md) 0 0 0; background: color-mix(in oklab, var(--lime-1), transparent 88%); color: var(--lime-1); font-size: var(--text-xs); font-weight: var(--weight-strong); }
-  .ad__pt { position: absolute; left: var(--x); top: var(--y); display: inline-flex; align-items: center; gap: var(--space-2); white-space: nowrap; font-size: var(--text-xs); }
-  .ad__pt i { flex: none; width: var(--space-3); height: var(--space-3); margin-left: calc(var(--space-3) / -2); border-radius: 50%; background: var(--violet-3); box-shadow: 0 0 0 var(--space-1) color-mix(in oklab, var(--violet-3), transparent 75%); }
+  /* The dot's centre sits exactly on (x, y); the pop-in scales around the dot, so it never drifts. */
+  .ad__pt {
+    position: absolute; left: var(--x); top: var(--y); display: inline-flex; align-items: center; gap: var(--space-2);
+    translate: calc(var(--space-3) / -2) -50%; transform-origin: calc(var(--space-3) / 2) 50%; white-space: nowrap; font-size: var(--text-xs); line-height: 1.2;
+  }
+  .ad__pt i { flex: none; width: var(--space-3); height: var(--space-3); border-radius: 50%; background: var(--violet-3); box-shadow: 0 0 0 var(--space-1) color-mix(in oklab, var(--violet-3), transparent 75%); }
   .ad__pt--1 i, .ad__pt--2 i { background: var(--lime-1); box-shadow: 0 0 0 var(--space-1) color-mix(in oklab, var(--lime-1), transparent 75%); }
   .ad__pt--5 i { background: var(--gray-4); box-shadow: none; }
   .ad__pt--5 b { color: var(--color-text-muted); text-decoration: line-through; }

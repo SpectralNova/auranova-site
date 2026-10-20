@@ -14,8 +14,8 @@
 
 | # | Section | Theme | Content |
 |---|---|---|---|
-| 1 | Hero + cards | dark | H1 + lead → a grid of case cards (or a carousel **with a pause control**): screenshot · client · one real result · tags |
-| 2 | CTA final | violet | [Agenda una llamada] |
+| 1 | Hero | dark | H1 (David, CP1.4): "Conoce los trabajos que hemos realizado y que **ya están activos y funcionando**" + lead |
+| 2 | Cases + CTA | light | One case card per project: screenshot · client · tags · summary · **Lo que hicimos** (technical description; Vista's is `[[PENDIENTE]]` until David sends it) · measured scores · live link; then the closing call to action (no violet band, ADR-010) |
 
 ## Case-study template
 

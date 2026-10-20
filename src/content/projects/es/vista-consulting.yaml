@@ -5,6 +5,8 @@ sector: "Planeación patrimonial"
 city: "Monterrey"
 url: "https://www.vistaconsulting.mx"
 summary: "Diseñamos y desarrollamos el sitio completo, de la estructura a la publicación."
+# "Lo que hicimos", shown on /proyectos/ only. David will send the technical description (2026-10-20).
+details: "[[PENDIENTE: descripción técnica de lo que hicimos para Vista Consulting (David)]]"
 tags: ["Sitio web", "Diseño", "Desarrollo"]
 stack: "Hecho con Astro · publicado en Cloudflare"
 image: "vista-consulting-desktop.png"

@@ -54,8 +54,6 @@ main:focus { outline: none; }
 .section-head--center { text-align: center; }
 .section-head--center h2, .section-head--center .lead { margin-inline: auto; }
 .more-link { margin: var(--space-6) 0 0; }
-/* A section with a full-width row (CapTicker): clip sideways without creating a scroll container. */
-.section--ticker { overflow-x: clip; }
 .more-link .btn--ghost { padding-inline: 0; }
 .caption { margin: var(--space-4) 0 0; font-size: var(--text-sm); }
 
@@ -137,6 +135,9 @@ main:focus { outline: none; }
 }
 .theme-light .case-card__scores dd { color: var(--color-text); }
 .case-card__stack { font-size: var(--text-sm); }
+.case-card__details { margin: var(--space-4) 0; padding: var(--space-4); border-radius: var(--radius-md); background: var(--color-surface-2); }
+.case-card__details-title { margin: 0 0 var(--space-2); font-size: var(--text-base); }
+.case-card__details p { margin: 0; }
 
 /* ---------- Long-form pages (Cómo trabajamos) ---------- */
 .toc { margin-top: var(--space-6); }

@@ -10,9 +10,11 @@ import type { Lang } from '../content/business';
 interface Props {
   lang: Lang;
   project: CollectionEntry<'projects'>;
+  /** Show the technical description ("Lo que hicimos"): the Proyectos page does, service pages don't. */
+  showDetails?: boolean;
 }
 
-const { lang, project } = Astro.props;
+const { lang, project, showDetails = false } = Astro.props;
 const p = project.data;
 const images = import.meta.glob<ImageMetadata>('../assets/projects/*', { eager: true, import: 'default' });
 const image = images[`../assets/projects/${p.image}`];
@@ -40,6 +42,14 @@ const visit = lang === 'es' ? 'Ver el sitio en vivo' : 'Visit the live site';
     <h3 class="card__title">{p.client}</h3>
     <p class="muted">{p.sector}</p>
     <p set:html={rich(p.summary, lang)} />
+    {
+      showDetails && p.details && (
+        <div class="case-card__details">
+          <h4 class="case-card__details-title">{lang === 'es' ? 'Lo que hicimos' : 'What we did'}</h4>
+          <p set:html={rich(p.details, lang)} />
+        </div>
+      )
+    }
     {
       scores && low && (
         <dl class="case-card__scores">

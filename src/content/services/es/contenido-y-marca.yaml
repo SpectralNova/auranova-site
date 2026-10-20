@@ -33,8 +33,6 @@ page:
   capabilities:
     eyebrow: "Lo que hacemos"
     title: "Todo lo que ==se ve y se lee=="
-    # The big scroll ticker's words (when they differ from the item titles below).
-    ticker: ["Textos para tu sitio", "Imágenes a tu medida", "Video y reels", "Subtítulos", "Miniaturas y portadas", "Identidad visual", "Presentaciones y documentos"]
     items:
       - { icon: "pen-line", title: "Textos para tu sitio", text: "En español claro, con las palabras que usan tus clientes, y pensados para que te contacten." }
       - { icon: "image", title: "Imágenes personalizadas para ti", text: "¿Ya tienes imágenes de tu negocio? Las revisamos y las complementamos con nuestro diseño. ¿No tienes? Nosotros nos encargamos con modelos avanzados de inteligencia artificial, sin que parezcan imágenes genéricas o mal generadas." }

@@ -90,7 +90,7 @@
 
 ## Q9 · Revision rounds
 - **Status:** ✅ · **Answer:** **1 round per phase** as the base. · **Date:** 2026-10-19
-- **Extra rounds ✅ (2026-10-20):** each project includes **one extra revision round at no cost and unlimited text changes for 30 days after final delivery**; after that, any change or revision is quoted.
+- **Extra rounds ✅ (2026-10-20):** each project includes **one extra revision round at no cost and unlimited text changes for 30 business days after final delivery**; after that, any change or revision is quoted.
 
 ## Q10 · Late payment, pause and cancellation
 - **Answer:** ✅ if a payment is late, **the project pauses until the payment arrives**. (2026-10-19)
@@ -98,7 +98,7 @@
 - **Rest ✅ (2026-10-20, CP1.2 review):** no late fee (the pause replaces it); pausing a project costs nothing and there is no reactivation fee; the deposit is non-refundable once the project starts; if we cancel, we refund or credit what was paid. Cancellation by the client: 15 days' notice, work done is billed (contract §3).
 
 ## Q11 · Warranty, training, maintenance
-- **Answer:** ✅ 30-day bug-fix warranty after launch + 1 training session. (2026-10-19)
+- **Answer:** ✅ 30-day bug-fix warranty after launch + 1 training session. (2026-10-19) The 30 days are **business days** ("30 días hábiles"), and so is the 30-day window for the extra revision round and unlimited text changes (David, 2026-10-20).
 - **Maintenance plans ✅ (2026-10-20):** no public plans. At the end of each project, clients who want an ongoing relationship get a **fixed maintenance plan at a preferential rate** for having built their project with us. Scope and response time are set in that plan.
 
 ## Q12 · Portfolio permissions

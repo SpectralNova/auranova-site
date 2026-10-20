@@ -1,6 +1,6 @@
 ---
 // One page per service (src/content/services/es/*.yaml). CP1.2 (David): each page is its own world —
-// a generated background in the hero, a coded signature demo, a scroll ticker of capabilities; the Sitios
+// a generated background in the hero and a coded signature demo; the Sitios
 // web page also shows this site's measured quality. Sections alternate light/dark automatically, so the
 // optional ones (quality, tools, proof) never leave two equal themes side by side. No violet band: the
 // closing call to action lives in the last section (ADR-010).
@@ -12,7 +12,6 @@ import CTA from '../../components/CTA.astro';
 import CtaBlock from '../../components/CtaBlock.astro';
 import CaseCard from '../../components/CaseCard.astro';
 import Capabilities from '../../components/Capabilities.astro';
-import CapTicker from '../../components/CapTicker.astro';
 import ToolsGrid from '../../components/ToolsGrid.astro';
 import FAQ from '../../components/FAQ.astro';
 import MoreLink from '../../components/MoreLink.astro';
@@ -80,8 +79,7 @@ const demoCopy = { pause: shared.demoControls.pause, play: shared.demoControls.p
     {c.demo.note && <p class="demo-foot" set:html={rich(c.demo.note, lang)} />}
   </Section>
 
-  <Section lang={lang} theme={theme('capabilities')} id="que-hacemos" eyebrow={c.capabilities.eyebrow} title={c.capabilities.title} class="section--ticker">
-    <CapTicker items={c.capabilities.ticker ?? c.capabilities.items.map((i: { title: string }) => i.title)} />
+  <Section lang={lang} theme={theme('capabilities')} id="que-hacemos" eyebrow={c.capabilities.eyebrow} title={c.capabilities.title}>
     <Capabilities lang={lang} items={c.capabilities.items} />
     {
       c.note && (

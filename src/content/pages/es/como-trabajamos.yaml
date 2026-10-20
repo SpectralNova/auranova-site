@@ -147,7 +147,7 @@ sections:
       - "Lo agendamos."
     after:
       - "Si surge algo nuevo cerca del lanzamiento, lo agendamos para después, para no mover tu fecha."
-      - "Tu proyecto incluye una ronda de revisión extra sin costo y cambios de texto ilimitados durante los 30 días posteriores a la entrega final. Después de ese periodo, cualquier cambio o revisión queda sujeto a cotización."
+      - "Tu proyecto incluye una ronda de revisión extra sin costo y cambios de texto ilimitados durante los 30 días hábiles posteriores a la entrega final. Después de ese periodo, cualquier cambio o revisión queda sujeto a cotización."
 
   - id: "propiedad"
     nav: "Propiedad"

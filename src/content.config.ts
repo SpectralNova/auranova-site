@@ -43,6 +43,8 @@ const projects = defineCollection({
     city: z.string(),
     url: z.url(),
     summary: z.string(),
+    /** Technical description ("Lo que hicimos"), shown on /proyectos/ only. */
+    details: z.string().optional(),
     tags: z.array(z.string()),
     stack: z.string(),
     image: z.string(),
