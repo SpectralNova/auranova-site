@@ -1,0 +1,91 @@
+title: "Diseño y desarrollo web en Monterrey · AuraNova"
+description: "Sitios web rápidos, claros y medibles para negocios de Monterrey, de todo México y de Estados Unidos. Primero ves tu sitio real, y todo queda por escrito."
+
+hero:
+  eyebrow: "Diseño y desarrollo web · Monterrey"
+  title: "Sitios web que ==hacen brillar== a tu negocio"
+  lead: "Diseñamos y desarrollamos sitios rápidos, claros y medibles. Ves tu sitio real antes de construirlo a fondo, y siempre sabes qué sigue, cuánto cuesta y quién hace qué."
+  secondary: "Cómo trabajamos"
+  note: "{{horarioCorto}} · Te respondemos en {{respuesta}}"
+
+problems:
+  eyebrow: "El problema"
+  title: "Por qué tu sitio ==no te trae clientes=="
+  lead: "Casi siempre es una de estas cuatro cosas. Las cuatro se miden, y las cuatro se arreglan."
+  items:
+    - title: "Tarda en cargar"
+      text: "En el celular, cada segundo de espera es una razón para irse. Nuestro estándar: que lo principal aparezca en 2.5 segundos o menos."
+    - title: "No queda claro qué hacer"
+      text: "Tu visitante no sabe si llamarte, escribirte o pedir una cotización. Cada página tiene un objetivo y un botón claro para lograrlo."
+    - title: "En el celular se ve mal"
+      text: "Letras diminutas, botones imposibles de tocar, cosas que se salen de la pantalla. Probamos cada página desde la pantalla de celular más angosta."
+    - title: "No es tuyo"
+      text: "La agencia anterior desapareció y se quedó con tu dominio o tus accesos. Con nosotros, todo está a tu nombre desde el primer día."
+  link: { label: "Conoce nuestro estándar", route: "estandar" }
+
+services:
+  eyebrow: "Servicios"
+  title: "Lo que necesitas, ==sin piezas de más=="
+  lead: "Tres servicios. Te recomendamos sólo lo que tu negocio de verdad necesita."
+  linkLabel: "Ver servicio"
+
+process:
+  eyebrow: "Cómo trabajamos"
+  title: "==Primero lo ves==, luego lo construimos"
+  steps:
+    - title: "Descubrimiento"
+      text: "Definimos el objetivo, a quién le habla tu sitio y el alcance. Todo queda por escrito: qué incluye, cuánto cuesta y cuándo se entrega."
+    - title: "Primero lo ves"
+      text: "Antes de construir a fondo, ves tu sitio real en tu teléfono, en una liga privada. Lo apruebas y seguimos."
+    - title: "Construcción"
+      text: "Construimos todas las páginas, formularios, SEO y analítica. Cada etapa incluye una ronda de revisión."
+    - title: "Lanzamiento medido"
+      text: "Publicamos con el reporte de nuestro estándar de calidad y te entregamos el código, el dominio y todos los accesos."
+  link: { label: "Así trabajamos, a detalle", route: "como" }
+
+projects:
+  eyebrow: "Proyectos"
+  title: "Hecho por nosotros, ==en línea hoy=="
+
+standard:
+  eyebrow: "Nuestro estándar"
+  title: "Calidad que ==se mide=="
+  lead: "No decimos «rápido» ni «accesible»: lo medimos. Así califica este mismo sitio en Lighthouse, la herramienta de Google para medir la calidad de una página."
+  link: { label: "Conoce los 15 puntos", route: "estandar" }
+
+writing:
+  eyebrow: "Todo por escrito"
+  title: "Sabes qué sigue, ==cuánto cuesta== y quién hace qué"
+  items:
+    - title: "Horario claro"
+      text: "Atendemos {{horario}}. Te respondemos en {{respuesta}}."
+    - title: "Pagos por etapas"
+      text: "Precio fijo por proyecto. Pagas {{pagos}}. Montos en {{moneda}}."
+    - title: "Lo tuyo es tuyo"
+      text: "El dominio y las cuentas están a tu nombre desde el primer día. Con el pago final te entregamos el código y todos los accesos."
+  link: { label: "Lee cómo trabajamos", route: "como" }
+
+faq:
+  eyebrow: "Preguntas frecuentes"
+  title: "Lo que nos preguntan ==antes de empezar=="
+  items:
+    - q: "¿Cuánto cuesta un sitio web?"
+      a: "Depende de lo que necesites, por eso no publicamos precios genéricos. Después de la llamada te enviamos una cotización a precio fijo, por escrito, con todo lo que incluye. Pagas por etapas: {{pagos}}."
+    - q: "¿Cuánto tarda?"
+      a: "Lo define el alcance de tu proyecto. El calendario se acuerda por escrito en tu propuesta, con una fecha para cada etapa. Si una aprobación se retrasa, el calendario se recorre el mismo tiempo."
+    - q: "¿El sitio, el dominio y el código son míos?"
+      a: "Sí. El dominio y las cuentas se registran a tu nombre desde el primer día, y con el pago final te entregamos el código, la documentación y todos los accesos."
+    - q: "¿Qué pasa si quiero cambiar algo a mitad del proyecto?"
+      a: "Cada etapa incluye una ronda de revisión. Si pides algo fuera de lo acordado, te decimos por escrito cuánto cuesta y cuánto mueve la fecha, y sólo lo hacemos si lo apruebas."
+    - q: "¿Qué pasa después del lanzamiento?"
+      a: "Durante {{garantia}} corregimos sin costo cualquier error, e incluimos una sesión de capacitación. Para soporte continuo ofrecemos planes de mantenimiento: [[PENDIENTE: alcance, precio y tiempo de respuesta de los planes (Q11)]]."
+    - q: "¿En qué horario atienden?"
+      a: "Atendemos {{horario}}. No trabajamos fines de semana ni días feriados, y si vamos a ausentarnos te avisamos con anticipación. Te respondemos en {{respuesta}}."
+    - q: "¿Trabajan con negocios fuera de Monterrey?"
+      a: "Sí. Estamos en Monterrey y trabajamos a distancia con negocios de todo México y de Estados Unidos. Las llamadas y la vista previa de tu sitio funcionan igual desde cualquier lugar."
+    - q: "¿Qué necesito tener listo para empezar?"
+      a: "Saber qué quieres lograr y a quién le vendes. Los textos, fotos, logo y accesos los acordamos por escrito, con fechas, desde el inicio; si te falta algo, te decimos cómo resolverlo."
+
+cta:
+  title: "¿Listo para un sitio que ==sí trabaje==?"
+  text: "Agenda una llamada de {{duracionLlamada}}. Atendemos {{horario}}."

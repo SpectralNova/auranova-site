@@ -1,0 +1,23 @@
+---
+// Native <details> FAQ (works without JavaScript). Pair with faqJsonLd() on the page.
+import { rich } from '../lib/rich';
+import type { Lang } from '../content/business';
+
+interface Props {
+  lang: Lang;
+  items: { q: string; a: string }[];
+}
+
+const { lang, items } = Astro.props;
+---
+
+<div class="faq">
+  {
+    items.map((item) => (
+      <details>
+        <summary set:html={rich(item.q, lang)} />
+        <p set:html={rich(item.a, lang)} />
+      </details>
+    ))
+  }
+</div>

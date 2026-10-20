@@ -1,0 +1,38 @@
+---
+// A page section in one of the three themes (DESIGN_SYSTEM §2.2). Violet: once per page, final CTA only.
+import { rich } from '../lib/rich';
+import type { Lang } from '../content/business';
+
+interface Props {
+  lang: Lang;
+  theme?: 'dark' | 'light' | 'violet';
+  id?: string;
+  eyebrow?: string;
+  title?: string;
+  lead?: string;
+  /** Center the heading block (final CTA band). */
+  center?: boolean;
+  class?: string;
+}
+
+const { lang, theme = 'dark', id, eyebrow, title, lead, center = false, class: className } = Astro.props;
+const headingId = id ? `${id}-title` : undefined;
+---
+
+<section
+  class:list={['section', { 'theme-light': theme === 'light', 'theme-violet': theme === 'violet' }, className]}
+  id={id}
+  aria-labelledby={title ? headingId : undefined}>
+  <div class="container">
+    {
+      (eyebrow || title || lead) && (
+        <div class:list={['section-head', { 'section-head--center': center }]}>
+          {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+          {title && <h2 id={headingId} set:html={rich(title, lang)} />}
+          {lead && <p class="lead" set:html={rich(lead, lang)} />}
+        </div>
+      )
+    }
+    <slot />
+  </div>
+</section>

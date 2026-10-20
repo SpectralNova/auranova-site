@@ -1,0 +1,105 @@
+---
+import { getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import CTA from '../components/CTA.astro';
+import { href } from '../i18n/routes';
+import { t } from '../i18n/ui';
+import { rich } from '../lib/rich';
+import { breadcrumbJsonLd } from '../lib/jsonld';
+
+const lang = 'es';
+const page = await getEntry('pages', 'es/como-trabajamos');
+if (!page) throw new Error('Missing src/content/pages/es/como-trabajamos.yaml');
+const c = page.data as any;
+const ui = t(lang);
+const site = Astro.site!;
+const crumbs = breadcrumbJsonLd([
+  { name: ui.breadcrumbHome, url: new URL(href('inicio', lang), site).href },
+  { name: c.hero.eyebrow, url: new URL(href('como', lang), site).href },
+]);
+---
+
+<Layout lang={lang} route="como" title={c.title} description={c.description} jsonLd={[crumbs]}>
+  <section class="section hero" aria-labelledby="hero-title">
+    <div class="bg-grid hero__grid" aria-hidden="true"></div>
+    <div class="container">
+      <span class="eyebrow">{c.hero.eyebrow}</span>
+      <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
+      <p class="lead" set:html={rich(c.hero.lead, lang)} />
+      <p class="hero__note muted" set:html={rich(c.hero.contract, lang)} />
+      <nav class="toc" aria-labelledby="toc-title">
+        <p class="toc__title" id="toc-title">{ui.onThisPage}</p>
+        <ul>
+          <li><a href="#proceso">{c.process.eyebrow}</a></li>
+          {c.sections.map((s: any) => <li><a href={`#${s.id}`}>{s.nav}</a></li>)}
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <Section lang={lang} id="proceso" eyebrow={c.process.eyebrow} title={c.process.title}>
+    <ol class="card-grid card-grid--4" role="list">
+      {
+        c.process.steps.map((step: any, i: number) => (
+          <li class="card">
+            <span class="step__num" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <h3 class="card__title">{step.title}</h3>
+            <dl class="step-facts">
+              <dt>{c.process.labels.what}</dt>
+              <dd set:html={rich(step.what, lang)} />
+              <dt>{c.process.labels.approve}</dt>
+              <dd set:html={rich(step.approve, lang)} />
+              <dt>{c.process.labels.pay}</dt>
+              <dd set:html={rich(step.pay, lang)} />
+            </dl>
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
+
+  <section class="section theme-light">
+    <div class="container doc">
+      {
+        c.sections.map((s: any) => (
+          <section id={s.id} aria-labelledby={`${s.id}-title`}>
+            <h2 id={`${s.id}-title`} set:html={rich(s.title, lang)} />
+            <div class="doc__body">
+            {s.body?.map((p: string) => <p set:html={rich(p, lang)} />)}
+            {s.list && (
+              <ul class="check-list">
+                {s.list.map((li: string) => <li set:html={rich(li, lang)} />)}
+              </ul>
+            )}
+            {s.ordered && (
+              <ol>
+                {s.ordered.map((li: string) => <li set:html={rich(li, lang)} />)}
+              </ol>
+            )}
+            {s.after?.map((p: string) => <p set:html={rich(p, lang)} />)}
+            {s.columns && (
+              <ul class="card-grid card-grid--2" role="list">
+                {s.columns.map((col: any) => (
+                  <li class="card">
+                    <h3 class="card__title">{col.title}</h3>
+                    <ul class="check-list">
+                      {col.list.map((li: string) => <li set:html={rich(li, lang)} />)}
+                    </ul>
+                  </li>
+                ))}
+              </ul>
+            )}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </section>
+
+  <Section lang={lang} theme="violet" id="agenda-final" title={c.cta.title} lead={c.cta.text} center>
+    <p class="center"><CTA lang={lang} location="final" /></p>
+  </Section>
+</Layout>

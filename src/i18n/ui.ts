@@ -1,0 +1,98 @@
+import type { Lang } from '../content/business';
+import type { RouteKey } from './routes';
+
+// Interface strings (not page copy). Page copy lives in src/content.
+export const ui = {
+  es: {
+    htmlLang: 'es-MX',
+    ogLocale: 'es_MX',
+    skip: 'Saltar al contenido',
+    navLabel: 'Principal',
+    menuLabel: 'Menú',
+    menuOpen: 'Abrir menú',
+    menuClose: 'Cerrar menú',
+    cta: 'Agenda una llamada',
+    langName: 'Español',
+    switchTo: 'Ver esta página en español',
+    nav: [
+      ['servicios', 'Servicios'],
+      ['como', 'Cómo trabajamos'],
+      ['proyectos', 'Proyectos'],
+      ['nosotros', 'Nosotros'],
+    ] as [RouteKey, string][],
+    footer: {
+      tagline: 'Diseño y desarrollo web en Monterrey, para negocios de todo México y de Estados Unidos.',
+      site: 'Sitio',
+      trust: 'Confianza',
+      contact: 'Contacto',
+      email: 'Correo',
+      hours: 'Horario',
+      links: {
+        site: [
+          ['inicio', 'Inicio'],
+          ['servicios', 'Servicios'],
+          ['como', 'Cómo trabajamos'],
+          ['proyectos', 'Proyectos'],
+          ['nosotros', 'Nosotros'],
+          ['contacto', 'Contacto'],
+        ] as [RouteKey, string][],
+        trust: [
+          ['estandar', 'Nuestro estándar'],
+          ['recursos', 'Recursos'],
+          ['aviso', 'Aviso de privacidad'],
+          ['terminos', 'Términos de uso'],
+        ] as [RouteKey, string][],
+      },
+    },
+    breadcrumbHome: 'Inicio',
+    onThisPage: 'En esta página',
+    measuredOn: 'Medido el',
+  },
+  en: {
+    htmlLang: 'en-US',
+    ogLocale: 'en_US',
+    skip: 'Skip to content',
+    navLabel: 'Main',
+    menuLabel: 'Menu',
+    menuOpen: 'Open menu',
+    menuClose: 'Close menu',
+    cta: 'Book a call',
+    langName: 'English',
+    switchTo: 'View this page in English',
+    nav: [
+      ['servicios', 'Services'],
+      ['como', 'How we work'],
+      ['proyectos', 'Projects'],
+      ['nosotros', 'About'],
+    ] as [RouteKey, string][],
+    footer: {
+      tagline: 'Web design and development from Monterrey, for businesses across Mexico and the United States.',
+      site: 'Site',
+      trust: 'Trust',
+      contact: 'Contact',
+      email: 'Email',
+      hours: 'Hours',
+      links: {
+        site: [
+          ['inicio', 'Home'],
+          ['servicios', 'Services'],
+          ['como', 'How we work'],
+          ['proyectos', 'Projects'],
+          ['nosotros', 'About'],
+          ['contacto', 'Contact'],
+        ] as [RouteKey, string][],
+        trust: [
+          ['estandar', 'Our standard'],
+          ['recursos', 'Resources'],
+          ['aviso', 'Privacy notice'],
+          ['terminos', 'Terms of use'],
+        ] as [RouteKey, string][],
+      },
+    },
+    breadcrumbHome: 'Home',
+    onThisPage: 'On this page',
+    measuredOn: 'Measured on',
+  },
+} satisfies Record<Lang, unknown>;
+
+export const t = (lang: Lang) => ui[lang];

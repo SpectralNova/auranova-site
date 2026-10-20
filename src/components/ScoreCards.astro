@@ -1,0 +1,46 @@
+---
+// This site's own Lighthouse scores (ADR-005): read from src/data/site-scores.json, never typed by hand.
+import { formatDate, loadScores, lowest, seconds } from '../lib/scores';
+import { rich } from '../lib/rich';
+import type { Lang } from '../content/business';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const scores = loadScores('site-scores');
+const low = scores && lowest(scores);
+const labels =
+  lang === 'es'
+    ? { performance: 'Rendimiento', accessibility: 'Accesibilidad', bestPractices: 'Buenas prácticas', seo: 'SEO', of: 'de 100' }
+    : { performance: 'Performance', accessibility: 'Accessibility', bestPractices: 'Best practices', seo: 'SEO', of: 'out of 100' };
+const caption =
+  scores && low
+    ? lang === 'es'
+      ? `Medido el ${formatDate(scores.measuredAt, lang)} con Lighthouse ${scores.lighthouseVersion}, perfil móvil, en ${scores.pages.length} páginas; mostramos la calificación más baja. El contenido principal aparece en ${seconds(low.lcpMs, lang)} o menos.`
+      : `Measured on ${formatDate(scores.measuredAt, lang)} with Lighthouse ${scores.lighthouseVersion}, mobile profile, on ${scores.pages.length} pages; we show the lowest score. The main content appears in ${seconds(low.lcpMs, lang)} or less.`
+    : undefined;
+---
+
+{
+  scores && low ? (
+    <>
+      <ul class="card-grid card-grid--4" role="list">
+        {(['performance', 'accessibility', 'bestPractices', 'seo'] as const).map((k) => (
+          <li class="card">
+            <div class="stat__value">{low[k]}</div>
+            <div class="stat__label">
+              {labels[k]} · {labels.of}
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p class="caption muted">
+        {caption} {scores.note && <Fragment set:html={rich(scores.note, lang)} />}
+      </p>
+    </>
+  ) : (
+    <p set:html={rich('[[PENDIENTE: medir este sitio con Lighthouse (npm run measure)]]', lang)} />
+  )
+}

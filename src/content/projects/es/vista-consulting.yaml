@@ -1,0 +1,12 @@
+# Permission: David, 2026-10-19 (Q12). Pending: Vista's OK in writing.
+order: 1
+client: "Vista Consulting"
+sector: "Planeación patrimonial"
+city: "Monterrey"
+url: "https://www.vistaconsulting.mx"
+summary: "Diseñamos y desarrollamos el sitio completo, de la estructura a la publicación."
+tags: ["Sitio web", "Diseño", "Desarrollo"]
+stack: "Hecho con Astro · publicado en Cloudflare"
+image: "vista-consulting-desktop.png"
+imageAlt: "Página de inicio de vistaconsulting.mx en una pantalla de escritorio"
+scores: "vista-scores"

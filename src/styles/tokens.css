@@ -1,0 +1,228 @@
+/* Synced from Resources/AuraNova/Design System/tokens.css by scripts/sync-design-system.mjs.
+   Do not edit here: change upstream, bump its changelog, then run `npm run sync:ds`. */
+/* ==========================================================================
+   AuraNova — design tokens v1.1 (2026-10-19)
+   Source of truth for every colour, type size, space, radius, shadow and
+   motion value. Components never use raw values: only these variables.
+   Palette: Resources/AuraNova/Brand Colors.pdf (exact hex, nothing added
+   except the derived dark surfaces and the two functional "danger" values).
+   Docs: DESIGN_SYSTEM.md
+   ========================================================================== */
+
+@font-face {
+  font-family: "Roboto Condensed";
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/roboto-condensed-800.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Roboto";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/roboto-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Montserrat";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/montserrat-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Montserrat";
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url("/fonts/montserrat-400-italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Montserrat";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/montserrat-600.woff2") format("woff2");
+}
+
+:root {
+  /* ---------- Primitive palette: Brand Colors.pdf (do not edit) ---------- */
+  --lime-1: #D8FD34; /* BRAND PRIMARY */
+  --lime-2: #B4D32A;
+  --lime-3: #91AA20;
+  --lime-4: #728717;
+  --lime-5: #52620E;
+  --lime-6: #323C05;
+  --lime-7: #151A01;
+
+  --violet-1: #FBFBFF;
+  --violet-2: #CBD0FE;
+  --violet-3: #9DA4FE;
+  --violet-4: #7877FD;
+  --violet-5: #5934FD; /* BRAND SECONDARY */
+  --violet-6: #3C05BB;
+  --violet-7: #1E016B;
+
+  --gray-1: #EDEFF0;
+  --gray-2: #C2C9CC;
+  --gray-3: #9BA3A8;
+  --gray-4: #7B8285;
+  --gray-5: #595F61;
+  --gray-6: #383B3D;
+  --gray-7: #191B1C;
+
+  --white: #FFFFFF;
+
+  /* The logo's own gradient (left lime -> right violet). Use sparingly. */
+  --brand-gradient: linear-gradient(90deg, var(--lime-1) 4%, var(--violet-5) 100%);
+
+  /* ---------- Semantic colours: DARK theme (site default) ---------- */
+  --color-bg: var(--gray-7);
+  --color-surface: color-mix(in oklab, var(--gray-7), white 4%);   /* ~#222426 cards */
+  --color-surface-2: color-mix(in oklab, var(--gray-7), white 8%); /* ~#2B2D30 raised/hover */
+  --color-border: color-mix(in oklab, var(--gray-7), white 12%);   /* decorative lines */
+  --color-border-strong: var(--gray-4);                            /* inputs: 4.4:1 vs bg */
+
+  --color-text: var(--gray-1);          /* 15.0:1 on bg */
+  --color-text-muted: var(--gray-3);    /*  6.8:1 on bg, 6.1:1 on surface */
+  --color-text-disabled: var(--gray-5); /* decorative/disabled only — fails text contrast */
+
+  --color-accent: var(--lime-1);        /* CTA fill, highlighted words, stat numbers: 14.8:1 */
+  --color-on-accent: var(--lime-7);     /* text on lime: 15.3:1 */
+  --color-accent-hover: var(--lime-2);
+  --color-secondary: var(--violet-5);   /* secondary fills, badges */
+  --color-on-secondary: var(--violet-1);/* 6.1:1 */
+  --color-link: var(--violet-3);        /* 7.6:1 — never --violet-5 on dark (2.7:1) */
+  --color-link-hover: var(--violet-2);
+  --color-focus: var(--lime-1);
+
+  --color-success: var(--lime-1);
+  --color-danger: #FF7A7A;              /* functional, outside palette: 6.9:1 */
+
+  /* ---------- Typography ---------- */
+  --font-display: "Roboto Condensed", "Roboto", "Arial Narrow", system-ui, sans-serif; /* H1, H2, stats */
+  --font-heading: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;          /* H3–H6 */
+  --font-body: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;         /* text + UI */
+
+  --weight-display: 800;
+  --weight-heading: 700;
+  --weight-body: 400;
+  --weight-strong: 600;
+
+  /* Fluid scale: min @320px -> max @1440px */
+  --text-xs: 0.75rem;                                       /* 12 legal only */
+  --text-sm: 0.875rem;                                      /* 14 captions, labels */
+  --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);      /* 16 -> 18 body */
+  --text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);    /* 18 -> 20 lead */
+  --text-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);        /* 20 -> 24 h4 */
+  --text-2xl: clamp(1.5rem, 1.3rem + 0.9vw, 2rem);          /* 24 -> 32 h3 */
+  --text-3xl: clamp(2rem, 1.6rem + 1.8vw, 3rem);            /* 32 -> 48 h2 */
+  --text-4xl: clamp(2.5rem, 1.8rem + 3.2vw, 4.5rem);        /* 40 -> 72 h1 */
+  --text-5xl: clamp(3rem, 2rem + 5vw, 6rem);                /* 48 -> 96 hero stats */
+
+  --leading-tight: 1.04;   /* display */
+  --leading-snug: 1.2;     /* headings */
+  --leading-normal: 1.6;   /* body */
+
+  --tracking-display: -0.01em;
+  --tracking-caps: 0.08em; /* buttons, eyebrows (uppercase) */
+
+  --measure: 68ch;
+
+  /* ---------- Space (4px base) ---------- */
+  --space-1: 0.25rem;  /*   4 */
+  --space-2: 0.5rem;   /*   8 */
+  --space-3: 0.75rem;  /*  12 */
+  --space-4: 1rem;     /*  16 */
+  --space-5: 1.5rem;   /*  24 */
+  --space-6: 2rem;     /*  32 */
+  --space-7: 3rem;     /*  48 */
+  --space-8: 4rem;     /*  64 */
+  --space-9: 6rem;     /*  96 */
+  --space-10: 8rem;    /* 128 */
+  --section-y: clamp(4rem, 3rem + 5vw, 8rem);
+
+  /* ---------- Layout ---------- */
+  --container-max: 75rem;                               /* 1200 */
+  --container-pad: clamp(1rem, 0.5rem + 2.5vw, 2rem);   /* 16 -> 32 gutter */
+  --grid-columns: 12;
+  --grid-gap: clamp(1rem, 0.75rem + 1vw, 1.5rem);
+
+  /* ---------- Radius ---------- */
+  --radius-sm: 0.5rem;   /*  8 inputs, small chips */
+  --radius-md: 1rem;     /* 16 small cards, images */
+  --radius-lg: 1.5rem;   /* 24 cards, floating nav */
+  --radius-xl: 2rem;     /* 32 feature panels */
+  --radius-pill: 999px;  /* buttons, chips */
+
+  /* ---------- Elevation & glow ---------- */
+  --shadow-lg: 0 18px 40px -12px rgb(0 0 0 / 0.75);
+  --glow-accent: 0 0 28px -4px rgb(216 253 52 / 0.35);
+  --glow-secondary: 0 0 40px -6px rgb(89 52 253 / 0.45);
+  --inset-highlight: inset 0 1.5px 0 rgb(255 255 255 / 0.45);
+  --nav-blur: blur(14px);
+
+  /* ---------- Motion ---------- */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 500ms;
+
+  /* ---------- Layers ---------- */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-nav: 50;
+  --z-overlay: 100;
+
+  color-scheme: dark;
+}
+
+/* ---------- LIGHT theme: whole page or a single section ---------- */
+[data-theme="light"],
+.theme-light {
+  --color-bg: var(--violet-1);
+  --color-surface: var(--white);
+  --color-surface-2: var(--gray-1);
+  --color-border: var(--gray-1);
+  --color-border-strong: var(--gray-4);   /* 3.8:1 — UI boundaries */
+
+  --color-text: var(--gray-7);            /* 16.8:1 */
+  --color-text-muted: var(--gray-5);      /*  6.3:1 */
+  --color-text-disabled: var(--gray-3);
+
+  /* Lime can NEVER be text on light (1.1:1). On light it is only a fill behind dark text. */
+  --color-accent: var(--lime-1);
+  --color-on-accent: var(--lime-7);
+  --color-accent-hover: var(--lime-2);
+  --color-accent-text: var(--lime-5);     /* 6.5:1 — lime-family text on light */
+  --color-secondary: var(--violet-5);
+  --color-on-secondary: var(--violet-1);
+  --color-link: var(--violet-5);          /* 6.1:1 */
+  --color-link-hover: var(--violet-6);
+  --color-focus: var(--violet-5);
+
+  --color-success: var(--lime-5);
+  --color-danger: #C4122F;                /* functional, outside palette: 5.9:1 */
+
+  --shadow-lg: 0 18px 40px -16px rgb(25 27 28 / 0.25);
+  color-scheme: light;
+}
+
+/* ---------- VIOLET band: deep brand section (e.g. final CTA) ---------- */
+.theme-violet {
+  --color-bg: var(--violet-7);
+  --color-surface: color-mix(in oklab, var(--violet-7), white 6%);
+  --color-border: color-mix(in oklab, var(--violet-7), white 16%);
+  --color-text: var(--violet-1);          /* 16.0:1 */
+  --color-text-muted: var(--violet-2);
+  --color-link: var(--violet-2);
+  --color-focus: var(--lime-1);           /* 14.2:1 */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+  }
+}

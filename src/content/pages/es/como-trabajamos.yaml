@@ -1,0 +1,125 @@
+title: "Cómo trabajamos: proceso, pagos y propiedad de tu sitio · AuraNova"
+description: "Nuestro proceso en cuatro etapas, horario, pagos, cambios y propiedad de tu sitio, explicados en español claro y por escrito."
+
+hero:
+  eyebrow: "Cómo trabajamos"
+  title: "Así trabajamos: ==todo por escrito=="
+  lead: "Antes de agendar, conoce nuestro proceso, horario, pagos y lo que nos toca a cada quien. Es un resumen, en español claro, del contrato que firmamos contigo."
+  contract: "Versión del contrato: [[PENDIENTE: versión y fecha del contrato actualizado (Q20)]]"
+
+process:
+  eyebrow: "El proceso"
+  title: "Cuatro etapas, ==sin sorpresas=="
+  labels: { what: "Qué pasa", approve: "Qué apruebas", pay: "Qué pagas" }
+  steps:
+    - title: "Descubrimiento"
+      what: "Platicamos tu objetivo, tu cliente ideal y lo que debe lograr el sitio. Te enviamos una propuesta con alcance, calendario y precio fijo."
+      approve: "La propuesta y el Anexo A, el detalle de todo lo que incluye."
+      pay: "40% para apartar tu fecha."
+    - title: "Primero lo ves"
+      what: "Construimos una vista previa real, en una liga privada, para que la revises en tu teléfono antes de la construcción completa."
+      approve: "El diseño, la estructura y el tono."
+      pay: "30% al aprobar el diseño."
+    - title: "Construcción"
+      what: "Construimos todas las páginas, formularios, SEO y analítica, con el contenido final."
+      approve: "El contenido terminado, en una ronda de revisión."
+      pay: "Nada en esta etapa."
+    - title: "Lanzamiento medido"
+      what: "Revisamos tu sitio contra nuestro estándar de calidad y te entregamos el reporte. Publicamos y te damos acceso a todo."
+      approve: "El sitio, antes de publicarlo."
+      pay: "30% antes del lanzamiento."
+
+sections:
+  - id: "horario"
+    nav: "Horario"
+    title: "Horario y tiempos de respuesta"
+    body:
+      - "Atendemos {{horario}}. No trabajamos fines de semana ni días feriados oficiales; si vamos a ausentarnos, te avisamos con anticipación."
+    list:
+      - "Nosotros te respondemos en {{respuesta}}."
+      - "Tú respondes y apruebas en {{respuestaCliente}}. Si una respuesta se retrasa, el calendario se recorre el mismo tiempo."
+
+  - id: "responsabilidades"
+    nav: "Responsabilidades"
+    title: "Lo que nos toca ==a cada quien=="
+    columns:
+      - title: "Nuestros compromisos"
+        list:
+          - "Entregar lo que describe tu Anexo A, en el calendario que apruebas."
+          - "Responderte en {{respuesta}} dentro de nuestro horario."
+          - "Mostrarte tu sitio real en una liga privada antes de la construcción completa."
+          - "Pedir tu aprobación por escrito antes de cualquier gasto."
+          - "Darte por escrito el costo y el impacto en fechas de cualquier cambio, antes de hacerlo."
+          - "Usar sólo recursos con licencia y respetar los derechos de terceros."
+          - "Corregir cualquier diferencia contra el Anexo A que nos reportes en los 15 días siguientes a la entrega."
+          - "Cumplir nuestro estándar de calidad en cada página."
+          - "Proteger tus datos y accesos, y nunca tocar tu sitio publicado sin tu aprobación por escrito."
+          - "Entregarte todo con el pago final: código, accesos y documentación."
+      - title: "Tus compromisos"
+        list:
+          - "[[CONFIRMAR: Nombrar a una persona de contacto con poder de decisión.]]"
+          - "Responder y aprobar en {{respuestaCliente}}."
+          - "Entregar textos, fotos, logo y accesos en las fechas acordadas."
+          - "Pagar cada factura dentro de los 15 días siguientes."
+          - "Pedir los cambios por escrito."
+          - "Garantizar que el contenido que nos das es tuyo o tienes derecho a usarlo."
+          - "Revisar la entrega y reportar diferencias dentro de 15 días."
+          - "Contarnos quién es tu cliente ideal y qué debe lograr el sitio."
+          - "Darnos accesos sólo con los permisos necesarios."
+          - "Mantener el dominio y el hosting a tu nombre y al corriente."
+
+  - id: "pagos"
+    nav: "Pagos"
+    title: "Pagos"
+    list:
+      - "Precio fijo por proyecto, según el alcance que apruebas por escrito. No cobramos por hora."
+      - "Pagas en tres partes: {{pagos}}."
+      - "Montos en {{moneda}}. Cada factura vence a los 15 días."
+      - "Si un pago se retrasa, el proyecto se pausa hasta recibirlo, y el calendario se recorre el mismo tiempo."
+      - "Los gastos de terceros, como licencias o servicios, sólo con tu aprobación previa por escrito."
+
+  - id: "cambios"
+    nav: "Cambios"
+    title: "Cambios y revisiones"
+    body:
+      - "Cada etapa incluye una ronda de revisión. Si necesitas algo que no está en lo acordado:"
+    ordered:
+      - "Nos lo pides por escrito."
+      - "Te enviamos el costo y el impacto en fechas."
+      - "Tú lo apruebas, o no."
+      - "Lo agendamos."
+    after:
+      - "Si surge algo nuevo cerca del lanzamiento, lo agendamos para después, para no mover tu fecha."
+      - "[[CONFIRMAR: Las rondas de revisión adicionales se cotizan como cualquier otro cambio.]]"
+
+  - id: "propiedad"
+    nav: "Propiedad"
+    title: "Lo tuyo ==es tuyo=="
+    list:
+      - "El dominio, el hosting y las cuentas de servicios se registran a tu nombre desde el primer día."
+      - "Con el pago final te cedemos los derechos del sitio y te entregamos el código, los accesos y la documentación."
+      - "Los accesos se comparten con un gestor de contraseñas."
+      - "Las herramientas y el código que ya teníamos antes de tu proyecto se licencian para tu sitio. Fuentes, plugins e imágenes de terceros conservan sus propias licencias."
+      - "Podemos mostrar tu proyecto terminado en nuestro portafolio."
+
+  - id: "cancelacion"
+    nav: "Pausas y cancelación"
+    title: "Pausas y cancelación"
+    list:
+      - "[[CONFIRMAR: Si necesitas pausar el proyecto, acordamos una nueva fecha cuando estés listo, sin costo de reactivación.]]"
+      - "Puedes cancelar con 15 días de aviso; pagas el trabajo realizado hasta ese momento."
+      - "[[CONFIRMAR: El anticipo no es reembolsable una vez iniciado el proyecto.]]"
+      - "[[CONFIRMAR: Si nosotros cancelamos, te reembolsamos o te damos crédito por lo pagado.]]"
+
+  - id: "garantia"
+    nav: "Garantía"
+    title: "Entrega y garantía"
+    list:
+      - "Al entregar, tienes 15 días para reportarnos por escrito cualquier diferencia contra lo acordado, y la corregimos. Pasado ese plazo, la entrega se da por aceptada."
+      - "Durante {{garantia}} después del lanzamiento corregimos sin costo cualquier error."
+      - "Incluimos una sesión de capacitación."
+      - "Mantenimiento continuo: [[PENDIENTE: planes de mantenimiento: alcance, precio y tiempo de respuesta (Q11)]]."
+
+cta:
+  title: "¿Te hace sentido? ==Platiquemos.=="
+  text: "Agenda una llamada de {{duracionLlamada}} y revisamos tu proyecto juntos."

@@ -1,0 +1,26 @@
+---
+// The primary call to action (ADR-004). Opens Cal.com directly once the link exists;
+// until then it goes to the booking block on the contact page.
+import { business, factValue, type Lang } from '../content/business';
+import { href } from '../i18n/routes';
+import { t } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  /** Where the CTA sits, for the cta_click event (hero, final, nav…). */
+  location: string;
+  variant?: 'primary' | 'secondary';
+  class?: string;
+}
+
+const { lang, location, variant = 'primary', class: className } = Astro.props;
+const booking = factValue(business.bookingUrl, lang);
+const url = booking ?? `${href('contacto', lang)}#agenda`;
+---
+
+<a
+  class:list={['btn', `btn--${variant}`, className]}
+  href={url}
+  data-track={booking ? 'booking_open' : 'cta_click'}
+  data-track-location={location}>{t(lang).cta}</a
+>

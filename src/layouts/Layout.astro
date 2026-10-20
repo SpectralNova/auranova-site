@@ -1,0 +1,99 @@
+---
+import '../styles/tokens.css';
+import '../styles/components.css';
+import '../styles/site.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { business, factText, factValue, type Lang } from '../content/business';
+import { built, href, routes, type RouteKey } from '../i18n/routes';
+import { t } from '../i18n/ui';
+import { INDEXABLE } from '../lib/env';
+
+interface Props {
+  lang: Lang;
+  /** The page's key in src/i18n/routes.ts; omit on pages without a public URL (404). */
+  route?: RouteKey;
+  title: string;
+  description: string;
+  /** Extra JSON-LD objects for this page (FAQPage, BreadcrumbList…). */
+  jsonLd?: object[];
+}
+
+const { lang, route, title, description, jsonLd = [] } = Astro.props;
+const ui = t(lang);
+const site = Astro.site ?? new URL('https://auranova.mx');
+const canonical = route ? new URL(href(route, lang), site).href : undefined;
+const alternates = route
+  ? (['es', 'en'] as const).filter((l) => built[l].includes(route)).map((l) => ({ lang: l, url: new URL(routes[route][l], site).href }))
+  : [];
+
+const hours = factValue(business.hours, lang);
+const email = factText(business.email, lang);
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: factText(business.name, lang),
+  url: new URL('/', site).href,
+  logo: new URL('/auranova-mark.svg', site).href,
+  image: new URL('/apple-touch-icon.png', site).href,
+  description: ui.footer.tagline,
+  areaServed: factValue(business.areaServed, lang),
+  availableLanguage: ['es', 'en'],
+  address: { '@type': 'PostalAddress', addressLocality: 'Monterrey', addressRegion: 'N.L.', addressCountry: 'MX' },
+  openingHoursSpecification: hours && {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: hours.days,
+    opens: hours.opens,
+    closes: hours.closes,
+  },
+  contactPoint: { '@type': 'ContactPoint', contactType: 'sales', email, availableLanguage: ['es', 'en'] },
+};
+---
+
+<!doctype html>
+<html lang={ui.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {
+      alternates.length > 1 &&
+        alternates.map((a) => <link rel="alternate" hreflang={t(a.lang).htmlLang} href={a.url} />)
+    }
+    {alternates.length > 1 && <link rel="alternate" hreflang="x-default" href={alternates.find((a) => a.lang === 'es')?.url} />}
+    {!INDEXABLE && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="preload" href="/fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/roboto-condensed-800.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#191B1C" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AuraNova" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={ui.ogLocale} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <script type="application/ld+json" set:html={JSON.stringify([organization, ...jsonLd])} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{ui.skip}</a>
+    <Header lang={lang} route={route} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+    <script>
+      // Analytics hook (Q18 TBD): CTAs carry data-track; window.auTrack is wired once a tool is chosen.
+      document.addEventListener('click', (event) => {
+        const el = (event.target as Element | null)?.closest<HTMLElement>('[data-track]');
+        if (!el) return;
+        const track = (window as unknown as { auTrack?: (name: string, props: object) => void }).auTrack;
+        track?.(el.dataset.track ?? '', { location: el.dataset.trackLocation });
+      });
+    </script>
+  </body>
+</html>

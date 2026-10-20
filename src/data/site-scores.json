@@ -1,0 +1,50 @@
+{
+  "measuredAt": "2026-10-20T00:47:22.081Z",
+  "baseUrl": "http://localhost:4329",
+  "lighthouseVersion": "13.5.0",
+  "formFactor": "mobile",
+  "runs": 3,
+  "note": "[[CONFIRMAR: medido en la vista previa local; se vuelve a medir en el sitio publicado]]",
+  "pages": [
+    {
+      "path": "/",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 1439,
+      "cls": 0,
+      "tbtMs": 0
+    },
+    {
+      "path": "/como-trabajamos/",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 1432,
+      "cls": 0,
+      "tbtMs": 0
+    },
+    {
+      "path": "/servicios/sitios-web/",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 1436,
+      "cls": 0,
+      "tbtMs": 0
+    },
+    {
+      "path": "/contacto/",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 1510,
+      "cls": 0,
+      "tbtMs": 0
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+---
+// A symmetric grid of text cards (2, 3 or 4 columns, DESIGN_SYSTEM §4). `numbered` turns them into step cards.
+import { rich } from '../lib/rich';
+import type { Lang } from '../content/business';
+
+interface Item {
+  title: string;
+  text?: string;
+  list?: string[];
+}
+interface Props {
+  lang: Lang;
+  items: Item[];
+  cols?: 2 | 3 | 4;
+  numbered?: boolean;
+  /** An ordered process reads as a list to screen readers. */
+  ordered?: boolean;
+}
+
+const { lang, items, cols = 3, numbered = false, ordered = numbered } = Astro.props;
+const List = ordered ? 'ol' : 'ul';
+---
+
+<List class:list={['card-grid', `card-grid--${cols}`]} role="list">
+  {
+    items.map((item, i) => (
+      <li class="card">
+        {numbered && (
+          <span class="step__num" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+        )}
+        <h3 class="card__title" set:html={rich(item.title, lang)} />
+        {item.text && <p class="muted" set:html={rich(item.text, lang)} />}
+        {item.list && (
+          <ul class="check-list">
+            {item.list.map((li) => (
+              <li set:html={rich(li, lang)} />
+            ))}
+          </ul>
+        )}
+      </li>
+    ))
+  }
+</List>

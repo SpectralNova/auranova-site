@@ -1,0 +1,109 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Section from '../../components/Section.astro';
+import CTA from '../../components/CTA.astro';
+import Cards from '../../components/Cards.astro';
+import CaseCard from '../../components/CaseCard.astro';
+import FAQ from '../../components/FAQ.astro';
+import MoreLink from '../../components/MoreLink.astro';
+import { href, type RouteKey } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import { rich } from '../../lib/rich';
+import { breadcrumbJsonLd, faqJsonLd } from '../../lib/jsonld';
+
+// One page per Spanish service that has full page content (CP1: sitios-web).
+export const getStaticPaths = (async () => {
+  const services = await getCollection('services', (s) => s.id.startsWith('es/') && Boolean(s.data.page));
+  return services.map((service) => ({ params: { slug: service.data.route.split('/')[1] }, props: { service } }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  service: CollectionEntry<'services'>;
+}
+
+const lang = 'es';
+const { service } = Astro.props;
+const route = service.data.route as RouteKey;
+const c = service.data.page as any;
+const home = await getEntry('pages', 'es/inicio');
+const steps = (home!.data as any).process.steps;
+const projects = (await getCollection('projects', (p) => p.id.startsWith('es/'))).sort((a, b) => a.data.order - b.data.order);
+const ui = t(lang);
+const site = Astro.site!;
+const crumbs = breadcrumbJsonLd([
+  { name: ui.breadcrumbHome, url: new URL(href('inicio', lang), site).href },
+  { name: ui.nav[0][1], url: new URL(href('servicios', lang), site).href },
+  { name: service.data.name, url: new URL(href(route, lang), site).href },
+]);
+---
+
+<Layout lang={lang} route={route} title={c.title} description={c.description} jsonLd={[faqJsonLd(c.faq.items, lang), crumbs]}>
+  <section class="section hero" aria-labelledby="hero-title">
+    <div class="bg-grid hero__grid" aria-hidden="true"></div>
+    <div class="container">
+      <span class="eyebrow">{c.hero.eyebrow}</span>
+      <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
+      <p class="lead" set:html={rich(c.hero.lead, lang)} />
+      <div class="hero__actions"><CTA lang={lang} location={`servicio-${service.data.route.split('/')[1]}`} /></div>
+    </div>
+  </section>
+
+  <Section lang={lang} theme="light" id="problema" eyebrow={c.problem.eyebrow} title={c.problem.title}>
+    <Cards lang={lang} items={c.problem.items} cols={3} />
+  </Section>
+
+  <Section lang={lang} id="solucion" eyebrow={c.solution.eyebrow} title={c.solution.title}>
+    <Cards lang={lang} items={c.solution.items} cols={3} />
+    <div class="card callout">
+      <h3 class="card__title" set:html={rich(c.solution.redesign.title, lang)} />
+      <p class="muted" set:html={rich(c.solution.redesign.text, lang)} />
+    </div>
+  </Section>
+
+  <Section lang={lang} theme="light" id="incluye" eyebrow={c.includes.eyebrow} title={c.includes.title} lead={c.includes.lead}>
+    <ul class="card-grid card-grid--3" role="list">
+      {
+        c.includes.columns.map((col: any) => (
+          <li class="card">
+            <h3 class="card__title">{col.title}</h3>
+            <ul class:list={['check-list', { 'check-list--no': col.negative }]}>
+              {col.list.map((li: string) => (
+                <li set:html={rich(li, lang)} />
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section lang={lang} id="proceso" eyebrow={c.process.eyebrow} title={c.process.title}>
+    <Cards lang={lang} items={steps} cols={4} numbered />
+    <MoreLink lang={lang} link={c.process.link} />
+  </Section>
+
+  {
+    projects.length > 0 && (
+      <Section lang={lang} theme="light" id="proyectos" eyebrow={c.proof.eyebrow} title={c.proof.title}>
+        {projects.map((p) => (
+          <CaseCard lang={lang} project={p} />
+        ))}
+      </Section>
+    )
+  }
+
+  <Section lang={lang} id="precio" eyebrow={c.price.eyebrow} title={c.price.title}>
+    {c.price.text.map((p: string) => <p set:html={rich(p, lang)} />)}
+    <div class="hero__actions"><CTA lang={lang} location="precio" /></div>
+  </Section>
+
+  <Section lang={lang} theme="light" id="preguntas" eyebrow={c.faq.eyebrow} title={c.faq.title}>
+    <FAQ lang={lang} items={c.faq.items} />
+  </Section>
+
+  <Section lang={lang} theme="violet" id="agenda-final" title={c.cta.title} lead={c.cta.text} center>
+    <p class="center"><CTA lang={lang} location="final" /></p>
+  </Section>
+</Layout>

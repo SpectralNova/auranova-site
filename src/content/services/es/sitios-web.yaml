@@ -1,0 +1,102 @@
+order: 1
+route: "servicios/sitios-web"
+name: "Sitios web"
+kicker: "Nuevos y rediseños"
+summary: "Para negocios que necesitan un sitio que se vea profesional, cargue rápido en el celular y lleve a la gente a contactarte."
+
+page:
+  title: "Diseño de páginas web en Monterrey · AuraNova"
+  description: "Sitios web nuevos y rediseños para negocios de Monterrey y de todo México: rápidos en el celular, claros y tuyos desde el primer día. Cotización a precio fijo."
+  hero:
+    eyebrow: "Sitios web · Monterrey"
+    title: "Diseño de páginas web en Monterrey que ==trabajan para tu negocio=="
+    lead: "Sitios nuevos y rediseños, hechos para que tus clientes entiendan qué haces y te contacten. Rápidos en el celular, fáciles de usar y tuyos desde el primer día."
+
+  problem:
+    eyebrow: "El problema"
+    title: "¿Te ==suena familiar==?"
+    items:
+      - title: "Te da pena mandarlo"
+        text: "Tu sitio se ve viejo, y prefieres mandar fotos por WhatsApp antes que la liga."
+      - title: "Entran, pero nadie escribe"
+        text: "Hay visitas, pero ninguna llamada ni mensaje. Después de leer, no queda claro qué hacer."
+      - title: "Dependes de alguien más"
+        text: "Para cambiar un texto o un precio tienes que esperar a alguien que ya no contesta."
+
+  solution:
+    eyebrow: "Cómo lo resolvemos"
+    title: "Un sitio con ==un propósito claro=="
+    items:
+      - title: "Cada página con un objetivo"
+        text: "Antes de diseñar, definimos qué debe lograr cada página y a quién le habla. Un botón principal, claro, en cada pantalla."
+      - title: "Rápido y claro en el celular"
+        text: "Diseñamos primero para el teléfono y medimos la velocidad con las herramientas de Google antes de publicar."
+      - title: "Fácil de actualizar"
+        text: "Te dejamos el contenido en un formato que puedes editar, y te enseñamos a hacerlo en una sesión de capacitación."
+    redesign:
+      title: "¿Ya tienes sitio?"
+      text: "Partimos de lo que ya funciona: medimos tu sitio actual, conservamos tus direcciones para no perder lo que ya ganaste en Google y mejoramos el resto."
+
+  includes:
+    eyebrow: "Qué incluye"
+    title: "Todo por escrito, ==antes de empezar=="
+    lead: "Esto incluye normalmente un sitio web; en tu propuesta, el Anexo A lo detalla página por página. [[CONFIRMAR: entregables, aportaciones y exclusiones de este servicio]]"
+    columns:
+      - title: "Incluye"
+        list:
+          - "Un brief por página: objetivo, público y acción principal"
+          - "Vista previa real de tu diseño antes de construir"
+          - "Las páginas acordadas en tu Anexo A"
+          - "Formulario de contacto con aviso de privacidad"
+          - "SEO técnico: títulos, descripciones, mapa del sitio y datos estructurados"
+          - "Analítica para medir contactos"
+          - "Reporte de nuestro estándar de calidad"
+          - "Una ronda de revisión por etapa"
+          - "Una sesión de capacitación y {{garantia}} de garantía"
+      - title: "Tú aportas"
+        list:
+          - "Los textos, o la información para escribirlos"
+          - "Tu logo y tus fotos"
+          - "Accesos a tu dominio y hosting, si ya los tienes"
+          - "Una persona que revise y apruebe"
+      - title: "No incluye"
+        negative: true
+        list:
+          - "Fotografía o video profesional"
+          - "Campañas de anuncios"
+          - "El costo del dominio, el hosting y las licencias: van a tu nombre y los pagas directo"
+
+  process:
+    eyebrow: "El proceso"
+    title: "==Primero lo ves==, luego lo construimos"
+    link: { label: "Así trabajamos, a detalle", route: "como" }
+
+  proof:
+    eyebrow: "Proyectos"
+    title: "Un sitio que ==ya está en línea=="
+
+  price:
+    eyebrow: "Precio"
+    title: "¿Cuánto ==cuesta==?"
+    text:
+      - "Cada sitio es distinto, así que no publicamos precios genéricos. Después de la llamada te enviamos una cotización a precio fijo, por escrito, con todo lo que incluye."
+      - "Pagas en tres partes: {{pagos}}. Montos en {{moneda}}."
+
+  faq:
+    eyebrow: "Preguntas frecuentes"
+    title: "Dudas sobre ==tu sitio=="
+    items:
+      - q: "¿Pueden rediseñar mi sitio actual?"
+        a: "Sí. Medimos tu sitio actual, conservamos lo que funciona y cuidamos tus direcciones (URL) para no perder lo que ya ganaste en Google."
+      - q: "¿Podré cambiar los textos yo mismo?"
+        a: "Sí. Te dejamos una forma sencilla de editar el contenido y te capacitamos en una sesión."
+      - q: "¿Con qué herramientas trabajan?"
+        a: "Elegimos la herramienta según tu proyecto. Hemos construido sitios con Astro, Next.js y WordPress."
+      - q: "¿El dominio y el hosting están incluidos?"
+        a: "Se registran a tu nombre y los pagas directo al proveedor; así siempre son tuyos. Te ayudamos a contratarlos y configurarlos."
+      - q: "¿Cuánto tarda?"
+        a: "Lo define el alcance de tu proyecto. El calendario se acuerda por escrito en tu propuesta, con una fecha para cada etapa."
+
+  cta:
+    title: "¿Listo para un sitio que ==sí trabaje==?"
+    text: "Agenda una llamada de {{duracionLlamada}}. Atendemos {{horario}}."

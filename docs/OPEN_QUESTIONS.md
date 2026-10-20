@@ -38,6 +38,9 @@
 | Q27 | US clients: currency, contract, invoicing | 🔴 new | CP1 |
 | Q28 | Domain vs. US search | 🟡 new | CP1 |
 | Q29 | US positioning | 🟡 new | CP1 |
+| Q30 | Design-system fixes found in the build | 🟡 new | CP1 |
+
+**Batch for CP1** (most blocking first): Q26, Q27, Q29, Q12, Q15, Q10, Q6, Q16, Q2, Q30. Before CP2 as well: Q18 (analytics) and Q11 (maintenance plans).
 
 ---
 
@@ -172,6 +175,14 @@
 - **Question:** Which US clients are we talking to?
 - **Blocks:** the English hero, service-page angles, English keywords.
 - **Recommended:** US small businesses that need a bilingual (EN/ES) site or serve Spanish-speaking customers, plus the practical angle: a Monterrey studio working in US-friendly hours (UTC−6, the same as US Central in winter, one hour behind in summer). No price claims.
+- **Status:** 🟡
+
+## Q30 · Design-system fixes found in the build (new)
+- **Question:** Building the real nav surfaced two issues in `components.css`. They're fixed locally in `src/styles/site.css`; OK to move the fixes upstream (DESIGN_SYSTEM v1.2)?
+  1. **Collapse point.** With 4 links + "Agenda una llamada", the nav doesn't fit between 768 and 1023 px. The site collapses to the menu below **1024 px** instead of 768.
+  2. **Sticky nav.** `.nav` is sticky inside `<header>`, but a sticky element only sticks within its parent, so it never sticks. The site makes the header wrapper sticky instead.
+- **Blocks:** nothing (fixed locally); upstream accuracy.
+- **Recommended:** yes to both, as a v1.2 component change.
 - **Status:** 🟡
 
 ---

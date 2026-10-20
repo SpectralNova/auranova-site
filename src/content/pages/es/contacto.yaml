@@ -1,0 +1,59 @@
+title: "Contacto: agenda una llamada · AuraNova"
+description: "Agenda una llamada para platicar de tu sitio web, o escríbenos. Atendemos de lunes a viernes, de 9:00 a 17:00, hora de Monterrey."
+
+hero:
+  eyebrow: "Contacto"
+  title: "Agenda una ==llamada=="
+  lead: "Una llamada de {{duracionLlamada}} para conocer tu negocio y lo que necesitas de tu sitio."
+  hours: "Atendemos {{horario}}."
+  bookingPending: "[[PENDIENTE: liga de Cal.com para agendar (Q16)]]"
+  next:
+    title: "Qué pasa después"
+    steps:
+      - title: "Eliges día y hora"
+        text: "Ves los horarios disponibles en tu propia zona horaria."
+      - title: "Recibes la confirmación"
+        text: "Te llega un correo con la liga de la llamada."
+      - title: "Platicamos"
+        text: "Revisamos tu objetivo, el alcance y los tiempos. Después te enviamos una propuesta por escrito."
+
+form:
+  eyebrow: "Formulario"
+  title: "¿Prefieres ==escribirnos==?"
+  lead: "Cuéntanos de tu proyecto y te respondemos en {{respuesta}}."
+  optional: "(opcional)"
+  select: "Elige una opción"
+  fields:
+    name: "Nombre"
+    email: "Correo"
+    company: "Empresa"
+    website: "Sitio actual"
+    websiteHint: "Si ya tienes uno."
+    type: "¿Qué necesitas?"
+    typeOptions:
+      - "Sitio web nuevo o rediseño"
+      - "Plataforma a la medida"
+      - "Mantenimiento y soporte"
+      - "No estoy seguro"
+    budget: "Presupuesto aproximado"
+    budgetHint: "[[PENDIENTE: rangos de presupuesto en MXN (Q6)]]"
+    budgetNone: "Prefiero no decir"
+    message: "Mensaje"
+    messageHint: "¿Qué quieres lograr con tu sitio?"
+    consent: "Leí y acepto el [aviso de privacidad](/aviso-de-privacidad/)."
+  submit: "Enviar mensaje"
+  errors:
+    required: "Este campo es obligatorio."
+    email: "Escribe un correo válido, por ejemplo nombre@empresa.com."
+    consent: "Necesitamos tu consentimiento para poder responderte."
+    summary: "Revisa los campos marcados."
+  previewNote: "[[PENDIENTE: el envío del formulario se conecta en la fase 2 (ADR-003)]]"
+
+channels:
+  eyebrow: "Otros canales"
+  title: "También por ==correo=="
+  labels:
+    email: "Correo"
+    hours: "Horario"
+    response: "Respuesta"
+  response: "En {{respuesta}}"

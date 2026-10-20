@@ -1,0 +1,80 @@
+---
+// A permitted, published project (Q12). Numbers come from a measurement file, never typed by hand.
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { formatDate, loadScores, lowest } from '../lib/scores';
+import { rich } from '../lib/rich';
+import type { Lang } from '../content/business';
+
+interface Props {
+  lang: Lang;
+  project: CollectionEntry<'projects'>;
+}
+
+const { lang, project } = Astro.props;
+const p = project.data;
+const images = import.meta.glob<ImageMetadata>('../assets/projects/*', { eager: true, import: 'default' });
+const image = images[`../assets/projects/${p.image}`];
+if (!image) throw new Error(`Missing project image ${p.image}`);
+const scores = p.scores ? loadScores(p.scores) : undefined;
+const low = scores && lowest(scores);
+const visit = lang === 'es' ? 'Ver el sitio en vivo' : 'Visit the live site';
+---
+
+<article class="case-card card">
+  <div class="case-card__shot">
+    <Picture
+      src={image}
+      formats={['avif', 'webp']}
+      fallbackFormat="webp"
+      widths={[480, 800, 1200]}
+      sizes="(min-width: 1024px) 640px, 100vw"
+      alt={p.imageAlt}
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  <div class="case-card__body">
+    <ul class="case-card__tags" role="list">{p.tags.map((tag) => <li class="tag">{tag}</li>)}</ul>
+    <h3 class="card__title">{p.client}</h3>
+    <p class="muted">{p.sector} · {p.city}</p>
+    <p set:html={rich(p.summary, lang)} />
+    {
+      scores && low && (
+        <dl class="case-card__scores">
+          <div>
+            <dt>{lang === 'es' ? 'Rendimiento' : 'Performance'}</dt>
+            <dd>{low.performance}</dd>
+          </div>
+          <div>
+            <dt>{lang === 'es' ? 'Accesibilidad' : 'Accessibility'}</dt>
+            <dd>{low.accessibility}</dd>
+          </div>
+          <div>
+            <dt>{lang === 'es' ? 'Buenas prácticas' : 'Best practices'}</dt>
+            <dd>{low.bestPractices}</dd>
+          </div>
+          <div>
+            <dt>SEO</dt>
+            <dd>{low.seo}</dd>
+          </div>
+        </dl>
+      )
+    }
+    {
+      scores && (
+        <p class="caption muted">
+          {lang === 'es'
+            ? `Lighthouse, perfil móvil, de 100. Medido el ${formatDate(scores.measuredAt, lang)}.`
+            : `Lighthouse, mobile profile, out of 100. Measured on ${formatDate(scores.measuredAt, lang)}.`}{' '}
+          {scores.note && <Fragment set:html={rich(scores.note, lang)} />}
+        </p>
+      )
+    }
+    <p class="case-card__stack muted">{p.stack}</p>
+    <a class="btn btn--secondary" href={p.url} rel="noopener">
+      {visit} <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</article>

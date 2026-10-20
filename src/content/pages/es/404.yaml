@@ -1,0 +1,11 @@
+title: "Página no encontrada · AuraNova"
+description: "La página que buscas no existe."
+eyebrow: "Error 404"
+heading: "No encontramos ==esta página=="
+text: "Puede que la dirección esté mal escrita o que la página ya no exista."
+previewNote: "[[PENDIENTE: varias páginas de esta vista previa se construyen en la fase 2]]"
+home: "Ir al inicio"
+links:
+  - { label: "Servicios", route: "servicios" }
+  - { label: "Cómo trabajamos", route: "como" }
+  - { label: "Contacto", route: "contacto" }
