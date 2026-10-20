@@ -1,6 +1,4 @@
 # The /servicios/ page, plus blocks shared by every service page (price, process, tools).
-# Service illustrations: "a" Plano bicolor · "b" Línea y acento · "c" Degradado aura (compare at /opciones/)
-illustration: "a"
 title: "Servicios · AuraNova"
 description: "Sitios web, plataformas a la medida, posicionamiento en Google, contenido y marca, mantenimiento y asesoría digital para pequeños y medianos negocios."
 
@@ -51,6 +49,30 @@ tools:
     googleanalytics: { name: "Google Analytics", text: "Visitas y contactos, medidos" }
     google: { name: "Perfil de negocio", text: "Tu ficha en Google Maps" }
     caldotcom: { name: "Cal.com", text: "Agenda de citas en línea" }
+    # Contenido y marca. Keys that aren't Simple Icons slugs carry `brand` (a Simple Icons slug) or `icon`
+    # (a Lucide icon); Adobe and OpenAI logos aren't in Simple Icons, so they get a neutral line icon.
+    premierepro: { name: "Adobe Premiere Pro", text: "Edición de video", icon: "clapperboard" }
+    aftereffects: { name: "Adobe After Effects", text: "Gráficos animados", icon: "wand-sparkles" }
+    photoshop: { name: "Adobe Photoshop", text: "Retoque y composición", icon: "image" }
+    illustrator: { name: "Adobe Illustrator", text: "Logotipos e ilustración", icon: "pen-tool" }
+    nanobanana: { name: "Nano Banana Pro", text: "Google", brand: "googlegemini" }
+    imagen: { name: "Imagen 4 Ultra", text: "Google", brand: "google" }
+    gptimage: { name: "GPT Image 2.5", text: "OpenAI", icon: "sparkles" }
+    flux: { name: "Flux 3", text: "Black Forest Labs", icon: "sparkles" }
+    seedream: { name: "Seedream 5.0 Pro", text: "ByteDance", brand: "bytedance" }
+    ideogram: { name: "Ideogram 4.5", text: "Ideogram", icon: "sparkles" }
+    recraft: { name: "Recraft 4.1", text: "Recraft · imagen y vector", icon: "sparkles" }
+    kling: { name: "Kling o3", text: "Kuaishou", brand: "kuaishou" }
+    grok: { name: "Grok Imagine 2.0", text: "xAI", icon: "sparkles" }
+    qwenimage: { name: "Qwen Image 3", text: "Alibaba", brand: "qwen" }
+    wan: { name: "Wan 2.7 Pro", text: "Alibaba", brand: "alibabacloud" }
+    hunyuan: { name: "Hunyuan Image 3", text: "Tencent", icon: "sparkles" }
+    luma: { name: "Luma Uni-1", text: "Luma AI", icon: "sparkles" }
+    metamuse: { name: "Muse Image", text: "Meta", brand: "meta" }
+    reve: { name: "Reve 2.1", text: "Reve", icon: "sparkles" }
+    imagineart: { name: "ImagineArt 2.0", text: "ImagineArt", icon: "sparkles" }
+    krea: { name: "Krea 3", text: "Krea", icon: "sparkles" }
+    zimage: { name: "Z-Image Turbo", text: "Alibaba", brand: "alibabacloud" }
   order: ["astro", "nextdotjs", "wordpress", "woocommerce", "cloudflare", "render", "github", "googlesearchconsole", "googleanalytics", "google", "caldotcom"]
 
 process:

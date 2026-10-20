@@ -61,7 +61,7 @@ page:
   includes:
     eyebrow: "Qué incluye"
     title: "Todo por escrito, ==antes de empezar=="
-    lead: "Esto incluye normalmente un sitio web; en tu propuesta, el Anexo A lo detalla página por página. [[CONFIRMAR: entregables, aportaciones y exclusiones de este servicio]]"
+    lead: "Esto incluye normalmente un sitio web; en tu propuesta, el Anexo A lo detalla página por página."
     columns:
       - title: "Incluye"
         list:

@@ -1,6 +1,6 @@
 ---
 // Home: only the essentials (David, CP1): what we do, how we do it, book a call.
-// CP1.2: hero animation shows the site working for the client (options at /opciones/); no violet band.
+// CP1.2: hero animation shows the site working for the client (option A, Q34); no violet band.
 import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Section from '../components/Section.astro';
@@ -32,7 +32,7 @@ const c = page.data as any;
         </div>
         <p class="hero__note muted" set:html={rich(c.hero.note, lang)} />
       </div>
-      <HeroWorks variant={c.hero.variant} copy={c.hero.works} />
+      <HeroWorks copy={c.hero.works} />
     </div>
   </section>
 

@@ -1,7 +1,6 @@
 ---
-// The six services as cards with their 2D illustration; each links to its own page.
-// The illustration style is one setting (`illustration` in pages/<lang>/servicios.yaml); /opciones/ compares them.
-import { getCollection, getEntry } from 'astro:content';
+// The six services as cards with their 2D illustration (style A, Plano bicolor: Q35); each links to its page.
+import { getCollection } from 'astro:content';
 import GeneratedImage from './GeneratedImage.astro';
 import { href, type RouteKey } from '../i18n/routes';
 import type { Lang } from '../content/business';
@@ -9,22 +8,18 @@ import type { Lang } from '../content/business';
 interface Props {
   lang: Lang;
   linkLabel: string;
-  /** Override the site-wide illustration style (only /opciones/ does this). */
-  style?: 'a' | 'b' | 'c';
 }
 
 const { lang, linkLabel } = Astro.props;
-const shared = (await getEntry('pages', `${lang}/servicios`))?.data as { illustration?: 'a' | 'b' | 'c' } | undefined;
-const style = Astro.props.style ?? shared?.illustration ?? 'a';
 const services = (await getCollection('services', (s) => s.id.startsWith(`${lang}/`))).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<ul class:list={['card-grid card-grid--3', `svc-grid svc-grid--${style}`]} role="list">
+<ul class="card-grid card-grid--3 svc-grid" role="list">
   {
     services.map(({ data }) => (
       <li class="card card--interactive svc-card">
         <div class="svc-card__art">
-          <GeneratedImage file={`services/${style}/${data.art}.webp`} widths={[208, 312, 416]} sizes="13rem" />
+          <GeneratedImage file={`services/${data.art}.webp`} widths={[208, 312, 416]} sizes="13rem" />
         </div>
         <span class="tag">{data.kicker}</span>
         <h3 class="card__title">

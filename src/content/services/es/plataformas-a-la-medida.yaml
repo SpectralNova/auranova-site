@@ -56,7 +56,7 @@ page:
   includes:
     eyebrow: "Qué incluye"
     title: "Primero lo definimos, ==luego lo construimos=="
-    lead: "Cada plataforma es distinta; el Anexo A de tu propuesta la describe pantalla por pantalla. [[CONFIRMAR: entregables, aportaciones y exclusiones de este servicio]]"
+    lead: "Cada plataforma es distinta; el Anexo A de tu propuesta la describe pantalla por pantalla."
     columns:
       - title: "Incluye"
         list:

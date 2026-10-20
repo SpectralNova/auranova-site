@@ -49,12 +49,12 @@ page:
 
   note:
     title: "Planes de mantenimiento"
-    text: "[[PENDIENTE: planes de mantenimiento: alcance, precio y tiempo de respuesta (Q11)]]"
+    text: "Si te interesa mantener una relación permanente con nosotros, al final de tu proyecto te preparamos un plan de mantenimiento fijo, con una tarifa preferencial por haber hecho tu proyecto con nosotros."
 
   includes:
     eyebrow: "Qué incluye"
     title: "Lo que cubre ==tu plan=="
-    lead: "Cada sitio terminado con nosotros incluye {{garantia}} de garantía y una sesión de capacitación. [[CONFIRMAR: entregables, aportaciones y exclusiones de este servicio]]"
+    lead: "Cada sitio terminado con nosotros incluye {{garantia}} de garantía y una sesión de capacitación."
     columns:
       - title: "Incluye"
         list:
@@ -78,7 +78,7 @@ page:
       - q: "¿Qué cubre la garantía de {{garantia}}?"
         a: "Cualquier error en lo que entregamos, corregido sin costo durante {{garantia}} después del lanzamiento."
       - q: "¿Dan soporte a sitios que no hicieron ustedes?"
-        a: "[[CONFIRMAR: Sí, después de revisarlo y decirte por escrito en qué estado está.]]"
+        a: "Sí, después de revisarlo y decirte por escrito en qué estado está."
       - q: "¿En cuánto tiempo responden?"
         a: "Te respondemos en {{respuesta}}, {{horario}}."
 

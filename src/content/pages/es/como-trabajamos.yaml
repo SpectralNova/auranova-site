@@ -6,10 +6,7 @@ hero:
   title: "Así trabajamos: ==todo por escrito=="
   lead: "Antes de agendar, conoce nuestro proceso, horario, pagos y lo que nos toca a cada quien. Es un resumen, en español claro, del contrato que firmamos contigo."
   contract: "Versión del contrato: [[PENDIENTE: versión y fecha del contrato actualizado (Q20)]]"
-  ctaNote: "Una llamada de {{duracionLlamada}} para conocer tu negocio. Te decimos qué necesitas y qué no."
-
-# Big statement between the hero and the roadmap; words light up with the scroll.
-statement: "Primero lo ves. Luego lo apruebas. ==Y sólo entonces lo construimos.=="
+  ctaNote: "Una llamada de {{duracionLlamada}}, sin costo, para conocer tu negocio. Te decimos qué necesitas y qué no."
 
 # The scroll roadmap (src/components/Roadmap.astro): the call, then the four contract stages.
 # `paid` = % paid once that stage is approved (Q7: 40 / 30 / 30). `screen` picks the step's mockup.
@@ -26,7 +23,7 @@ roadmap:
       title: "Una llamada de {{duracionLlamada}}"
       what: "Platicamos tu negocio, a quién le vendes y qué quieres lograr. Te decimos con honestidad qué necesitas, y qué no."
       approve: "Nada todavía: sólo decides si quieres una propuesta."
-      pay: "[[CONFIRMAR: Nada: la llamada no tiene costo.]]"
+      pay: "Nada: la llamada no tiene costo."
       care: "Atendemos {{horario}} y te respondemos en {{respuesta}}."
       paid: 0
       screen: "call"
@@ -115,9 +112,9 @@ sections:
           - "Cumplir nuestro estándar de calidad en cada página."
           - "Proteger tus datos y accesos, y nunca tocar tu sitio publicado sin tu aprobación por escrito."
           - "Entregarte todo con el pago final: código, accesos y documentación."
+          - "Ponernos en contacto contigo y acompañarte en cada etapa del proyecto."
       - title: "Tus compromisos"
         list:
-          - "[[CONFIRMAR: Nombrar a una persona de contacto con poder de decisión.]]"
           - "Responder y aprobar en {{respuestaCliente}}."
           - "Entregar textos, fotos, logo y accesos en las fechas acordadas."
           - "Pagar cada factura dentro de los 15 días siguientes."
@@ -150,7 +147,7 @@ sections:
       - "Lo agendamos."
     after:
       - "Si surge algo nuevo cerca del lanzamiento, lo agendamos para después, para no mover tu fecha."
-      - "[[CONFIRMAR: Las rondas de revisión adicionales se cotizan como cualquier otro cambio.]]"
+      - "Tu proyecto incluye una ronda de revisión extra sin costo y cambios de texto ilimitados durante los 30 días posteriores a la entrega final. Después de ese periodo, cualquier cambio o revisión queda sujeto a cotización."
 
   - id: "propiedad"
     nav: "Propiedad"
@@ -166,10 +163,10 @@ sections:
     nav: "Pausas y cancelación"
     title: "Pausas y cancelación"
     list:
-      - "[[CONFIRMAR: Si necesitas pausar el proyecto, acordamos una nueva fecha cuando estés listo, sin costo de reactivación.]]"
+      - "Si necesitas pausar el proyecto, acordamos una nueva fecha cuando estés listo, sin costo por pausarlo ni por reactivarlo."
       - "Puedes cancelar con 15 días de aviso; pagas el trabajo realizado hasta ese momento."
-      - "[[CONFIRMAR: El anticipo no es reembolsable una vez iniciado el proyecto.]]"
-      - "[[CONFIRMAR: Si nosotros cancelamos, te reembolsamos o te damos crédito por lo pagado.]]"
+      - "El anticipo no es reembolsable una vez iniciado el proyecto."
+      - "Si nosotros cancelamos, te reembolsamos o te damos crédito por lo pagado."
 
   - id: "garantia"
     nav: "Garantía"
@@ -178,7 +175,7 @@ sections:
       - "Al entregar, tienes 15 días para reportarnos por escrito cualquier diferencia contra lo acordado, y la corregimos. Pasado ese plazo, la entrega se da por aceptada."
       - "Durante {{garantia}} después del lanzamiento corregimos sin costo cualquier error."
       - "Incluimos una sesión de capacitación."
-      - "Mantenimiento continuo: [[PENDIENTE: planes de mantenimiento: alcance, precio y tiempo de respuesta (Q11)]]."
+      - "Si te interesa mantener una relación permanente con nosotros, al final de tu proyecto te preparamos un plan de mantenimiento fijo, con una tarifa preferencial por haber hecho tu proyecto con nosotros."
 
 faq:
   eyebrow: "Preguntas frecuentes"
@@ -193,7 +190,7 @@ faq:
     - q: "¿Qué pasa si quiero cambiar algo a mitad del proyecto?"
       a: "Cada etapa incluye una ronda de revisión. Si pides algo fuera de lo acordado, te decimos por escrito cuánto cuesta y cuánto mueve la fecha, y sólo lo hacemos si lo apruebas."
     - q: "¿Qué pasa después del lanzamiento?"
-      a: "Durante {{garantia}} corregimos sin costo cualquier error, e incluimos una sesión de capacitación. Para soporte continuo ofrecemos planes de mantenimiento: [[PENDIENTE: alcance, precio y tiempo de respuesta de los planes (Q11)]]."
+      a: "Durante {{garantia}} corregimos sin costo cualquier error, e incluimos una sesión de capacitación. Si quieres soporte continuo, al final de tu proyecto te preparamos un plan de mantenimiento fijo, con una tarifa preferencial por haber hecho tu proyecto con nosotros."
     - q: "¿En qué horario atienden?"
       a: "Atendemos {{horario}}. No trabajamos fines de semana ni días feriados, y si vamos a ausentarnos te avisamos con anticipación. Te respondemos en {{respuesta}}."
     - q: "¿Trabajan con negocios de otras ciudades?"

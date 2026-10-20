@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-10-20T15:30:19.124Z",
+  "measuredAt": "2026-10-20T17:53:59.200Z",
   "baseUrl": "http://localhost:4329",
   "lighthouseVersion": "13.5.0",
   "formFactor": "mobile",
@@ -12,7 +12,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1528,
+      "lcpMs": 1536,
       "cls": 0,
       "tbtMs": 0
     },
@@ -22,7 +22,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1674,
+      "lcpMs": 1671,
       "cls": 0.002,
       "tbtMs": 0
     },
@@ -32,7 +32,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1666,
+      "lcpMs": 1822,
       "cls": 0,
       "tbtMs": 0
     },
@@ -42,17 +42,17 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1512,
+      "lcpMs": 1519,
       "cls": 0,
       "tbtMs": 0
     },
     {
       "path": "/nosotros/",
-      "performance": 100,
+      "performance": 99,
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1661,
+      "lcpMs": 1665,
       "cls": 0,
       "tbtMs": 0
     },
@@ -62,7 +62,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1512,
+      "lcpMs": 1515,
       "cls": 0,
       "tbtMs": 0
     }

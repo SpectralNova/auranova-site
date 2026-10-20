@@ -1,7 +1,7 @@
 ---
-// /servicios/: one row per service, art and text alternating sides. The 2D illustration (style picked in
-// pages/<lang>/servicios.yaml) drifts a little against the scroll (motion.css .sd-drift).
-import { getCollection, getEntry } from 'astro:content';
+// /servicios/: one row per service, art and text alternating sides. The 2D illustration drifts a little
+// against the scroll (motion.css .sd-drift).
+import { getCollection } from 'astro:content';
 import GeneratedImage from './GeneratedImage.astro';
 import { href, type RouteKey } from '../i18n/routes';
 import type { Lang } from '../content/business';
@@ -12,8 +12,6 @@ interface Props {
 }
 
 const { lang, linkLabel } = Astro.props;
-const shared = (await getEntry('pages', `${lang}/servicios`))?.data as { illustration?: string } | undefined;
-const style = shared?.illustration ?? 'a';
 const services = (await getCollection('services', (s) => s.id.startsWith(`${lang}/`))).sort((a, b) => a.data.order - b.data.order);
 ---
 
@@ -25,7 +23,7 @@ const services = (await getCollection('services', (s) => s.id.startsWith(`${lang
         <li class="srow" id={data.art}>
           <div class="srow__art" aria-hidden="true">
             <div class="srow__halo sd-drift">
-              <GeneratedImage file={`services/${style}/${data.art}.webp`} widths={[320, 480, 640]} sizes="(min-width: 1024px) 22rem, 70vw" />
+              <GeneratedImage file={`services/${data.art}.webp`} widths={[320, 480, 640]} sizes="(min-width: 1024px) 22rem, 70vw" />
             </div>
           </div>
           <div class="srow__copy">

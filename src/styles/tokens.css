@@ -1,7 +1,7 @@
 /* Synced from Resources/AuraNova/Design System/tokens.css by scripts/sync-design-system.mjs.
    Do not edit here: change upstream, bump its changelog, then run `npm run sync:ds`. */
 /* ==========================================================================
-   AuraNova — design tokens v1.2 (2026-10-19)
+   AuraNova — design tokens v1.3 (2026-10-20)
    Source of truth for every colour, type size, space, radius, shadow and
    motion value. Components never use raw values: only these variables.
    Palette: Resources/AuraNova/Brand Colors.pdf (exact hex, nothing added
@@ -103,6 +103,9 @@
   --font-display: "Roboto Condensed", "Roboto", "Arial Narrow", system-ui, sans-serif; /* H1, H2, stats */
   --font-heading: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;          /* H3–H6 */
   --font-body: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;         /* text + UI */
+  /* Code and terminal text INSIDE product mockups only. The system's own monospace (never downloaded),
+     not a brand family: the 3-family rule still holds for everything else. */
+  --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
 
   --weight-display: 800;
   --weight-heading: 700;
@@ -206,6 +209,31 @@
 
   --shadow-lg: 0 18px 40px -16px rgb(25 27 28 / 0.25);
   color-scheme: light;
+}
+
+/* ---------- DARK inside a light section: product mockups, demos ---------- */
+.theme-dark {
+  --color-bg: var(--gray-7);
+  --color-surface: color-mix(in oklab, var(--gray-7), white 4%);
+  --color-surface-2: color-mix(in oklab, var(--gray-7), white 8%);
+  --color-border: color-mix(in oklab, var(--gray-7), white 12%);
+  --color-border-strong: var(--gray-4);
+  --color-text: var(--gray-1);
+  --color-text-muted: var(--gray-3);
+  --color-text-disabled: var(--gray-5);
+  --color-accent: var(--lime-1);
+  --color-on-accent: var(--lime-7);
+  --color-accent-hover: var(--lime-2);
+  --color-secondary: var(--violet-5);
+  --color-on-secondary: var(--violet-1);
+  --color-link: var(--violet-3);
+  --color-link-hover: var(--violet-2);
+  --color-focus: var(--lime-1);
+  --color-success: var(--lime-1);
+  --color-danger: #FF7A7A;
+  --shadow-lg: 0 18px 40px -12px rgb(0 0 0 / 0.75);
+  color-scheme: dark;
+  color: var(--color-text);
 }
 
 /* ---------- VIOLET band: deep brand section (e.g. final CTA) ---------- */

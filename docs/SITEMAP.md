@@ -14,13 +14,12 @@
 | `/servicios/contenido-y-marca/` | Contenido y marca (textos, imágenes, video, identidad) | built |
 | `/servicios/mantenimiento-web/` | Mantenimiento y soporte | built |
 | `/servicios/asesoria-digital/` | Asesoría digital | built |
-| `/como-trabajamos/` | Cómo trabajamos: statement · scroll roadmap (call + 4 stages) · así te cuidamos · contract summary · FAQ + CTA | built |
+| `/como-trabajamos/` | Cómo trabajamos: scroll roadmap (call + 4 stages) · así te cuidamos · contract summary · FAQ + CTA | built |
 | `/proyectos/` | Proyectos (Vista Consulting) | built |
 | `/nosotros/` | Nosotros: **the only page that names the city** | built |
 | `/contacto/` | Contacto (form interface; delivery in Phase 2) | built |
 | `/estandar/`, `/recursos/`, `/aviso-de-privacidad/`, `/terminos/` | Footer pages | Phase 2 |
 | 404 | Recovery page | built |
-| `/opciones/` | **Preview only** (CP1.2): hero-animation and illustration options side by side (Q34, Q35). Never built in production; excluded from the sitemap; noindex like every preview | built (preview) |
 
 English (`/en/…`) is on hold (Q4, ADR-007); the routes stay reserved. `/blog` stays reserved (Q22).
 

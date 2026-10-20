@@ -83,14 +83,22 @@
 
 ## ADR-011 · Scroll storytelling without scroll-jacking; every demo pausable
 - **Status:** Implemented for CP1.2 · 2026-10-20 (David: TypeSomething's product page for Servicios, piergorelli.com for Cómo trabajamos)
-- **Native scroll, always:** effects follow the scroll position through CSS scroll-driven animations (`src/styles/motion.css`): rise-ins, the mosaic that grows into place, parallax art, the capability ticker, the process rail that fills, the statement whose words light up. They move only when the visitor scrolls. Browsers without support and `prefers-reduced-motion` get the static layout.
+- **Native scroll, always:** effects follow the scroll position through CSS scroll-driven animations (`src/styles/motion.css`): rise-ins, the mosaic that grows into place, parallax art, the capability ticker (full width, plain text: no edge fades, CP1.3), the process rail that fills. (The word-reveal statement on Cómo trabajamos was removed in CP1.3 at David's request.) They move only when the visitor scrolls. Browsers without support and `prefers-reduced-motion` get the static layout.
 - **The roadmap pins, it doesn't hijack:** on desktop (≥1024 × ≥700 px, JavaScript on) Cómo trabajamos keeps a stage in view with `position: sticky` while the page scrolls past it; the step follows the scroll position. The page never moves by itself; the stage tabs are buttons that jump to a step. Phones, short screens and no-JS get a plain timeline with every step.
 - **Timed animation = pausable:** the hero and service demos loop, so each one plays only while on screen, has a pause button whose label says what it will do (WCAG 2.2.2), and shows its final frame with reduced motion (`src/lib/demo.ts`). Nothing else runs longer than 5 s: the Nosotros stars twinkle ~4.5 s and rest; its sky moves with the pointer and the scroll only.
 - **Honesty:** demos use a generic "Tu negocio". Any demo with numbers is labelled "Datos de ejemplo"/"Ejemplo" and carries a footnote (docs/CLAIMS.md). The quality report on Sitios web is the only real number set, and it comes from `npm run measure`.
 - **Cost:** about 6 KB of JavaScript in total (demos, roadmap, parallax, menu, tabs). Lighthouse mobile: 99–100 performance on every page.
 
-## ADR-012 · Design-system proposals from CP1.2 (DS v1.3, not applied upstream yet)
-- **Status:** Proposed · 2026-10-20 — approve at CP1.2, then change upstream first (brief rule), bump the changelog and re-sync.
-  1. **`.tag` on light backgrounds** measures 4.43:1 (violet-5 on its own 20% tint, 12 px). Fix: `--color-link-hover` (violet-6) for `.theme-light .tag` text. Applied locally in `site.css` until then.
-  2. **`.theme-dark` utility** to force the dark semantic tokens inside a light section (the service demos are dark product windows). Local stand-in: `.demo-dark` in `demos.css`.
-  3. **`--font-mono`** (system monospace stack, no download) for code and terminal demos. Local stand-in: `.demo-mono`.
+## ADR-012 · Design system v1.3
+- **Status:** Approved by David (CP1.2 review, "Q30: Recommended") and applied 2026-10-20: changed upstream first (`Resources/AuraNova/Design System/`, changelog bumped), then `npm run sync:ds`. The local stand-ins are gone.
+  1. **`.tag` on light backgrounds** measured 4.43:1 (violet-5 on its own 20% tint, 12 px) → text in `--color-link-hover` (violet-6), ≈ 8:1.
+  2. **`.theme-dark` utility**: the dark semantic tokens inside a light section (the service demos are dark product windows).
+  3. **`--font-mono`**: the system monospace, never downloaded, only for code and terminal text inside mockups. The 3-family rule is unchanged.
+
+## ADR-013 · Options decided; the alternatives are retired
+- **Status:** Implemented for CP1.3 · 2026-10-20
+- **Decision:** hero animation **A** (Q34) and illustration style **A** (Q35). HeroWorks keeps only A, the illustrations live at `src/assets/generated/services/<art>.webp`, and the preview-only `/opciones/` page is gone, with hero variants B/C and styles B/C. Git history keeps all of it.
+
+## ADR-014 · 4K-sharp backgrounds by local AI upscaling
+- **Status:** Implemented for CP1.3 · 2026-10-20 (David: "the banners are blurry in high resolutions")
+- **Decision:** the six service backgrounds and the Nosotros constellation were upscaled ×4 locally with Real-ESRGAN x4plus (ONNX on the CPU, tiled), from the original generations. The art stays identical and no credits were spent; banners are 4352 × 2432 and the constellation 4608 × 3072, enough for a 4K screen at 2×. Astro serves AVIF/WebP from 640 px up, so phones still download small files; Lighthouse stays at 99–100.

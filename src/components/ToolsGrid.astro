@@ -1,10 +1,13 @@
 ---
 // Tools we work with (labels in src/content/pages/es/servicios.yaml). Logos: Simple Icons, monochrome.
+// A label may name a different Simple Icons slug (`brand`) or, when the brand has no logo there, a Lucide
+// icon (`icon`). Each cell lights up in lime on hover (site.css).
 import BrandIcon from './BrandIcon.astro';
+import Icon from './Icon.astro';
 
 interface Props {
   slugs: string[];
-  labels: Record<string, { name: string; text: string }>;
+  labels: Record<string, { name: string; text: string; brand?: string; icon?: string }>;
 }
 
 const { slugs, labels } = Astro.props;
@@ -12,14 +15,15 @@ const { slugs, labels } = Astro.props;
 
 <ul class="tools" role="list">
   {
-    slugs.map((slug) => (
-      <li class="tool">
-        <span class="icon-tile icon-tile--brand">
-          <BrandIcon slug={slug} />
-        </span>
-        <strong class="tool__name">{labels[slug]?.name ?? slug}</strong>
-        <span class="tool__text">{labels[slug]?.text}</span>
-      </li>
-    ))
+    slugs.map((slug) => {
+      const label = labels[slug];
+      return (
+        <li class="tool">
+          <span class="icon-tile icon-tile--brand">{label?.icon ? <Icon name={label.icon} size={26} /> : <BrandIcon slug={label?.brand ?? slug} />}</span>
+          <strong class="tool__name">{label?.name ?? slug}</strong>
+          <span class="tool__text">{label?.text}</span>
+        </li>
+      );
+    })
   }
 </ul>

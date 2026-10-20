@@ -14,8 +14,8 @@
 
 | # | Section | Theme | Content |
 |---|---|---|---|
-| 1 | Hero | dark, grid | Eyebrow "Sitios web para pequeños y medianos negocios" → H1 "Un sitio web que **trabaja tanto como tú**" → lead (fast, reliable, affordable, advice, in writing) → [Agenda una llamada] + [Ver servicios] → hours. **Visual (Q34, options at /opciones/):** a coded, pausable animation of the site working for the client. Default **A · Tu sitio atiende**: a business site takes a quote request while notifications arrive. Alternatives: B (a phone receiving clients day and night), C (search → site → message). |
-| 2 | Qué hacemos | light | 6 service cards with their 2D illustration (style Q35, default A) → each service page |
+| 1 | Hero | dark, grid | Eyebrow "Sitios web para pequeños y medianos negocios" → H1 "Un sitio web que **trabaja tanto como tú**" → lead (fast, reliable, affordable, advice, in writing) → [Agenda una llamada] + [Ver servicios] → hours. **Visual (Q34 ✅ A):** a coded, pausable animation of the site working for the client, **Tu sitio atiende**: a business site takes a quote request while notifications arrive. |
+| 2 | Qué hacemos | light | 6 service cards with their 2D illustration (style A, Plano bicolor: Q35 ✅) → each service page |
 | 3 | Cómo lo hacemos + CTA | dark | Process tabs (4 steps), auto-advancing with a progress bar + pause, each with an animated mockup; then **[Agenda una llamada]** with "Te decimos qué necesitas y qué no." under it (replaces "Conoce todos los detalles" and the violet band, ADR-010) |
 
 Moved off the home: the problems (→ service pages), "Este sitio, medido" (→ Sitios web), "todo por escrito" and the FAQ (→ Cómo trabajamos), the Vista case (→ Proyectos, Sitios web).

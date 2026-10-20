@@ -49,7 +49,9 @@ const crumbs = breadcrumbJsonLd([
   { name: s.name, url: new URL(href(route, lang), site).href },
 ]);
 
-const sections = ['demo', 'capabilities', c.quality && 'quality', 'includes', s.tools?.length && 'tools', 'process', projects.length && 'proof', 'price', 'faq'].filter(Boolean) as string[];
+// Tools: one grid (`tools` slugs) or titled groups (`page.toolGroups`, e.g. Contenido y marca).
+const toolGroups: { title?: string; slugs: string[] }[] = c.toolGroups ?? (s.tools?.length ? [{ slugs: s.tools }] : []);
+const sections = ['demo', 'capabilities', c.quality && 'quality', 'includes', toolGroups.length && 'tools', 'process', projects.length && 'proof', 'price', 'faq'].filter(Boolean) as string[];
 const theme = (key: string) => (sections.indexOf(key) % 2 === 0 ? 'light' : 'dark');
 const slug = s.route.split('/')[1];
 const demoCopy = { pause: shared.demoControls.pause, play: shared.demoControls.play, demo: c.demo.ui };
@@ -78,8 +80,8 @@ const demoCopy = { pause: shared.demoControls.pause, play: shared.demoControls.p
     {c.demo.note && <p class="demo-foot" set:html={rich(c.demo.note, lang)} />}
   </Section>
 
-  <Section lang={lang} theme={theme('capabilities')} id="que-hacemos" eyebrow={c.capabilities.eyebrow} title={c.capabilities.title}>
-    <CapTicker items={c.capabilities.items.map((i: { title: string }) => i.title)} />
+  <Section lang={lang} theme={theme('capabilities')} id="que-hacemos" eyebrow={c.capabilities.eyebrow} title={c.capabilities.title} class="section--ticker">
+    <CapTicker items={c.capabilities.ticker ?? c.capabilities.items.map((i: { title: string }) => i.title)} />
     <Capabilities lang={lang} items={c.capabilities.items} />
     {
       c.note && (
@@ -117,9 +119,14 @@ const demoCopy = { pause: shared.demoControls.pause, play: shared.demoControls.p
   </Section>
 
   {
-    s.tools?.length && (
-      <Section lang={lang} theme={theme('tools')} id="herramientas" eyebrow={shared.tools.eyebrow} title={shared.tools.title}>
-        <ToolsGrid slugs={s.tools} labels={shared.tools.items} />
+    toolGroups.length > 0 && (
+      <Section lang={lang} theme={theme('tools')} id="herramientas" eyebrow={shared.tools.eyebrow} title={c.toolsTitle ?? shared.tools.title}>
+        {toolGroups.map((group) => (
+          <div class="tool-group">
+            {group.title && <h3 class="tool-group__title">{group.title}</h3>}
+            <ToolsGrid slugs={group.slugs} labels={shared.tools.items} />
+          </div>
+        ))}
       </Section>
     )
   }
@@ -155,4 +162,6 @@ const demoCopy = { pause: shared.demoControls.pause, play: shared.demoControls.p
   @media (max-width: 1023px) {
     .hero--service { display: block; min-height: 0; padding-top: min(50vw, 21rem); }
   }
+  .tool-group + .tool-group { margin-top: var(--space-7); }
+  .tool-group__title { margin: 0 0 var(--space-4); font-size: var(--text-lg); }
 </style>

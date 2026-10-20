@@ -7,8 +7,7 @@ hero:
   lead: "Diseñamos, construimos y cuidamos sitios rápidos y confiables, a un precio pensado para negocios como el tuyo. Y te asesoramos en cada paso, en español claro y todo por escrito."
   secondary: "Ver servicios"
   note: "{{horarioCorto}} · Te respondemos en {{respuesta}}"
-  # Hero animation: "a" Tu sitio atiende · "b" Tu sitio no cierra · "c" Del clic al cliente (see /opciones/)
-  variant: "a"
+  # Hero animation (David picked A, Q34): a business site takes a quote request while notifications arrive.
   works:
     pause: "Pausar animación"
     play: "Reproducir animación"
@@ -22,22 +21,6 @@ hero:
         - { icon: "mail", title: "Nueva solicitud de cotización", meta: "Hace 1 min" }
         - { icon: "calendar-check", title: "Cita agendada", meta: "Jueves · 10:00" }
         - { icon: "message-circle", title: "Nuevo mensaje", meta: "«¿Tienen disponibilidad?»" }
-    b:
-      url: "tunegocio.mx"
-      badge: "Tu sitio no cierra"
-      events:
-        - { time: "09:00", icon: "mail", title: "Nueva solicitud de cotización" }
-        - { time: "14:30", icon: "message-circle", title: "Mensaje desde tu sitio" }
-        - { time: "21:45", icon: "calendar-check", title: "Cita agendada para mañana" }
-        - { time: "02:10", icon: "shopping-bag", title: "Nuevo pedido en línea" }
-    c:
-      steps: ["Te buscan", "Te encuentran", "Te escriben"]
-      query: "pastelería cerca de mí"
-      result: "Tu negocio"
-      resultMeta: "Abierto ahora · Ver sitio"
-      cta: "Pedir cotización"
-      message: "Nuevo cliente"
-      messageText: "Ana quiere una cotización"
 
 services:
   eyebrow: "Qué hacemos"

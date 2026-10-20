@@ -8,7 +8,7 @@ summary: "Textos que venden, imágenes y video para tu sitio y tus redes, y una 
 
 page:
   title: "Contenido, video e identidad visual para negocios · AuraNova"
-  description: "Textos para tu sitio, imágenes creadas con IA, edición de video y reels, miniaturas, subtítulos, identidad visual y presentaciones para pequeños y medianos negocios."
+  description: "Textos para tu sitio, imágenes a tu medida, edición de video y reels, miniaturas, subtítulos, identidad visual y presentaciones para pequeños y medianos negocios."
   hero:
     eyebrow: "Contenido y marca"
     title: "Contenido que ==habla por tu negocio=="
@@ -33,19 +33,29 @@ page:
   capabilities:
     eyebrow: "Lo que hacemos"
     title: "Todo lo que ==se ve y se lee=="
+    # The big scroll ticker's words (when they differ from the item titles below).
+    ticker: ["Textos para tu sitio", "Imágenes a tu medida", "Video y reels", "Subtítulos", "Miniaturas y portadas", "Identidad visual", "Presentaciones y documentos"]
     items:
       - { icon: "pen-line", title: "Textos para tu sitio", text: "En español claro, con las palabras que usan tus clientes, y pensados para que te contacten." }
-      - { icon: "image", title: "Imágenes con IA", text: "Imágenes e ilustraciones originales para tu sitio y tus campañas, creadas con inteligencia artificial y revisadas por nosotros." }
+      - { icon: "image", title: "Imágenes personalizadas para ti", text: "¿Ya tienes imágenes de tu negocio? Las revisamos y las complementamos con nuestro diseño. ¿No tienes? Nosotros nos encargamos con modelos avanzados de inteligencia artificial, sin que parezcan imágenes genéricas o mal generadas." }
       - { icon: "clapperboard", title: "Video y reels", text: "Edición de video para redes: cortes, gráficos animados, música y color." }
       - { icon: "captions", title: "Subtítulos", text: "Subtítulos precisos y limpios para que tus videos se entiendan sin sonido." }
       - { icon: "image-play", title: "Miniaturas y portadas", text: "Portadas para YouTube, reels y publicaciones que invitan a dar clic." }
       - { icon: "swatch-book", title: "Identidad visual", text: "Paleta de colores, tipografías, logotipo listo para web y una guía sencilla de uso." }
       - { icon: "presentation", title: "Presentaciones y documentos", text: "Presentaciones, propuestas y documentos con tu marca, listos para enviar." }
 
+  # Tools grid, in two groups (labels in pages/es/servicios.yaml → tools.items).
+  toolsTitle: "Las herramientas que usamos para darle vida a ==tu visión=="
+  toolGroups:
+    - title: "Edición y diseño"
+      slugs: ["premierepro", "aftereffects", "photoshop", "illustrator"]
+    - title: "Modelos para crear imágenes"
+      slugs: ["nanobanana", "imagen", "gptimage", "flux", "seedream", "ideogram", "recraft", "kling", "grok", "qwenimage", "wan", "hunyuan", "luma", "metamuse", "reve", "imagineart", "krea", "zimage"]
+
   includes:
     eyebrow: "Qué incluye"
     title: "Contenido a la medida, ==con tu voz=="
-    lead: "Cotizamos cada pieza o paquete por separado, según lo que necesites. [[CONFIRMAR: entregables, aportaciones y exclusiones de este servicio]]"
+    lead: "Cotizamos cada pieza o paquete por separado, según lo que necesites."
     columns:
       - title: "Incluye"
         list:
@@ -69,8 +79,8 @@ page:
     eyebrow: "Preguntas frecuentes"
     title: "Dudas sobre ==contenido=="
     items:
-      - q: "¿Las imágenes hechas con IA se pueden usar en mi negocio?"
-        a: "Sí. Las creamos con herramientas que permiten el uso comercial, las revisamos antes de entregarlas y nunca las presentamos como fotos reales de tu negocio. [[CONFIRMAR: términos de licencia de la herramienta de imágenes]]"
+      - q: "¿Puedo usar las imágenes en mi negocio?"
+        a: "Sí. Las imágenes que creamos para ti tienen licencia comercial: puedes usarlas en tu sitio, en tus redes sociales, en anuncios pagados, en podcasts e incluso en televisión. Las revisamos antes de entregarlas y nunca las presentamos como fotos reales de tu negocio."
       - q: "¿Ustedes graban el video?"
         a: "Trabajamos con el material que nos compartes y lo convertimos en piezas listas para publicar. Si necesitas grabación, lo platicamos."
       - q: "¿Puedo pedir sólo una parte?"

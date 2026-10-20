@@ -23,8 +23,8 @@ const services = defineCollection({
     summary: z.string(),
     /** Lucide icon for the nav menu. */
     navIcon: z.string(),
-    /** Art slug: the 2D illustration (src/assets/generated/services/<style>/<art>.webp) and the
-     *  hero background (src/assets/generated/bg/<art>.webp). Style: `illustration` in pages/es/servicios.yaml. */
+    /** Art slug: the 2D illustration (src/assets/generated/services/<art>.webp) and the hero background
+     *  (src/assets/generated/bg/<art>.webp). */
     art: z.string(),
     /** Simple Icons slugs shown in the page's tools grid (labels live in pages/es/servicios.yaml). */
     tools: z.array(z.string()).optional(),

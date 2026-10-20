@@ -383,9 +383,9 @@ Before designing any page, write its **page brief** in `docs/pages/{slug}.md`: g
 | Q6 | Pricing model | Fixed per project; budget ranges in the form; no public prices. Brackets pending | ✅ · 🔴 brackets |
 | Q7 | Payment schedule, IVA | 40 / 30 / 30; MXN + IVA | ✅ |
 | Q8 | Response times | ≤ 1 business day (us) / ≤ 3 (client) | ✅ |
-| Q9 | Revision rounds | 1 round per phase as the base | ✅ |
-| Q10 | Late fee, pause, cancellation | Late payment → project paused until paid. Rest to confirm | ✅ · 🟡 rest |
-| Q11 | Warranty, training, maintenance | 30-day bug fixes + 1 training session. Plans pending | ✅ · 🔴 plans |
+| Q9 | Revision rounds | 1 round per phase as the base; + 1 extra round and unlimited text changes for 30 days after delivery | ✅ |
+| Q10 | Late fee, pause, cancellation | Late payment → project paused until paid; pausing is free (no reactivation fee); deposit non-refundable once started; if we cancel, refund or credit | ✅ |
+| Q11 | Warranty, training, maintenance | 30-day bug fixes + 1 training session; a fixed maintenance plan at a preferential rate, offered at the end of each project | ✅ |
 | Q12 | Portfolio permissions | Vista Consulting now; LOGOS and FERREMAG once published | ✅ |
 | Q13 | Photos | None; AuraNova presents as a company | ✅ |
 | Q14 | Voice | "Nosotros" | ✅ |

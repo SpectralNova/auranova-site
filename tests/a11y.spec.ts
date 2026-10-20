@@ -16,7 +16,6 @@ const pages = [
   '/nosotros/',
   '/contacto/',
   '/no-existe/',
-  '/opciones/', // preview-only review page (CP1.2); never built in production
 ];
 
 for (const path of pages) {

@@ -1,14 +1,13 @@
 ---
-// Cómo trabajamos (CP1.2): sells the call and shows how clients are looked after. A statement that lights
-// up with the scroll, the process as a scroll roadmap (call + four contract stages, with what you approve,
-// pay and how we look after you), the commitments, the contract summary and the FAQ. The closing call to
-// action lives in the last section (no violet band, ADR-010).
+// Cómo trabajamos (CP1.2): sells the call and shows how clients are looked after. The process as a scroll
+// roadmap (call + four contract stages, with what you approve, pay and how we look after you), the
+// commitments, the contract summary and the FAQ. The closing call to action lives in the last section
+// (no violet band, ADR-010).
 import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Section from '../components/Section.astro';
 import CTA from '../components/CTA.astro';
 import CtaBlock from '../components/CtaBlock.astro';
-import Statement from '../components/Statement.astro';
 import Roadmap from '../components/Roadmap.astro';
 import Capabilities from '../components/Capabilities.astro';
 import FAQ from '../components/FAQ.astro';
@@ -48,12 +47,6 @@ const crumbs = breadcrumbJsonLd([
           <li><a href="#preguntas">{c.faq.eyebrow}</a></li>
         </ul>
       </nav>
-    </div>
-  </section>
-
-  <section class="section theme-light section--statement" aria-label={c.roadmap.eyebrow}>
-    <div class="container">
-      <Statement text={c.statement} wide />
     </div>
   </section>
 
@@ -110,5 +103,7 @@ const crumbs = breadcrumbJsonLd([
 </Layout>
 
 <style>
-  .section--statement { padding-block: var(--space-10); }
+  /* The hero and the roadmap are both dark (the statement band between them was removed in CP1.3):
+     a hairline marks where the process starts. */
+  :global(.hero + #proceso) { border-top: 1px solid var(--color-border); }
 </style>

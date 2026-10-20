@@ -16,9 +16,8 @@
 
 | # | Anchor | Content | Source / status |
 |---|---|---|---|
-| 1 | — | Dark hero: H1 ("Así trabajamos: todo por escrito") + lead + **[Agenda una llamada]** + "Una llamada de 30 minutos… te decimos qué necesitas y qué no" + contract version + index | — |
-| — | — | Light statement whose words light up with the scroll: "Primero lo ves. Luego lo apruebas. **Y sólo entonces lo construimos.**" | ✅ (the process) |
-| 2 | `#proceso` | **Scroll roadmap** (ADR-011): 00 La llamada + the 4 contract stages. Each: what happens · what you approve · what you pay · **cómo te cuidamos**. Desktop: a pinned stage with a big counter (00/04), tabs with progress, a "pagado" meter that fills 0 → 40 → 70 → 70 → 100% and one screen per step (booking card · proposal "Aprobada" · private-link phone · build bars + 1 review round · real quality report + handover). Phones / no JS: a vertical timeline. | ✅ · the call's cost 🔴 Q36 |
+| 1 | — | Dark hero: H1 ("Así trabajamos: todo por escrito") + lead + **[Agenda una llamada]** + "Una llamada de 30 minutos, sin costo… te decimos qué necesitas y qué no" + contract version + index | — |
+| 2 | `#proceso` | **Scroll roadmap** (ADR-011): 00 La llamada + the 4 contract stages. Each: what happens · what you approve · what you pay · **cómo te cuidamos**. Desktop: a pinned stage with a big counter (00/04), tabs with progress, a "pagado" meter that fills 0 → 40 → 70 → 70 → 100% and one screen per step (booking card · proposal "Aprobada" · private-link phone · build bars + 1 review round · real quality report + handover). Phones / no JS: a vertical timeline. | ✅ (the call is free, Q36) |
 | 2b | `#cuidamos` | Así te cuidamos: 6 commitments with icons (response time, todo por escrito, primero lo ves, no surprise costs, lo tuyo es tuyo, 30-day warranty) | ✅ (contract summary below) |
 | 3 | `#horario` | Lunes a viernes 9:00–17:00, hora del centro; no weekends or holidays; absences announced in advance · our response ≤ 1 día hábil · yours ≤ 3 días hábiles, or the schedule moves | ✅ |
 | 4 | `#responsabilidades` | Two-sided table (PHILOSOPHY §5), shown as two stacked cards on mobile | 🟡 mixed |

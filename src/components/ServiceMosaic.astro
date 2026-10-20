@@ -22,7 +22,7 @@ const services = (await getCollection('services', (s) => s.id.startsWith(`${lang
       <li class={`mosaic__tile mosaic__tile--${i + 1}`}>
         <a class="mosaic__link" href={href(data.route as RouteKey, lang)}>
           <span class="mosaic__img" aria-hidden="true">
-            <GeneratedImage file={`bg/${data.art}.webp`} widths={[480, 800, 1088]} sizes="(min-width: 1024px) 50vw, 100vw" />
+            <GeneratedImage file={`bg/${data.art}.webp`} widths={[480, 800, 1088, 1632, 2400]} sizes="(min-width: 1024px) 50vw, 100vw" />
           </span>
           <span class="mosaic__text">
             <span class="mosaic__num" aria-hidden="true">

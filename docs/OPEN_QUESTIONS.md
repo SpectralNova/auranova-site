@@ -1,6 +1,6 @@
 # Open questions
 
-*Seeded 2026-10-19 (Phase 0) from `WEBSITE_PROMPT.md` §16, plus new items found along the way. Batch 1 answered 2026-10-19; CP1 feedback received 2026-10-19 (CP1.1 built); CP1.1 feedback received 2026-10-20 (CP1.2 built).*
+*Seeded 2026-10-19 (Phase 0) from `WEBSITE_PROMPT.md` §16, plus new items found along the way. Batch 1 answered 2026-10-19; CP1 feedback received 2026-10-19 (CP1.1 built); CP1.1 feedback received 2026-10-20 (CP1.2 built); CP1.2 review answered 2026-10-20 (CP1.3 built).*
 *Protocol: brief §1. When David answers, update the source of truth first (facts → `src/content/business.ts`; terms → `docs/PHILOSOPHY.md`), then the status here and in brief §16.*
 
 ✅ answered · 🟡 proposed default (build with it, not approved) · 🔴 unknown (David must supply)
@@ -18,8 +18,8 @@
 | Q7 | Payment schedule + IVA | ✅ | — |
 | Q8 | Response times | ✅ | — |
 | Q9 | Revision rounds | ✅ | — |
-| Q10 | Late payment, pause, cancellation | ✅ late payment · 🟡 rest | CP1.1 |
-| Q11 | Warranty, training, maintenance | ✅ warranty/training · 🔴 plans | CP2 |
+| Q10 | Late payment, pause, cancellation | ✅ (CP1.2 review) | — |
+| Q11 | Warranty, training, maintenance | ✅ (plans: fixed plan offered at the end of each project) | — |
 | Q12 | Portfolio permissions | ✅ · 🟡 Vista in writing | CP1.1 |
 | Q13 | Photos | ✅ none; company, not person | — |
 | Q14 | Voice | ✅ nosotros | — |
@@ -38,15 +38,15 @@
 | Q27 | US clients: currency, contract, invoicing | ⏸ on hold | — |
 | Q28 | Domain vs. US search | ⏸ on hold (keep .mx) | — |
 | Q29 | US positioning | ⏸ on hold | — |
-| Q30 | Design-system fixes found in the build | ✅ done (DS v1.2) | — |
-| Q31 | Service scopes and drafted policies | 🟡 new | CP1.1 |
+| Q30 | Design-system fixes found in the build | ✅ done (DS v1.2; v1.3 approved and applied 2026-10-20) | — |
+| Q31 | Service scopes and drafted policies | ✅ authorized | — |
 | Q32 | Hero tagline + service H1s | ✅ kept (CP1.1 review raised no change) | — |
-| Q33 | AI image license (Artlist) | 🟡 | CP1.2 |
-| Q34 | Home hero animation (A / B / C) | 🟡 new · A in place | CP1.2 |
-| Q35 | Service illustration style (A / B / C) | 🟡 new · A in place | CP1.2 |
-| Q36 | Is the 30-minute call free? | 🔴 new | CP1.2 |
+| Q33 | AI image license (Artlist) | ✅ commercial use confirmed | — |
+| Q34 | Home hero animation (A / B / C) | ✅ A | — |
+| Q35 | Service illustration style (A / B / C) | ✅ A | — |
+| Q36 | Is the 30-minute call free? | ✅ yes | — |
 
-**Batch for CP1.2** (most blocking first): Q34, Q35, Q36, Q31, Q12, Q15, Q10, Q6, Q2, Q33. Before CP2 as well: Q18 (analytics) and Q11 (maintenance plans).
+**Still open after CP1.2** (most blocking first): Q12 (Vista's OK in writing), Q15 (my reading: no WhatsApp/socials at launch), Q6 (budget brackets for the form), Q2 (domicilio for the aviso). Before CP2 as well: Q18 (analytics). Phase 2: Q16 Cal.com link, Q20 contract version, the business email (Q15) once the domain is bought.
 
 ---
 
@@ -90,19 +90,16 @@
 
 ## Q9 · Revision rounds
 - **Status:** ✅ · **Answer:** **1 round per phase** as the base. · **Date:** 2026-10-19
-- **My reading (🟡):** extra rounds are possible and go through the change-request process (estimate → approval).
+- **Extra rounds ✅ (2026-10-20):** each project includes **one extra revision round at no cost and unlimited text changes for 30 days after final delivery**; after that, any change or revision is quoted.
 
 ## Q10 · Late payment, pause and cancellation
 - **Answer:** ✅ if a payment is late, **the project pauses until the payment arrives**. (2026-10-19)
   - *Internal only, never published:* for referrals or people David knows personally, this can be relaxed case by case. The site states only the rule.
-- **Still 🟡, to confirm at CP1:**
-  - No late-fee percentage: the pause replaces it. Recommended: yes.
-  - Client-requested pauses: no restart fee; a new date is agreed when they're ready. Recommended: yes, keep it simple.
-  - Cancellation: 15 days' notice, work done is billed, and the 40% deposit is non-refundable once onboarding starts (contract §3 + CONTRACT_INSIGHTS §3.7). Recommended: yes.
+- **Rest ✅ (2026-10-20, CP1.2 review):** no late fee (the pause replaces it); pausing a project costs nothing and there is no reactivation fee; the deposit is non-refundable once the project starts; if we cancel, we refund or credit what was paid. Cancellation by the client: 15 days' notice, work done is billed (contract §3).
 
 ## Q11 · Warranty, training, maintenance
 - **Answer:** ✅ 30-day bug-fix warranty after launch + 1 training session. (2026-10-19)
-- **Still open 🔴:** maintenance plans (scope, price, response time). Needed before the Mantenimiento page is written (CP2).
+- **Maintenance plans ✅ (2026-10-20):** no public plans. At the end of each project, clients who want an ongoing relationship get a **fixed maintenance plan at a preferential rate** for having built their project with us. Scope and response time are set in that plan.
 
 ## Q12 · Portfolio permissions
 - **Answer:** ✅ (2026-10-19)
@@ -215,7 +212,8 @@
   - Contenido: "imágenes con IA con uso comercial, nunca presentadas como fotos reales" (license: Q33).
 - **Blocks:** production (the markers).
 - **Recommended:** review each page's "Qué incluye" block and reply with changes; the policies as drafted.
-- **Status:** 🟡
+- **Status:** ✅ authorized as drafted (2026-10-20); the `[[CONFIRMAR]]` markers are gone.
+- **Related:** the client-side line "nombrar a una persona de contacto con poder de decisión" was read as being about *our* contact. Per David ("nuestro equipo se pondrá en contacto contigo"; he handles every call at the start), it now sits in **our** commitments ("Ponernos en contacto contigo y acompañarte en cada etapa") and was removed from the client's list.
 
 ## Q32 · Hero tagline and service H1s (new)
 - **Question:** OK with the new home H1, "Un sitio web que **trabaja tanto como tú**", and the service H1s (see `docs/pages/servicio.md`)?
@@ -227,25 +225,22 @@
 - **Question:** The site's illustrations were generated with Artlist (GPT Image 2.5) on your AI Suite plan. Can you confirm in your Artlist account terms that AI generations can be used commercially (on our site and in client work)?
 - **Blocks:** the images in production; the "imágenes con IA" offer on Contenido y marca.
 - **Recommended:** confirm (it's your account); I log it in `docs/ASSETS.md`.
-- **Status:** 🟡
+- **Status:** ✅ confirmed by David (2026-10-20): commercial use covers all social platforms, websites, client work, paid ads, podcasts, and broadcast & TV.
 
 ## Q34 · Home hero animation (new, CP1.2)
 - **Question:** Which animation shows "your site works for you" best? Compare them live at **`/opciones/`** on the preview (that page never reaches production).
   - **A · Tu sitio atiende:** a business site takes a quote request while notifications arrive (quote, appointment, message).
   - **B · Tu sitio no cierra:** a phone goes from day to night and keeps receiving clients at every hour.
   - **C · Del clic al cliente:** search on Google → the site → a new client's message.
-- **Recommended:** **A**, the most immediate; it is what the home shows now. Changing it is one line (`hero.variant` in `src/content/pages/es/inicio.yaml`).
-- **Status:** 🟡
+- **Status:** ✅ **A** (2026-10-20). B, C and /opciones/ were removed (git history keeps them).
 
 ## Q35 · Service illustration style (new, CP1.2)
 - **Question:** Which 2D style replaces the 3D art on the service cards and the /servicios/ rows? All three are at **`/opciones/`**: **A** Plano bicolor (flat violet + lime, dark outline), **B** Línea y acento (monoline violet, lime accents), **C** Degradado aura (soft lime → violet gradients).
-- **Recommended:** **A**: fully 2D and the sharpest at card size; B is the cleanest; C is the most "aura" but loses detail when small. Changing it is one line (`illustration` in `src/content/pages/es/servicios.yaml`).
-- **Status:** 🟡
+- **Status:** ✅ **A** (2026-10-20). Styles B and C were removed (git history keeps them).
 
 ## Q36 · Is the 30-minute call free? (new, CP1.2)
 - **Question:** The roadmap on /como-trabajamos/ says what you pay at each stage. For the first call it reads "[[CONFIRMAR: Nada: la llamada no tiene costo.]]". Is the call free, always?
-- **Blocks:** production (the marker); "sin costo" could also go on the CTA note if true.
-- **Status:** 🔴
+- **Status:** ✅ yes, always free (2026-10-20). The roadmap says so, and so does the call note on Cómo trabajamos.
 
 ---
 

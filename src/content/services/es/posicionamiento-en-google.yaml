@@ -64,7 +64,7 @@ page:
   includes:
     eyebrow: "Qué incluye"
     title: "Un plan claro, ==por escrito=="
-    lead: "El alcance exacto depende de dónde estás hoy; lo detallamos en tu propuesta. [[CONFIRMAR: entregables, aportaciones y exclusiones de este servicio]]"
+    lead: "El alcance exacto depende de dónde estás hoy; lo detallamos en tu propuesta."
     columns:
       - title: "Incluye"
         list:

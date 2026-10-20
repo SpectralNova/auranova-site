@@ -4,24 +4,6 @@
    pausable (WCAG 2.2.2), and still for prefers-reduced-motion.
    ========================================================================== */
 
-/* Service demos are dark product windows, also inside light sections: restore the dark semantic tokens
-   (same values as the DS dark theme; a `.theme-dark` utility is proposed upstream for DS v1.3). */
-.demo-dark {
-  --color-bg: var(--gray-7);
-  --color-surface: color-mix(in oklab, var(--gray-7), white 4%);
-  --color-surface-2: color-mix(in oklab, var(--gray-7), white 8%);
-  --color-border: color-mix(in oklab, var(--gray-7), white 12%);
-  --color-border-strong: var(--gray-4);
-  --color-text: var(--gray-1);
-  --color-text-muted: var(--gray-3);
-  --color-accent: var(--lime-1);
-  --color-on-accent: var(--lime-7);
-  --color-link: var(--violet-3);
-  --color-focus: var(--lime-1);
-  color-scheme: dark;
-  color: var(--color-text);
-}
-
 /* A service page's signature demo: one big window, centred under the section heading. */
 .svc-demo {
   --cycle: calc(var(--dur-slow) * 28);
@@ -38,7 +20,7 @@
 /* A status strip along the bottom holds the pause button, so it never covers the demo. */
 .svc-demo { padding-bottom: calc(var(--space-6) + var(--space-5)); }
 .svc-demo .demo-toggle { right: var(--space-3); bottom: var(--space-2); }
-.demo-mono { font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace; }
+.demo-mono { font-family: var(--font-mono); }
 .demo-foot { margin: var(--space-4) 0 0; text-align: center; color: var(--color-text-muted); font-size: var(--text-sm); }
 
 /* Paused until on screen, or when the visitor pauses it (src/lib/demo.ts). */
