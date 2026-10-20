@@ -36,7 +36,7 @@ export const business = {
   hours: ok({ days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '17:00' }),
 
   email: ok('contacto@auranova.mx'), // Q15 ✅ Zoho Mail, set up 2026-10-20
-  bookingUrl: pending({ es: 'liga de Cal.com (Q16)', en: 'Cal.com link (Q16)' }),
+  bookingUrl: ok('https://cal.com/auranova-cal/llamada-inicial'), // Q16 ✅ (David, 2026-10-20; synced to Zoho Calendar)
 };
 
 // Facts that copy can use as {{key}} (see src/content/README.md).

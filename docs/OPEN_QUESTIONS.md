@@ -24,7 +24,7 @@
 | Q13 | Photos | ✅ none; company, not person | — |
 | Q14 | Voice | ✅ nosotros | — |
 | Q15 | Channels | ✅ email · 🟡 my reading | CP1.1 |
-| Q16 | Booking tool | ✅ Cal.com · ✅ 30 min · 🟡 buffers | CP1.2 |
+| Q16 | Booking tool | ✅ Cal.com · ✅ 30 min · ✅ link | CP1.2 |
 | Q17 | Lead magnet | ✅ | — |
 | Q18 | Analytics | 🔴 TBD | before CP2 |
 | Q19 | Domain + hosting | ✅ (bought 2026-10-20) | — |
@@ -46,7 +46,7 @@
 | Q35 | Service illustration style (A / B / C) | ✅ A | — |
 | Q36 | Is the 30-minute call free? | ✅ yes | — |
 
-**Still open after CP1.2** (most blocking first): Q12 (Vista's OK in writing), Q15 (my reading: no WhatsApp/socials at launch), Q6 (budget brackets for the form), Q2 (domicilio for the aviso). Before CP2 as well: Q18 (analytics). Phase 2: Q16 Cal.com link, Q20 contract version. (Business email ✅ contacto@auranova.mx, 2026-10-20.)
+**Still open after CP1.2** (most blocking first): Q12 (Vista's OK in writing), Q15 (my reading: no WhatsApp/socials at launch), Q6 (budget brackets for the form), Q2 (domicilio for the aviso). Before CP2 as well: Q18 (analytics). Phase 2: Q20 contract version. (Business email ✅ contacto@auranova.mx and Cal.com link ✅, 2026-10-20.)
 
 ---
 
@@ -123,6 +123,7 @@
 
 ## Q16 · Booking tool
 - **Answer:** ✅ Cal.com. (2026-10-19) ✅ The call lasts **30 minutes** (2026-10-20; `duracionLlamada` in `business.ts`).
+- **Link (2026-10-20):** ✅ https://cal.com/auranova-cal/llamada-inicial (event "llamada-inicial", 30 min, synced to Zoho Calendar). Every "Agenda una llamada" CTA now links straight to it (ADR-004).
 - **Still 🟡:** 15-minute buffers, Mon–Fri 9:00–17:00 `America/Monterrey`; link out at launch (ADR-004). Cal.com shows each visitor the slots in their own time zone, which matters for US clients. You create the free account in Phase 2.
 
 ## Q17 · Lead magnet
