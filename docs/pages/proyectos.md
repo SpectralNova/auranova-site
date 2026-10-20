@@ -7,8 +7,8 @@
 | **Primary CTA** | Index: **Agenda una llamada**. Case: **Agenda una llamada**, then "Siguiente proyecto". |
 | **Success metric** | Case-page sessions that end in `cta_click`. |
 | **SEO** | Index "Proyectos de diseño y desarrollo web · AuraNova"; each case titled by client + outcome. `BreadcrumbList`. |
-| **Blanks** | **Q12 gates the whole page.** Also Q21 (numbers). |
-| **Rule** | Built only once at least one client has given **written permission**. Until then the route isn't generated and "Nuestro estándar" takes the nav slot (SITEMAP). |
+| **Blanks** | Q12: Vista's OK in writing (🟡). LOGOS and FERREMAG are added once each is published. |
+| **Rule** | Only clients who have given permission. At launch: **Vista Consulting** (vistaconsulting.mx, published, 100% AuraNova; Astro on Cloudflare). |
 
 ## Index outline
 
@@ -30,4 +30,4 @@
 | 7 | Capturas | Desktop 1440 × 900 + mobile 390 × 844, same tool and frame every time |
 | 8 | CTA | [Agenda una llamada] + next case |
 
-**Note:** FERREMAG is a local demo and LOGOS may still be a preview (Q12), so neither has production results yet. A case can still show the process and the measured standard, but never invented outcomes.
+**Note:** Vista's "result" numbers are what we can measure on the live site (Lighthouse, Core Web Vitals, date of measurement), plus facts David confirms (launch date, scope). No before/after unless a real "before" exists. Never invented outcomes.

@@ -1,8 +1,12 @@
 # AuraNova: business philosophy
 
-*Working draft v0.2 · 2026-10-19 · owner: David Contreras Morales*
+*Working draft v0.3 · 2026-10-19 · owner: David Contreras Morales · v0.3 applies the CP0 answers (see `docs/OPEN_QUESTIONS.md`)*
 
-> **Name.** ✅ The official business name is **AuraNova** (David, 2026-10-19). The brand folder is now `Resources/AuraNova/`. The original logo masters are still named `spectdesign_logo.*` from the old working name; that's only a file name. The contract template's sender line ("Spectral Nova") has to be changed to AuraNova (see `research/CONTRACT_INSIGHTS.md`).
+> **Name.** ✅ The official business name is **AuraNova** (David, 2026-10-19). The brand folder is `Resources/AuraNova/`, and the logo masters are `auranova_logo.ai` / `.svg`. The contract template's sender line ("Spectral Nova") has to be changed to AuraNova (see `research/CONTRACT_INSIGHTS.md`).
+>
+> **Presentation.** ✅ AuraNova presents itself as a **company, not a person** (Q13): studio voice, no personal photos. Legally it operates as a **persona física** (Q2), so David's name appears only where the law requires it (aviso de privacidad, términos, contracts, invoices).
+>
+> **Markets.** ✅ Monterrey, remote across Mexico, and remote for US clients; the site is in Spanish and English (Q3, Q4).
 
 **How to read this.** Public statements are in Spanish (es-MX), written as they would appear on the site. The notes are in English and explain intent and where each idea came from. Status tags:
 
@@ -45,7 +49,9 @@ Tagline candidates (es-MX):
 
 ## 3. Visión 🟡
 
-> **Ser el desarrollador web de confianza de los negocios de [[PENDIENTE: Monterrey / México / LATAM]]: el que se recomienda porque cumple lo que firma, entrega a tiempo y deja a cada cliente con un sitio que es completamente suyo.**
+> **Ser el estudio de desarrollo web de confianza para negocios de Monterrey, de todo México y de Estados Unidos: el que se recomienda porque cumple lo que firma, entrega a tiempo y deja a cada cliente con un sitio que es completamente suyo.**
+
+*Area ✅ (Q3, Q4); wording 🟡. "Desarrollador" became "estudio" because AuraNova presents as a company (Q13).*
 
 ---
 
@@ -117,7 +123,7 @@ Every value has to show up as a behavior a client can check. If it can't be chec
 | Nuestros compromisos | Tus compromisos |
 |---|---|
 | Entregar lo descrito en el **Anexo A**, en el calendario que aprobaste. | Nombrar **una persona de contacto** con poder de decisión. 🟡 |
-| Responder mensajes en **≤ 1 día hábil** dentro del horario de atención. 🟡 | Responder y aprobar en **≤ 3 días hábiles**; si no, el calendario se recorre. 🟡 |
+| Responder mensajes en **≤ 1 día hábil** dentro del horario de atención. ✅ | Responder y aprobar en **≤ 3 días hábiles**; si no, el calendario se recorre. ✅ |
 | Mostrarte tu sitio real en una liga privada **antes** de la construcción completa. | Entregar textos, fotos, logos y accesos **en las fechas acordadas**. |
 | Pedir tu aprobación **antes** de cualquier gasto (contrato §2.2). | Pagar cada factura dentro de **15 días** (contrato §2.3). |
 | Estimar por escrito el costo y el impacto en fechas de cualquier cambio **antes** de hacerlo. | Pedir los cambios **por escrito**. |
@@ -136,22 +142,22 @@ Every value has to show up as a behavior a client can check. If it can't be chec
 | Term | Proposed default | Source | Status |
 |---|---|---|---|
 | Horario de atención | Lunes a viernes, 9:00–17:00, hora del centro de México (zona `America/Monterrey`). Sin atención en fines de semana ni días feriados oficiales; las ausencias se avisan con anticipación. | David | ✅ |
-| Respuesta (nosotros) | ≤ 1 día hábil. | proposal | 🟡 |
-| Respuesta y aprobación (cliente) | ≤ 3 días hábiles; si no, el calendario se recorre. | video | 🟡 |
-| Modelo de cobro | **Precio fijo por proyecto** según el Anexo A (how you priced LOGOS) **vs.** cobro por hora + anticipo (contract §2.1). Pick one. | contract / LOGOS | 🔴 decide |
-| Calendario de pagos | **40% anticipo** (aparta tu fecha) / **30% al aprobar el diseño (CP1)** / **30% antes del lanzamiento**. This is your LOGOS option C, marked "sugerida". The video uses 30/35/35. | LOGOS proposal, video | 🟡 |
-| Facturas | Vencen a 15 días. Montos en MXN **+ IVA**. | contract §2.3, LOGOS | 🟡 IVA |
-| Pagos tardíos | Recargo de [[X]]% después de [[N]] días naturales. | video | 🔴 |
+| Respuesta (nosotros) | ≤ 1 día hábil. | Q8 | ✅ |
+| Respuesta y aprobación (cliente) | ≤ 3 días hábiles; si no, el calendario se recorre. | Q8 | ✅ |
+| Modelo de cobro | **Precio fijo por proyecto** según el Anexo A; sin precios públicos; rangos de presupuesto en el formulario. | Q6 | ✅ (brackets 🔴) |
+| Calendario de pagos | **40% anticipo** (aparta tu fecha) / **30% al aprobar el diseño (CP1)** / **30% antes del lanzamiento**. | Q7 | ✅ |
+| Facturas | Vencen a 15 días. Montos en MXN **+ IVA**. US clients: Q27. | contract §2.3, Q7 | ✅ |
+| Pagos tardíos | **Si un pago se retrasa, el proyecto se pausa hasta recibirlo** y el calendario se recorre. No late-fee percentage (🟡 confirm). *Internal only, never published: David may relax this for referrals or people he knows personally.* | Q10 | ✅ |
 | Gastos | Sólo con aprobación previa por escrito. | contract §2.2 | ✅ (in contract) |
-| Cambios de alcance | Solicitud por escrito → estimación de costo y fecha → tu aprobación → se agenda. | video; replaces contract §5's "no additional expense" default | 🟡 |
-| Rondas de revisión | 2 rondas por fase (diseño / contenido / pre-lanzamiento). | proposal | 🟡 |
-| Pausas | Una pausa de más de [[N]] días hábiles requiere cuota de reactivación de [[$ MXN]] y nueva fecha. | video ($500 USD restart fee) | 🔴 |
-| Cancelación | El cliente cancela con 15 días de aviso y paga el trabajo realizado; **el anticipo no es reembolsable** una vez iniciado el onboarding. Si nosotros cancelamos: reembolso o crédito. | contract §3, video | 🟡 |
+| Cambios de alcance | Solicitud por escrito → estimación de costo y fecha → tu aprobación → se agenda. | Q20 (contract to be updated per CONTRACT_INSIGHTS §3) | ✅ |
+| Rondas de revisión | **1 ronda por fase** como base; rondas adicionales se cotizan como solicitud de cambio (🟡 wording). | Q9 | ✅ |
+| Pausas (a petición del cliente) | Sin cuota de reactivación; se acuerda una nueva fecha cuando el cliente está listo. | proposal (Q10) | 🟡 |
+| Cancelación | El cliente cancela con 15 días de aviso y paga el trabajo realizado; **el anticipo no es reembolsable** una vez iniciado el onboarding. Si nosotros cancelamos: reembolso o crédito. | contract §3, Q20 | 🟡 confirm (Q10) |
 | Aceptación | 15 días tras la entrega para reportar diferencias contra el Anexo A; después, la entrega se da por aceptada. | contract §4 | ✅ (in contract) |
-| Garantía | Corrección de errores sin costo durante **30 días** después del lanzamiento. | LOGOS proposal (proposed by Claude, unconfirmed) | 🟡 |
-| Capacitación | 1 sesión incluida. | LOGOS proposal (proposed by Claude, unconfirmed) | 🟡 |
-| Mantenimiento | Plan mensual opcional: [[alcance, precio, tiempo de respuesta]]. | your LOGOS support role | 🔴 |
-| Propiedad intelectual | Cesión total al cliente con el pago final **+ derecho a mostrar el proyecto en nuestro portafolio**. | contract §6 + video | 🟡 portfolio right is **not** in the contract yet |
+| Garantía | Corrección de errores sin costo durante **30 días** después del lanzamiento. | Q11 | ✅ |
+| Capacitación | 1 sesión incluida. | Q11 | ✅ |
+| Mantenimiento | Plan mensual opcional: [[alcance, precio, tiempo de respuesta]]. | Q11 | 🔴 |
+| Propiedad intelectual | Cesión total al cliente con el pago final **+ derecho a mostrar el proyecto en nuestro portafolio**. | contract §6 + Q20 | ✅ (pending the updated contract text) |
 
 ---
 
@@ -203,7 +209,8 @@ The Kindling article states the principles but gives almost no thresholds. The n
 
 - **Clear, direct, warm.** No unnecessary technical terms. When one is needed, explain it in one line.
 - Address the client informally with **"tú"**, the norm for Mexican business-casual (Backdoor does this too).
-- **"Nosotros" vs. "yo":** 🔴 open question Q14. A one-person studio speaking as "nosotros" sounds bigger; "yo" sounds more personal and more honest. Decide before copywriting.
+- ✅ **"Nosotros"** (Q14): AuraNova speaks as a studio. Never imply a team size, years or numbers that aren't real.
+- **English** (Q4): the same voice in US English: plain, direct, warm, "you". Adapted for US readers, not translated word for word.
 - Headlines promise an outcome, not a feature ("Más clientes desde tu sitio" beats "Diseño responsivo").
 - Every claim is specific and verifiable.
 

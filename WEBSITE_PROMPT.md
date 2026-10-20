@@ -66,7 +66,7 @@ Desktop/CLAUDE-PLOCAL/
 └── Resources/
     ├── Web Design Agreement Template.pdf  ← the contract template (source of the terms)
     └── AuraNova/                          ← brand masters: DO NOT MODIFY
-        ├── Brand Colors.pdf, spectdesign_logo.ai / .svg, Font Title/ (Roboto), Font Text/ (Montserrat)
+        ├── Brand Colors.pdf, auranova_logo.ai / .svg, Font Title/ (Roboto), Font Text/ (Montserrat)
         └── Design System/                 ← READ DESIGN_SYSTEM.md, then open specimen.html
             ├── tokens.css, components.css, specimen.html
             ├── fonts/ (5 woff2 subsets)   logo/ (web mark, favicons, PWA icons)
@@ -78,7 +78,7 @@ Desktop/CLAUDE-PLOCAL/
 
 ## 3. The business (summary; the full version is `docs/PHILOSOPHY.md`)
 
-- **Who.** David Contreras Morales, a professional web developer. Official business name ✅ **AuraNova** (exact casing: capital A, capital N, one word). Based in 🟡 Monterrey, N.L. (Q3). The logo masters are still named `spectdesign_logo.*` from an old working name; ignore that file name, never show it.
+- **Who.** David Contreras Morales, a professional web developer. Official business name ✅ **AuraNova** (exact casing: capital A, capital N, one word). Based in 🟡 Monterrey, N.L. (Q3). The logo masters are `auranova_logo.ai` / `.svg` (renamed from an old working name, which is never shown).
 - **Proposed brand idea** (🟡): **Aura + Nova.** A nova is a star that suddenly shines far brighter; an aura is the presence something gives off at first glance. AuraNova makes businesses **shine online**, and the shine is earned through method (purpose, everything in writing, measured quality), not decoration. Tagline candidates are in PHILOSOPHY §1, e.g. *"Sitios web que hacen brillar a tu negocio."*
 - **Mission** (🟡): *"Diseñamos y desarrollamos sitios web con un propósito de negocio claro: rápidos, fáciles de usar, accesibles y medibles. Trabajamos con un proceso transparente en el que ves tu sitio desde el principio y siempre sabes qué sigue, cuánto cuesta y quién es responsable de qué."*
 - **Values** (🟡): Propósito antes que decoración · Diseñamos para quien te visita · Primero lo ves · Todo por escrito · Calidad que se mide · Lo tuyo es tuyo · Respeto al tiempo, en ambos sentidos.
@@ -371,29 +371,29 @@ Before designing any page, write its **page brief** in `docs/pages/{slug}.md`: g
 
 ## 16. Open questions: seed list (copy into `docs/OPEN_QUESTIONS.md` in Phase 0)
 
-**Batch 1 for CP0** = Q2, Q3, Q5, Q6, Q12, Q14, Q15, Q19, Q20 (Q1 is answered). Ask the rest as they become blocking.
+**Batch 1 answered by David on 2026-10-19.** The live log, with each answer's consequences and the new questions Q23–Q29, is `docs/OPEN_QUESTIONS.md`.
 
-| ID | Question | Blocks | Recommended default | Status |
-|---|---|---|---|---|
-| Q1 | Brand name. **Answered: AuraNova** (David, 2026-10-19). Still open: does the logo need a designed wordmark, or is "AuraNova" set in type beside the mark enough? | Logo lockup, OG images | "AuraNova" in Roboto Condensed 800 beside the mark | ✅ name · 🟡 wordmark |
-| Q2 | Legal identity: persona física (which tax regime) or moral? Razón social, fiscal address? (The RFC is not published.) | Aviso de privacidad, footer, invoices | — | 🔴 |
-| Q3 | Base city and service area: Monterrey? all of Mexico, remote? international? | SEO, hero eyebrow, `areaServed` | Monterrey, N.L. + remote across Mexico | 🟡 |
-| Q4 | Audience details and language: es-MX only, or English too? | IA, i18n, copy | es-MX at launch; `/en/` later | 🟡 |
-| Q5 | Final services list, and which one leads. | Servicios pages, nav, form | Sitios web · Rediseños · Plataformas a la medida · Mantenimiento | 🟡 |
-| Q6 | Pricing model: fixed per project (how you priced LOGOS) or hourly + retainer (contract §2.1)? Show "desde $X MXN" publicly, or only budget ranges in the form? | Service pages, form budget field, contract | Fixed per project; budget ranges in the form; no public prices at launch | 🔴 |
-| Q7 | Payment schedule, and IVA. | Cómo trabajamos | 40% reserve / 30% at CP1 / 30% before launch; MXN + IVA | 🟡 |
-| Q8 | Response times: yours and the client's. | Hero microcopy, terms | ≤ 1 business day (you) / ≤ 3 business days (client) | 🟡 |
-| Q9 | Revision rounds per phase. | Terms, Anexo A | 2 rounds per phase | 🟡 |
-| Q10 | Late fee (% after N days), pause/restart fee, cancellation details. | Terms | Values must come from you or your lawyer | 🔴 |
-| Q11 | Post-launch warranty, training, maintenance plans (scope + price). | Terms, Mantenimiento page | 30-day bug fixes + 1 training session; plans TBD | 🟡 / 🔴 |
-| Q12 | Portfolio permissions: can we show LOGOS? FERREMAG (local demo, not live)? Other past work? Any testimonials? | Proyectos, proof strip | Ask both clients in writing; until then, no names | 🔴 |
-| Q13 | Photos: a headshot and workspace photos? | Nosotros, hero | — | 🔴 |
-| Q14 | Voice: "nosotros" (studio) or "yo" (personal brand)? Is it only you, or are there partners/collaborators? | All copy | — (decide before CP1 copy) | 🔴 |
-| Q15 | Channels: business email (on the domain?), WhatsApp number, phone, which social networks, show a physical address? | Contacto, footer, JSON-LD | Domain email + WhatsApp button; no street address | 🔴 |
-| Q16 | Booking tool and call length. | Contacto | Cal.com, 30 min, Mon–Fri 9–17 slots | 🟡 |
-| Q17 | Lead magnet (the 15 no negociables checklist PDF)? Gated by email or not? | Recursos | Yes, ungated at launch | 🟡 |
-| Q18 | Analytics. | Consent / cookie banner | Cookieless (Cloudflare Web Analytics) | 🟡 |
-| Q19 | Domain name, and hosting. Does David already own an AuraNova domain (.com / .mx / .com.mx)? If not, check availability and present options; buying one needs his OK. | Deploy, emails | Render static + an AuraNova domain | 🔴 |
-| Q20 | Will you update the contract per `CONTRACT_INSIGHTS.md` §3 before launch? Which version is canonical (a lawyer-reviewed Spanish version)? | Cómo trabajamos | Yes; Spanish version for Mexican clients | 🔴 |
-| Q21 | Real numbers for social proof: years in web development, projects delivered? | Proof strip | Omit until real | 🔴 |
-| Q22 | Blog at launch? | IA | No; add it later | 🟡 |
+| ID | Question | Answer (2026-10-19) | Status |
+|---|---|---|---|
+| Q1 | Brand name / wordmark | AuraNova; type lockup in Roboto Condensed 800 beside the mark | ✅ |
+| Q2 | Legal identity | Persona física. Domicilio for the aviso still needed | ✅ · 🔴 domicilio |
+| Q3 | Base city and service area | Monterrey, N.L. + remote across Mexico + US remote | ✅ |
+| Q4 | Audience details and language | Spanish **and** English; MX and US clients | ✅ |
+| Q5 | Services | 3: Sitios web (nuevos y rediseños) · Plataformas a la medida · Mantenimiento y soporte | ✅ |
+| Q6 | Pricing model | Fixed per project; budget ranges in the form; no public prices. Brackets pending | ✅ · 🔴 brackets |
+| Q7 | Payment schedule, IVA | 40 / 30 / 30; MXN + IVA | ✅ |
+| Q8 | Response times | ≤ 1 business day (us) / ≤ 3 (client) | ✅ |
+| Q9 | Revision rounds | 1 round per phase as the base | ✅ |
+| Q10 | Late fee, pause, cancellation | Late payment → project paused until paid. Rest to confirm | ✅ · 🟡 rest |
+| Q11 | Warranty, training, maintenance | 30-day bug fixes + 1 training session. Plans pending | ✅ · 🔴 plans |
+| Q12 | Portfolio permissions | Vista Consulting now; LOGOS and FERREMAG once published | ✅ |
+| Q13 | Photos | None; AuraNova presents as a company | ✅ |
+| Q14 | Voice | "Nosotros" | ✅ |
+| Q15 | Channels | Business email on the domain (after purchase); WhatsApp later in the relationship | ✅ |
+| Q16 | Booking tool | Cal.com | ✅ |
+| Q17 | Lead magnet | Yes, ungated | ✅ |
+| Q18 | Analytics | TBD | 🔴 |
+| Q19 | Domain, hosting | auranova.mx + Cloudflare Pages (purchase after the trademark check + OK on price) | ✅ |
+| Q20 | Contract update | Yes, David will update it | ✅ · 🔴 version |
+| Q21 | Social-proof numbers | Omit until real | ✅ |
+| Q22 | Blog at launch | No | ✅ |

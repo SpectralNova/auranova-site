@@ -14,8 +14,8 @@
 - **Why:** speed is part of the pitch; Lighthouse ≥ 95 ×4 and ≤ 30 KB JS are easiest with HTML-first output. Content in Markdown lets David edit copy without touching components.
 
 ## ADR-002 · Hosting: Cloudflare Pages
-- **Status:** Proposed (CP0) · 2026-10-19 · depends on Q19
-- **Decision:** host the static build on Cloudflare Pages (free plan). Preview deploys come from a preview branch with `SITE_NOINDEX=1` (the LOGOS pattern): the build adds `<meta name="robots" content="noindex">` and writes `X-Robots-Tag: noindex` into `_headers`. Security headers (HSTS, CSP, Referrer-Policy, Permissions-Policy) also live in `_headers`. Production only at CP3.
+- **Status:** **Accepted** (Q19, 2026-10-19). Note: vistaconsulting.mx, David's own published build, is already Astro served by Cloudflare.
+- **Decision:** host the static build on Cloudflare Pages (free plan). The build reads `SITE_ENV`, which **defaults to `preview`**. Any build that isn't explicitly `SITE_ENV=production` adds `<meta name="robots" content="noindex">` and writes `X-Robots-Tag: noindex` into `_headers` (the LOGOS `SITE_NOINDEX` idea, made fail-safe: forgetting the variable can't make a preview indexable). Security headers (HSTS, CSP, Referrer-Policy, Permissions-Policy) also live in `_headers`. Production only at CP3.
 - **Options:**
   - **Cloudflare Pages** ✓: static sites don't spin down; `_headers` file; Pages Functions for the form endpoint (ADR-003); Turnstile in the same account if spam appears.
   - **Render static** (the brief's default): David already uses Render, and its static sites support custom headers. But static sites can't run server code, so the form would need an extra third-party service.
@@ -34,8 +34,8 @@
 - **Needs:** the destination email (Q15); the domain (Q19) for the sender's SPF/DKIM records. Sign-up waits for David's OK and an MXN cost check.
 
 ## ADR-004 · Booking: link out at launch
-- **Status:** Proposed (CP0) · 2026-10-19 · depends on Q16
-- **Decision:** every "Agenda una llamada" CTA opens the booking page (Cal.com, Q16) directly, with `cta_click` + `booking_open` tracked on our side. No third-party script on any page, so the CSP stays tight.
+- **Status:** Proposed (CP0) · 2026-10-19 · tool ✅ Cal.com (Q16)
+- **Decision:** every "Agenda una llamada" CTA opens the Cal.com booking page directly, with `cta_click` + `booking_open` tracked on our side. No third-party script on any page, so the CSP stays tight. Cal.com shows each visitor the slots in their own time zone (useful for US clients). Until the account exists, CTAs go to `/contacto/#agenda`.
 - **Options:** **link-out** ✓ · embed loaded on click (adds JS and a CSP exception, but keeps visitors on the site and can report `booking_complete`).
 - **Why:** start minimal. If the data later shows drop-off between `booking_open` and a booked call, switch to the on-click embed.
 - **Trade-off:** no `booking_complete` event at launch; count bookings in Cal.com instead.
@@ -50,3 +50,10 @@
 - **Status:** Proposed (CP0) · 2026-10-19
 - **Decision:** `src/content/business.ts` exports every business fact (name, hours, timezone, channels, legal identity, service area). A fact is either a confirmed value, `confirm(value, note)` (🟡) or `pending(question)` (🔴). A `<Fact>` component renders 🟡/🔴 values as `.pending` markers (`[[CONFIRMAR: …]]` / `[[PENDIENTE: …]]`). Footer, contact page, JSON-LD, the auto-reply and Cómo trabajamos all read hours from the same object. `check:pending` scans `dist/` and fails a production build on any marker.
 - **Why:** an answer from David changes one line and propagates everywhere, and no unapproved fact can ship.
+
+## ADR-007 · Bilingual site: Spanish at `/`, English at `/en/`
+- **Status:** Proposed (CP1) · 2026-10-19 · from Q4
+- **Decision:** Astro's built-in i18n routing, with `es` as the default locale (no prefix) and `en` under `/en/`. English slugs are translated (`/en/how-we-work`). Each page declares its counterpart, so the language link and the `hreflang` pairs (`es-MX`, `en-US`, `x-default` → Spanish) always point to the real equivalent. Copy lives in one content file per page per language; facts (hours, email, services) come from `business.ts` with a label per language. There's no redirect by browser language: it annoys visitors and confuses crawlers.
+- **Options:** **one domain, path prefix** ✓ · subdomain (`en.`) · a separate English domain. The prefix keeps one site, one deploy and one domain's authority (see Q28 on .mx and US search).
+- **Hours in English:** "Mon–Fri, 9 a.m.–5 p.m. Monterrey time (UTC−6)". Monterrey has no daylight saving time since 2022, so it matches US Central only in winter; Cal.com converts slots for each visitor.
+- **Timing:** Q26. The routes are wired at CP1; English copy comes at CP2.

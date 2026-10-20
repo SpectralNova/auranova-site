@@ -1,206 +1,178 @@
 # Open questions
 
-*Seeded 2026-10-19 (Phase 0) from `WEBSITE_PROMPT.md` §16, plus Q23–Q25 found during discovery.*
+*Seeded 2026-10-19 (Phase 0) from `WEBSITE_PROMPT.md` §16, plus new items found along the way. Batch 1 answered by David on 2026-10-19.*
 *Protocol: brief §1. When David answers, update the source of truth first (facts → `src/content/business.ts`; terms → `docs/PHILOSOPHY.md`), then the status here and in brief §16.*
 
 ✅ answered · 🟡 proposed default (build with it, not approved) · 🔴 unknown (David must supply)
 
 ## Index
 
-| ID | Topic | Status | Batch |
+| ID | Topic | Status | Next ask |
 |---|---|---|---|
-| Q1 | Brand name / wordmark | ✅ name · 🟡 wordmark | — |
-| Q2 | Legal identity | 🔴 | 1 |
-| Q3 | City and service area | 🟡 | 1 |
-| Q4 | Audience scope + language | 🟡 | 2 |
-| Q5 | Services list | 🟡 | 1 |
-| Q6 | Pricing model | 🔴 | 1 |
-| Q7 | Payment schedule + IVA | 🟡 | 2 |
-| Q8 | Response times | 🟡 | 2 |
-| Q9 | Revision rounds | 🟡 | 2 |
-| Q10 | Late fee, pause, cancellation | 🔴 | 2 |
-| Q11 | Warranty, training, maintenance | 🟡 / 🔴 | 2 |
-| Q12 | Portfolio permissions | 🔴 | 1 |
-| Q13 | Photos + short bio | 🔴 | 2 |
-| Q14 | Voice: "nosotros" or "yo" | 🔴 | 1 |
-| Q15 | Channels | 🔴 | 1 |
-| Q16 | Booking tool | 🟡 | 2 |
-| Q17 | Lead magnet | 🟡 | 2 |
-| Q18 | Analytics | 🟡 ⚠ | 2 |
-| Q19 | Domain + hosting | 🔴 | 1 |
-| Q20 | Contract update | 🔴 | 1 |
-| Q21 | Social-proof numbers | 🔴 | 2 |
-| Q22 | Blog at launch | 🟡 | 2 |
-| Q23 | Name conflict / trademark check | 🔴 new | 1 |
-| Q24 | Upstream docs: logo file names | 🟡 new | report |
-| Q25 | Typical project timelines | 🔴 new | 2 |
+| Q1 | Brand name / wordmark | ✅ | — |
+| Q2 | Legal identity | ✅ persona física · 🔴 domicilio | CP1 |
+| Q3 | City and service area | ✅ | — |
+| Q4 | Audience scope + language | ✅ ES + EN, MX + US | → Q26–Q29 |
+| Q5 | Services list | ✅ | — |
+| Q6 | Pricing model | ✅ model · 🔴 budget brackets | CP1 |
+| Q7 | Payment schedule + IVA | ✅ | — |
+| Q8 | Response times | ✅ | — |
+| Q9 | Revision rounds | ✅ | — |
+| Q10 | Late payment, pause, cancellation | ✅ late payment · 🟡 rest | CP1 |
+| Q11 | Warranty, training, maintenance | ✅ warranty/training · 🔴 plans | CP2 |
+| Q12 | Portfolio permissions | ✅ · 🟡 Vista in writing | CP1 |
+| Q13 | Photos | ✅ none; company, not person | — |
+| Q14 | Voice | ✅ nosotros | — |
+| Q15 | Channels | ✅ email · 🟡 my reading | CP1 |
+| Q16 | Booking tool | ✅ Cal.com · 🟡 length/buffers | CP2 |
+| Q17 | Lead magnet | ✅ | — |
+| Q18 | Analytics | 🔴 TBD | before CP2 |
+| Q19 | Domain + hosting | ✅ (purchase after Q23) | — |
+| Q20 | Contract update | ✅ will update · 🔴 version | CP2 |
+| Q21 | Social-proof numbers | ✅ omit | — |
+| Q22 | Blog at launch | ✅ no | — |
+| Q23 | Trademark check | ✅ run | see result |
+| Q24 | Upstream docs: logo file names | ✅ fixed | — |
+| Q25 | Typical timelines | ✅ interim answer · 🔴 details later | — |
+| Q26 | English: when | 🟡 new | CP1 |
+| Q27 | US clients: currency, contract, invoicing | 🔴 new | CP1 |
+| Q28 | Domain vs. US search | 🟡 new | CP1 |
+| Q29 | US positioning | 🟡 new | CP1 |
 
 ---
 
 ## Q1 · Brand name and wordmark
-- **Question:** Name answered. Still open: does the logo need a designed wordmark, or is "AuraNova" set in type beside the mark enough?
-- **Blocks:** logo lockup, OG images.
-- **Recommended:** A. The type lockup the design system already defines (`.nav__logo`, Roboto Condensed 800).
-- **Options:** A type lockup · B a designed wordmark (later; regenerate assets).
-- **Status:** ✅ name · 🟡 wordmark · **Answer:** AuraNova (one word, capital A and N) · **Date:** 2026-10-19
+- **Question:** Designed wordmark, or "AuraNova" set in type beside the mark?
+- **Status:** ✅ · **Answer:** AuraNova (one word, capital A and N); type lockup in Roboto Condensed 800 beside the mark (`.nav__logo`). · **Date:** 2026-10-19
 
 ## Q2 · Legal identity
-- **Question:** Persona física (which tax regime) or persona moral? Name or razón social, and the address for legal notices? (The RFC is never published.)
-- **Blocks:** aviso de privacidad, términos, footer ©, invoices (CFDI).
-- **Recommended:** — (from you or your accountant). Note: the aviso normally has to name the responsible party and a domicilio for data requests, even if the site shows no street address elsewhere (Q15). The lawyer confirms what the 2025 LFPDPPP requires.
-- **Options:** persona física (e.g., RESICO or actividad empresarial y profesional) · persona moral (e.g., S.A.S.).
-- **Status:** 🔴 · **Answer:** — · **Date:** —
+- **Question:** Persona física or moral? Name or razón social, address for legal notices?
+- **Answer:** ✅ **persona física**. (2026-10-19)
+- **Still open 🔴:** tax regime (for invoices; not published) and a **domicilio** for the aviso de privacidad.
+- **Consequence:** as a persona física, the aviso and the términos name **you** (David Contreras Morales) as the responsible party, with "AuraNova" as the commercial name, even though every marketing page speaks as a company (Q13, Q14). The lawyer confirms the exact wording.
 
 ## Q3 · City and service area
-- **Question:** Base city and service area?
-- **Blocks:** hero eyebrow, titles and H1 keywords, JSON-LD `areaServed`, the vision statement, Google Business Profile.
-- **Recommended:** A.
-- **Options:** A Monterrey, N.L. + remote across Mexico · B Monterrey metro only · C all of Mexico, no city · D A + international.
-- **Status:** 🟡 · **Answer:** — · **Date:** —
+- **Status:** ✅ · **Answer:** Monterrey, N.L. + remote across Mexico; plus remote work for US clients (Q4). JSON-LD `areaServed`: Monterrey, Mexico, United States. · **Date:** 2026-10-19
 
 ## Q4 · Audience scope and language
-- **Question:** es-MX only, or English too? Are startups or B2B tech clients in scope?
-- **Blocks:** IA, i18n, copy.
-- **Recommended:** es-MX at launch; routes ready for `/en/` later; SMBs first.
-- **Options:** A es-MX only · B es-MX + en at launch.
-- **Status:** 🟡 · **Answer:** — · **Date:** —
+- **Status:** ✅ · **Answer:** Spanish **and** English. David is fully bilingual; the studio is open to remote work for Mexican and US clients. · **Date:** 2026-10-19
+- **Consequence:** the site is bilingual at launch: Spanish at `/`, English at `/en/` (ADR-007). Follow-ups: Q26–Q29.
 
 ## Q5 · Services list
-- **Question:** Final services, and which one leads?
-- **Blocks:** /servicios, the service pages, the form's "tipo de proyecto" field.
-- **Recommended:** A. **Three** services, led by Sitios web: (1) Sitios web, nuevos y rediseños · (2) Plataformas a la medida · (3) Mantenimiento y soporte. A new site and a redesign share the same process and deliverables; splitting them makes two thin pages. "Rediseño" stays a section inside page 1.
-- **Options:** A three (above) · B four, as in the brief (Sitios web · Rediseños · Plataformas a la medida · Mantenimiento) · C other.
-- **Status:** 🟡 · **Answer:** — · **Date:** —
+- **Status:** ✅ · **Answer:** A, three services led by Sitios web: (1) Sitios web, nuevos y rediseños · (2) Plataformas a la medida · (3) Mantenimiento y soporte. · **Date:** 2026-10-19
 
 ## Q6 · Pricing model
-- **Question:** Fixed price per project (how you priced LOGOS) or hourly + retainer (contract §2.1)? Public "desde $X MXN", or only budget ranges in the form? If ranges, which brackets?
-- **Blocks:** service pages (pricing guidance), form budget field, FAQ "¿Cuánto cuesta?", contract §2.
-- **Recommended:** fixed price per project against Anexo A; budget ranges in the form (you give the brackets); no public prices at launch.
-- **Options:** model: A fixed · B hourly + retainer. Display: i no public prices · ii "desde $X MXN + IVA" per service.
-- **Status:** 🔴 · **Answer:** — · **Date:** —
+- **Answer:** ✅ fixed price per project against Anexo A; budget ranges in the form; no public prices at launch. (2026-10-19)
+- **Still open 🔴:** the budget brackets for the form, in MXN, and in USD for the English form if Q27 says USD.
 
 ## Q7 · Payment schedule and IVA
-- **Question:** Payment milestones, and are amounts quoted + IVA?
-- **Blocks:** Cómo trabajamos (#pagos).
-- **Recommended:** 40% to reserve / 30% at design approval (CP1) / 30% before launch; MXN + IVA.
-- **Options:** A 40/30/30 · B 30/35/35 (video) · C 50/50 · D 100% upfront.
-- **Status:** 🟡 · **Answer:** — · **Date:** —
+- **Status:** ✅ · **Answer:** 40% to reserve / 30% at design approval (CP1) / 30% before launch; amounts in MXN + IVA. (US clients: Q27.) · **Date:** 2026-10-19
 
 ## Q8 · Response times
-- **Question:** Your response time and the client's?
-- **Blocks:** hero microcopy, Cómo trabajamos, auto-reply.
-- **Recommended:** ≤ 1 business day (you) / ≤ 3 business days (client; otherwise the schedule moves).
-- **Status:** 🟡 · **Answer:** — · **Date:** —
+- **Status:** ✅ · **Answer:** ≤ 1 business day (us) / ≤ 3 business days (client; otherwise the schedule moves). · **Date:** 2026-10-19
 
 ## Q9 · Revision rounds
-- **Question:** Revision rounds per phase?
-- **Blocks:** Cómo trabajamos, Anexo A, "qué incluye" on service pages.
-- **Recommended:** 2 rounds per phase (design / content / pre-launch).
-- **Status:** 🟡 · **Answer:** — · **Date:** —
+- **Status:** ✅ · **Answer:** **1 round per phase** as the base. · **Date:** 2026-10-19
+- **My reading (🟡):** extra rounds are possible and go through the change-request process (estimate → approval).
 
-## Q10 · Late fee, pause and cancellation
-- **Question:** Late fee (% after N days), pause/restart fee and threshold, cancellation details?
-- **Blocks:** Cómo trabajamos (#pagos, #cancelacion).
-- **Recommended:** — (values must come from you or your lawyer).
-- **Status:** 🔴 · **Answer:** — · **Date:** —
+## Q10 · Late payment, pause and cancellation
+- **Answer:** ✅ if a payment is late, **the project pauses until the payment arrives**. (2026-10-19)
+  - *Internal only, never published:* for referrals or people David knows personally, this can be relaxed case by case. The site states only the rule.
+- **Still 🟡, to confirm at CP1:**
+  - No late-fee percentage: the pause replaces it. Recommended: yes.
+  - Client-requested pauses: no restart fee; a new date is agreed when they're ready. Recommended: yes, keep it simple.
+  - Cancellation: 15 days' notice, work done is billed, and the 40% deposit is non-refundable once onboarding starts (contract §3 + CONTRACT_INSIGHTS §3.7). Recommended: yes.
 
 ## Q11 · Warranty, training, maintenance
-- **Question:** Post-launch warranty, training, and maintenance plans (scope + price)?
-- **Blocks:** Cómo trabajamos (#garantia), the Mantenimiento service page.
-- **Recommended:** 30-day bug-fix warranty + 1 training session; maintenance plans TBD.
-- **Status:** 🟡 warranty/training · 🔴 plans · **Answer:** — · **Date:** —
+- **Answer:** ✅ 30-day bug-fix warranty after launch + 1 training session. (2026-10-19)
+- **Still open 🔴:** maintenance plans (scope, price, response time). Needed before the Mantenimiento page is written (CP2).
 
 ## Q12 · Portfolio permissions
-- **Question:** Can we show LOGOS (is it launched, or still a preview)? FERREMAG (local demo, not live)? Other past work? Any testimonials?
-- **Blocks:** /proyectos, the home "Proyectos" section, any client logo.
-- **Recommended:** ask both clients in writing (I can draft the request in Spanish). Until a permission arrives: no client names anywhere, /proyectos is not built, and "Nuestro estándar" takes its nav slot (see `SITEMAP.md`).
-- **Status:** 🔴 · **Answer:** — · **Date:** —
+- **Answer:** ✅ (2026-10-19)
+  - **vistaconsulting.mx:** published; 100% David's work. Can be shown now. (Built with Astro, served by Cloudflare.)
+  - **LOGOS** and **FERREMAG:** can be shown (logos and cases) **once each is published**.
+- **Consequence:** /proyectos is built at launch with Vista Consulting, and "Proyectos" stays in the main nav.
+- **To confirm 🟡:** Vista's OK in writing (an email or WhatsApp message from them is enough), covering their name, logo, screenshots and the measured numbers.
 
-## Q13 · Photos and short bio
-- **Question:** A headshot and workspace photos? And 3–5 facts for your story on Nosotros (background, how you got into web development, why AuraNova)?
-- **Blocks:** Nosotros, possibly the hero.
-- **Recommended:** — (real photos only; no stock).
-- **Status:** 🔴 · **Answer:** — · **Date:** —
+## Q13 · Photos
+- **Status:** ✅ · **Answer:** no headshot or workspace photos. AuraNova presents itself as a company, not a person. · **Date:** 2026-10-19
+- **Consequence:** Nosotros is about the studio (mission, values, method), not a personal story. David's name appears only where the law requires it (Q2).
 
-## Q14 · Voice: "nosotros" or "yo"
-- **Question:** Does the site speak as a studio ("nosotros") or as you ("yo")? Is it only you, or are there regular collaborators?
-- **Blocks:** all copy (decide before CP1 copy).
-- **Recommended:** B if you work alone; A if you have regular collaborators. "Yo" matches the honesty values and the audience's main fear (an agency that vanished): a named person signs and answers. The brand stays AuraNova either way. PHILOSOPHY's drafts are in "nosotros" and would be reworded.
-- **Options:** A "nosotros" · B "yo".
-- **Status:** 🔴 · **Answer:** — · **Date:** —
+## Q14 · Voice
+- **Status:** ✅ · **Answer:** "nosotros" (studio voice); clients addressed as "tú". · **Date:** 2026-10-19
 
 ## Q15 · Channels
-- **Question:** Business email (on the domain?), WhatsApp number, phone, which social networks, show a physical address?
-- **Blocks:** Contacto, footer, JSON-LD `contactPoint`, form delivery address, auto-reply sender.
-- **Recommended:** a domain email (e.g., contacto@ + the Q19 domain); a WhatsApp Business `wa.me` button (no floating bubble); no phone line beyond WhatsApp; no street address on pages (the aviso may still need one, see Q2); only the social networks you actually post on.
-- **Status:** 🔴 · **Answer:** — · **Date:** —
+- **Answer:** ✅ the website's channel is a **business email on the domain**, set up once the domain is bought. WhatsApp is an option later in the relationship. (2026-10-19)
+- **My reading (🟡, confirm at CP1):** the site shows **no WhatsApp button** at launch, only the email + booking + form. No phone, no street address, and no social networks at launch (you didn't name any).
+- **Consequence:** the `whatsapp_click` event is dropped.
 
 ## Q16 · Booking tool
-- **Question:** Booking tool and call length?
-- **Blocks:** Contacto, every "Agenda una llamada" link.
-- **Recommended:** Cal.com, 30-minute call, Mon–Fri 9:00–17:00 `America/Monterrey`, 15-minute buffers; link out at launch (ADR-004).
-- **Options:** Cal.com · Calendly · Google Calendar appointment schedules.
-- **Status:** 🟡 · **Answer:** — · **Date:** —
+- **Answer:** ✅ Cal.com. (2026-10-19)
+- **Still 🟡:** a 30-minute call, 15-minute buffers, Mon–Fri 9:00–17:00 `America/Monterrey`; link out at launch (ADR-004). Cal.com shows each visitor the slots in their own time zone, which matters for US clients. You create the free account in Phase 2.
 
 ## Q17 · Lead magnet
-- **Question:** A checklist PDF of the 15 no negociables? Gated by email or not?
-- **Blocks:** /recursos.
-- **Recommended:** yes, ungated, generated from the same data as /estandar.
-- **Status:** 🟡 · **Answer:** — · **Date:** —
+- **Status:** ✅ · **Answer:** yes, ungated, generated from the same data as /estandar; in both languages (Q4). · **Date:** 2026-10-19
 
 ## Q18 · Analytics
-- **Question:** Which analytics tool?
-- **Blocks:** consent banner (or none), the analytics events in brief §9.
-- **⚠ Finding:** the brief's default, Cloudflare Web Analytics, is cookieless but has **no custom events**, so it can't record `cta_click`, `booking_open`, `form_submit`, `whatsapp_click` or `resource_download`.
-- **Recommended:** a cookieless tool with custom events: Umami Cloud (has a free tier, to verify at sign-up) or Plausible (paid). No cookie banner either way. GA4 only if you ask, plus a consent banner.
-- **Status:** 🟡 · **Answer:** — · **Date:** —
+- **Status:** 🔴 TBD (David, 2026-10-19). Decide before CP2: it determines the events and the aviso's wording.
+- **Meanwhile:** the build calls a `track()` helper that does nothing until a tool is chosen. Options stay as before: Umami Cloud (free tier, cookieless, custom events) or Plausible (paid). Cloudflare Web Analytics has no custom events.
 
 ## Q19 · Domain and hosting
-- **Question:** Do you already own an AuraNova domain? If not, which one should we buy? And which host?
-- **Blocks:** preview deploy (host), production deploy, domain email, form email (SPF/DKIM), canonical URLs.
-- **Domain findings (read-only RDAP/WHOIS lookups, 2026-10-19):**
-  - Taken: **auranova.com** (registered 2021, GoDaddy) · **auranova.com.mx** (registered 2026-05-24, shows "Coming Soon"; is it yours?) · auranova.dev · auranova.studio · auranovadesign.com · auranovaweb.com · auranovastudio.com · auranovadigital.com.
-  - Appear free: **auranova.mx** (NIC México WHOIS: not found) · estudioauranova.com · somosauranova.com · auranovamx.com · auranovamty.com · auranovasites.com. Unconfirmed: auranova.co, auranova.io.
-  - Availability and price are re-checked at the registrar before buying; buying needs your OK.
-- **Recommended:** domain **auranova.mx** (the exact name, local). Host: **Cloudflare Pages** (ADR-002), because Render static sites have no server functions, so the form would need an extra third-party service.
-- **Options:** domain: auranova.mx · one of the free .com names · one you own. Host: A Cloudflare Pages · B Render static + a form service.
-- **Status:** 🔴 · **Answer:** — · **Date:** —
+- **Status:** ✅ · **Answer:** domain **auranova.mx**; host **Cloudflare Pages** (ADR-002). · **Date:** 2026-10-19
+- **Before buying:** the Q23 search, a fresh availability + price check (in MXN), and your explicit OK. See Q28 for the effect on US search.
+- **Domain findings (2026-10-19):** taken: auranova.com (since 2021), auranova.com.mx (since 2026-05-24, "Coming Soon"), auranova.dev, auranova.studio and other .com variants. auranova.mx appeared free in NIC México WHOIS.
 
 ## Q20 · Contract update
-- **Question:** Will you update the contract per `CONTRACT_INSIGHTS.md` §3 before launch? Which version is canonical?
-- **Blocks:** publishing Cómo trabajamos (it must match the signed contract).
-- **Recommended:** yes; a lawyer-reviewed Spanish version for Mexican clients. Until then the page is built in preview with 🟡 markers on every term not already in the template.
-- **Status:** 🔴 · **Answer:** — · **Date:** —
+- **Answer:** ✅ David will update the contract per `CONTRACT_INSIGHTS.md` §3. (2026-10-19)
+- **Still open 🔴:** the version + date to cite in Cómo trabajamos (production can't ship without it), and an English version for US clients (Q27).
+- **Build rule:** terms David approved here are written as plain text; one page-level `[[PENDIENTE: versión del contrato]]` marker blocks production until the updated contract exists.
 
 ## Q21 · Social-proof numbers
-- **Question:** Real numbers: years in web development, projects delivered?
-- **Blocks:** proof sections, Nosotros.
-- **Recommended:** omit until real.
-- **Status:** 🔴 · **Answer:** — · **Date:** —
+- **Status:** ✅ · **Answer:** omit until real. · **Date:** 2026-10-19
 
 ## Q22 · Blog at launch
-- **Question:** Blog at launch?
-- **Blocks:** IA.
-- **Recommended:** no; routes reserved for later.
-- **Status:** 🟡 · **Answer:** — · **Date:** —
+- **Status:** ✅ · **Answer:** no; routes reserved for later. · **Date:** 2026-10-19
 
-## Q23 · Name conflict and trademark check (new)
-- **Question:** Other parties hold auranova.com (since 2021) and auranova.com.mx (since May 2026, "Coming Soon" page). Before buying a domain, setting up Google Business Profile or printing anything, should we search IMPI's trademark database (MARCia) for "AuraNova"?
-- **Blocks:** domain purchase, Google Business Profile, anything printed.
-- **Recommended:** yes, search Nice classes 42 (web design and development) and 35 this week; if there's no conflicting mark, consider filing your own. I can run the search in the browser if you want.
-- **Status:** 🔴 · **Answer:** — · **Date:** —
+## Q23 · Trademark check
+- **Status:** ✅ run 2026-10-19 (IMPI MARCia, quick search "AURANOVA" and "AURA NOVA", filtered by Nice class). Not a legal opinion.
+- **Result:**
+  - **"AURANOVA" is registered**, reg. 2465719 (application 2757090), owner Rocío Guadalupe Bolívar Cime, valid until 19/10/2032, **class 5 only**: pharmaceuticals, medicines, supplements, medical supplies. Different field from ours.
+  - **Class 42 (web design/development): no "AuraNova" or "Aura Nova" mark.** Several plain "AURA" marks exist (e.g., Salesforce, Aura Systems, Aura Blockchain Consortium, one individual's registration to 2035).
+  - **Class 35:** "AURA NOVA CANCÚN BY LAK'IN" and "AURA NOVA PLAYA DEL CARMEN BY EDÉN" are registered to CADU Inmobiliaria (real-estate developments; valid to 2036).
+- **Reading:** no blocker for a web-development studio. The main protection target is class 42; class 35 is crowded with "AURA NOVA" names.
+- **Recommended next step (🟡):** have a trademark agent or lawyer confirm, then file "AuraNova" in **class 42**. Check IMPI's current fee per class before filing. Buying auranova.mx doesn't depend on the filing.
 
-## Q24 · Upstream docs: logo file names (new)
-- **Question:** The masters are now `auranova_logo.ai` / `.svg`, but `DESIGN_SYSTEM.md` (intro and file note), the brief (§2, §3) and `PHILOSOPHY.md` (header) still call them `spectdesign_logo.*`. OK to correct that text? Docs only; no asset changes.
-- **Blocks:** nothing (accuracy only).
-- **Recommended:** yes; bump the design system to v1.2 in its changelog.
-- **Status:** 🟡 · **Answer:** — · **Date:** —
+## Q24 · Upstream docs: logo file names
+- **Status:** ✅ · **Answer:** approved and done 2026-10-19: DESIGN_SYSTEM.md v1.1.1 (docs only), brief §2/§3 and PHILOSOPHY now say `auranova_logo.*`.
 
-## Q25 · Typical project timelines (new)
-- **Question:** How many weeks does each type of project usually take (e.g., how long LOGOS and FERREMAG took per phase)?
-- **Blocks:** FAQ "¿Cuánto tarda?", service pages, Cómo trabajamos.
-- **Recommended:** — (needs your real numbers). Until then the FAQ answer stays at "el calendario se acuerda por escrito en tu propuesta" (🟡).
-- **Status:** 🔴 · **Answer:** — · **Date:** —
+## Q25 · Typical project timelines
+- **Answer:** ✅ interim: the FAQ says the schedule is agreed in writing in each proposal; timelines vary by project. (2026-10-19)
+- **Later 🔴:** David will add more detailed ranges.
+
+## Q26 · English: when (new)
+- **Question:** English is in scope (Q4). When should the English copy be written?
+- **Blocks:** the scope of CP1 vs. CP2.
+- **Recommended:** the bilingual routes, hreflang and language switcher are wired now. **CP1 is reviewed in Spanish.** English is written at CP2 from the *approved* Spanish copy, adapted for US readers rather than translated word for word, so the voice gets fixed once, not twice.
+- **Options:** A English at CP2 (recommended) · B English pages already at CP1.
+- **Status:** 🟡
+
+## Q27 · US clients: currency, contract, invoicing (new)
+- **Question:** For US clients: quote in USD? Contract in English, under which law? How do you invoice a foreign client?
+- **Blocks:** English Cómo trabajamos (payments, law), English form budget ranges, the English terms.
+- **Recommended:** quote in USD; an English version of the updated contract, governed by Mexican law (the lawyer confirms); your accountant confirms the CFDI and IVA treatment for clients abroad. The English pages say "USD" and don't mention IVA until that's confirmed.
+- **Status:** 🔴
+
+## Q28 · Domain vs. US search (new)
+- **Question:** Google treats .mx as a Mexico-targeted domain, so English pages on auranova.mx rank less well in US search than on a generic domain. Keep auranova.mx anyway?
+- **Blocks:** nothing yet (purchase waits for Q23).
+- **Recommended:** keep **auranova.mx**. Most clients are in Mexico, and US clients are more likely to arrive through referrals than through search. Revisit a generic domain if US search becomes a goal (auranova.com is taken; auranova.co appeared free).
+- **Status:** 🟡
+
+## Q29 · US positioning (new)
+- **Question:** Which US clients are we talking to?
+- **Blocks:** the English hero, service-page angles, English keywords.
+- **Recommended:** US small businesses that need a bilingual (EN/ES) site or serve Spanish-speaking customers, plus the practical angle: a Monterrey studio working in US-friendly hours (UTC−6, the same as US Central in winter, one hour behind in summer). No price claims.
+- **Status:** 🟡
 
 ---
 
@@ -208,11 +180,12 @@
 
 | # | The brief says | Reality | Handling |
 |---|---|---|---|
-| 1 | Logo masters are `spectdesign_logo.*` (§2, §3; also PHILOSOPHY, DESIGN_SYSTEM.md) | Files are `auranova_logo.ai` / `.svg` | Q24 |
-| 2 | Default host Render static; forms via "the host's serverless function" (§10) | Render static sites have no functions | ADR-002, ADR-003, Q19 |
-| 3 | Default analytics Cloudflare Web Analytics + custom events (§9, §10) | It has no custom events | Q18 |
-| 4 | "Proyectos" is a primary nav item (§6) | No project is permitted yet (Q12) | Conditional nav slot (SITEMAP) |
-| 5 | Home proof strip shows "this site's measured scores" until logos exist (§7.2), and the Standard teaser shows them again (§7.7) | Same numbers twice | Skip the strip until permitted logos exist |
-| 6 | Screenshot widths 320/390/768/1024/1440 (§10) | PHILOSOPHY §7 #15 says 320/375/768/1024/1440 | Capture both: 320/375/390/768/1024/1440 |
-| 7 | AuraNova domain to be chosen (Q19) | auranova.com and auranova.com.mx are held by others | Q23 |
-| 8 | Aviso de privacidad "under the current LFPDPPP" (§11) | A new LFPDPPP replaced the 2010 law in March 2025; older templates are outdated | Lawyer review (draft in Phase 2) |
+| 1 | Logo masters are `spectdesign_logo.*` | Files are `auranova_logo.ai` / `.svg` | ✅ fixed (Q24) |
+| 2 | Default host Render static; forms via "the host's serverless function" | Render static sites have no functions | ✅ Cloudflare Pages (Q19) |
+| 3 | Default analytics Cloudflare Web Analytics + custom events | It has no custom events | Q18 |
+| 4 | "Proyectos" is a primary nav item | ✅ resolved: Vista Consulting is published and permitted (Q12) | Proyectos stays |
+| 5 | Home proof strip + Standard teaser both show the scores | Same numbers twice | Strip skipped until client logos exist |
+| 6 | Screenshot widths 320/390/768/1024/1440 vs. PHILOSOPHY's 320/375/… | Two lists | Capture both: 320/375/390/768/1024/1440 |
+| 7 | AuraNova domain to be chosen | auranova.com and auranova.com.mx are held by others | Q23, Q28 |
+| 8 | Aviso "under the current LFPDPPP" | A new LFPDPPP replaced the 2010 law in March 2025 | Lawyer review (Phase 2) |
+| 9 | i18n: es-MX only at launch | ✅ Q4: Spanish and English at launch | ADR-007, Q26 |
