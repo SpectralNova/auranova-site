@@ -132,6 +132,11 @@ describe('protection', () => {
     assert.deepEqual(await res.json(), { ok: true });
     assert.equal(calls.length, 0);
   });
+  it('quietly drops a form posted without the page (no fill time)', async () => {
+    const res = await send(form({ t: null }));
+    assert.deepEqual(await res.json(), { ok: true });
+    assert.equal(calls.length, 0);
+  });
   it('refuses a failed Turnstile check before touching HubSpot or email', async () => {
     handler = (c) => (c.url.includes('turnstile') ? json({ success: false, 'error-codes': ['invalid-input-response'] }) : undefined);
     const res = await send(form());

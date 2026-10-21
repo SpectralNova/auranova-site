@@ -58,8 +58,9 @@ async function contact(request: Request, env: Env, ctx: Ctx): Promise<Response> 
   }
 
   // Bots: a filled honeypot or a form sent faster than a person can type get a quiet "ok" and nothing else.
-  const startedAt = Number(form.get('t'));
-  if (String(form.get('sitio_web_2') ?? '').trim() || !(Date.now() - startedAt >= MIN_FILL_MS)) return json({ ok: true });
+  // A missing `t` counts as a bot too (the page's script always sets it; Number(null) would be 0, i.e. 1970).
+  const elapsed = Date.now() - Number(form.get('t') || NaN);
+  if (String(form.get('sitio_web_2') ?? '').trim() || !(elapsed >= MIN_FILL_MS)) return json({ ok: true });
 
   const { lead, invalid } = parseLead(form);
   if (invalid.length) return json({ ok: false, error: 'invalid', fields: invalid }, 400);
