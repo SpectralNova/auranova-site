@@ -97,7 +97,7 @@ price:
   eyebrow: "Precio"
   title: "Precios ==claros, sin sorpresas=="
   text:
-    - "No publicamos precios genéricos porque cada negocio necesita algo distinto. Después de la llamada te enviamos una cotización a precio fijo, por escrito, pensada para el presupuesto de un negocio pequeño."
+    - "No publicamos precios genéricos porque cada negocio necesita algo distinto. Después de la llamada te enviamos una cotización a precio fijo, por escrito, pensada para el presupuesto de un negocio pequeño y válida por {{vigencia}}."
     - "Pagas en tres partes: {{pagos}}. Montos en {{moneda}}."
 
 cta:

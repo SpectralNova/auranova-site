@@ -60,6 +60,7 @@ export const textFacts = {
     en: '40% to book your start date, 30% at design approval and 30% before launch',
   }), // Q7
   moneda: ok({ es: 'pesos mexicanos más IVA', en: '[[PENDIENTE: currency and taxes for US clients (Q27)]]' }), // Q7
+  vigencia: ok({ es: '15 días', en: '15 days' }), // how long a quote is valid (David, 2026-10-21)
   garantia: ok({ es: '30 días hábiles', en: '30 business days' }), // Q11; business days (David, 2026-10-20)
   correo: business.email,
   ciudad: business.city,

@@ -130,6 +130,7 @@ sections:
     title: "Pagos"
     list:
       - "Precio fijo por proyecto, según el alcance que apruebas por escrito. No cobramos por hora."
+      - "Cada cotización es válida por {{vigencia}}."
       - "Pagas en tres partes: {{pagos}}."
       - "Montos en {{moneda}}. Cada factura vence a los 15 días."
       - "Si un pago se retrasa, el proyecto se pausa hasta recibirlo, y el calendario se recorre el mismo tiempo."
@@ -182,7 +183,7 @@ faq:
   title: "Lo que nos preguntan ==antes de empezar=="
   items:
     - q: "¿Cuánto cuesta un sitio web?"
-      a: "Depende de lo que necesites, por eso no publicamos precios genéricos. Después de la llamada te enviamos una cotización a precio fijo, por escrito, pensada para el presupuesto de un negocio pequeño. Pagas por etapas: {{pagos}}."
+      a: "Depende de lo que necesites, por eso no publicamos precios genéricos. Después de la llamada te enviamos una cotización a precio fijo, por escrito, pensada para el presupuesto de un negocio pequeño y válida por {{vigencia}}. Pagas por etapas: {{pagos}}."
     - q: "¿Cuánto tarda?"
       a: "Lo define el alcance de tu proyecto. El calendario se acuerda por escrito en tu propuesta, con una fecha para cada etapa. Si una aprobación se retrasa, el calendario se recorre el mismo tiempo."
     - q: "¿El sitio, el dominio y el código son míos?"

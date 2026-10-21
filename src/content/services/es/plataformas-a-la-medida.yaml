@@ -89,7 +89,7 @@ page:
       - q: "¿Puedo empezar con algo pequeño?"
         a: "Sí, y lo recomendamos. Empezamos con lo indispensable y agregamos funciones cuando las necesites."
       - q: "¿Cuánto cuesta?"
-        a: "Depende de las funciones. Después de la llamada te enviamos una cotización a precio fijo, por escrito."
+        a: "Depende de las funciones. Después de la llamada te enviamos una cotización a precio fijo, por escrito y válida por {{vigencia}}."
 
   cta:
     title: "¿Tu negocio ya ==necesita su propio sistema==?"
