@@ -5,6 +5,8 @@ hero:
   eyebrow: "Contacto"
   title: "Agenda una ==llamada=="
   lead: "Una llamada de {{duracionLlamada}} para conocer tu negocio y lo que necesitas de tu sitio."
+  or: "o"
+  emailCta: "Envíanos un correo"
   hours: "Atendemos {{horario}}."
   bookingPending: "[[PENDIENTE: liga de Cal.com para agendar (Q16)]]"
   next:

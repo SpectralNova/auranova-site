@@ -36,11 +36,13 @@ const year = new Date().getFullYear();
         <dt>{ui.footer.email}</dt>
         <dd>{email ? <a href={`mailto:${email}`}>{email}</a> : <Fragment set:html={rich(factText(business.email, lang), lang)} />}</dd>
         <dt>{ui.footer.hours}</dt>
-        <dd set:html={rich('{{horario}}', lang)} />
+        <dd set:html={rich('{{horarioPie}}', lang)} />
+        <dt>{ui.footer.location}</dt>
+        <dd>{factText(business.location, lang)}</dd>
       </dl>
     </div>
   </div>
   <div class="container site-footer__legal">
-    <p class="muted">© {year} AuraNova</p>
+    <p class="muted">© {year} AuraNova. {ui.footer.rights}</p>
   </div>
 </footer>

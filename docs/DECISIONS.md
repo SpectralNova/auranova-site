@@ -33,6 +33,8 @@
   - **mailto: only**: rejected; the brief requires a form with consent and validation.
 - **Why:** less personal data held in fewer places (non-negotiable #13 and the aviso). The aviso lists Cloudflare and the email provider as processors (encargados).
 - **Needs:** the destination email (Q15); the domain (Q19) for the sender's SPF/DKIM records. Sign-up waits for David's OK and an MXN cost check.
+- **Update (2026-10-20, setup checklist):** the function runs on the Cloudflare Worker (ADR-002 deploy) and, besides the two emails (Resend, from contacto@auranova.mx ✅), it submits each lead to **HubSpot Free** through the Forms API (portal **52196836**, form ID pending), so leads can be followed up and matched to Meta ads. HubSpot therefore becomes a processor (encargado) with an international transfer: the aviso de privacidad must list it. Field map (site → HubSpot): nombre → firstname + lastname (split on the first space), correo → email, empresa → company, sitio → website, tipo → `servicio_de_interes` (dropdown; values `sitio_web`, `plataforma`, `posicionamiento`, `contenido_marca`, `mantenimiento`, `asesoria`, `no_seguro`, in the site's option order), presupuesto → `presupuesto_aproximado` (text until Q6), mensaje → message, and the landing URL's UTM tags → `utm_source` / `utm_medium` / `utm_campaign` / `utm_content`. No phone field (the site doesn't ask for one). Created through the HubSpot connector on 2026-10-20 (David approved), along with the deal pipeline "Pipeline de ventas": Nuevo lead `1464204206` → Llamada agendada `1464204207` → Propuesta enviada `1464204208` → Ganado `1464204209` / Perdido `1464204210`.
+- **Update 2 (2026-10-20):** HubSpot's form editor needs a paid plan, and new accounts can no longer create legacy private apps (HubSpot changelog, sunset 2026-09-28 for accounts created after that date). New plan: the Worker writes leads with the **CRM API** (upsert the contact by email, then create a deal in "Nuevo lead" with the message as a note), authenticated by a HubSpot **service key** (scopes: contacts read/write, deals read/write) stored as the Cloudflare secret `HUBSPOT_SERVICE_KEY`; David creates it and pastes it only in Cloudflare. Service key ✅ created by David on 2026-10-20 (free plan has them); account currency switched to MXN ✅.
 
 ## ADR-004 · Booking: link out at launch
 - **Status:** Proposed (CP0) · 2026-10-19 · tool ✅ Cal.com (Q16)
@@ -40,6 +42,7 @@
 - **Options:** **link-out** ✓ · embed loaded on click (adds JS and a CSP exception, but keeps visitors on the site and can report `booking_complete`).
 - **Why:** start minimal. If the data later shows drop-off between `booking_open` and a booked call, switch to the on-click embed.
 - **Trade-off:** no `booking_complete` event at launch; count bookings in Cal.com instead.
+- **Update (David, 2026-10-20):** every "Agenda una llamada" CTA now goes to `/contacto/#agenda` (`cta_click`). That block offers two choices: **Agenda una llamada** (lime, opens Cal.com, `booking_open`) *o* **Envíanos un correo** (dark, `mailto:contacto@auranova.mx`, `email_click`). Call slots in Cal.com: Mon 13:00–15:00; Tue–Fri 10:00–12:00 and 13:00–15:00 (Mexico City), 30-minute buffer.
 
 ## ADR-005 · "Nuestro estándar" scores are measured, never typed
 - **Status:** Proposed (CP0) · 2026-10-19

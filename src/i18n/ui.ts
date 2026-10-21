@@ -27,6 +27,8 @@ export const ui = {
       contact: 'Contacto',
       email: 'Correo',
       hours: 'Horario',
+      location: 'Ubicación',
+      rights: 'Todos los derechos reservados.',
       links: {
         site: [
           ['inicio', 'Inicio'],
@@ -76,6 +78,8 @@ export const ui = {
       contact: 'Contact',
       email: 'Email',
       hours: 'Hours',
+      location: 'Location',
+      rights: 'All rights reserved.',
       links: {
         site: [
           ['inicio', 'Home'],

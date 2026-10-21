@@ -64,7 +64,7 @@ roadmap:
       paid: 100
       screen: "launch"
   screens:
-    call: { title: "Llamada de {{duracionLlamada}}", days: ["L", "M", "M", "J", "V"], slots: ["10:00", "11:30", "13:00", "16:00"], confirm: "Confirmar", confirmed: "Llamada agendada", when: "Jueves · 11:30" }
+    call: { title: "Llamada de {{duracionLlamada}}", days: ["L", "M", "M", "J", "V"], slots: ["10:00", "11:00", "13:00", "14:00"], confirm: "Confirmar", confirmed: "Llamada agendada", when: "Jueves · 11:00" }
     proposal: { title: "Propuesta", items: ["Qué incluye, página por página", "Calendario por etapa", "Precio fijo", "Anexo A, por escrito"], stamp: "Aprobada" }
     preview: { link: "Liga privada", button: "Aprobar diseño" }
     build: { items: ["Páginas", "Formularios", "SEO", "Analítica"], round: "Una ronda de revisión" }

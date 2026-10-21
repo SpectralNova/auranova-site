@@ -65,6 +65,13 @@ main:focus { outline: none; }
 .hero h1 { max-width: 16ch; margin-top: var(--space-5); }
 .hero .lead { max-width: 52ch; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-6); }
+/* Contacto: "Agenda una llamada" o "Envíanos un correo". Stacked on phones so the "o" never strands at a line end. */
+.hero__actions--choice { align-items: center; }
+.hero__or { color: var(--color-text-muted); font-size: var(--text-sm); }
+@media (max-width: 479px) {
+  .hero__actions--choice { flex-direction: column; align-items: stretch; }
+  .hero__or { text-align: center; }
+}
 .hero__note { margin: var(--space-4) 0 0; font-size: var(--text-sm); }
 
 /* ---------- Card grids (2, 3 or 4 equal columns) ---------- */
@@ -221,6 +228,8 @@ main:focus { outline: none; }
 .site-footer__contact { margin: 0; font-size: var(--text-sm); }
 .site-footer__contact dt { color: var(--color-text-muted); }
 .site-footer__contact dd { margin: 0 0 var(--space-3); }
+.site-footer__contact a { color: var(--color-accent); }
+.site-footer__contact a:hover { color: var(--color-accent-hover); }
 .site-footer__legal { margin-top: var(--space-7); padding-top: var(--space-5); border-top: 1px solid var(--color-border); font-size: var(--text-sm); }
 .site-footer__legal p { margin: 0; }
 

@@ -124,7 +124,8 @@
 ## Q16 · Booking tool
 - **Answer:** ✅ Cal.com. (2026-10-19) ✅ The call lasts **30 minutes** (2026-10-20; `duracionLlamada` in `business.ts`).
 - **Link (2026-10-20):** ✅ https://cal.com/auranova-cal/llamada-inicial (event "llamada-inicial", 30 min, synced to Zoho Calendar). Every "Agenda una llamada" CTA now links straight to it (ADR-004).
-- **Still 🟡:** 15-minute buffers, Mon–Fri 9:00–17:00 `America/Monterrey`; link out at launch (ADR-004). Cal.com shows each visitor the slots in their own time zone, which matters for US clients. You create the free account in Phase 2.
+- **Set up (2026-10-20, through the Cal.com connector):** call slots (David, 2026-10-20) Monday 13:00–15:00, Tuesday–Friday 10:00–12:00 and 13:00–15:00, `America/Mexico_City` (same offset as Monterrey); the site's posted business hours stay 9:00–17:00; **30-minute buffer** after each call (David); video by **Zoom** (David; connected and set as the location); booking page locked to Spanish (es-419); bookings go to the **contacto@** Zoho calendar and clients see **contacto@auranova.mx** as the organizer (David, 2026-10-20; the Zoom host name stays David's, on purpose); Cal.com's default "15 min" and "Secret" events hidden.
+- **Verified (2026-10-20):** David's test booking worked end to end. Cal.com account email = contacto@auranova.mx; minimum notice 2 hours (David); profile bio proofread ("claro" → "con claridad"). Custom brand colors (lime / violet) are a paid Cal.com feature, so they wait for an upgrade. Cal.com → HubSpot app ✅ enabled on "Llamada inicial" (2026-10-20): each booking creates or updates the contact and logs the meeting; a cancellation marks the meeting "Canceled" (tested). Event title template: "{Link title}: {Organiser} y {Scheduler}". Link out at launch (ADR-004).
 
 ## Q17 · Lead magnet
 - **Status:** ✅ · **Answer:** yes, ungated, generated from the same data as /estandar; in both languages (Q4). · **Date:** 2026-10-19

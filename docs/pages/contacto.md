@@ -4,7 +4,7 @@
 |---|---|
 | **Goal** | Book a call, or write. |
 | **Audience** | An owner ready to talk, plus those who prefer to write first. |
-| **Primary CTA** | **Agenda una llamada** (Cal.com, ADR-004). Alternatives: the form, the business email (Q15). |
+| **Primary CTA** | Every site CTA lands on `#agenda`, which offers **Agenda una llamada** (Cal.com) *o* **Envíanos un correo** (mailto), ADR-004 update. The form sits below. |
 | **Success metric** | `booking_open` · `form_submit` per session. |
 | **SEO** | Title "Contacto: agenda una llamada · AuraNova". `BreadcrumbList`. |
 | **Blanks** | Q6 budget brackets (booking link ✅, call length ✅ 30 min, email ✅ contacto@auranova.mx) |

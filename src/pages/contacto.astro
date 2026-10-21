@@ -33,7 +33,11 @@ const crumbs = breadcrumbJsonLd([
       <span class="eyebrow">{c.hero.eyebrow}</span>
       <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
       <p class="lead" set:html={rich(c.hero.lead, lang)} />
-      <div class="hero__actions"><CTA lang={lang} location="contacto" /></div>
+      <div class="hero__actions hero__actions--choice">
+        {booking && <a class="btn btn--primary" href={booking} data-track="booking_open" data-track-location="contacto">{ui.cta}</a>}
+        {booking && email && <span class="hero__or">{c.hero.or}</span>}
+        {email && <a class="btn btn--secondary" href={`mailto:${email}`} data-track="email_click" data-track-location="contacto">{c.hero.emailCta}</a>}
+      </div>
       {!booking && <p class="hero__note" set:html={rich(c.hero.bookingPending, lang)} />}
       <p class="hero__note muted" set:html={rich(c.hero.hours, lang)} />
       <h2 class="next-title">{c.hero.next.title}</h2>
