@@ -144,6 +144,7 @@
 - **Answer:** ✅ David will update the contract per `CONTRACT_INSIGHTS.md` §3. (2026-10-19)
 - **Still open 🔴:** the version + date to cite in Cómo trabajamos (production can't ship without it), and an English version for US clients (Q27).
 - **Build rule:** terms David approved here are written as plain text; one page-level `[[PENDIENTE: versión del contrato]]` marker blocks production until the updated contract exists.
+- **Draft (2026-10-21):** the contract + Anexo A now exist as **BORRADOR** in `Desktop/CLAUDE-PLOCAL/AuraNova Documentos/00 Plantillas/Contratos (borradores)` (19 clauses from §3 + the site's terms, generated from the accepted quote; [[CONFIRMAR]] on terms the site doesn't state: warranty exclusions, 2-year confidentiality, rescission, liability cap; 12 notes for the lawyer). Still needed: a lawyer's review (David is looking for one), David's RFC, domicilio (Q2) and bank details. The version + date for Cómo trabajamos comes after the review.
 
 ## Q21 · Social-proof numbers
 - **Status:** ✅ · **Answer:** omit until real. · **Date:** 2026-10-19
