@@ -135,6 +135,7 @@
 ## Q18 · Analytics
 - **Status:** 🔴 TBD (David, 2026-10-19). Decide before CP2: it determines the events and the aviso's wording.
 - **Meanwhile:** the build calls a `track()` helper that does nothing until a tool is chosen. Options stay as before: Umami Cloud (free tier, cookieless, custom events) or Plausible (paid). Cloudflare Web Analytics has no custom events.
+- **Meta (2026-10-21):** Pixel/dataset **2078766606859398** created by David (Events Manager, Web source). It loads only through Cloudflare **Zaraz** with consent («Publicidad» in the cookie banner) at launch (checklist step 07), with the Conversions API token pasted by David into Zaraz. No Meta code goes into the site's source, so the CSP stays `script-src 'self'`. Events to wire: PageView, Lead (form sent), Schedule (booking opened).
 
 ## Q19 · Domain and hosting
 - **Status:** ✅ · **Answer:** domain **auranova.mx**; host **Cloudflare Pages** (ADR-002). · **Date:** 2026-10-19
