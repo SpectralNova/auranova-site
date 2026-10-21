@@ -6,6 +6,7 @@ dist/
 # secrets: never commit (an .env.example may be committed)
 .env*
 !.env.example
+.dev.vars*
 
 # private client and legal documents
 Documentos/

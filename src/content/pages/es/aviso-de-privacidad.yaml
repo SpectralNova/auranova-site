@@ -1,0 +1,171 @@
+# Aviso de privacidad integral (Q2). Text from the draft for the lawyer
+# (AuraNova Documentos/00 Plantillas/_generador/aviso_privacidad.cjs, 2026-10-21), adapted to the web:
+# the domicilio is the virtual office's (never the fiscal address), and the page stays blocked for
+# production until the lawyer's review, the address and the cookie banner exist.
+title: "Aviso de privacidad · AuraNova"
+description: "Qué datos personales trata AuraNova, para qué los usa, con quién los comparte y cómo ejercer tus derechos ARCO."
+
+hero:
+  eyebrow: "Aviso de privacidad"
+  title: "Aviso de privacidad ==integral=="
+  lead: "En AuraNova cuidamos tus datos personales. Este aviso te explica qué datos tratamos, para qué, con quién los compartimos y cómo ejercer tus derechos, conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares, publicada en el Diario Oficial de la Federación el 20 de marzo de 2025 (la «Ley»)."
+  updated: "Última actualización: 21 de octubre de 2026"
+  review: "[[PENDIENTE: revisión del aviso por un abogado y aviso de cookies con «Preferencias de cookies» en el sitio, antes de publicarlo]]"
+
+sections:
+  - id: responsable
+    nav: "Responsable"
+    title: "1. Quién es responsable de tus datos"
+    body:
+      - "AuraNova es el nombre comercial de {{nombreLegal}}, persona física con actividad empresarial en México (en adelante, «AuraNova» o «nosotros»), responsable del tratamiento de tus datos personales."
+      - "**Domicilio para oír y recibir notificaciones:** {{domicilio}}."
+      - "**Correo de contacto:** [contacto@auranova.mx](mailto:contacto@auranova.mx)"
+
+  - id: datos
+    nav: "Datos"
+    title: "2. Qué datos tratamos"
+    body:
+      - "Según cómo te relaciones con nosotros, podemos tratar estos datos:"
+      - h: "2.1 Identificación y contacto"
+      - list:
+          - "Nombre."
+          - "Correo electrónico."
+          - "Teléfono, si nos lo das."
+          - "Nombre de tu negocio y dirección de tu sitio web actual."
+      - h: "2.2 Información sobre tu proyecto"
+      - list:
+          - "El servicio que te interesa, tu presupuesto aproximado y lo que nos cuentas en tus mensajes o en la llamada."
+          - "Los textos, fotos, logo y demás materiales que nos compartes para tu sitio."
+      - h: "2.3 Datos para contratar y facturar"
+      - list:
+          - "Nombre o razón social, RFC, régimen fiscal, código postal y domicilio fiscal, uso del CFDI y tu Constancia de Situación Fiscal."
+          - "Nombre del representante legal, si contratas como empresa."
+          - "Comprobantes de pago. No guardamos datos de tarjetas: los pagos se hacen por transferencia."
+      - h: "2.4 Accesos a tus cuentas"
+      - list:
+          - "Usuarios y contraseñas de tu dominio, hosting y plataformas, que nos compartes con un gestor de contraseñas y que usamos sólo para tu proyecto."
+      - h: "2.5 Datos de navegación"
+      - list:
+          - "Páginas visitadas, tipo de dispositivo y navegador, país o ciudad aproximada y sitio de procedencia."
+          - "Las etiquetas de campaña de la liga con la que llegaste, por ejemplo, de qué anuncio vienes."
+          - "Tu dirección IP, que nuestro proveedor de hospedaje procesa para proteger el sitio contra spam y abuso."
+      - h: "2.6 Datos de publicidad, sólo si los aceptas"
+      - list:
+          - "Identificadores del Pixel de Meta y tus interacciones con nuestros anuncios (ver la sección 9)."
+      - "**No tratamos datos personales sensibles**, como datos de salud, origen étnico o racial, creencias religiosas, opiniones políticas, datos biométricos o vida sexual. Te pedimos no enviárnoslos."
+
+  - id: finalidades
+    nav: "Finalidades"
+    title: "3. Para qué usamos tus datos"
+    body:
+      - h: "3.1 Finalidades necesarias para atenderte o para cumplir nuestro contrato"
+      - list:
+          - "Responder tus mensajes y tus solicitudes de información o de cotización."
+          - "Agendar y realizar la llamada inicial por videollamada."
+          - "Preparar cotizaciones, contratos y anexos."
+          - "Prestar los servicios que contrates: diseño, desarrollo, publicación, configuración de herramientas, capacitación, garantía y mantenimiento."
+          - "Facturar, cobrar y llevar nuestra contabilidad."
+          - "Cumplir nuestras obligaciones legales y fiscales, y atender requerimientos de autoridades."
+          - "Proteger nuestro sitio y nuestros formularios contra spam y abuso."
+      - h: "3.2 Finalidades que requieren tu consentimiento"
+      - list:
+          - "Enviarte novedades, contenido y promociones de AuraNova."
+          - "Medir y mejorar nuestros anuncios en Facebook e Instagram, y mostrarte publicidad de AuraNova, con el Pixel de Meta y su API de conversiones."
+          - "Pedirte tu opinión sobre nuestro servicio y, sólo con tu autorización por escrito, publicar tu testimonio."
+      - "Puedes negarte a estas finalidades o retirar tu consentimiento en cualquier momento, sin que eso afecte los servicios que nos pidas:"
+      - list:
+          - "**Correos de novedades:** con la liga para darte de baja que viene en cada correo."
+          - "**Publicidad:** desde «Preferencias de cookies», al pie de nuestro sitio."
+          - "**Cualquiera de ellas:** escribiendo a [contacto@auranova.mx](mailto:contacto@auranova.mx) con el asunto «Limitación de uso»."
+
+  - id: proveedores
+    nav: "Con quién los compartimos"
+    title: "4. Con quién compartimos tus datos"
+    body:
+      - "**No vendemos, rentamos ni compartimos tus datos con terceros para sus propios fines.**"
+      - "Para operar, usamos proveedores que tratan tus datos sólo por nuestra cuenta y bajo nuestras instrucciones:"
+      - list:
+          - "**Cloudflare:** hospedaje del sitio, envío del formulario, estadísticas de visitas sin cookies y protección contra spam."
+          - "**Resend:** envío de los correos del formulario."
+          - "**HubSpot:** registro de contactos y seguimiento de solicitudes."
+          - "**Zoho:** correo electrónico y calendario."
+          - "**Cal.com:** agenda de llamadas."
+          - "**Zoom:** videollamadas."
+      - "Algunos de estos proveedores guardan información fuera de México, por ejemplo en Estados Unidos. Todos están obligados a protegerla."
+      - "Si aceptas las cookies de publicidad, Meta Platforms recibe datos de tu visita para medir nuestros anuncios y mostrarte publicidad de AuraNova, conforme a su propio aviso de privacidad."
+      - "También podemos comunicar tus datos a autoridades competentes cuando la ley lo exija."
+
+  - id: tu-sitio
+    nav: "Cuando hacemos tu sitio"
+    title: "5. Cuando hacemos el sitio de tu negocio"
+    body:
+      - "Si contratas un sitio que recaba datos de tus propios clientes, por ejemplo con un formulario o un CRM, tú eres el responsable de esos datos y nosotros actuamos como encargados: los tratamos sólo para construir y operar tu sitio, conforme a tus instrucciones y a nuestro contrato."
+
+  - id: arco
+    nav: "Derechos ARCO"
+    title: "6. Tus derechos ARCO"
+    body:
+      - "Tienes derecho a **acceder** a tus datos, a **rectificarlos** si son inexactos o están incompletos, lo que incluye actualizarlos, a **cancelarlos** y a **oponerte** a su tratamiento para fines específicos. También puedes **revocar tu consentimiento**. Ejercer estos derechos es gratuito."
+      - "Para ejercerlos, escríbenos a [contacto@auranova.mx](mailto:contacto@auranova.mx) con el asunto «Derechos ARCO» o «Revocación de consentimiento», e incluye:"
+      - list:
+          - "Tu nombre completo."
+          - "El medio por el que quieres recibir la respuesta."
+          - "Una identificación oficial, o la de tu representante y el documento que acredite su representación."
+          - "La descripción clara del derecho que quieres ejercer y de los datos a los que se refiere."
+          - "Cualquier otro elemento que nos ayude a localizar tus datos."
+      - "Te respondemos en un plazo máximo de 20 días, contados desde que recibimos tu solicitud. Si procede, la hacemos efectiva dentro de los 15 días siguientes a nuestra respuesta. Estos plazos pueden ampliarse una sola vez, por un periodo igual, cuando las circunstancias lo justifiquen. Te respondemos por el mismo medio, salvo que nos indiques otro."
+      - "La revocación del consentimiento puede no aplicar a los datos que necesitamos para cumplir obligaciones legales o un contrato vigente."
+      - "Si consideras que tu derecho a la protección de tus datos personales fue vulnerado, puedes acudir a la Secretaría Anticorrupción y Buen Gobierno, la autoridad en la materia."
+
+  - id: seguridad
+    nav: "Seguridad"
+    title: "7. Cómo protegemos tus datos"
+    body:
+      - "Aplicamos medidas administrativas, técnicas y físicas para proteger tus datos contra daño, pérdida, alteración, destrucción y uso, acceso o tratamiento no autorizados. Entre ellas:"
+      - list:
+          - "Conexión cifrada (HTTPS) en todo nuestro sitio."
+          - "Accesos guardados en un gestor de contraseñas. Nunca te pedimos contraseñas por correo."
+          - "Acceso a tu información sólo para quien la necesita para tu proyecto."
+          - "Proveedores con medidas de seguridad reconocidas."
+
+  - id: conservacion
+    nav: "Conservación"
+    title: "8. Cuánto tiempo conservamos tus datos"
+    body:
+      - "Conservamos tus datos sólo el tiempo necesario para las finalidades de este aviso:"
+      - list:
+          - "**Contratos, facturas y datos fiscales:** el plazo que exigen las leyes fiscales, en general 5 años."
+          - "**Solicitudes que no se convirtieron en proyecto:** hasta 2 años desde el último contacto."
+          - "**Accesos a tus cuentas:** los eliminamos de nuestro gestor de contraseñas al entregar tu proyecto, salvo que contrates mantenimiento."
+      - "Después, los bloqueamos y los eliminamos de forma segura."
+
+  - id: cookies
+    nav: "Cookies"
+    title: "9. Cookies y tecnologías similares"
+    body:
+      - "Nuestro sitio mide sus visitas con una herramienta que no instala cookies (Cloudflare Web Analytics [[CONFIRMAR: herramienta de analítica (Q18)]])."
+      - "Sólo si las aceptas en el aviso de cookies, usamos el **Pixel de Meta** y su API de conversiones para medir y mejorar nuestros anuncios en Facebook e Instagram. Puedes cambiar tu elección en cualquier momento desde «Preferencias de cookies», al pie del sitio, y también bloquear las cookies desde tu navegador."
+
+  - id: menores
+    nav: "Menores de edad"
+    title: "10. Menores de edad"
+    body:
+      - "Nuestros servicios son para negocios y personas adultas. No recabamos a sabiendas datos de menores de edad. Si crees que un menor nos dio sus datos, escríbenos y los eliminamos."
+
+  - id: cambios
+    nav: "Cambios"
+    title: "11. Cambios a este aviso"
+    body:
+      - "Si cambiamos este aviso, publicamos la versión nueva en esta página, con su fecha de actualización. Si el cambio es importante, también te avisamos por correo, si tenemos el tuyo."
+
+  - id: consentimiento
+    nav: "Tu consentimiento"
+    title: "12. Tu consentimiento"
+    body:
+      - "Al enviarnos tus datos por el formulario, al agendar una llamada o al escribirnos, consientes su tratamiento para las finalidades de la sección 3.1. Para las de la sección 3.2 te pedimos tu consentimiento por separado: en el formulario, en el aviso de cookies o por escrito."
+
+contact:
+  title: "¿Tienes preguntas sobre este aviso o sobre tus datos?"
+  text: "Escríbenos a [contacto@auranova.mx](mailto:contacto@auranova.mx)."
+  # Shown once /terminos/ is built (routes.ts).
+  terms: "Consulta también nuestros [Términos de uso](/terminos/)."

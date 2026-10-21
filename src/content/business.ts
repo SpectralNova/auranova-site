@@ -65,6 +65,9 @@ export const textFacts = {
   garantia: ok({ es: '30 días hábiles', en: '30 business days' }), // Q11; business days (David, 2026-10-20)
   correo: business.email,
   ciudad: business.city,
+  // Legal pages only (Q2).
+  nombreLegal: business.legalName,
+  domicilio: business.domicilio,
 } satisfies Record<string, Fact<string>>;
 
 export type TextFactKey = keyof typeof textFacts;

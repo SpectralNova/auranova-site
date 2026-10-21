@@ -79,6 +79,13 @@ const organization = {
     <meta property="og:description" content={description} />
     <meta property="og:locale" content={ui.ogLocale} />
     {canonical && <meta property="og:url" content={canonical} />}
+    {/* Share image (scripts/og-image.mjs): link previews in WhatsApp, Facebook, LinkedIn and ads. */}
+    <meta property="og:image" content={new URL('/og/auranova.jpg', site).href} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ui.ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json" set:html={JSON.stringify([organization, ...jsonLd])} />
   </head>
   <body>
@@ -89,6 +96,18 @@ const organization = {
     </main>
     <Footer lang={lang} />
     <script>
+      // Where the visit came from, for the contact form (ADR-003 → HubSpot utm_* fields): the first page of the
+      // visit keeps its campaign tags, its path and the referring site. This tab only (sessionStorage).
+      try {
+        if (!sessionStorage.getItem('au_origin')) {
+          const params = new URLSearchParams(location.search);
+          const referrer = document.referrer && new URL(document.referrer).origin !== location.origin ? document.referrer : '';
+          const origin: Record<string, string> = { landing: location.pathname, referrer: referrer.slice(0, 300) };
+          for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content']) origin[key] = (params.get(key) ?? '').slice(0, 200);
+          sessionStorage.setItem('au_origin', JSON.stringify(origin));
+        }
+      } catch {}
+
       // Analytics hook (Q18 TBD): CTAs carry data-track; window.auTrack is wired once a tool is chosen.
       document.addEventListener('click', (event) => {
         const el = (event.target as Element | null)?.closest<HTMLElement>('[data-track]');

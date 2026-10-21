@@ -32,14 +32,15 @@ form:
     website: "Sitio actual"
     websiteHint: "Si ya tienes uno."
     type: "¿Qué necesitas?"
+    # value = HubSpot's servicio_de_interes and worker/lead.ts SERVICES (the build fails if one is unknown).
     typeOptions:
-      - "Sitio web nuevo, rediseño o tienda"
-      - "Plataforma a la medida"
-      - "Posicionamiento en Google"
-      - "Contenido y marca"
-      - "Mantenimiento y soporte"
-      - "Asesoría digital"
-      - "No estoy seguro"
+      - { value: "sitio_web", label: "Sitio web nuevo, rediseño o tienda" }
+      - { value: "plataforma", label: "Plataforma a la medida" }
+      - { value: "posicionamiento", label: "Posicionamiento en Google" }
+      - { value: "contenido_marca", label: "Contenido y marca" }
+      - { value: "mantenimiento", label: "Mantenimiento y soporte" }
+      - { value: "asesoria", label: "Asesoría digital" }
+      - { value: "no_seguro", label: "No estoy seguro" }
     budget: "Presupuesto aproximado"
     budgetHint: "Montos en pesos mexicanos, más IVA."
     budgetNone: "Prefiero no decir"
@@ -51,13 +52,22 @@ form:
     message: "Mensaje"
     messageHint: "¿Qué quieres lograr con tu sitio?"
     consent: "Leí y acepto el [aviso de privacidad](/aviso-de-privacidad/)."
+    # Secondary purpose (aviso §3.2): its own optional box, unchecked by default.
+    newsletter: "Quiero recibir novedades, contenido y promociones de AuraNova por correo. Puedes darte de baja cuando quieras."
+  # Aviso de privacidad simplificado (the draft's wording; the lawyer confirms it).
+  notice: "AuraNova, nombre comercial de {{nombreLegal}}, usa tus datos para responder tu solicitud, agendar tu llamada y, si contratas, prestar el servicio y facturarlo. Con tu consentimiento, también los usa para enviarte novedades y medir sus anuncios; puedes negarte a esto último sin que afecte tu solicitud. Consulta el [aviso de privacidad integral](/aviso-de-privacidad/)."
   submit: "Enviar mensaje"
+  sending: "Enviando…"
+  noscript: "Para enviar el formulario necesitas JavaScript. También puedes escribirnos a contacto@auranova.mx."
+  status:
+    sent: "Recibimos tu mensaje. Te respondemos en {{respuesta}} y te enviamos una confirmación a tu correo."
+    challenge: "No pudimos confirmar que eres una persona. Inténtalo de nuevo."
+    failed: "No pudimos enviar tu mensaje. Inténtalo de nuevo en unos minutos o escríbenos a contacto@auranova.mx."
   errors:
     required: "Este campo es obligatorio."
     email: "Escribe un correo válido, por ejemplo nombre@empresa.com."
     consent: "Necesitamos tu consentimiento para poder responderte."
     summary: "Revisa los campos marcados."
-  previewNote: "[[PENDIENTE: el envío del formulario se conecta en la fase 2 (ADR-003)]]"
 
 channels:
   eyebrow: "Otros canales"
@@ -67,3 +77,5 @@ channels:
     hours: "Horario"
     response: "Respuesta"
   response: "En {{respuesta}}"
+  # Stands alone, so it uses the footer's wording (no leading "de"; audit L5).
+  hours: "{{horarioPie}}"

@@ -159,7 +159,7 @@ main:focus { outline: none; }
 .case-card__facts dt { margin-top: var(--space-2); color: var(--color-text-muted); font-size: var(--text-sm); }
 .case-card__facts div { display: flex; flex-direction: column; }
 
-/* ---------- Long-form pages (Cómo trabajamos) ---------- */
+/* ---------- Long-form pages (Cómo trabajamos, Aviso de privacidad) ---------- */
 .toc { margin-top: var(--space-6); }
 .toc__title { margin: 0 0 var(--space-3); font-size: var(--text-sm); font-weight: var(--weight-strong); color: var(--color-text-muted); }
 .toc ul { display: flex; flex-wrap: wrap; gap: var(--space-2); list-style: none; margin: 0; padding: 0; }
@@ -176,6 +176,9 @@ main:focus { outline: none; }
 .doc__body > ul:not([class]), .doc__body > ol:not([class]) { max-width: var(--measure); margin: 0 0 var(--space-4); padding-left: var(--space-6); }
 .doc__body li { margin-bottom: var(--space-2); }
 .doc__body > .check-list { max-width: var(--measure); margin-bottom: var(--space-4); }
+/* Sub-headings inside a section (Aviso de privacidad: 2.1, 2.2…). */
+.doc__body > h3 { max-width: var(--measure); margin: var(--space-6) 0 var(--space-3); font-size: var(--text-lg); }
+.doc__body > h3:first-child { margin-top: 0; }
 /* Desktop: heading in the left 4 columns, text in the right 8 (keeps lines within the measure). */
 @media (min-width: 1024px) {
   .doc > section { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--grid-gap); align-items: start; }
@@ -199,6 +202,10 @@ main:focus { outline: none; }
 .field--check label { font-weight: var(--weight-body); font-size: var(--text-base); }
 .form__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); }
 .form__status { margin: 0; }
+.form > .caption { margin: 0; } /* the grid gap spaces it */
+/* Turnstile shows only when it needs the visitor (interaction-only); empty, it takes no room. */
+.form__turnstile:empty { display: none; }
+.form[aria-busy='true'] button[type='submit'] { cursor: progress; opacity: 0.8; }
 .hp { position: absolute; inset-inline-start: -100vw; }
 
 .contact-list { display: grid; gap: var(--space-4); margin: 0; }

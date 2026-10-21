@@ -16,7 +16,13 @@ const { file, position = '100% 50%', mobilePosition = '88% 50%' } = Astro.props;
 
 <div class="backdrop" aria-hidden="true" data-parallax style={`--pos: ${position}; --pos-m: ${mobilePosition}`}>
   <div class="backdrop__img sd-hero-out">
-    <GeneratedImage file={file} widths={[640, 1088, 1632, 2400, 3200, 4352]} sizes="100vw" priority />
+    {/* sizes = how wide the art is really drawn (inset −4% + cover), measured per breakpoint. */}
+    <GeneratedImage
+      file={file}
+      widths={[640, 1088, 1632, 2400, 3200, 4352]}
+      sizes="(max-width: 767px) 112vw, (max-width: 1279px) 140vw, 108vw"
+      priority
+    />
   </div>
   <div class="backdrop__fade"></div>
 </div>

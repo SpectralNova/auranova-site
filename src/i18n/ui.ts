@@ -6,6 +6,7 @@ export const ui = {
   es: {
     htmlLang: 'es-MX',
     ogLocale: 'es_MX',
+    ogImageAlt: 'AuraNova: un sitio web que trabaja tanto como tú. Sitios web, contenido y asesoría digital.',
     skip: 'Saltar al contenido',
     navLabel: 'Principal',
     menuLabel: 'Menú',
@@ -57,6 +58,7 @@ export const ui = {
   en: {
     htmlLang: 'en-US',
     ogLocale: 'en_US',
+    ogImageAlt: 'AuraNova: a website that works as hard as you do. Websites, content and digital consulting.',
     skip: 'Skip to content',
     navLabel: 'Main',
     menuLabel: 'Menu',

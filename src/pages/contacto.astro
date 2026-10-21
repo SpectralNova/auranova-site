@@ -7,15 +7,19 @@ import Cards from '../components/Cards.astro';
 import { business, factText, factValue } from '../content/business';
 import { href } from '../i18n/routes';
 import { t } from '../i18n/ui';
-import { rich } from '../lib/rich';
+import { plain, rich } from '../lib/rich';
 import { breadcrumbJsonLd } from '../lib/jsonld';
-import { PRODUCTION } from '../lib/env';
+import { TURNSTILE_SITE_KEY } from '../lib/env';
+import { SERVICES } from '../../worker/lead.ts';
 
 const lang = 'es';
 const page = await getEntry('pages', 'es/contacto');
 if (!page) throw new Error('Missing src/content/pages/es/contacto.yaml');
 const c = page.data as any;
 const f = c.form.fields;
+// The Worker only accepts the values it knows (and HubSpot only has those): fail the build on a typo.
+for (const o of f.typeOptions) if (!Object.hasOwn(SERVICES, o.value)) throw new Error(`contacto.yaml: unknown service "${o.value}"`);
+const status = c.form.status;
 const ui = t(lang);
 const site = Astro.site!;
 const booking = factValue(business.bookingUrl, lang);
@@ -46,7 +50,18 @@ const crumbs = breadcrumbJsonLd([
   </section>
 
   <Section lang={lang} theme="light" id="escribenos" eyebrow={c.form.eyebrow} title={c.form.title} lead={c.form.lead}>
-    <form class="form" id="contact-form" action="/api/contacto" method="post" novalidate data-error-summary={c.form.errors.summary}>
+    <form
+      class="form"
+      id="contact-form"
+      action="/api/contacto"
+      method="post"
+      novalidate
+      data-error-summary={c.form.errors.summary}
+      data-sending={c.form.sending}
+      data-sent={plain(status.sent, lang)}
+      data-challenge={plain(status.challenge, lang)}
+      data-failed={plain(status.failed, lang)}
+      data-sitekey={TURNSTILE_SITE_KEY}>
       <div class="field">
         <label for="f-name">{f.name}</label>
         <input id="f-name" name="nombre" type="text" autocomplete="name" required aria-describedby="f-name-err" />
@@ -70,7 +85,7 @@ const crumbs = breadcrumbJsonLd([
         <label for="f-type">{f.type}</label>
         <select id="f-type" name="tipo" required aria-describedby="f-type-err">
           <option value="">{c.form.select}</option>
-          {f.typeOptions.map((o: string) => <option>{o}</option>)}
+          {f.typeOptions.map((o: { value: string; label: string }) => <option value={o.value}>{o.label}</option>)}
         </select>
         <p class="field__error" id="f-type-err" data-msg={c.form.errors.required} hidden></p>
       </div>
@@ -92,6 +107,9 @@ const crumbs = breadcrumbJsonLd([
         <label for="f-hp">No llenes este campo</label>
         <input id="f-hp" name="sitio_web_2" type="text" tabindex="-1" autocomplete="off" />
       </div>
+      {/* Filled by the script: when the form appeared (bots send instantly) and where the visit came from. */}
+      {['t', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'landing', 'referrer'].map((name) => <input type="hidden" name={name} />)}
+      <p class="form__full caption muted" id="f-notice" set:html={rich(c.form.notice, lang)} />
       <div class="field form__full">
         <div class="field--check">
           <input id="f-consent" name="consentimiento" type="checkbox" required aria-describedby="f-consent-err" />
@@ -99,11 +117,18 @@ const crumbs = breadcrumbJsonLd([
         </div>
         <p class="field__error" id="f-consent-err" data-msg={c.form.errors.consent} hidden></p>
       </div>
+      <div class="field form__full">
+        <div class="field--check">
+          <input id="f-news" name="novedades" type="checkbox" />
+          <label for="f-news">{f.newsletter} <span class="muted">{c.form.optional}</span></label>
+        </div>
+      </div>
+      <div class="form__full form__turnstile" id="f-turnstile"></div>
       <div class="form__actions form__full">
-        <button class="btn btn--primary" type="submit">{c.form.submit}</button>
+        <button class="btn btn--primary" type="submit" data-label={c.form.submit}>{c.form.submit}</button>
         <p class="form__status" id="form-status" role="status" tabindex="-1"></p>
       </div>
-      {!PRODUCTION && <p class="form__full caption" set:html={rich(c.form.previewNote, lang)} />}
+      <noscript class="form__full"><p class="caption">{c.form.noscript}</p></noscript>
     </form>
   </Section>
 
@@ -115,7 +140,7 @@ const crumbs = breadcrumbJsonLd([
       </div>
       <div>
         <dt>{c.channels.labels.hours}</dt>
-        <dd set:html={rich('{{horario}}', lang)} />
+        <dd set:html={rich(c.channels.hours, lang)} />
       </div>
       <div>
         <dt>{c.channels.labels.response}</dt>
@@ -127,14 +152,22 @@ const crumbs = breadcrumbJsonLd([
 </Layout>
 
 <script>
-  // Phase 1: form UI only (validation + accessible errors). Delivery is wired in Phase 2 (ADR-003).
+  // Contact form (ADR-003): accessible validation, then the Worker at /api/contacto. Turnstile (anti-spam)
+  // loads on the first interaction with the form, never on page load.
+  type Field = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+  interface Turnstile {
+    render(el: HTMLElement, options: object): string;
+    reset(id: string): void;
+  }
+
   const form = document.querySelector<HTMLFormElement>('#contact-form');
   const status = document.querySelector<HTMLElement>('#form-status');
-  if (form && status) {
-    const fields = Array.from(form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('[required]'));
-    const showError = (field: (typeof fields)[number]) => {
+  const submit = form?.querySelector<HTMLButtonElement>('button[type=submit]');
+  if (form && status && submit) {
+    const msg = form.dataset;
+    const fields = Array.from(form.querySelectorAll<Field>('[required]'));
+    const showError = (field: Field, valid = field.checkValidity()) => {
       const err = document.getElementById(`${field.id}-err`);
-      const valid = field.checkValidity();
       field.setAttribute('aria-invalid', String(!valid));
       if (err) {
         err.hidden = valid;
@@ -143,16 +176,115 @@ const crumbs = breadcrumbJsonLd([
       return valid;
     };
     fields.forEach((field) => field.addEventListener('blur', () => field.getAttribute('aria-invalid') && showError(field)));
-    form.addEventListener('submit', (event) => {
+
+    // Hidden fields: when the form appeared, and the visit's origin saved by the layout on its first page.
+    const setHidden = (name: string, value: string) => {
+      const input = form.elements.namedItem(name);
+      if (input instanceof HTMLInputElement) input.value = value;
+    };
+    const fillHidden = () => {
+      setHidden('t', String(Date.now()));
+      let origin: Record<string, string> = {};
+      try {
+        origin = JSON.parse(sessionStorage.getItem('au_origin') ?? '{}');
+      } catch {}
+      for (const name of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'landing', 'referrer']) setHidden(name, origin[name] ?? '');
+    };
+    fillHidden();
+
+    // Turnstile: one token per send. `waiting` resolves the next token (or '' on error or after 15 s).
+    const slot = document.querySelector<HTMLElement>('#f-turnstile');
+    let widget: string | undefined;
+    let token = '';
+    let waiting: ((value: string) => void)[] = [];
+    const settle = (value: string) => {
+      token = value;
+      waiting.forEach((resolve) => resolve(value));
+      waiting = [];
+    };
+    const turnstile = () => (window as unknown as { turnstile?: Turnstile }).turnstile;
+    let loading = false;
+    const loadTurnstile = () => {
+      if (loading || !slot) return;
+      loading = true;
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.addEventListener('load', () => {
+        widget = turnstile()?.render(slot, {
+          sitekey: msg.sitekey,
+          language: 'es',
+          theme: 'light',
+          size: 'flexible',
+          appearance: 'interaction-only',
+          callback: settle,
+          'expired-callback': () => (token = ''),
+          'error-callback': () => settle(''),
+        });
+      });
+      script.addEventListener('error', () => settle(''));
+      document.head.append(script);
+    };
+    form.addEventListener('focusin', loadTurnstile, { once: true });
+    form.addEventListener('pointerdown', loadTurnstile, { once: true });
+    const getToken = () =>
+      token
+        ? Promise.resolve(token)
+        : new Promise<string>((resolve) => {
+            waiting.push(resolve);
+            setTimeout(() => resolve(''), 15000);
+            loadTurnstile();
+          });
+
+    const say = (text = '') => {
+      status.textContent = text;
+      status.focus();
+    };
+    const busy = (on: boolean) => {
+      form.setAttribute('aria-busy', String(on));
+      submit.textContent = on ? (msg.sending ?? '') : (submit.dataset.label ?? '');
+    };
+
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
+      if (form.getAttribute('aria-busy') === 'true') return; // one send at a time
       const invalid = fields.filter((field) => !showError(field));
       if (invalid.length) {
-        status.textContent = form.dataset.errorSummary ?? '';
+        status.textContent = msg.errorSummary ?? '';
         invalid[0].focus();
         return;
       }
-      status.textContent = 'Vista previa: el envío se conecta en la fase 2.';
-      status.focus();
+      busy(true);
+      status.textContent = msg.sending ?? '';
+      try {
+        const pass = await getToken();
+        if (!pass) return say(msg.challenge);
+        const data = new FormData(form);
+        data.set('cf-turnstile-response', pass);
+        const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        const body = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; fields?: string[] };
+        if (res.ok && body.ok) {
+          form.reset();
+          fields.forEach((field) => field.removeAttribute('aria-invalid'));
+          fillHidden();
+          return say(msg.sent);
+        }
+        if (body.error === 'invalid' && body.fields?.length) {
+          // The server disagreed with the browser: mark its fields the same way.
+          const marked = body.fields.map((name) => form.elements.namedItem(name)).filter((el): el is Field => fields.includes(el as Field));
+          marked.forEach((field) => showError(field, false));
+          status.textContent = msg.errorSummary ?? '';
+          return marked[0]?.focus();
+        }
+        say(body.error === 'challenge' ? msg.challenge : msg.failed);
+      } catch {
+        say(msg.failed);
+      } finally {
+        // Tokens are single-use: get a fresh one for the next send.
+        token = '';
+        if (widget !== undefined) turnstile()?.reset(widget);
+        busy(false);
+      }
     });
   }
 </script>

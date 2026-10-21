@@ -18,9 +18,13 @@ function siteFiles() {
     hooks: {
       /** @param {{ dir: URL }} options */
       'astro:build:done': async ({ dir }) => {
+        // Turnstile (contact form) is the only third-party script: it loads on the first interaction with
+        // the form, never on page load, and draws its check in a frame from the same origin.
+        const turnstile = 'https://challenges.cloudflare.com';
         const csp = [
           "default-src 'self'",
-          "script-src 'self'",
+          `script-src 'self' ${turnstile}`,
+          `frame-src ${turnstile}`,
           "style-src 'self' 'unsafe-inline'",
           "img-src 'self' data:",
           "font-src 'self'",

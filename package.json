@@ -8,12 +8,14 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/check-pending.mjs",
+    "build": "astro build && node scripts/check-links.mjs && node scripts/check-pending.mjs",
     "preview": "astro preview",
     "sync:ds": "node scripts/sync-design-system.mjs",
     "check:pending": "node scripts/check-pending.mjs",
+    "check:links": "node scripts/check-links.mjs",
     "check:tokens": "node scripts/check-tokens.mjs",
     "test:a11y": "playwright test",
+    "test:worker": "node --test worker/index.test.ts",
     "test:lh": "node scripts/lighthouse.mjs",
     "measure": "node scripts/lighthouse.mjs --write-scores",
     "screenshots": "node scripts/screenshots.mjs"
@@ -30,6 +32,7 @@
     "@playwright/test": "^1.64.1",
     "chrome-launcher": "^1.2.2",
     "lighthouse": "^13.5.0",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.151.3"
   }
 }

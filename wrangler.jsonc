@@ -1,12 +1,25 @@
-// Cloudflare Worker that only serves the static build (ADR-002). No server code, no adapter:
-// with this file present, `wrangler deploy` uploads dist/ as-is instead of auto-configuring the project.
+// Cloudflare Worker for the site (ADR-002, ADR-003). Cloudflare's static assets serve dist/ as-is; the Worker
+// code (worker/index.ts) runs only for /api/* (the contact form). No Astro adapter: with this file present,
+// `wrangler deploy` uploads dist/ unchanged instead of auto-configuring the project.
 // _headers (CSP, noindex on previews…) in dist/ is applied by Cloudflare's static assets.
+// Secrets are NOT here: TURNSTILE_SECRET_KEY, RESEND_API_KEY and HUBSPOT_SERVICE_KEY are set in the
+// Cloudflare dashboard (Settings → Variables and Secrets) and survive every deploy.
 {
   "name": "auranova-site",
   "compatibility_date": "2026-10-19",
+  "main": "./worker/index.ts",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "html_handling": "force-trailing-slash"
-  }
+    "html_handling": "force-trailing-slash",
+    "run_worker_first": ["/api/*"]
+  },
+  "vars": {
+    "LEAD_TO": "contacto@auranova.mx",
+    "MAIL_FROM": "AuraNova <contacto@auranova.mx>",
+    "HUBSPOT_PORTAL_ID": "52196836"
+  },
+  // Workers Logs (errors only are logged: no form contents).
+  "observability": { "enabled": true }
 }

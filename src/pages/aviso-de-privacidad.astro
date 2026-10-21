@@ -1,0 +1,69 @@
+---
+// Aviso de privacidad integral (Q2, 2025 LFPDPPP). Linked from the footer and from the contact form's
+// consent. The text lives in YAML; its blanks (lawyer review, virtual office address) block production.
+import { getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import { href, isBuilt } from '../i18n/routes';
+import { t } from '../i18n/ui';
+import { rich } from '../lib/rich';
+import { breadcrumbJsonLd } from '../lib/jsonld';
+
+const lang = 'es';
+const page = await getEntry('pages', 'es/aviso-de-privacidad');
+if (!page) throw new Error('Missing src/content/pages/es/aviso-de-privacidad.yaml');
+const c = page.data as any;
+const ui = t(lang);
+const site = Astro.site!;
+const crumbs = breadcrumbJsonLd([
+  { name: ui.breadcrumbHome, url: new URL(href('inicio', lang), site).href },
+  { name: c.hero.eyebrow, url: new URL(href('aviso', lang), site).href },
+]);
+---
+
+<Layout lang={lang} route="aviso" title={c.title} description={c.description} jsonLd={[crumbs]}>
+  <section class="section hero" aria-labelledby="hero-title">
+    <div class="bg-grid hero__grid" aria-hidden="true"></div>
+    <div class="container">
+      <span class="eyebrow">{c.hero.eyebrow}</span>
+      <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
+      <p class="lead" set:html={rich(c.hero.lead, lang)} />
+      <p class="hero__note muted">{c.hero.updated}</p>
+      <p class="hero__note" set:html={rich(c.hero.review, lang)} />
+      <nav class="toc" aria-labelledby="toc-title">
+        <p class="toc__title" id="toc-title">{ui.onThisPage}</p>
+        <ul>{c.sections.map((s: any) => <li><a href={`#${s.id}`}>{s.nav}</a></li>)}</ul>
+      </nav>
+    </div>
+  </section>
+
+  <Section lang={lang} theme="light">
+    <div class="doc">
+      {
+        c.sections.map((s: any) => (
+          <section id={s.id} aria-labelledby={`${s.id}-title`}>
+            <h2 id={`${s.id}-title`}>{s.title}</h2>
+            <div class="doc__body">
+              {s.body.map((block: any) =>
+                typeof block === 'string' ? (
+                  <p set:html={rich(block, lang)} />
+                ) : block.h ? (
+                  <h3>{block.h}</h3>
+                ) : (
+                  <ul>{block.list.map((li: string) => <li set:html={rich(li, lang)} />)}</ul>
+                ),
+              )}
+            </div>
+          </section>
+        ))
+      }
+      <section aria-labelledby="contacto-aviso-title">
+        <h2 id="contacto-aviso-title">{c.contact.title}</h2>
+        <div class="doc__body">
+          <p set:html={rich(c.contact.text, lang)} />
+          {isBuilt('terminos', lang) && <p set:html={rich(c.contact.terms, lang)} />}
+        </div>
+      </section>
+    </div>
+  </Section>
+</Layout>

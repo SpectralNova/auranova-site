@@ -15,8 +15,15 @@ const pages = [
   '/proyectos/',
   '/nosotros/',
   '/contacto/',
+  '/aviso-de-privacidad/',
   '/no-existe/',
 ];
+
+// Stand-ins for Turnstile and the Worker: the form tests never leave this machine.
+const TURNSTILE_STUB =
+  "window.turnstile = { render(el, o) { setTimeout(() => o.callback('XXXX.DUMMY.TOKEN.XXXX'), 50); return 'w'; }, reset() {} };";
+const stubTurnstile = (page: import('@playwright/test').Page) =>
+  page.route('https://challenges.cloudflare.com/**', (route) => route.fulfill({ contentType: 'text/javascript', body: TURNSTILE_STUB }));
 
 for (const path of pages) {
   for (const width of [390, 1440]) {
@@ -133,8 +140,19 @@ test('roadmap: pinned on desktop, tabs jump to a step from the keyboard; plain t
   await expect(page.locator('.rm__step').nth(4)).toBeVisible();
 });
 
-test('contact form: keyboard only, errors announced, then accepted', async ({ page }) => {
+test('contact form: keyboard only, errors announced, then sent (Turnstile only after the first interaction)', async ({ page }) => {
+  const thirdParty: string[] = [];
+  page.on('request', (request) => {
+    if (!request.url().startsWith('http://localhost')) thirdParty.push(request.url());
+  });
+  await stubTurnstile(page);
+  let sent = '';
+  await page.route('**/api/contacto', (route) => {
+    sent = route.request().postData() ?? '';
+    return route.fulfill({ json: { ok: true } });
+  });
   await page.goto('/contacto/');
+  expect(thirdParty).toEqual([]);
   await page.locator('#contact-form button[type=submit]').focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('#f-name')).toBeFocused();
@@ -153,5 +171,22 @@ test('contact form: keyboard only, errors announced, then accepted', async ({ pa
   await page.locator('#contact-form button[type=submit]').focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('#form-status')).toBeFocused();
-  await expect(page.locator('#form-status')).toContainText('Vista previa');
+  await expect(page.locator('#form-status')).toContainText('Recibimos tu mensaje');
+  expect(sent).toContain('XXXX.DUMMY.TOKEN.XXXX');
+  expect(sent).toContain('sitio_web');
+  await expect(page.locator('#f-name')).toHaveValue('');
+});
+
+test('contact form: a failed send says so, offers the email and keeps what was typed', async ({ page }) => {
+  await stubTurnstile(page);
+  await page.route('**/api/contacto', (route) => route.fulfill({ status: 502, json: { ok: false, error: 'delivery' } }));
+  await page.goto('/contacto/');
+  await page.locator('#f-name').fill('Ana Pérez');
+  await page.locator('#f-email').fill('ana@empresa.com');
+  await page.locator('#f-type').selectOption('asesoria');
+  await page.locator('#f-message').fill('Necesito una asesoría.');
+  await page.locator('#f-consent').check();
+  await page.locator('#contact-form button[type=submit]').click();
+  await expect(page.locator('#form-status')).toContainText('contacto@auranova.mx');
+  await expect(page.locator('#f-message')).toHaveValue('Necesito una asesoría.');
 });

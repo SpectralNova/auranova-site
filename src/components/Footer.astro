@@ -1,6 +1,6 @@
 ---
-import { business, factText, factValue, textFacts, type Lang } from '../content/business';
-import { href } from '../i18n/routes';
+import { business, factText, factValue, type Lang } from '../content/business';
+import { href, isBuilt } from '../i18n/routes';
 import { t } from '../i18n/ui';
 import { rich } from '../lib/rich';
 
@@ -12,6 +12,8 @@ const { lang } = Astro.props;
 const ui = t(lang);
 const email = factValue(business.email, lang);
 const year = new Date().getFullYear();
+// Only pages that exist get a link (routes.ts `built`); the rest appear when their page is built.
+const trustLinks = ui.footer.links.trust.filter(([key]) => isBuilt(key, lang));
 ---
 
 <footer class="site-footer">
@@ -26,10 +28,14 @@ const year = new Date().getFullYear();
       <h2 class="site-footer__title">{ui.footer.site}</h2>
       <ul>{ui.footer.links.site.map(([key, label]) => <li><a href={href(key, lang)}>{label}</a></li>)}</ul>
     </nav>
-    <nav aria-label={ui.footer.trust}>
-      <h2 class="site-footer__title">{ui.footer.trust}</h2>
-      <ul>{ui.footer.links.trust.map(([key, label]) => <li><a href={href(key, lang)}>{label}</a></li>)}</ul>
-    </nav>
+    {
+      trustLinks.length > 0 && (
+        <nav aria-label={ui.footer.trust}>
+          <h2 class="site-footer__title">{ui.footer.trust}</h2>
+          <ul>{trustLinks.map(([key, label]) => <li><a href={href(key, lang)}>{label}</a></li>)}</ul>
+        </nav>
+      )
+    }
     <div>
       <h2 class="site-footer__title">{ui.footer.contact}</h2>
       <dl class="site-footer__contact">

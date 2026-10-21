@@ -8,7 +8,14 @@ import GeneratedImage from './GeneratedImage.astro';
 
 <div class="nova-bg" aria-hidden="true" data-parallax>
   <div class="nova-bg__img">
-    <GeneratedImage file="constelacion.webp" widths={[768, 1280, 1920, 2560, 3456, 4608]} sizes="100vw" priority />
+    {/* sizes = how wide the art is really drawn (inset −6% + cover; on phones the tall banner crops a slice
+         of a much wider image), measured per breakpoint: otherwise phones get a file 3–4× too small. */}
+    <GeneratedImage
+      file="constelacion.webp"
+      widths={[768, 1280, 1920, 2560, 3456, 4608]}
+      sizes="(max-width: 767px) 430vw, (max-width: 1023px) 190vw, (max-width: 1439px) 145vw, 115vw"
+      priority
+    />
   </div>
   <div class="nova-bg__stars nova-bg__stars--a"></div>
   <div class="nova-bg__stars nova-bg__stars--b"></div>
@@ -52,7 +59,7 @@ import GeneratedImage from './GeneratedImage.astro';
   .nova-bg__fade {
     position: absolute; inset: 0;
     background:
-      linear-gradient(90deg, color-mix(in oklab, var(--color-bg), transparent 15%) 0%, color-mix(in oklab, var(--color-bg), transparent 55%) 45%, transparent 75%),
+      linear-gradient(90deg, color-mix(in oklab, var(--color-bg), transparent 12%) 0%, color-mix(in oklab, var(--color-bg), transparent 20%) 38%, color-mix(in oklab, var(--color-bg), transparent 60%) 58%, transparent 80%),
       linear-gradient(0deg, var(--color-bg) 0%, transparent 30%);
   }
   @media (max-width: 767px) {
