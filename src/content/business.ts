@@ -24,7 +24,7 @@ export const business = {
   name: ok('AuraNova'),
   // Legal identity (Q2): shown only on legal pages; marketing pages speak as a company (Q13).
   legalForm: ok({ es: 'persona física', en: 'sole proprietor (persona física)' }),
-  legalName: ok('David Contreras Morales'),
+  legalName: ok('David Rodrigo Contreras Morales'), // as on his Constancia de Situación Fiscal (David, 2026-10-21)
   // Q2 (David, 2026-10-21): the public notice uses a VIRTUAL OFFICE address; his fiscal/home address is never published.
   domicilio: pending({ es: 'domicilio de la oficina virtual para el aviso de privacidad (Q2)', en: 'virtual office address for the privacy notice (Q2)' }),
 
