@@ -93,6 +93,8 @@ page:
     items:
       - q: "¿Pueden rediseñar mi sitio actual?"
         a: "Sí. Medimos tu sitio actual, conservamos lo que funciona y cuidamos tus direcciones (URL) para no perder lo que ya ganaste en Google."
+      - q: "¿Una tienda en línea es igual de rápida que un sitio?"
+        a: "No siempre, y te lo decimos desde el principio. Una tienda en WordPress carga más código que un sitio hecho a la medida: el carrito, el inventario, la pasarela de pago y los plugins que la hacen funcionar. Además, su velocidad depende del hosting que contratas. Por eso, en tiendas fijamos una meta realista (una calificación de 70 o más en celular, en lugar de 90) y te entregamos el reporte con lo que la afecta."
       - q: "¿Podré cambiar los textos yo mismo?"
         a: "Sí. Te dejamos una forma sencilla de editar el contenido y te capacitamos en una sesión."
       - q: "¿Con qué herramientas trabajan?"

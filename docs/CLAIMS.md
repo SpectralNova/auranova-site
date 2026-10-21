@@ -9,6 +9,7 @@
 | Llamada de 30 minutos | Inicio, Servicio, Cómo trabajamos, Contacto | Q16 (David, 2026-10-20) | ✅ |
 | La llamada no tiene costo | Cómo trabajamos (roadmap step 00, hero note) | Q36 (David, 2026-10-20) | ✅ |
 | Una ronda de revisión extra sin costo y cambios de texto ilimitados durante los 30 días hábiles posteriores a la entrega final; después, se cotiza | Cómo trabajamos (#cambios) | Q9 (David, 2026-10-20) | ✅ |
+| Tiendas en WordPress: meta de velocidad de 70 o más en celular (en lugar de 90), con la razón | Sitios web (FAQ) | David, 2026-10-21 ("realistic standard, disclose why") | ✅ |
 | Cada cotización es válida por 15 días (`{{vigencia}}`) | Cómo trabajamos (#pagos, FAQ), Servicios, Plataformas (FAQ) | David, 2026-10-21 | ✅ |
 | Plan de mantenimiento fijo con tarifa preferencial, al final de tu proyecto | Mantenimiento, Cómo trabajamos (#garantia, FAQ) | Q11 (David, 2026-10-20) | ✅ |
 | "Ponernos en contacto contigo y acompañarte en cada etapa" | Cómo trabajamos (nuestros compromisos) | David, 2026-10-20 (he handles every call) | ✅ |
