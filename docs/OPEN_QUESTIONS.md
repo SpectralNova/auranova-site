@@ -60,6 +60,7 @@
 - **Still open 🔴:** tax regime (for invoices; not published) and a **domicilio** for the aviso de privacidad.
 - **Consequence:** as a persona física, the aviso and the términos name **you** (David Contreras Morales) as the responsible party, with "AuraNova" as the commercial name, even though every marketing page speaks as a company (Q13, Q14). The lawyer confirms the exact wording.
 
+- **Decision (David, 2026-10-21):** the privacy notice uses a **virtual office** address, to be contracted (listings seen at about MXN 800–2,500/month; prices to confirm with providers). David's fiscal address is private: it appears only in contracts and invoices, never on the site or in public documents. Using a virtual office as the SAT fiscal address is a question for his accountant.
 ## Q3 · City and service area
 - **Status:** ✅ · **Answer:** Monterrey, N.L. + remote across Mexico. · **Date:** 2026-10-19
 - **CP1 feedback (2026-10-19):** the city and country appear **only on Nosotros**: not in the hero, titles, service H1s, footer or FAQ. The invisible JSON-LD address keeps Monterrey for local search. Hours say "hora del centro".
