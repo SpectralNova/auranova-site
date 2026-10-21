@@ -7,7 +7,7 @@
 | **Primary CTA** | Every site CTA lands on `#agenda`, which offers **Agenda una llamada** (Cal.com) *o* **Envíanos un correo** (mailto), ADR-004 update. The form sits below. |
 | **Success metric** | `booking_open` · `form_submit` per session. |
 | **SEO** | Title "Contacto: agenda una llamada · AuraNova". `BreadcrumbList`. |
-| **Blanks** | Q6 budget brackets (booking link ✅, call length ✅ 30 min, email ✅ contacto@auranova.mx) |
+| **Blanks** | Form delivery (ADR-003). Budget brackets ✅ (Q6), booking link ✅, call length ✅ 30 min, email ✅ contacto@auranova.mx |
 
 ## Outline
 

@@ -78,6 +78,7 @@ const crumbs = breadcrumbJsonLd([
         <label for="f-budget">{f.budget} <span class="muted">{c.form.optional}</span></label>
         <select id="f-budget" name="presupuesto" aria-describedby="f-budget-hint">
           <option value="">{f.budgetNone}</option>
+          {f.budgetOptions.map((o: string) => <option>{o}</option>)}
         </select>
         <p class="field__hint" id="f-budget-hint" set:html={rich(f.budgetHint, lang)} />
       </div>

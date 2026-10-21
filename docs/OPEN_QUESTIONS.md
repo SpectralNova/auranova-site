@@ -14,7 +14,7 @@
 | Q3 | City and service area | ✅ (city only on Nosotros) | — |
 | Q4 | Audience scope + language | ⏸ EN + US on hold | — |
 | Q5 | Services list | ✅ 6 services (CP1) | — |
-| Q6 | Pricing model | ✅ model · 🔴 budget brackets | CP1.1 |
+| Q6 | Pricing model | ✅ model · ✅ budget brackets | CP1.1 |
 | Q7 | Payment schedule + IVA | ✅ | — |
 | Q8 | Response times | ✅ | — |
 | Q9 | Revision rounds | ✅ | — |
@@ -46,7 +46,7 @@
 | Q35 | Service illustration style (A / B / C) | ✅ A | — |
 | Q36 | Is the 30-minute call free? | ✅ yes | — |
 
-**Still open after CP1.2** (most blocking first): Q12 (Vista's OK in writing), Q15 (my reading: no WhatsApp/socials at launch), Q6 (budget brackets for the form), Q2 (domicilio for the aviso). Before CP2 as well: Q18 (analytics). Phase 2: Q20 contract version. (Business email ✅ contacto@auranova.mx and Cal.com link ✅, 2026-10-20.)
+**Still open after CP1.2** (most blocking first): Q12 (Vista's OK in writing), Q15 (my reading: no WhatsApp/socials at launch), Q2 (domicilio for the aviso). Before CP2 as well: Q18 (analytics). Phase 2: Q20 contract version. (Business email ✅ contacto@auranova.mx and Cal.com link ✅, 2026-10-20.)
 
 ---
 
@@ -81,7 +81,7 @@
 
 ## Q6 · Pricing model
 - **Answer:** ✅ fixed price per project against Anexo A; budget ranges in the form; no public prices at launch. (2026-10-19)
-- **Still open 🔴:** the budget brackets for the form, in MXN, and in USD for the English form if Q27 says USD.
+- **Budget brackets ✅ (David, 2026-10-21, approved with the internal pricing):** Menos de $20,000 · $20,000 a $35,000 · $35,000 a $50,000 · Más de $50,000 · Prefiero no decir (MXN plus IVA). They follow the packages (Esencial $20k … Completo/Tienda llave en mano $50k). Still open: USD ranges for the English form if Q27 says USD.
 
 ## Q7 · Payment schedule and IVA
 - **Status:** ✅ · **Answer:** 40% to reserve / 30% at design approval (CP1) / 30% before launch; amounts in MXN + IVA. (US clients: Q27.) · **Date:** 2026-10-19
