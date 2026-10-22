@@ -23,14 +23,14 @@
 | Q12 | Portfolio permissions | ✅ · 🟡 Vista in writing | CP1.1 |
 | Q13 | Photos | ✅ none; company, not person | — |
 | Q14 | Voice | ✅ nosotros | — |
-| Q15 | Channels | ✅ email · 🟡 my reading | CP1.1 |
+| Q15 | Channels | ✅ email · ✅ Instagram + Facebook · 🔴 YouTube link | when the channel exists |
 | Q16 | Booking tool | ✅ Cal.com · ✅ 30 min · ✅ link | CP1.2 |
-| Q17 | Lead magnet | ✅ | — |
+| Q17 | Lead magnet | ✅ built (PDF from /estandar/ data) | — |
 | Q18 | Analytics | ✅ Cloudflare Web Analytics | — |
 | Q19 | Domain + hosting | ✅ (bought 2026-10-20) | — |
 | Q20 | Contract update | ✅ will update · ✅ date (1 nov 2026) | — |
 | Q21 | Social-proof numbers | ✅ omit | — |
-| Q22 | Blog at launch | ✅ no | — |
+| Q22 | Blog → «Aprende» | ✅ name and route (2026-10-22) · 🔴 content plan | David is sharing it |
 | Q23 | Trademark check | ✅ run | see result |
 | Q24 | Upstream docs: logo file names | ✅ fixed | — |
 | Q25 | Typical timelines | ✅ interim answer · 🔴 details later | — |
@@ -123,6 +123,11 @@
 - **Set up (2026-10-20):** public address **contacto@auranova.mx** (Zoho Mail Forever Free; MX, SPF, DKIM `zmail` verified, DMARC p=none). In `business.ts` as ✅.
 - **My reading (🟡, confirm at CP1):** the site shows **no WhatsApp button** at launch, only the email + booking + form. No phone, no street address, and no social networks at launch (you didn't name any).
 - **Consequence:** the `whatsapp_click` event is dropped.
+- **Social profiles ✅ (David, 2026-10-22):** icons in the nav bar (from 1200 px), the menu sheet and the footer, plus `sameAs` in the JSON-LD.
+  - **Instagram:** https://www.instagram.com/auranova.mx/
+  - **Facebook:** https://www.facebook.com/profile.php?id=61595699520565
+  - **YouTube 🔴:** not set up yet. Its icon shows dimmed in previews and is left out of production until the link lands in `business.ts` (ADR-016).
+  - Still no WhatsApp button.
 
 ## Q16 · Booking tool
 - **Answer:** ✅ Cal.com. (2026-10-19) ✅ The call lasts **30 minutes** (2026-10-20; `duracionLlamada` in `business.ts`).
@@ -132,6 +137,7 @@
 
 ## Q17 · Lead magnet
 - **Status:** ✅ · **Answer:** yes, ungated, generated from the same data as /estandar; in both languages (Q4). · **Date:** 2026-10-19
+- **Built (2026-10-22):** `public/recursos/revisa-tu-sitio-auranova.pdf`, 15 yes/no questions where «sí» always means it passes, US Letter. `npm run checklist` makes it from `estandar.yaml`, and the build fails if the YAML changed after the PDF was made (ADR-017). Spanish only while English is on hold.
 
 ## Q18 · Analytics
 - **Answer:** ✅ **Cloudflare Web Analytics** (David, 2026-10-21): free, cookieless, no consent needed; the aviso §9 names it. It has no custom events: the site's events (`booking_open`, `form_submit`) go only to Zaraz for Meta (ADR-015). Its beacon (a ~5 KB Cloudflare script on every page) is the one exception to «no third-party script on page load» (David, 2026-10-21); the CSP allows `static.cloudflareinsights.com` (script) and `cloudflareinsights.com` (connect). **Launch:** Cloudflare → Web Analytics → add auranova.mx with automatic setup; if the beacon doesn't appear on the Worker's pages, switch to manual setup and add its snippet (public token) to the layout, production builds only.
@@ -155,6 +161,11 @@
 
 ## Q22 · Blog at launch
 - **Status:** ✅ · **Answer:** no; routes reserved for later. · **Date:** 2026-10-19
+- **Update (David, 2026-10-22):** yes, a content section, tied to organic content (long and short videos, articles) that runs alongside the ads.
+  - **Topics:** programming tools, databases, AI and models, connectors, Claude and other AI tools; and, for business owners, why a proper website matters, mobile vs. desktop, and similar.
+  - **Name: «Aprende»** at `/aprende/`, chosen over Ideas, Lab and Blog: it covers articles and videos and tells an owner what they get. `/blog/` will redirect to it.
+  - **Status:** reserved in `routes.ts`. It gets built, and goes into the nav, once it has its first pieces.
+  - **Open 🔴:** the rest of David's content plan (formats, cadence, who writes or records what).
 
 ## Q23 · Trademark check
 - **Status:** ✅ run 2026-10-19 (IMPI MARCia, quick search "AURANOVA" and "AURA NOVA", filtered by Nice class). Not a legal opinion.

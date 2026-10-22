@@ -1,5 +1,7 @@
 # Page brief · Nuestro estándar (`/estandar`)
 
+*Built 2026-10-22 (preview). Changes from this brief: the 15 are ledger rows grouped by topic (cards left lone cards in groups of 1 and 4); sections alternate dark and light; each item also has the owner's yes/no question, which is what the PDF prints (ADR-017).*
+
 | | |
 |---|---|
 | **Goal** | Differentiate: show the standard every delivery passes, and prove this site passes it. |

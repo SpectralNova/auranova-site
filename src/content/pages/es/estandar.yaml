@@ -1,0 +1,160 @@
+title: "Nuestro estándar: 15 no negociables de un buen sitio web · AuraNova"
+description: "Los 15 puntos que revisamos y medimos en cada sitio antes de publicarlo, con los resultados de este mismo sitio."
+
+hero:
+  eyebrow: "Nuestro estándar"
+  title: "15 no negociables que ==medimos en cada sitio=="
+  lead: "Así revisamos cada sitio que entregamos, página por página, antes de publicarlo. A este sitio le pedimos todavía más: 95 o más en Lighthouse, la herramienta de Google para medir sitios web."
+  download: "Descargar la lista (PDF)"
+
+measured:
+  eyebrow: "Este sitio, medido"
+  title: "Lo que pedimos, ==lo cumplimos primero=="
+  lead: "Éstas son las calificaciones de este sitio, medidas con Lighthouse en un celular simulado. No las escribimos a mano: se actualizan cada vez que lo medimos."
+  clsLabel: "Y no se mueve mientras carga: desplazamiento acumulado (CLS) de"
+  inpNote: "La rapidez con la que responde al tocar (INP) no se mide en laboratorio: se mide con visitantes reales, una vez publicado el sitio."
+
+# The 15 (PHILOSOPHY §7). One source for /estandar/, /recursos/ and the checklist PDF (scripts/checklist-pdf.mjs):
+#   forYou  what it means for the business owner
+#   how     how we meet and measure it (the thresholds; keep them identical to PHILOSOPHY §7)
+#   check   the question an owner can answer about their own site (the PDF)
+# After editing the groups or the pdf block, regenerate the PDF: node scripts/checklist-pdf.mjs (the build fails otherwise).
+list:
+  eyebrow: "Los 15"
+  title: "Qué revisamos y ==cómo lo medimos=="
+  lead: "Cada entrega incluye esta revisión completa: punto por punto, si cumple o no, con su evidencia."
+  forYouLabel: "Para ti"
+  howLabel: "Cómo lo medimos"
+  credit: "Basado en los 15 principios de diseño web de Kindling.App. Los umbrales y la forma de medirlos son nuestros."
+  groups:
+    - title: "Propósito y contenido"
+      summary: "Si cada página tiene un objetivo claro y textos reales."
+      items:
+        - n: 1
+          title: "Cada página tiene un propósito"
+          forYou: "Cada página existe para que tu cliente haga algo: llamarte, escribirte, comprar o agendar."
+          how: "Cada página tiene por escrito su objetivo, su público, una acción principal y cómo medimos si funciona."
+          check: "¿Cada página de tu sitio tiene una acción clara que quieres que haga tu cliente?"
+        - n: 2
+          title: "Pensado para tus clientes"
+          forYou: "Las decisiones de diseño se toman pensando en quien te visita, no en nuestro gusto ni en el tuyo."
+          how: "Definimos tu público por escrito al inicio, y cada sección dice a quién sirve."
+          check: "¿Sabes quién visita tu sitio y qué busca, y tu sitio le habla a esa persona?"
+        - n: 11
+          title: "Contenido real"
+          forYou: "Textos claros y específicos de tu negocio. Nada de relleno ni de cifras, reseñas o logos inventados."
+          how: "Ninguna página se publica con texto de relleno o con huecos pendientes: lo revisamos de forma automática antes de publicar."
+          check: "¿Todos los textos son reales y de tu negocio, sin relleno, sin cifras sin fuente y sin secciones vacías o «en construcción»?"
+        - n: 12
+          title: "Nada de bloques enormes de texto"
+          forYou: "Tu sitio se lee rápido, también en el celular."
+          how: "Párrafos de unas 4 líneas como máximo en computadora, un subtítulo al menos cada 300 palabras y listas cuando hay 3 cosas o más."
+          check: "¿Los párrafos son cortos (4 o 5 líneas como máximo) y las páginas largas tienen subtítulos?"
+    - title: "Velocidad"
+      summary: "Si tu sitio carga rápido en el celular, con las mismas cifras que usa Google."
+      items:
+        - n: 3
+          title: "Carga rápida"
+          forYou: "Tus visitantes no esperan: un sitio lento pierde clientes antes de que lo vean."
+          how: "En celular, el contenido principal aparece en 2.5 segundos o menos (LCP), la página responde al tocar en 200 milisegundos o menos (INP) y no se mueve mientras carga (CLS de 0.1 o menos). En Lighthouse, 90 o más de rendimiento en celular. Imágenes en formatos modernos y con sus medidas, y tipografías ligeras y precargadas."
+          check: "Mide tu sitio gratis en pagespeed.web.dev, en la vista de celular: ¿el rendimiento es de 90 o más y el LCP de 2.5 segundos o menos?"
+    - title: "Diseño y marca"
+      summary: "Si tu marca se ve igual de bien, y ordenada, en todo el sitio."
+      items:
+        - n: 4
+          title: "Diseño consistente"
+          forYou: "Colores, tamaños y espacios se repiten igual en todo el sitio, y se ve profesional de principio a fin."
+          how: "Todo sale del sistema de diseño del sitio, sin valores sueltos. Lo revisamos en el código."
+          check: "¿Los botones, los títulos y los colores se ven igual en todas las páginas?"
+        - n: 5
+          title: "Tu marca, en todas partes"
+          forYou: "Te reconocen en cualquier página, y también cuando alguien comparte tu sitio."
+          how: "Tu logo arriba a la izquierda en cada página, con liga al inicio; el ícono del sitio en la pestaña del navegador, y una imagen para cuando se comparte una liga."
+          check: "¿Tu logo está arriba a la izquierda en todas las páginas y lleva al inicio? ¿Tu sitio tiene ícono en la pestaña y muestra una imagen cuando compartes la liga por WhatsApp?"
+        - n: 7
+          title: "Espacio para respirar"
+          forYou: "Lo importante resalta y leer no cansa."
+          how: "Espacios tomados de una sola escala, y líneas de texto de 60 a 75 caracteres."
+          check: "¿El texto tiene aire alrededor y sus líneas se siguen fácilmente, sin sentirse amontonado?"
+        - n: 8
+          title: "Orden y simetría"
+          forYou: "Todo está alineado, y el sitio se siente ordenado y confiable."
+          how: "Una retícula de 12 columnas y los mismos ejes de alineación en cada sección."
+          check: "¿Los elementos de cada sección están alineados entre sí?"
+    - title: "Navegación y móvil"
+      summary: "Si tus visitantes encuentran todo y saben qué hacer, también desde el celular."
+      items:
+        - n: 6
+          title: "Fácil de recorrer"
+          forYou: "Tus visitantes encuentran lo que buscan sin perderse."
+          how: "7 opciones o menos en el menú; cualquier página a 3 clics o menos del inicio; la página actual marcada; una página de error útil, y un pie de página que repite las ligas clave."
+          check: "¿Tu menú tiene 7 opciones o menos, llegas a cualquier página en 3 clics o menos y una dirección que no existe muestra una página útil?"
+        - n: 14
+          title: "Llamadas a la acción claras"
+          forYou: "Siempre está claro qué hacer después."
+          how: "Un botón principal por pantalla, con un verbo; uno visible al abrir cada página y otro al final."
+          check: "Al abrir cada página, ¿ves un botón con una acción clara, y hay otro al final?"
+        - n: 15
+          title: "Hecho primero para el celular"
+          forYou: "Muchos de tus clientes te van a buscar desde el celular, y ahí tu sitio funciona igual de bien que en la computadora."
+          how: "Lo diseñamos primero para celular y lo probamos en 5 anchos de pantalla (320, 375, 768, 1024 y 1440 px), sin desplazamiento hacia los lados y con botones de 44 px o más para tocarlos con el dedo."
+          check: "En tu celular, ¿el sitio se queda fijo a lo ancho (no se mueve hacia los lados) y puedes tocar cada botón sin atinarle a otro?"
+    - title: "Respeto a tus visitantes"
+      summary: "Si se lee bien y nada los molesta."
+      items:
+        - n: 9
+          title: "Colores que se leen"
+          forYou: "Tus colores de marca, con textos que cualquiera puede leer."
+          how: "Sólo la paleta de tu marca, con un contraste de texto de 4.5:1 o más (3:1 en textos grandes y controles)."
+          check: "¿El texto se lee bien sobre su fondo, también en el celular y a pleno sol?"
+        - n: 10
+          title: "Letra legible"
+          forYou: "Se lee cómodo en cualquier pantalla."
+          how: "3 familias tipográficas como máximo; texto de 16 px o más, con interlineado de 1.5 a 1.7, y nada de letra delgada en el texto."
+          check: "¿El texto se lee sin hacer zoom en el celular, con 3 tipos de letra como máximo?"
+        - n: 13
+          title: "Sin molestias"
+          forYou: "Nada estorba ni interrumpe a tus visitantes."
+          how: "Sin ventanas emergentes al entrar, sin videos que suenan solos, sin trucos con el desplazamiento y sin burbujas de chat encima del contenido. Ningún carrusel avanza solo sin un botón para pausarlo."
+          check: "¿Tu sitio se usa sin interrupciones: sin ventanas que lo tapan todo al entrar, sin nada que suene solo y sin carruseles que avanzan sin poder pausarlos?"
+
+extras:
+  eyebrow: "Además"
+  title: "Lo que ==también== cuidamos"
+  items:
+    - icon: "accessibility"
+      title: "Accesibilidad"
+      text: "Cumplimos las pautas internacionales WCAG 2.2, nivel AA: el sitio se usa sólo con el teclado, siempre se ve dónde estás, cada campo tiene su etiqueta y todo funciona con el zoom al 200%."
+    - icon: "search"
+      title: "SEO técnico"
+      text: "Título y descripción únicos en cada página, datos estructurados para los buscadores, mapa del sitio, reglas correctas para los buscadores y direcciones limpias."
+    - icon: "lock"
+      title: "Privacidad"
+      text: "Un aviso de privacidad conforme a la ley mexicana siempre que el sitio reciba datos personales, y analítica sin cookies, salvo que tu negocio necesite más."
+    - icon: "shield-check"
+      title: "Seguridad"
+      text: "HTTPS, protección contra spam en los formularios, dependencias al día y ningún dato secreto en el código."
+    - icon: "package-check"
+      title: "Entrega"
+      text: "Te entregamos los accesos, la documentación y una forma de editar tu contenido en español."
+
+download:
+  eyebrow: "Llévatelo"
+  title: "La lista, ==para revisar tu propio sitio=="
+  lead: "Los mismos 15 puntos, convertidos en preguntas para que revises tu sitio actual en unos 10 minutos. Gratis y sin registrarte."
+  button: "Descargar la lista (PDF)"
+  more: "Ver qué incluye"
+
+cta:
+  note: "¿Tu sitio no pasó la revisión? Te decimos qué necesitas y qué no."
+
+# The checklist PDF (scripts/checklist-pdf.mjs), built from the groups above.
+pdf:
+  file: "/recursos/revisa-tu-sitio-auranova.pdf"
+  title: "Revisa tu sitio web en 10 minutos"
+  subtitle: "Los 15 no negociables de AuraNova, en preguntas"
+  intro: "Responde cada pregunta con tu sitio abierto, en la computadora y en el celular. Cada «sí» es un punto que tu sitio ya cumple, y cada «no», algo por mejorar."
+  closingTitle: "¿Tu sitio no pasó la revisión?"
+  closing: "Agenda una llamada sin costo de 30 minutos y te decimos qué necesitas y qué no."
+  closingLink: "auranova.mx/contacto"
+  standardLink: "Cómo lo medimos nosotros: auranova.mx/estandar"

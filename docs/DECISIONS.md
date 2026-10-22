@@ -113,3 +113,23 @@
 - **Decision:** `CookieConsent.astro`: one optional purpose, **«Publicidad»** (the Meta Pixel, which runs only through Cloudflare Zaraz, Q18). Small, non-blocking card at the bottom (full width on phones, right on desktop), no overlay; «Aceptar» and «Rechazar» the same size; «Preferencias de cookies» in the footer reopens it with the current choice. The choice is kept in `localStorage` (`au_consent`, versioned: bump `VERSION` to ask again) and handed to Zaraz with `zaraz.consent.setAll()` + `sendQueuedEvents()`. Events go through `window.auTrack` → `zaraz.track()`: `booking_open` (the Cal.com button on /contacto/) and `form_submit` (form sent); Zaraz drops them without consent. No personal data in events.
 - **Why not Zaraz's own modal:** the site's design and accessibility bar (tested: keyboard order, focus return, Esc), and Nosotros promises no pop-up tricks. Site analytics stay cookieless (Q18), so they need no consent.
 - **Step 07 (launch, Zaraz on auranova.mx):** enable Consent management with **one** purpose, «Publicidad» (`setAll` assumes one: add purpose ids if more appear), and hide Zaraz's default modal; add the Facebook Pixel tool (dataset 2078766606859398 + Conversions API token pasted by David) under that purpose; triggers: Pageview → PageView, event `booking_open` → Schedule, event `form_submit` → Lead. Check that Zaraz's injected script passes the CSP (`script-src 'self'`).
+
+## ADR-016 · Social profiles: plain links, never a dead one
+- **Status:** Built (preview) · 2026-10-22
+- **Decision:** `SocialLinks.astro` renders AuraNova's profiles from `business.ts` (`social`, Q15) as plain links with Simple Icons glyphs.
+  - **Where:** in the nav bar from 1200 px, in the menu sheet below 1024 px, and in the footer. The JSON-LD organization lists them in `sameAs`.
+  - **Size:** 44 px round targets (PHILOSOPHY §7 #15).
+  - **No third parties:** no embeds, widgets or scripts, so the CSP and the «no third-party script on page load» rule are untouched.
+  - **Missing link:** a profile whose link is still 🔴 (YouTube) shows as a dimmed «próximamente» placeholder in previews. Indexable and production builds leave it out instead of failing, so the live site never has a dead link.
+  - **Clicks** fire `social_click`, which Zaraz ignores unless it's mapped.
+
+## ADR-017 · The checklist PDF is generated from the standard's data
+- **Status:** Built (preview) · 2026-10-22
+- **Decision:** the 15 are written once, in `src/content/pages/es/estandar.yaml`. Each item has `forYou`, `how` (with the PHILOSOPHY §7 thresholds) and `check` (the owner's yes/no question).
+  - **Pages:** /estandar/ and /recursos/ read the file at build time.
+  - **PDF:** `npm run checklist` (`scripts/checklist-pdf.mjs`, Playwright + Edge, like the OG image) writes three things:
+    - the PDF, to `public/recursos/`;
+    - a cover preview, to `src/assets/generated/`;
+    - a fingerprint of the data, to `src/data/checklist.json`.
+  - **Guard:** `npm run build` starts with `check-checklist.mjs`, which fails when the YAML changed after the PDF was made. The page and the PDF can't drift apart (the brief: "the two never disagree").
+  - **Why committed:** Cloudflare's build has no browser to print the PDF.

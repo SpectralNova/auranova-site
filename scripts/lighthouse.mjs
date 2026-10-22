@@ -20,7 +20,7 @@ const opt = (name, fallback) => {
 const external = opt('base');
 const out = opt('out', args.includes('--write-scores') ? 'site-scores' : undefined);
 const runs = Number(opt('runs', '3'));
-const paths = (opt('paths') ?? '/,/servicios/,/servicios/sitios-web/,/como-trabajamos/,/nosotros/,/contacto/').split(',');
+const paths = (opt('paths') ?? '/,/servicios/,/servicios/sitios-web/,/como-trabajamos/,/nosotros/,/contacto/,/estandar/,/recursos/').split(',');
 const BUDGET = 95;
 const EDGE = process.env.CHROME_PATH ?? 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
 const PORT = 4329;

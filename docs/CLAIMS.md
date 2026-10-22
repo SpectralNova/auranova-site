@@ -16,6 +16,12 @@
 | Imágenes con licencia comercial: sitio, redes, anuncios pagados, podcasts, televisión | Contenido y marca (FAQ) | Q33 (David, 2026-10-20) | ✅ |
 | Herramientas: Adobe Premiere Pro, After Effects, Photoshop, Illustrator + 18 image models | Contenido y marca (tools) | David (2026-10-20); the models available on his plan (platform not named) | ✅ |
 | Medimos tu sitio con Lighthouse antes de publicar, como parte de nuestro estándar | Sitios web ("Este sitio, medido") | PHILOSOPHY §7 #3 | ✅ |
+| Los 15 umbrales (LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1, Lighthouse ≥ 90, contraste 4.5:1, 16 px, 44 px, 320–1440 px…) | Nuestro estándar, checklist PDF | PHILOSOPHY §7, copied once into `estandar.yaml` | ✅ |
+| «Cada entrega incluye esta revisión completa: punto por punto, si cumple o no, con su evidencia» | Nuestro estándar | PHILOSOPHY §7 ("each deliverable ships with this table filled in") | ✅ |
+| «A este sitio le pedimos todavía más: 95 o más en Lighthouse» | Nuestro estándar (hero) | `scripts/lighthouse.mjs` budget 95; measured 99–100 on 8 pages (2026-10-22, `site-scores.json`) | ✅ |
+| «Basado en los 15 principios de diseño web de Kindling.App» | Nuestro estándar, checklist PDF | PHILOSOPHY Sources (credit, as the brief recommended) | ✅ |
+| «Revisa tu sitio web en 10 minutos» | Recursos, checklist PDF | Our estimate for 15 yes/no questions; the lead says «unos 10 minutos» | ✅ by rule (an estimate, worded as one) |
+| «Llamada sin costo de 30 minutos» | Checklist PDF | Q16 + Q36 | ✅ |
 | Demo numbers (KPIs, positions, response time, matrix) | Posicionamiento, Mantenimiento, Asesoría demos | none: **sample data**, labelled "Datos de ejemplo" / "Ejemplo" in the window and in a footnote; never presented as client results | ✅ by rule (ADR-011) |
 | Precio fijo por proyecto; no cobramos por hora; no publicamos precios genéricos | Inicio FAQ, Servicio, Cómo trabajamos | Q6 | ✅ |
 | Pagos 40% / 30% (al aprobar el diseño) / 30% (antes del lanzamiento); MXN + IVA | Inicio, Servicio, Cómo trabajamos | Q7 | ✅ |

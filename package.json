@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/check-links.mjs && node scripts/check-pending.mjs",
+    "build": "node scripts/check-checklist.mjs && astro build && node scripts/check-links.mjs && node scripts/check-pending.mjs",
+    "checklist": "node scripts/checklist-pdf.mjs",
     "preview": "astro preview",
     "sync:ds": "node scripts/sync-design-system.mjs",
     "check:pending": "node scripts/check-pending.mjs",

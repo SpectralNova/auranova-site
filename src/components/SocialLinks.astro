@@ -1,0 +1,44 @@
+---
+// AuraNova's social profiles (business.ts `social`, Q15): plain links with Simple Icons glyphs, no embeds or
+// third-party scripts. A profile whose link isn't set yet (YouTube) shows dimmed in previews, so its place can be
+// reviewed, and is left out of production builds: the live site never has a dead link.
+import BrandIcon from './BrandIcon.astro';
+import { business, factValue, type Lang } from '../content/business';
+import { INDEXABLE } from '../lib/env';
+import { t } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  class?: string;
+}
+
+const { lang, class: className } = Astro.props;
+const ui = t(lang).social;
+const profiles = (
+  [
+    ['instagram', 'Instagram'],
+    ['facebook', 'Facebook'],
+    ['youtube', 'YouTube'],
+  ] as const
+)
+  .map(([key, name]) => ({ key, name, url: factValue(business.social[key], lang) }))
+  .filter((p) => p.url || !INDEXABLE);
+---
+
+<ul class:list={['social', className]} role="list" aria-label={ui.label}>
+  {
+    profiles.map((p) => (
+      <li>
+        {p.url ? (
+          <a class="social__link" href={p.url} rel="me noopener" aria-label={`${ui.on} ${p.name}`} data-track="social_click" data-track-location={p.key}>
+            <BrandIcon slug={p.key} size={18} />
+          </a>
+        ) : (
+          <span class="social__link social__link--soon" role="img" aria-label={`${p.name} (${ui.soon})`} title={`${p.name}: ${ui.soon}`}>
+            <BrandIcon slug={p.key} size={18} />
+          </span>
+        )}
+      </li>
+    ))
+  }
+</ul>

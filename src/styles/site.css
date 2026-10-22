@@ -238,6 +238,27 @@ main:focus { outline: none; }
   color: var(--color-text); font: inherit; font-size: var(--text-sm); text-align: start;
 }
 .site-footer__link:hover { color: var(--color-accent); }
+.site-footer__social { margin-top: var(--space-5); }
+
+/* ---------- Social profiles (SocialLinks.astro) ---------- */
+/* Round 44 px targets, like the menu toggle (PHILOSOPHY §7 #15). Two classes so the footer's link rule doesn't win. */
+.social { display: flex; flex-wrap: wrap; gap: var(--space-2); list-style: none; margin: 0; padding: 0; }
+.social .social__link {
+  display: inline-grid; width: 44px; height: 44px; padding: 0; place-items: center;
+  border: 1px solid var(--color-border); border-radius: 50%; background: var(--color-surface); color: var(--color-text);
+}
+.social a.social__link:hover { border-color: currentColor; color: var(--color-accent); }
+.social .social__link--soon { opacity: 0.45; cursor: default; }
+/* In the nav bar from 1200 px: at 1024 they squeeze «Cómo trabajamos» onto two lines. Below 1024 px they live in
+   the menu sheet, and the footer has them at every width. */
+@media (max-width: 1199px) {
+  .nav__social { display: none; }
+}
+
+/* On the narrowest phones a long button label wraps instead of pushing the page sideways (PHILOSOPHY §7 #15). */
+@media (max-width: 374px) {
+  .btn { white-space: normal; text-align: center; line-height: 1.25; }
+}
 .site-footer__contact { margin: 0; font-size: var(--text-sm); }
 .site-footer__contact dt { color: var(--color-text-muted); }
 .site-footer__contact dd { margin: 0 0 var(--space-3); }
@@ -517,7 +538,9 @@ main:focus { outline: none; }
 .consent__text, .consent__current { margin: 0 0 var(--space-3); font-size: var(--text-sm); line-height: 1.5; color: var(--color-text-muted); }
 .consent__text a { color: var(--color-accent); }
 .consent__current { color: var(--color-text); }
-.consent__actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+/* minmax(0, …) and less side padding: at 320 px «Rechazar» overflowed the card and the screen. */
+.consent__actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+.consent__actions .btn { padding-inline: var(--space-3); }
 @media (prefers-reduced-motion: no-preference) {
   .consent:not([hidden]) { animation: consent-in var(--dur-slow) var(--ease-out) both; }
 }

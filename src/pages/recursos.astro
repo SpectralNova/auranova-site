@@ -1,0 +1,119 @@
+---
+// Recursos (docs/pages/recursos.md): the free checklist (Q17), ungated. Its topics and the PDF come from
+// estandar.yaml (scripts/checklist-pdf.mjs), so this page, /estandar/ and the PDF never disagree.
+import { getEntry } from 'astro:content';
+import { Picture } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import Icon from '../components/Icon.astro';
+import { href } from '../i18n/routes';
+import { t } from '../i18n/ui';
+import { rich } from '../lib/rich';
+import { breadcrumbJsonLd } from '../lib/jsonld';
+import checklist from '../data/checklist.json';
+import cover from '../assets/generated/checklist-cover.png';
+
+const lang = 'es';
+const page = await getEntry('pages', 'es/recursos');
+const standard = await getEntry('pages', 'es/estandar');
+if (!page || !standard) throw new Error('Missing src/content/pages/es/recursos.yaml or estandar.yaml');
+const c = page.data as any;
+const groups = (standard.data as any).list.groups as { title: string; summary: string; items: unknown[] }[];
+const site = Astro.site!;
+const crumbs = breadcrumbJsonLd([
+  { name: t(lang).breadcrumbHome, url: new URL(href('inicio', lang), site).href },
+  { name: c.hero.eyebrow, url: new URL(href('recursos', lang), site).href },
+]);
+const meta = `PDF · ${checklist.pages} páginas · ${Math.round(checklist.bytes / 1024)} KB`;
+---
+
+<Layout lang={lang} route="recursos" title={c.title} description={c.description} jsonLd={[crumbs]}>
+  <section class="section hero" aria-labelledby="hero-title">
+    <div class="bg-grid hero__grid" aria-hidden="true"></div>
+    <div class="container res-hero">
+      <div>
+        <span class="eyebrow">{c.hero.eyebrow}</span>
+        <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
+        <p class="lead" set:html={rich(c.hero.lead, lang)} />
+        <div class="hero__actions">
+          <a class="btn btn--primary" href={checklist.file} download data-track="resource_download" data-track-location="recursos-hero">
+            <Icon name="download" size={18} />
+            {c.hero.button}
+          </a>
+        </div>
+        <p class="res-hero__meta muted">{meta}</p>
+      </div>
+      <div class="res-hero__cover">
+        <Picture
+          src={cover}
+          formats={['avif', 'webp']}
+          fallbackFormat="webp"
+          widths={[360, 540, 816]}
+          sizes="(min-width: 1024px) 400px, 80vw"
+          alt={c.hero.coverAlt}
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </section>
+
+  <Section lang={lang} theme="light" id="que-incluye" eyebrow={c.includes.eyebrow} title={c.includes.title} lead={c.includes.lead}>
+    <ol class="res-topics" role="list">
+      {
+        groups.map((g, i) => (
+          <li class="card res-topic">
+            <span class="res-topic__num" aria-hidden="true">
+              {i + 1}
+            </span>
+            <div>
+              <h3 class="card__title">{g.title}</h3>
+              <p class="muted" set:html={rich(g.summary, lang)} />
+            </div>
+            <span class="res-topic__count">
+              {g.items.length} {g.items.length === 1 ? c.includes.question : c.includes.questions}
+            </span>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="res-standard">
+      <a class="btn btn--ghost" href={href('estandar', lang)}>{c.includes.standard} <span aria-hidden="true">→</span></a>
+    </p>
+    <CtaBlock lang={lang} location="recursos" title={c.cta.title} />
+  </Section>
+</Layout>
+
+<style>
+  .res-hero { display: grid; gap: var(--space-8); align-items: center; }
+  @media (min-width: 1024px) {
+    .res-hero { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+  }
+  .res-hero__meta { margin: var(--space-3) 0 0; font-size: var(--text-sm); }
+  /* 88%: room for the tilt's corners on narrow phones. */
+  .res-hero__cover { justify-self: center; width: min(88%, 25rem); }
+  .res-hero__cover :global(img) {
+    display: block; width: 100%; height: auto; border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg), var(--glow-secondary); transform: rotate(-2deg);
+  }
+  .res-topics { display: grid; gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
+  .res-topic { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+  @media (min-width: 768px) {
+    .res-topic { grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; }
+  }
+  .res-topic p { margin: var(--space-1) 0 0; }
+  .res-topic__num {
+    display: inline-grid; width: 2.5rem; height: 2.5rem; place-items: center; border-radius: 50%;
+    background: var(--gray-7); color: var(--lime-1); font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-lg);
+  }
+  .res-topic__count { grid-column: 2; font-size: var(--text-sm); font-weight: var(--weight-strong); color: var(--color-text-muted); white-space: nowrap; }
+  @media (min-width: 768px) {
+    .res-topic__count { grid-column: auto; }
+  }
+  .res-standard { margin: var(--space-5) 0 0; }
+  .res-standard .btn--ghost { padding-inline: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    .res-hero__cover :global(img) { transform: none; }
+  }
+</style>

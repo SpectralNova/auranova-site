@@ -5,6 +5,7 @@
 import { getCollection } from 'astro:content';
 import CTA from './CTA.astro';
 import Icon from './Icon.astro';
+import SocialLinks from './SocialLinks.astro';
 import type { Lang } from '../content/business';
 import { built, href, routes, type RouteKey } from '../i18n/routes';
 import { t } from '../i18n/ui';
@@ -79,6 +80,7 @@ const services = (await getCollection('services', (s) => s.id.startsWith(`${lang
           </a>
         )
       }
+      <SocialLinks lang={lang} class="nav__social" />
       <CTA lang={lang} location="nav" class="nav__cta" />
       <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label={ui.menuOpen}>
         <Icon name="menu" size={18} />
@@ -141,6 +143,7 @@ const services = (await getCollection('services', (s) => s.id.startsWith(`${lang
     </ul>
     <CTA lang={lang} location="menu" />
     <p class="menu-sheet__hours muted" set:html={rich('{{horarioCorto}}', lang)} />
+    <SocialLinks lang={lang} />
   </dialog>
 </header>
 

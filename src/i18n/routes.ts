@@ -19,6 +19,8 @@ export const routes = {
   contacto: { es: '/contacto/', en: '/en/contact/' },
   aviso: { es: '/aviso-de-privacidad/', en: '/en/privacy/' },
   terminos: { es: '/terminos/', en: '/en/terms/' },
+  // Articles and videos (Q22, David, 2026-10-22: «Aprende»). Reserved: not built until it has its first pieces.
+  aprende: { es: '/aprende/', en: '/en/learn/' },
 } as const satisfies Record<string, Record<Lang, string>>;
 
 export type RouteKey = keyof typeof routes;
@@ -39,6 +41,8 @@ export const built: Record<Lang, readonly RouteKey[]> = {
     'proyectos',
     'nosotros',
     'contacto',
+    'estandar',
+    'recursos',
     'aviso',
     'terminos',
   ],

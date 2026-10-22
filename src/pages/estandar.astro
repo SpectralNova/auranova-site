@@ -1,0 +1,153 @@
+---
+// Nuestro estándar (docs/pages/estandar.md): the 15 non-negotiables (PHILOSOPHY §7), this site's own measured
+// scores (ADR-005) and the free checklist (Q17), all from estandar.yaml.
+import { getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import CTA from '../components/CTA.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+import Icon from '../components/Icon.astro';
+import ScoreCards from '../components/ScoreCards.astro';
+import { href } from '../i18n/routes';
+import { t } from '../i18n/ui';
+import { rich } from '../lib/rich';
+import { breadcrumbJsonLd } from '../lib/jsonld';
+import { loadScores, lowest } from '../lib/scores';
+import checklist from '../data/checklist.json';
+
+const lang = 'es';
+const page = await getEntry('pages', 'es/estandar');
+if (!page) throw new Error('Missing src/content/pages/es/estandar.yaml');
+const c = page.data as any;
+const site = Astro.site!;
+const crumbs = breadcrumbJsonLd([
+  { name: t(lang).breadcrumbHome, url: new URL(href('inicio', lang), site).href },
+  { name: c.hero.eyebrow, url: new URL(href('estandar', lang), site).href },
+]);
+const scores = loadScores('site-scores');
+const low = scores && lowest(scores);
+const cls = low?.cls.toLocaleString('es-MX', { maximumFractionDigits: 3 });
+// Numbered in reading order, like the PDF (each item's `n` is its number in PHILOSOPHY §7).
+let n = 0;
+const groups = c.list.groups.map((g: any) => ({ ...g, items: g.items.map((it: any) => ({ ...it, num: ++n })) }));
+---
+
+<Layout lang={lang} route="estandar" title={c.title} description={c.description} jsonLd={[crumbs]}>
+  <section class="section hero" aria-labelledby="hero-title">
+    <div class="bg-grid hero__grid" aria-hidden="true"></div>
+    <div class="container">
+      <span class="eyebrow">{c.hero.eyebrow}</span>
+      <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
+      <p class="lead" set:html={rich(c.hero.lead, lang)} />
+      <div class="hero__actions">
+        <CTA lang={lang} location="estandar" />
+        <a class="btn btn--secondary" href={checklist.file} download data-track="resource_download" data-track-location="estandar-hero">
+          <Icon name="download" size={18} />
+          {c.hero.download}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Section lang={lang} id="medido" eyebrow={c.measured.eyebrow} title={c.measured.title} lead={c.measured.lead}>
+    <ScoreCards lang={lang} />
+    {cls && <p class="caption muted">{c.measured.clsLabel} {cls}.</p>}
+    <p class="caption muted" set:html={rich(c.measured.inpNote, lang)} />
+  </Section>
+
+  <Section lang={lang} theme="light" id="los-15" eyebrow={c.list.eyebrow} title={c.list.title} lead={c.list.lead}>
+    <div class="std">
+      {
+        groups.map((g: any, gi: number) => (
+          <div class="std__group">
+            <h3 class="std__group-title">
+              <span class="std__badge" aria-hidden="true">{gi + 1}</span>
+              {g.title}
+            </h3>
+            <ul class="std__items" role="list">
+              {g.items.map((it: any) => (
+                <li class="std__row">
+                  <div class="std__head">
+                    <span class="std__num" aria-hidden="true">
+                      {String(it.num).padStart(2, '0')}
+                    </span>
+                    <h4 class="std__title">
+                      <span class="sr-only">{it.num}. </span>
+                      {it.title}
+                    </h4>
+                  </div>
+                  <dl class="std__text">
+                    <div>
+                      <dt>{c.list.forYouLabel}</dt>
+                      <dd set:html={rich(it.forYou, lang)} />
+                    </div>
+                    <div>
+                      <dt>{c.list.howLabel}</dt>
+                      <dd class="muted" set:html={rich(it.how, lang)} />
+                    </div>
+                  </dl>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+    <p class="caption muted std__credit">{c.list.credit}</p>
+  </Section>
+
+  <Section lang={lang} id="ademas" eyebrow={c.extras.eyebrow} title={c.extras.title}>
+    <ul class="card-grid card-grid--3" role="list">
+      {
+        c.extras.items.map((x: any) => (
+          <li class="card">
+            <span class="icon-tile">
+              <Icon name={x.icon} />
+            </span>
+            <h3 class="card__title">{x.title}</h3>
+            <p class="muted" set:html={rich(x.text, lang)} />
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section lang={lang} theme="light" id="llevatelo" eyebrow={c.download.eyebrow} title={c.download.title} lead={c.download.lead}>
+    <div class="std__download">
+      <a class="btn btn--secondary" href={checklist.file} download data-track="resource_download" data-track-location="estandar-final">
+        <Icon name="download" size={18} />
+        {c.download.button}
+      </a>
+      <a class="btn btn--ghost" href={href('recursos', lang)}>{c.download.more} <span aria-hidden="true">→</span></a>
+    </div>
+    <CtaBlock lang={lang} note={c.cta.note} />
+  </Section>
+</Layout>
+
+<style>
+  .hero h1 { max-width: 20ch; }
+  .std { display: grid; gap: var(--space-8); }
+  .std__group-title { display: flex; align-items: center; gap: var(--space-3); margin: 0 0 var(--space-5); font-size: var(--text-2xl); }
+  .std__badge {
+    display: inline-grid; flex: none; width: 2rem; height: 2rem; place-items: center; border-radius: 50%;
+    background: var(--gray-7); color: var(--lime-1); font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-base);
+  }
+  /* Ledger rows (like Nosotros' values): a group of any size reads evenly, with no lone cards. */
+  .std__items { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-border); }
+  .std__row { display: grid; gap: var(--space-4) var(--space-7); padding-block: var(--space-5); border-bottom: 1px solid var(--color-border); }
+  @media (min-width: 1024px) {
+    .std__row { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); }
+  }
+  .std__head { display: flex; align-items: baseline; gap: var(--space-3); }
+  .std__num { flex: none; font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-xl); color: var(--color-link); }
+  .std__title { margin: 0; font-size: var(--text-lg); }
+  .std__text { display: grid; gap: var(--space-4) var(--space-6); margin: 0; }
+  @media (min-width: 768px) {
+    .std__text { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  .std__text dt { margin-bottom: var(--space-1); font-size: var(--text-xs); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--color-text-muted); }
+  .std__text dd { margin: 0; }
+  .std__credit { margin-top: var(--space-7); }
+  .std__download { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+  .std__download .btn :global(.icon), .hero__actions .btn :global(.icon) { flex: none; }
+</style>

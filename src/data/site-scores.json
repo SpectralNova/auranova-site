@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-10-22T01:05:54.902Z",
+  "measuredAt": "2026-10-22T22:53:40.724Z",
   "baseUrl": "http://localhost:4329",
   "lighthouseVersion": "13.5.0",
   "formFactor": "mobile",
@@ -8,11 +8,11 @@
   "pages": [
     {
       "path": "/",
-      "performance": 100,
+      "performance": 99,
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1587,
+      "lcpMs": 1664,
       "cls": 0,
       "tbtMs": 0
     },
@@ -22,7 +22,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1659,
+      "lcpMs": 1831,
       "cls": 0.002,
       "tbtMs": 0
     },
@@ -32,7 +32,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1811,
+      "lcpMs": 1978,
       "cls": 0,
       "tbtMs": 0
     },
@@ -42,7 +42,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1507,
+      "lcpMs": 1511,
       "cls": 0,
       "tbtMs": 0
     },
@@ -52,7 +52,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1957,
+      "lcpMs": 1969,
       "cls": 0,
       "tbtMs": 0
     },
@@ -62,7 +62,27 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1507,
+      "lcpMs": 1512,
+      "cls": 0,
+      "tbtMs": 0
+    },
+    {
+      "path": "/estandar/",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 1516,
+      "cls": 0,
+      "tbtMs": 0
+    },
+    {
+      "path": "/recursos/",
+      "performance": 99,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 2112,
       "cls": 0,
       "tbtMs": 0
     }

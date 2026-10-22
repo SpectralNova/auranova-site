@@ -39,6 +39,14 @@ export const business = {
 
   email: ok('contacto@auranova.mx'), // Q15 ✅ Zoho Mail, set up 2026-10-20
   bookingUrl: ok('https://cal.com/auranova-cal/llamada-inicial'), // Q16 ✅ (David, 2026-10-20; synced to Zoho Calendar)
+
+  // Social profiles (Q15, David, 2026-10-22): links only, no embeds or scripts (SocialLinks.astro).
+  social: {
+    instagram: ok('https://www.instagram.com/auranova.mx/'),
+    facebook: ok('https://www.facebook.com/profile.php?id=61595699520565'),
+    // The channel isn't set up yet: its icon shows in previews and stays out of production until the link exists.
+    youtube: pending({ es: 'liga del canal de YouTube (Q15)', en: 'YouTube channel link (Q15)' }),
+  },
 };
 
 // Facts that copy can use as {{key}} (see src/content/README.md).

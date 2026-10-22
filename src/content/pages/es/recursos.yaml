@@ -1,0 +1,21 @@
+title: "Checklist gratis: 15 puntos para revisar tu sitio web · AuraNova"
+description: "Descarga gratis la lista de 15 preguntas para revisar tu sitio web en unos 10 minutos, basada en el estándar con el que revisamos cada sitio. Sin registrarte."
+
+# The list itself (topics, questions, PDF) comes from estandar.yaml: one source for both pages and the PDF.
+hero:
+  eyebrow: "Recursos"
+  title: "Revisa tu sitio web ==en 10 minutos=="
+  lead: "Una lista gratuita de 15 preguntas, basada en el mismo estándar con el que revisamos cada sitio que entregamos. Descárgala sin registrarte."
+  button: "Descargar la lista (PDF)"
+  coverAlt: "Primera página de la lista «Revisa tu sitio web en 10 minutos», con sus primeras preguntas y casillas para marcar."
+
+includes:
+  eyebrow: "Qué incluye"
+  title: "15 preguntas en ==5 temas=="
+  lead: "Cada pregunta se responde con un sí o un no, con tu sitio abierto en la computadora y en el celular."
+  questions: "preguntas"
+  question: "pregunta"
+  standard: "Ver cómo lo medimos nosotros"
+
+cta:
+  title: "¿Tu sitio no pasó la revisión?"

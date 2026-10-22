@@ -50,6 +50,10 @@ const organization = {
     closes: hours.closes,
   },
   contactPoint: { '@type': 'ContactPoint', contactType: 'sales', email, availableLanguage: ['es', 'en'] },
+  // The social profiles that have a link (Q15), so search engines tie them to the business.
+  sameAs: Object.values(business.social)
+    .map((profile) => factValue(profile, lang))
+    .filter(Boolean),
 };
 ---
 

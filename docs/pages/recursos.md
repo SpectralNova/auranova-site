@@ -1,5 +1,7 @@
 # Page brief · Recursos (`/recursos`)
 
+*Built 2026-10-22 (preview). Additions to this brief: the hero shows the PDF's first page, and each topic says how many questions it has. The PDF asks yes/no questions where «sí» always means it passes (ADR-017).*
+
 | | |
 |---|---|
 | **Goal** | Lead magnet: a useful free checklist that brings owners back to the standard and to a call. |

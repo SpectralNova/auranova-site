@@ -15,6 +15,8 @@ const pages = [
   '/proyectos/',
   '/nosotros/',
   '/contacto/',
+  '/estandar/',
+  '/recursos/',
   '/aviso-de-privacidad/',
   '/terminos/',
   '/no-existe/',
@@ -273,4 +275,21 @@ test('events: a sent form reports form_submit to Zaraz (which applies the consen
   await page.locator('#contact-form button[type=submit]').click();
   await expect(page.locator('#form-status')).toContainText('Recibimos tu mensaje');
   expect(await zarazCalls(page)).toContain('track:form_submit');
+});
+
+test('social links and the checklist: real profiles, YouTube waits for its link, the PDF downloads', async ({ page, request }) => {
+  await page.goto('/recursos/');
+  const footer = page.locator('.site-footer .social');
+  await expect(footer.getByRole('link', { name: 'AuraNova en Instagram' })).toHaveAttribute('href', 'https://www.instagram.com/auranova.mx/');
+  await expect(footer.getByRole('link', { name: 'AuraNova en Facebook' })).toHaveAttribute('href', /facebook\.com\/profile\.php\?id=61595699520565/);
+  // No channel yet: a dimmed placeholder in previews (production builds leave it out), never a dead link.
+  await expect(footer.getByRole('img', { name: 'YouTube (próximamente)' })).toBeVisible();
+  await expect(footer.getByRole('link', { name: /YouTube/ })).toHaveCount(0);
+
+  const download = page.getByRole('link', { name: 'Descargar la lista (PDF)' });
+  const href = await download.getAttribute('href');
+  const pdf = await request.get(href!);
+  expect(pdf.ok()).toBe(true);
+  expect(pdf.headers()['content-type']).toContain('application/pdf');
+  expect((await pdf.body()).subarray(0, 5).toString()).toBe('%PDF-');
 });

@@ -1,4 +1,5 @@
 ---
+import SocialLinks from './SocialLinks.astro';
 import { business, factText, factValue, type Lang } from '../content/business';
 import { href, isBuilt } from '../i18n/routes';
 import { t } from '../i18n/ui';
@@ -23,6 +24,7 @@ const trustLinks = ui.footer.links.trust.filter(([key]) => isBuilt(key, lang));
         <img src="/auranova-mark.svg" alt="" width="36" height="36" loading="lazy" />AuraNova
       </a>
       <p class="muted">{ui.footer.tagline}</p>
+      <SocialLinks lang={lang} class="site-footer__social" />
     </div>
     <nav aria-label={ui.footer.site}>
       <h2 class="site-footer__title">{ui.footer.site}</h2>

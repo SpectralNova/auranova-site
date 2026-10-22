@@ -64,6 +64,7 @@ export const ui = {
     servicesMenu: 'Servicios',
     ctaNote: 'Te decimos qué necesitas y qué no.',
     example: 'Ejemplo',
+    social: { label: 'Redes sociales', on: 'AuraNova en', soon: 'próximamente' },
   },
   en: {
     htmlLang: 'en-US',
@@ -125,6 +126,7 @@ export const ui = {
     servicesMenu: 'Services',
     ctaNote: 'We tell you what you need, and what you don’t.',
     example: 'Example',
+    social: { label: 'Social media', on: 'AuraNova on', soon: 'coming soon' },
   },
 } satisfies Record<Lang, unknown>;
 
