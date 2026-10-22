@@ -1,0 +1,26 @@
+---
+// Términos de uso del sitio (not of the services: projects follow their proposal and contract). Linked from
+// the footer and the privacy notice. The text lives in YAML; its blanks (lawyer review, virtual office
+// address, jurisdiction) block production.
+import { getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import LegalDoc from '../components/LegalDoc.astro';
+import { href } from '../i18n/routes';
+import { t } from '../i18n/ui';
+import { breadcrumbJsonLd } from '../lib/jsonld';
+
+const lang = 'es';
+const page = await getEntry('pages', 'es/terminos');
+if (!page) throw new Error('Missing src/content/pages/es/terminos.yaml');
+const c = page.data as any;
+const ui = t(lang);
+const site = Astro.site!;
+const crumbs = breadcrumbJsonLd([
+  { name: ui.breadcrumbHome, url: new URL(href('inicio', lang), site).href },
+  { name: c.hero.eyebrow, url: new URL(href('terminos', lang), site).href },
+]);
+---
+
+<Layout lang={lang} route="terminos" title={c.title} description={c.description} jsonLd={[crumbs]}>
+  <LegalDoc lang={lang} c={c} />
+</Layout>

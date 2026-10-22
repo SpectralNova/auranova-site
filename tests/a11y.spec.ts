@@ -16,6 +16,7 @@ const pages = [
   '/nosotros/',
   '/contacto/',
   '/aviso-de-privacidad/',
+  '/terminos/',
   '/no-existe/',
 ];
 

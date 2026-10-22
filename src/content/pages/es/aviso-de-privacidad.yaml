@@ -166,6 +166,6 @@ sections:
 
 contact:
   title: "¿Tienes preguntas sobre este aviso o sobre tus datos?"
-  text: "Escríbenos a [contacto@auranova.mx](mailto:contacto@auranova.mx)."
-  # Shown once /terminos/ is built (routes.ts).
-  terms: "Consulta también nuestros [Términos de uso](/terminos/)."
+  body:
+    - "Escríbenos a [contacto@auranova.mx](mailto:contacto@auranova.mx)."
+    - { text: "Consulta también nuestros [Términos de uso](/terminos/).", ifBuilt: "terminos" }

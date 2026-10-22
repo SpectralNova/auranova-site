@@ -1,0 +1,65 @@
+---
+// A legal page (Aviso de privacidad, Términos de uso): dark hero with the update date, the page's blanks and a
+// table of contents, then the text in the long-form layout (.doc). The copy lives in YAML: each section's
+// `body` holds paragraphs (markup and {{facts}} allowed), sub-headings ({ h }) and lists ({ list }); the
+// closing contact block's paragraphs can wait for a page to exist ({ text, ifBuilt: <route key> }).
+import Section from './Section.astro';
+import { isBuilt, type RouteKey } from '../i18n/routes';
+import { t } from '../i18n/ui';
+import { rich } from '../lib/rich';
+import type { Lang } from '../content/business';
+
+interface Props {
+  lang: Lang;
+  /** The page's YAML data. */
+  c: any;
+}
+
+const { lang, c } = Astro.props;
+const ui = t(lang);
+const contact = (c.contact.body as (string | { text: string; ifBuilt: RouteKey })[])
+  .filter((p) => typeof p === 'string' || isBuilt(p.ifBuilt, lang))
+  .map((p) => (typeof p === 'string' ? p : p.text));
+---
+
+<section class="section hero" aria-labelledby="hero-title">
+  <div class="bg-grid hero__grid" aria-hidden="true"></div>
+  <div class="container">
+    <span class="eyebrow">{c.hero.eyebrow}</span>
+    <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
+    <p class="lead" set:html={rich(c.hero.lead, lang)} />
+    <p class="hero__note muted">{c.hero.updated}</p>
+    {c.hero.review && <p class="hero__note" set:html={rich(c.hero.review, lang)} />}
+    <nav class="toc" aria-labelledby="toc-title">
+      <p class="toc__title" id="toc-title">{ui.onThisPage}</p>
+      <ul>{c.sections.map((s: any) => <li><a href={`#${s.id}`}>{s.nav}</a></li>)}</ul>
+    </nav>
+  </div>
+</section>
+
+<Section lang={lang} theme="light">
+  <div class="doc">
+    {
+      c.sections.map((s: any) => (
+        <section id={s.id} aria-labelledby={`${s.id}-title`}>
+          <h2 id={`${s.id}-title`}>{s.title}</h2>
+          <div class="doc__body">
+            {s.body.map((block: any) =>
+              typeof block === 'string' ? (
+                <p set:html={rich(block, lang)} />
+              ) : block.h ? (
+                <h3>{block.h}</h3>
+              ) : (
+                <ul>{block.list.map((li: string) => <li set:html={rich(li, lang)} />)}</ul>
+              ),
+            )}
+          </div>
+        </section>
+      ))
+    }
+    <section aria-labelledby="doc-contact-title">
+      <h2 id="doc-contact-title">{c.contact.title}</h2>
+      <div class="doc__body">{contact.map((p) => <p set:html={rich(p, lang)} />)}</div>
+    </section>
+  </div>
+</Section>

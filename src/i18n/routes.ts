@@ -40,6 +40,7 @@ export const built: Record<Lang, readonly RouteKey[]> = {
     'nosotros',
     'contacto',
     'aviso',
+    'terminos',
   ],
   en: [],
 };

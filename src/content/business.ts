@@ -26,7 +26,7 @@ export const business = {
   legalForm: ok({ es: 'persona física', en: 'sole proprietor (persona física)' }),
   legalName: ok('David Rodrigo Contreras Morales'), // as on his Constancia de Situación Fiscal (David, 2026-10-21)
   // Q2 (David, 2026-10-21): the public notice uses a VIRTUAL OFFICE address; his fiscal/home address is never published.
-  domicilio: pending({ es: 'domicilio de la oficina virtual para el aviso de privacidad (Q2)', en: 'virtual office address for the privacy notice (Q2)' }),
+  domicilio: pending({ es: 'domicilio de la oficina virtual para el aviso de privacidad y los términos de uso (Q2)', en: 'virtual office address for the privacy notice and the terms of use (Q2)' }),
 
   siteUrl: ok('https://auranova.mx'), // Q19; registered 2026-10-20 (Cloudflare Registrar)
   // The city: Nosotros (CP1 feedback 2026-10-19) and the footer's full location (David, 2026-10-20).
