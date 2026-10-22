@@ -66,7 +66,9 @@ async function contact(request: Request, env: Env, ctx: Ctx): Promise<Response> 
   if (invalid.length) return json({ ok: false, error: 'invalid', fields: invalid }, 400);
 
   if (!env.TURNSTILE_SECRET_KEY || !env.RESEND_API_KEY || !env.HUBSPOT_SERVICE_KEY) {
-    console.error('contacto: missing secrets (TURNSTILE_SECRET_KEY, RESEND_API_KEY or HUBSPOT_SERVICE_KEY)');
+    // Names only, never values: Workers Logs then says exactly which secret to add.
+    const missing = (['TURNSTILE_SECRET_KEY', 'RESEND_API_KEY', 'HUBSPOT_SERVICE_KEY'] as const).filter((name) => !env[name]);
+    console.error(`contacto: missing secrets: ${missing.join(', ')}`);
     return json({ ok: false, error: 'config' }, 503);
   }
 
