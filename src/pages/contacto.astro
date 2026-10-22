@@ -282,6 +282,8 @@ const crumbs = breadcrumbJsonLd([
         const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
         const body = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; fields?: string[] };
         if (res.ok && body.ok) {
+          // Meta «Lead» through Zaraz, only with consent (Layout); no form data goes with it.
+          (window as unknown as { auTrack?: (name: string, props: object) => void }).auTrack?.('form_submit', {});
           form.reset();
           fields.forEach((field) => field.removeAttribute('aria-invalid'));
           fillHidden();

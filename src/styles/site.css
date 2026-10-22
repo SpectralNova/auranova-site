@@ -232,6 +232,12 @@ main:focus { outline: none; }
 .site-footer ul { list-style: none; margin: 0; padding: 0; }
 .site-footer li a { display: inline-block; padding-block: var(--space-1); color: var(--color-text); text-decoration: none; font-size: var(--text-sm); }
 .site-footer li a:hover { color: var(--color-accent); }
+/* «Preferencias de cookies»: a button (it opens the cookie banner) that looks like the footer's links. */
+.site-footer__link {
+  display: inline-block; padding: var(--space-1) 0; border: 0; background: none; cursor: pointer;
+  color: var(--color-text); font: inherit; font-size: var(--text-sm); text-align: start;
+}
+.site-footer__link:hover { color: var(--color-accent); }
 .site-footer__contact { margin: 0; font-size: var(--text-sm); }
 .site-footer__contact dt { color: var(--color-text-muted); }
 .site-footer__contact dd { margin: 0 0 var(--space-3); }
@@ -494,3 +500,25 @@ main:focus { outline: none; }
   font-family: var(--font-body); font-weight: var(--weight-strong); font-size: var(--text-lg);
 }
 .menu-sheet__group a .icon { color: var(--color-accent); }
+
+/* ---------- Cookie banner (CookieConsent.astro) ---------- */
+/* Small, at the bottom, never covering the page with an overlay: full width on phones, a card on the right on
+   wider screens (the heroes' copy and CTAs are on the left). Accept and reject are the same size, side by side. */
+.consent {
+  position: fixed; z-index: var(--z-overlay); inset-inline: var(--space-3); bottom: var(--space-3);
+  padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+  background: var(--color-surface); color: var(--color-text); box-shadow: var(--shadow-lg);
+}
+@media (min-width: 768px) {
+  .consent { inset-inline: auto var(--space-4); bottom: var(--space-4); max-width: 26rem; padding: var(--space-5); }
+}
+.consent:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+.consent__title { margin: 0 0 var(--space-1); font-weight: var(--weight-strong); }
+.consent__text, .consent__current { margin: 0 0 var(--space-3); font-size: var(--text-sm); line-height: 1.5; color: var(--color-text-muted); }
+.consent__text a { color: var(--color-accent); }
+.consent__current { color: var(--color-text); }
+.consent__actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+@media (prefers-reduced-motion: no-preference) {
+  .consent:not([hidden]) { animation: consent-in var(--dur-slow) var(--ease-out) both; }
+}
+@keyframes consent-in { from { opacity: 0; transform: translateY(var(--space-4)); } }

@@ -6,6 +6,7 @@ import '../styles/demos.css';
 import '../styles/motion.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 import { business, factText, factValue, type Lang } from '../content/business';
 import { built, href, routes, type RouteKey } from '../i18n/routes';
 import { t } from '../i18n/ui';
@@ -90,6 +91,8 @@ const organization = {
   </head>
   <body>
     <a class="skip-link" href="#main">{ui.skip}</a>
+    {/* Early in the page so keyboard and screen-reader users reach it first; it sits at the bottom visually. */}
+    <CookieConsent lang={lang} />
     <Header lang={lang} route={route} />
     <main id="main" tabindex="-1">
       <slot />
@@ -108,7 +111,11 @@ const organization = {
         }
       } catch {}
 
-      // Analytics hook (Q18 TBD): CTAs carry data-track; window.auTrack is wired once a tool is chosen.
+      // Events (Q18): CTAs carry data-track and the form reports `form_submit`. They go to Cloudflare Zaraz
+      // (auranova.mx only, step 07), which maps them to the Meta Pixel (booking_open → Schedule, form_submit →
+      // Lead) and drops them unless «Publicidad» was accepted in the cookie banner. No personal data is sent.
+      const w = window as unknown as { auTrack?: (name: string, props: object) => void; zaraz?: { track(name: string, props: object): void } };
+      w.auTrack ??= (name, props) => w.zaraz?.track(name, props);
       document.addEventListener('click', (event) => {
         const el = (event.target as Element | null)?.closest<HTMLElement>('[data-track]');
         if (!el) return;

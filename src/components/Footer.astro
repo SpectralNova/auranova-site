@@ -32,7 +32,10 @@ const trustLinks = ui.footer.links.trust.filter(([key]) => isBuilt(key, lang));
       trustLinks.length > 0 && (
         <nav aria-label={ui.footer.trust}>
           <h2 class="site-footer__title">{ui.footer.trust}</h2>
-          <ul>{trustLinks.map(([key, label]) => <li><a href={href(key, lang)}>{label}</a></li>)}</ul>
+          <ul>
+            {trustLinks.map(([key, label]) => <li><a href={href(key, lang)}>{label}</a></li>)}
+            <li><button class="site-footer__link" type="button" data-consent-open>{ui.consent.open}</button></li>
+          </ul>
         </nav>
       )
     }

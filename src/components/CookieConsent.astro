@@ -1,0 +1,110 @@
+---
+// Cookie banner (aviso §9, Q18). One optional purpose, «Publicidad»: the Meta Pixel, which runs only through
+// Cloudflare Zaraz (configured at launch, step 07) and only after the visitor accepts. Small and non-blocking
+// (no overlay, no pop-up tricks: Nosotros promises it), accept and reject equally easy. The choice is kept in
+// this browser and handed to Zaraz's consent API; «Preferencias de cookies» in the footer reopens it.
+// Hidden until the script runs, so returning visitors never see it flash and no-JS visitors (who can't be
+// tracked by Zaraz either) never see it.
+import type { Lang } from '../content/business';
+import { t } from '../i18n/ui';
+import { rich } from '../lib/rich';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = t(lang).consent;
+---
+
+<section class="consent" id="cookie-consent" aria-labelledby="consent-title" tabindex="-1" hidden>
+  <p class="consent__title" id="consent-title">{c.title}</p>
+  <p class="consent__text" set:html={rich(c.text, lang)} />
+  <p class="consent__current" data-yes={c.currentYes} data-no={c.currentNo} hidden></p>
+  <div class="consent__actions">
+    <button class="btn btn--primary" type="button" data-consent="accept">{c.accept}</button>
+    <button class="btn btn--secondary" type="button" data-consent="reject">{c.reject}</button>
+  </div>
+</section>
+
+<script>
+  const KEY = 'au_consent';
+  // Bump when the purposes change, so everyone is asked again.
+  const VERSION = 1;
+  interface Choice {
+    v: number;
+    ads: boolean;
+    at: string;
+  }
+  interface Zaraz {
+    consent?: { APIReady?: boolean; setAll(value: boolean): void; sendQueuedEvents(): void };
+  }
+
+  const banner = document.querySelector<HTMLElement>('#cookie-consent');
+  const current = banner?.querySelector<HTMLElement>('.consent__current');
+  if (banner && current) {
+    const read = (): Choice | null => {
+      try {
+        const choice = JSON.parse(localStorage.getItem(KEY) ?? 'null') as Choice | null;
+        return choice?.v === VERSION ? choice : null;
+      } catch {
+        return null;
+      }
+    };
+    const write = (choice: Choice) => {
+      try {
+        localStorage.setItem(KEY, JSON.stringify(choice));
+      } catch {}
+    };
+
+    // Zaraz has a single purpose («Publicidad»), so setAll is exact; add purpose ids if more are created.
+    const zaraz = () => (window as unknown as { zaraz?: Zaraz }).zaraz;
+    const toZaraz = (ads: boolean) => {
+      const run = () => {
+        const consent = zaraz()?.consent;
+        if (!consent) return;
+        consent.setAll(ads);
+        if (ads) consent.sendQueuedEvents(); // events from before the choice (e.g. this page view)
+      };
+      if (zaraz()?.consent?.APIReady) run();
+      else document.addEventListener('zarazConsentAPIReady', run, { once: true });
+    };
+
+    let opener: HTMLElement | null = null;
+    const close = () => {
+      const hadFocus = banner.contains(document.activeElement);
+      banner.hidden = true;
+      if (opener) opener.focus();
+      else if (hadFocus) document.querySelector<HTMLElement>('#main')?.focus();
+      opener = null;
+    };
+    const open = (from?: HTMLElement) => {
+      const choice = read();
+      current.hidden = !choice;
+      if (choice) current.textContent = (choice.ads ? current.dataset.yes : current.dataset.no) ?? '';
+      banner.hidden = false;
+      if (from) {
+        opener = from;
+        banner.focus();
+      }
+    };
+
+    banner.querySelectorAll<HTMLButtonElement>('[data-consent]').forEach((button) =>
+      button.addEventListener('click', () => {
+        const ads = button.dataset.consent === 'accept';
+        write({ v: VERSION, ads, at: new Date().toISOString() });
+        toZaraz(ads);
+        close();
+      }),
+    );
+    // Esc closes it only when there is already a choice to keep.
+    banner.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && read()) close();
+    });
+    document.querySelectorAll<HTMLElement>('[data-consent-open]').forEach((button) => button.addEventListener('click', () => open(button)));
+
+    const choice = read();
+    if (choice) toZaraz(choice.ads);
+    else open();
+  }
+</script>

@@ -212,3 +212,65 @@ test('contact form: a failed send says so, offers the email and keeps what was t
   await expect(page.locator('#form-status')).toContainText('contacto@auranova.mx');
   await expect(page.locator('#f-message')).toHaveValue('Necesito una asesoría.');
 });
+
+// Cookie banner. A stand-in for Cloudflare Zaraz's consent API records what the banner hands it.
+const ZARAZ_STUB = `window.zaraz = { calls: [], consent: { APIReady: true,
+  setAll(v) { window.zaraz.calls.push('setAll:' + v); }, sendQueuedEvents() { window.zaraz.calls.push('sendQueued'); } },
+  track(name) { window.zaraz.calls.push('track:' + name); } };`;
+const zarazCalls = (page: import('@playwright/test').Page) =>
+  page.evaluate(() => (window as unknown as { zaraz: { calls: string[] } }).zaraz.calls);
+
+test('cookie banner: asks once, early in the keyboard order, and hands the choice to Zaraz', async ({ page }) => {
+  await page.addInitScript(ZARAZ_STUB);
+  await page.goto('/');
+  const banner = page.locator('#cookie-consent');
+  await expect(banner).toBeVisible();
+  await page.keyboard.press('Tab'); // skip link
+  await page.keyboard.press('Tab');
+  await expect(banner.getByRole('link', { name: 'aviso de privacidad' })).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(banner.getByRole('button', { name: 'Aceptar' })).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(banner).toBeHidden();
+  await expect(page.locator('#main')).toBeFocused();
+  expect(await zarazCalls(page)).toEqual(['setAll:true', 'sendQueued']);
+  // Next page: no banner, and the stored choice reaches Zaraz again (plus that page's queued events).
+  await page.goto('/nosotros/');
+  await expect(banner).toBeHidden();
+  expect(await zarazCalls(page)).toEqual(['setAll:true', 'sendQueued']);
+});
+
+test('cookie banner: «Preferencias de cookies» reopens it with the current choice; Esc keeps it, Rechazar changes it', async ({ page }) => {
+  await page.addInitScript(ZARAZ_STUB);
+  await page.goto('/');
+  await page.locator('#cookie-consent').getByRole('button', { name: 'Aceptar' }).click();
+  const prefs = page.getByRole('button', { name: 'Preferencias de cookies' });
+  await prefs.click();
+  const banner = page.locator('#cookie-consent');
+  await expect(banner).toBeFocused();
+  await expect(banner).toContainText('las aceptaste');
+  await page.keyboard.press('Escape');
+  await expect(banner).toBeHidden();
+  await expect(prefs).toBeFocused();
+  await prefs.click();
+  await banner.getByRole('button', { name: 'Rechazar' }).click();
+  await expect(prefs).toBeFocused();
+  expect((await zarazCalls(page)).at(-1)).toBe('setAll:false');
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem('au_consent') ?? '{}').ads)).toBe(false);
+});
+
+test('events: a sent form reports form_submit to Zaraz (which applies the consent)', async ({ page }) => {
+  await page.addInitScript(ZARAZ_STUB);
+  await stubTurnstile(page);
+  await page.route('**/api/contacto', (route) => route.fulfill({ json: { ok: true } }));
+  await page.goto('/contacto/');
+  await page.locator('#cookie-consent').getByRole('button', { name: 'Rechazar' }).click();
+  await page.locator('#f-name').fill('Ana Pérez');
+  await page.locator('#f-email').fill('ana@empresa.com');
+  await page.locator('#f-type').selectOption('sitio_web');
+  await page.locator('#f-message').fill('Quiero un sitio.');
+  await page.locator('#f-consent').check();
+  await page.locator('#contact-form button[type=submit]').click();
+  await expect(page.locator('#form-status')).toContainText('Recibimos tu mensaje');
+  expect(await zarazCalls(page)).toContain('track:form_submit');
+});
