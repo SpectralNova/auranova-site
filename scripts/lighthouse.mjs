@@ -73,7 +73,8 @@ try {
       lighthouseVersion: require('lighthouse/package.json').version,
       formFactor: 'mobile',
       runs,
-      ...(local ? { note: '[[CONFIRMAR: medido en la vista previa local; se vuelve a medir en el sitio publicado]]' } : {}),
+      // A local measurement says so on the page; after launch it's measured on the published site (David, 2026-10-21).
+      ...(local ? { note: 'Medido antes de publicar el sitio; lo volvemos a medir ya publicado.' } : {}),
       pages: pages.map(({ failing, ...p }) => p),
     };
     await mkdir('src/data', { recursive: true });

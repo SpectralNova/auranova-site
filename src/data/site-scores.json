@@ -1,10 +1,10 @@
 {
-  "measuredAt": "2026-10-20T17:53:59.200Z",
+  "measuredAt": "2026-10-22T01:05:54.902Z",
   "baseUrl": "http://localhost:4329",
   "lighthouseVersion": "13.5.0",
   "formFactor": "mobile",
   "runs": 3,
-  "note": "[[CONFIRMAR: medido en la vista previa local; se vuelve a medir en el sitio publicado]]",
+  "note": "Medido antes de publicar el sitio; lo volvemos a medir ya publicado.",
   "pages": [
     {
       "path": "/",
@@ -12,7 +12,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1536,
+      "lcpMs": 1587,
       "cls": 0,
       "tbtMs": 0
     },
@@ -22,7 +22,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1671,
+      "lcpMs": 1659,
       "cls": 0.002,
       "tbtMs": 0
     },
@@ -32,7 +32,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1822,
+      "lcpMs": 1811,
       "cls": 0,
       "tbtMs": 0
     },
@@ -42,7 +42,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1519,
+      "lcpMs": 1507,
       "cls": 0,
       "tbtMs": 0
     },
@@ -52,7 +52,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1665,
+      "lcpMs": 1957,
       "cls": 0,
       "tbtMs": 0
     },
@@ -62,7 +62,7 @@
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
-      "lcpMs": 1515,
+      "lcpMs": 1507,
       "cls": 0,
       "tbtMs": 0
     }

@@ -6,7 +6,7 @@ navIcon: "monitor-smartphone"
 art: "sitios-web"
 summary: "Un sitio profesional que carga rápido, se ve bien en el celular y lleva a tus clientes a contactarte."
 tools: ["astro", "nextdotjs", "wordpress", "woocommerce", "cloudflare"]
-proof: true
+# proof (the projects section) removed from this page (David, 2026-10-21).
 
 page:
   title: "Diseño de páginas web para negocios · AuraNova"

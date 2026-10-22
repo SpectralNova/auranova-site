@@ -5,7 +5,7 @@ hero:
   eyebrow: "Cómo trabajamos"
   title: "Así trabajamos: ==todo por escrito=="
   lead: "Antes de agendar, conoce nuestro proceso, horario, pagos y lo que nos toca a cada quien. Es un resumen, en español claro, del contrato que firmamos contigo."
-  contract: "Versión del contrato: [[PENDIENTE: versión y fecha del contrato actualizado (Q20)]]"
+  contract: "Versión del contrato: 1 de noviembre de 2026"  # Q20: date only, no version number yet (David, 2026-10-21)
   ctaNote: "Una llamada de {{duracionLlamada}}, sin costo, para conocer tu negocio. Te decimos qué necesitas y qué no."
 
 # The scroll roadmap (src/components/Roadmap.astro): the call, then the four contract stages.
