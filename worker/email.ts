@@ -1,5 +1,5 @@
 // The form's two emails, sent with Resend from contacto@auranova.mx: the lead to the inbox, and the auto-reply
-// to the visitor (template 1, «Respuesta del formulario», from AuraNova Documentos/00 Plantillas/Correos).
+// to the visitor (template 1, «Respuesta del formulario», from AuraNova Archivo/plantillas/documentos/Correos).
 // Facts (response time, call length, booking link) come from business.ts, like the site's copy.
 import type { Env } from './index.ts';
 import { SERVICES, type Lead } from './lead.ts';
