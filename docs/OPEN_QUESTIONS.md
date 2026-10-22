@@ -26,7 +26,7 @@
 | Q15 | Channels | ✅ email · 🟡 my reading | CP1.1 |
 | Q16 | Booking tool | ✅ Cal.com · ✅ 30 min · ✅ link | CP1.2 |
 | Q17 | Lead magnet | ✅ | — |
-| Q18 | Analytics | 🔴 TBD | before CP2 |
+| Q18 | Analytics | ✅ Cloudflare Web Analytics | — |
 | Q19 | Domain + hosting | ✅ (bought 2026-10-20) | — |
 | Q20 | Contract update | ✅ will update · ✅ date (1 nov 2026) | — |
 | Q21 | Social-proof numbers | ✅ omit | — |
@@ -134,8 +134,7 @@
 - **Status:** ✅ · **Answer:** yes, ungated, generated from the same data as /estandar; in both languages (Q4). · **Date:** 2026-10-19
 
 ## Q18 · Analytics
-- **Status:** 🔴 TBD (David, 2026-10-19). Decide before CP2: it determines the events and the aviso's wording.
-- **Meanwhile:** the build calls a `track()` helper that does nothing until a tool is chosen. Options stay as before: Umami Cloud (free tier, cookieless, custom events) or Plausible (paid). Cloudflare Web Analytics has no custom events.
+- **Answer:** ✅ **Cloudflare Web Analytics** (David, 2026-10-21): free, cookieless, no consent needed; the aviso §9 names it. It has no custom events: the site's events (`booking_open`, `form_submit`) go only to Zaraz for Meta (ADR-015). Enabled on the auranova.mx hostname at launch. 🟡 Its beacon is a small Cloudflare script loaded on every page, an exception to «no third-party script on page load»: David to OK it; if so, the CSP allows `static.cloudflareinsights.com` (script) and `cloudflareinsights.com` (connect).
 - **Meta (2026-10-21):** Pixel/dataset **2078766606859398** created by David (Events Manager, Web source). It loads only through Cloudflare **Zaraz** with consent («Publicidad» in the cookie banner) at launch (checklist step 07), with the Conversions API token pasted by David into Zaraz. No Meta code goes into the site's source, so the CSP stays `script-src 'self'`. Events to wire: PageView, Lead (form sent), Schedule (booking opened).
 
 ## Q19 · Domain and hosting

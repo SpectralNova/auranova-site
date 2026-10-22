@@ -144,7 +144,7 @@ sections:
     nav: "Cookies"
     title: "9. Cookies y tecnologías similares"
     body:
-      - "Nuestro sitio mide sus visitas con una herramienta que no instala cookies (Cloudflare Web Analytics [[CONFIRMAR: herramienta de analítica (Q18)]])."
+      - "Nuestro sitio mide sus visitas con una herramienta que no instala cookies (Cloudflare Web Analytics)."
       - "Sólo si las aceptas en el aviso de cookies, usamos el **Pixel de Meta** y su API de conversiones para medir y mejorar nuestros anuncios en Facebook e Instagram. Puedes cambiar tu elección en cualquier momento desde «Preferencias de cookies», al pie del sitio, y también bloquear las cookies desde tu navegador."
 
   - id: menores
