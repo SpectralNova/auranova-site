@@ -61,6 +61,8 @@ form:
   noscript: "Para enviar el formulario necesitas JavaScript. También puedes escribirnos a contacto@auranova.mx."
   status:
     sent: "Recibimos tu mensaje. Te respondemos en {{respuesta}} y te enviamos una confirmación a tu correo."
+    # When Turnstile shows its checkbox (it asks only when it can't confirm silently).
+    verify: "Para enviar tu mensaje, completa la verificación de arriba."
     challenge: "No pudimos confirmar que eres una persona. Inténtalo de nuevo."
     failed: "No pudimos enviar tu mensaje. Inténtalo de nuevo en unos minutos o escríbenos a contacto@auranova.mx."
   errors:

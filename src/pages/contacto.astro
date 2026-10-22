@@ -59,6 +59,7 @@ const crumbs = breadcrumbJsonLd([
       data-error-summary={c.form.errors.summary}
       data-sending={c.form.sending}
       data-sent={plain(status.sent, lang)}
+      data-verify={plain(status.verify, lang)}
       data-challenge={plain(status.challenge, lang)}
       data-failed={plain(status.failed, lang)}
       data-sitekey={TURNSTILE_SITE_KEY}>
@@ -192,10 +193,12 @@ const crumbs = breadcrumbJsonLd([
     };
     fillHidden();
 
-    // Turnstile: one token per send. `waiting` resolves the next token (or '' on error or after 15 s).
+    // Turnstile: one token per send. `waiting` resolves the next token, or '' on error or timeout. Usually it
+    // checks silently; when it needs the visitor (interactive), it shows its checkbox and the send waits for it.
     const slot = document.querySelector<HTMLElement>('#f-turnstile');
     let widget: string | undefined;
     let token = '';
+    let interactive = false;
     let waiting: ((value: string) => void)[] = [];
     const settle = (value: string) => {
       token = value;
@@ -220,6 +223,11 @@ const crumbs = breadcrumbJsonLd([
           callback: settle,
           'expired-callback': () => (token = ''),
           'error-callback': () => settle(''),
+          'before-interactive-callback': () => {
+            interactive = true;
+            if (waiting.length) status.textContent = msg.verify ?? '';
+          },
+          'after-interactive-callback': () => (interactive = false),
         });
       });
       script.addEventListener('error', () => settle(''));
@@ -227,12 +235,21 @@ const crumbs = breadcrumbJsonLd([
     };
     form.addEventListener('focusin', loadTurnstile, { once: true });
     form.addEventListener('pointerdown', loadTurnstile, { once: true });
+    // Gives up after 20 s of silent checking, or after 3 minutes while the visitor is asked to tick the box.
     const getToken = () =>
       token
         ? Promise.resolve(token)
         : new Promise<string>((resolve) => {
-            waiting.push(resolve);
-            setTimeout(() => resolve(''), 15000);
+            const started = Date.now();
+            const timer = setInterval(() => {
+              if (Date.now() - started > (interactive ? 180000 : 20000)) done('');
+            }, 1000);
+            const done = (value: string) => {
+              clearInterval(timer);
+              resolve(value);
+            };
+            waiting.push(done);
+            if (interactive) status.textContent = msg.verify ?? '';
             loadTurnstile();
           });
 
@@ -259,6 +276,7 @@ const crumbs = breadcrumbJsonLd([
       try {
         const pass = await getToken();
         if (!pass) return say(msg.challenge);
+        status.textContent = msg.sending ?? '';
         const data = new FormData(form);
         data.set('cf-turnstile-response', pass);
         const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });

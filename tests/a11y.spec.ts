@@ -177,6 +177,27 @@ test('contact form: keyboard only, errors announced, then sent (Turnstile only a
   await expect(page.locator('#f-name')).toHaveValue('');
 });
 
+test('contact form: when Turnstile asks for its checkbox, the send says so and waits for it', async ({ page }) => {
+  // This stand-in asks for the checkbox and hands out the token only when the test "ticks" it.
+  await page.route('https://challenges.cloudflare.com/**', (route) =>
+    route.fulfill({
+      contentType: 'text/javascript',
+      body: "window.turnstile = { render(el, o) { setTimeout(() => o['before-interactive-callback'](), 50); window.__tick = () => { o['after-interactive-callback'](); o.callback('XXXX.DUMMY.TOKEN.XXXX'); }; return 'w'; }, reset() {} };",
+    }),
+  );
+  await page.route('**/api/contacto', (route) => route.fulfill({ json: { ok: true } }));
+  await page.goto('/contacto/');
+  await page.locator('#f-name').fill('Ana Pérez');
+  await page.locator('#f-email').fill('ana@empresa.com');
+  await page.locator('#f-type').selectOption('sitio_web');
+  await page.locator('#f-message').fill('Quiero un sitio.');
+  await page.locator('#f-consent').check();
+  await page.locator('#contact-form button[type=submit]').click();
+  await expect(page.locator('#form-status')).toContainText('completa la verificación');
+  await page.evaluate(() => (window as unknown as { __tick: () => void }).__tick());
+  await expect(page.locator('#form-status')).toContainText('Recibimos tu mensaje');
+});
+
 test('contact form: a failed send says so, offers the email and keeps what was typed', async ({ page }) => {
   await stubTurnstile(page);
   await page.route('**/api/contacto', (route) => route.fulfill({ status: 502, json: { ok: false, error: 'delivery' } }));
