@@ -3,7 +3,6 @@ import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import { href, type RouteKey } from '../i18n/routes';
 import { rich } from '../lib/rich';
-import { PRODUCTION } from '../lib/env';
 
 const lang = 'es';
 const page = await getEntry('pages', 'es/404');
@@ -18,7 +17,6 @@ const c = page.data as any;
       <span class="eyebrow">{c.eyebrow}</span>
       <h1 id="hero-title" set:html={rich(c.heading, lang)} />
       <p class="lead">{c.text}</p>
-      {!PRODUCTION && <p set:html={rich(c.previewNote, lang)} />}
       <div class="hero__actions"><a class="btn btn--primary" href={href('inicio', lang)}>{c.home}</a></div>
       <ul class="not-found__links">
         {
