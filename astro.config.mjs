@@ -18,17 +18,18 @@ function siteFiles() {
     hooks: {
       /** @param {{ dir: URL }} options */
       'astro:build:done': async ({ dir }) => {
-        // Turnstile (contact form) is the only third-party script: it loads on the first interaction with
-        // the form, never on page load, and draws its check in a frame from the same origin.
+        // Third-party scripts, both Cloudflare's: Turnstile (contact form) loads on the first interaction with
+        // the form and draws its check in its own frame; Web Analytics (Q18, cookieless) is the one script on
+        // every page (David, 2026-10-21), injected by Cloudflare on auranova.mx at launch.
         const turnstile = 'https://challenges.cloudflare.com';
         const csp = [
           "default-src 'self'",
-          `script-src 'self' ${turnstile}`,
+          `script-src 'self' ${turnstile} https://static.cloudflareinsights.com`,
           `frame-src ${turnstile}`,
           "style-src 'self' 'unsafe-inline'",
           "img-src 'self' data:",
           "font-src 'self'",
-          "connect-src 'self'",
+          "connect-src 'self' https://cloudflareinsights.com",
           "form-action 'self'",
           "base-uri 'self'",
           "frame-ancestors 'none'",
