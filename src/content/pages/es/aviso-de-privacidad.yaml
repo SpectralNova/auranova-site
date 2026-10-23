@@ -9,7 +9,7 @@ hero:
   eyebrow: "Aviso de privacidad"
   title: "Aviso de privacidad ==integral=="
   lead: "En AuraNova cuidamos tus datos personales. Este aviso te explica qué datos tratamos, para qué, con quién los compartimos y cómo ejercer tus derechos, conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares, publicada en el Diario Oficial de la Federación el 20 de marzo de 2025 (la «Ley»)."
-  updated: "Última actualización: 21 de octubre de 2026"
+  updated: "Última actualización: 23 de octubre de 2026"
   # The cookie banner with «Preferencias de cookies» exists since 2026-10-21; only the review is left.
   review: "[[PENDIENTE: revisión del aviso por un abogado, antes de publicarlo]]"
 
@@ -63,6 +63,7 @@ sections:
       - list:
           - "Responder tus mensajes y tus solicitudes de información o de cotización."
           - "Agendar y realizar la llamada inicial por videollamada."
+          - "Hacer el diagnóstico gratuito de tu sitio web cuando nos lo pidas y presentarte el resultado en una videollamada."
           - "Preparar cotizaciones, contratos y anexos."
           - "Prestar los servicios que contrates: diseño, desarrollo, publicación, configuración de herramientas, capacitación, garantía y mantenimiento."
           - "Facturar, cobrar y llevar nuestra contabilidad."
