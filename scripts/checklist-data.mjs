@@ -10,7 +10,7 @@ export const RECORD = 'src/data/checklist.json';
 
 export async function loadChecklist() {
   const page = parse(await readFile(SOURCE, 'utf8'));
-  const data = { groups: page.list.groups, credit: page.list.credit, pdf: page.pdf };
+  const data = { groups: page.list.groups, pdf: page.pdf };
   const hash = createHash('sha256').update(JSON.stringify(data)).digest('hex');
   return { ...data, hash };
 }

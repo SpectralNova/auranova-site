@@ -19,7 +19,6 @@
 | Los 15 umbrales (LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1, Lighthouse ≥ 90, contraste 4.5:1, 16 px, 44 px, 320–1440 px…) | Nuestro estándar, checklist PDF | PHILOSOPHY §7, copied once into `estandar.yaml` | ✅ |
 | «Cada entrega incluye esta revisión completa: punto por punto, si cumple o no, con su evidencia» | Nuestro estándar | PHILOSOPHY §7 ("each deliverable ships with this table filled in") | ✅ |
 | «A este sitio le pedimos todavía más: 95 o más en Lighthouse» | Nuestro estándar (hero) | `scripts/lighthouse.mjs` budget 95; measured 99–100 on 8 pages (2026-10-22, `site-scores.json`) | ✅ |
-| «Basado en los 15 principios de diseño web de Kindling.App» | Nuestro estándar, checklist PDF | PHILOSOPHY Sources (credit, as the brief recommended) | ✅ |
 | «Revisa tu sitio web en 10 minutos» | Recursos, checklist PDF | Our estimate for 15 yes/no questions; the lead says «unos 10 minutos» | ✅ by rule (an estimate, worded as one) |
 | «Llamada sin costo de 30 minutos» | Checklist PDF | Q16 + Q36 | ✅ |
 | Demo numbers (KPIs, positions, response time, matrix) | Posicionamiento, Mantenimiento, Asesoría demos | none: **sample data**, labelled "Datos de ejemplo" / "Ejemplo" in the window and in a footnote; never presented as client results | ✅ by rule (ADR-011) |

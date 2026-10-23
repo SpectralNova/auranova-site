@@ -49,7 +49,7 @@ page:
     title: "Todo lo que lleva ==un buen sitio=="
     items:
       - { icon: "layout-template", title: "Sitios informativos", text: "Las páginas que tu negocio necesita: inicio, servicios, nosotros y contacto, cada una con un objetivo claro." }
-      - { icon: "mouse-pointer-click", title: "Páginas de aterrizaje", text: "Una página enfocada en una sola acción para tu campaña, promoción o lanzamiento." }
+      - { icon: "mouse-pointer-click", title: "Landing pages", text: "Una página enfocada en una sola acción para tu campaña, promoción o lanzamiento." }
       - { icon: "shopping-bag", title: "Tiendas y catálogos", text: "Catálogos de productos y tiendas en línea con WooCommerce, con pagos y envíos configurados." }
       - { icon: "refresh-cw", title: "Rediseños y migraciones", text: "Renovamos tu sitio o lo pasamos a una plataforma más rápida sin perder lo que ya ganaste en Google." }
       - { icon: "calendar-check", title: "Formularios y citas", text: "Formularios de contacto, cotizaciones y agenda de citas que llegan directo a tu correo." }

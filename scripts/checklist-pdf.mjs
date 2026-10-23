@@ -6,7 +6,7 @@ import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { loadChecklist, RECORD } from './checklist-data.mjs';
 
-const { groups, credit, pdf, hash } = await loadChecklist();
+const { groups, pdf, hash } = await loadChecklist();
 const out = `public${pdf.file}`;
 const cover = 'src/assets/generated/checklist-cover.png';
 const SITE = 'https://auranova.mx';
@@ -65,7 +65,6 @@ li p { color: #383B3D; }
 .closing h2 { color: #D8FD34; }
 .closing a { color: #D8FD34; font-weight: 600; }
 .closing p + p { margin-top: 6pt; }
-.credit { margin-top: 12pt; font-size: 8.5pt; color: #595F61; }
 </style></head><body>
   <div class="top"><div class="lockup"><img src="${mark}" alt="">AuraNova</div><div class="url">auranova.mx</div></div>
   <h1>${esc(pdf.title)}</h1>
@@ -77,7 +76,6 @@ li p { color: #383B3D; }
     <p>${esc(pdf.closing)} <a href="${SITE}/contacto/#agenda">${esc(pdf.closingLink)}</a></p>
     <p>${link(pdf.standardLink)}</p>
   </div>
-  <p class="credit">${esc(credit)}</p>
 </body></html>`;
 
 await mkdir(dirname(out), { recursive: true });

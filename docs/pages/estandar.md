@@ -23,3 +23,4 @@
 | 6 | CTA final | violet | [Agenda una llamada] |
 
 **Recommendation for CP1:** credit the Kindling article as the origin of the 15 principles ("Basado en…"); the thresholds are ours. It fits the honesty values and avoids presenting someone else's list as our own.
+**Decision (David, 2026-10-22):** no credit on the page or in the PDF: the list isn't a registered work, and the thresholds and how we measure them are ours. The source stays in PHILOSOPHY's sources.

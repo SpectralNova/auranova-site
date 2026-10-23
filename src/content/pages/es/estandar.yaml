@@ -25,7 +25,6 @@ list:
   lead: "Cada entrega incluye esta revisión completa: punto por punto, si cumple o no, con su evidencia."
   forYouLabel: "Para ti"
   howLabel: "Cómo lo medimos"
-  credit: "Basado en los 15 principios de diseño web de Kindling.App. Los umbrales y la forma de medirlos son nuestros."
   groups:
     - title: "Propósito y contenido"
       summary: "Si cada página tiene un objetivo claro y textos reales."
