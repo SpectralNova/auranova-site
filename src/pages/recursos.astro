@@ -81,7 +81,7 @@ const meta = `PDF · ${checklist.pages} páginas · ${Math.round(checklist.bytes
     <p class="res-standard">
       <a class="btn btn--ghost" href={href('estandar', lang)}>{c.includes.standard} <span aria-hidden="true">→</span></a>
     </p>
-    <CtaBlock lang={lang} location="recursos" title={c.cta.title} />
+    <CtaBlock lang={lang} location="recursos" title={c.cta.title} note={c.cta.note} />
   </Section>
 </Layout>
 

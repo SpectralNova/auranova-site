@@ -46,7 +46,7 @@
 | Q35 | Service illustration style (A / B / C) | ✅ A | — |
 | Q36 | Is the 30-minute call free? | ✅ yes | — |
 | Q37 | Design system v1.4: line length, skip-link hover, one-word last lines | ✅ applied (2026-10-23) | — |
-| Q38 | Where the site links to «Diagnóstico gratis» | 🟡 proposed: from Asesoría digital and the /recursos/ closing CTA; not in the nav | David |
+| Q38 | Where the site links to «Diagnóstico gratis» | ✅ Asesoría digital + the /recursos/ closing CTA; not in the nav (2026-10-23) | — |
 
 **Still open after CP1.2** (most blocking first): Q12 (Vista's OK in writing), Q15 (my reading: no WhatsApp/socials at launch), Q2 (domicilio for the aviso). Before CP2 as well: Q18 (analytics). Phase 2: Q20 contract version. (Business email ✅ contacto@auranova.mx and Cal.com link ✅, 2026-10-20.)
 
@@ -292,7 +292,7 @@
 - **3. One-word last lines (optional):** `p, li { text-wrap: pretty; }` avoids most single words left on a paragraph's last line (progressive enhancement; browsers that don't support it are unaffected).
 
 ## Q38 · Where the site links to the free diagnosis (2026-10-23)
-- **Status:** 🟡. `/diagnostico-gratis/` exists for the ads (ADR-019), and nothing on the site links to it yet.
+- **Status:** ✅ approved by David 2026-10-23 and applied: the «Auditoría de tu sitio» item on Asesoría digital, and the note under the /recursos/ closing call to action. HubSpot: no dedicated stage for now; diagnoses stay in «Nuevo lead» (David, 2026-10-23).
 - **Proposal:**
   - from **Asesoría digital** (its «Auditoría de tu sitio» item: start with the free diagnosis);
   - from the **closing call to action on /recursos/** («¿Tu sitio no pasó la revisión?»), as a second option next to the call.

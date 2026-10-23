@@ -40,7 +40,7 @@ page:
     eyebrow: "Lo que hacemos"
     title: "Claridad antes de ==invertir=="
     items:
-      - { icon: "clipboard-check", title: "Auditoría de tu sitio", text: "Velocidad, accesibilidad, SEO y seguridad, con una lista de mejoras por prioridad." }
+      - { icon: "clipboard-check", title: "Auditoría de tu sitio", text: "Velocidad, accesibilidad, SEO y seguridad, con una lista de mejoras por prioridad. Puedes empezar con un [diagnóstico gratis](/diagnostico-gratis/)." }
       - { icon: "map", title: "Plan digital", text: "Qué hacer primero, qué después y cuánto cuesta cada paso." }
       - { icon: "wrench", title: "Elegir herramientas", text: "Plataformas, hosting y servicios que sí te convienen, y las que no necesitas." }
       - { icon: "binoculars", title: "Análisis de competencia", text: "Qué anuncios y qué contenido publican tus competidores, y qué les funciona." }

@@ -19,3 +19,5 @@ includes:
 
 cta:
   title: "¿Tu sitio no pasó la revisión?"
+  # Q38 (David, 2026-10-23): the free diagnosis as a second option next to the call.
+  note: "Te decimos qué necesitas y qué no. ¿Prefieres que lo revisemos nosotros? Pide tu [diagnóstico gratis](/diagnostico-gratis/)."
