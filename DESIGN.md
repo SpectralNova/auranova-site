@@ -152,7 +152,7 @@ components:
 
 # Design System: AuraNova
 
-> Derived from the brand master, `Resources/AuraNova/Design System/` (DESIGN_SYSTEM.md v1.3, tokens.css, components.css), which `npm run sync:ds` copies into `src/styles/`. **The master wins any disagreement.** Change it upstream, bump its changelog, sync, then refresh this file.
+> Derived from the brand master, `Resources/AuraNova/Design System/` (DESIGN_SYSTEM.md v1.4, tokens.css, components.css), which `npm run sync:ds` copies into `src/styles/`. **The master wins any disagreement.** Change it upstream, bump its changelog, sync, then refresh this file.
 
 ## Overview
 
@@ -224,7 +224,7 @@ One neon star against a near-black night, with violet as the atmosphere around i
 - **Title** (Roboto 700, 24 → 32 px, 1.2): H3, group titles, card titles.
 - **Subtitle** (Roboto 700, 20 → 24 px, 1.2): H4.
 - **Lead** (400, 18 → 20 px, 1.6): the intro paragraph under a section heading, in muted color.
-- **Body** (400, 16 → 18 px, 1.6): running text, never below 16 px, never wider than the measure (`--measure`, 68ch). In Montserrat 68ch holds about 85–90 Spanish characters per line, above the 60–75 that /estandar/ promises; a narrower measure is proposed for the next design-system version.
+- **Body** (400, 16 → 18 px, 1.6): running text, never below 16 px, never wider than the measure (`--measure`, 54ch). In Montserrat that is 60–75 characters per line, as /estandar/ promises (measured: median 67, 90% of lines at 73 or fewer). Paragraphs and list items use `text-wrap: pretty`, so no single word sits alone on a last line.
 - **Label** (600, 14 px, 0.08em, uppercase): buttons.
 - **Eyebrow** (600, 12 px, 0.08em, uppercase): eyebrow chips, tags and small field labels; also legal fine print.
 

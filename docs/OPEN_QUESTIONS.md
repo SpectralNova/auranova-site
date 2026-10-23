@@ -45,7 +45,7 @@
 | Q34 | Home hero animation (A / B / C) | ✅ A | — |
 | Q35 | Service illustration style (A / B / C) | ✅ A | — |
 | Q36 | Is the 30-minute call free? | ✅ yes | — |
-| Q37 | Design system v1.4: line length, skip-link hover, one-word last lines | 🟡 proposed (2026-10-23) | David approves the upstream change |
+| Q37 | Design system v1.4: line length, skip-link hover, one-word last lines | ✅ applied (2026-10-23) | — |
 
 **Still open after CP1.2** (most blocking first): Q12 (Vista's OK in writing), Q15 (my reading: no WhatsApp/socials at launch), Q2 (domicilio for the aviso). Before CP2 as well: Q18 (analytics). Phase 2: Q20 contract version. (Business email ✅ contacto@auranova.mx and Cal.com link ✅, 2026-10-20.)
 
@@ -280,7 +280,12 @@
 | 9 | i18n: es-MX only at launch | Q4 said ES + EN; then on hold (CP1) | ADR-007 on hold |
 
 ## Q37 · Design system v1.4 (found by Impeccable, 2026-10-23)
-- **Status:** 🟡 proposed. These live in the brand master (`Resources/AuraNova/Design System`), so they need David's approval, a v1.4 changelog entry and `npm run sync:ds`.
+- **Status:** ✅ approved by David and applied 2026-10-23: upstream first (v1.4 changelog), then `npm run sync:ds` (ADR-012).
+- **Measured after the change** (exact characters per rendered line, 5 text-heavy pages at 1440 px):
+  - body lines: median 67, 90% at 73 or fewer, longest 79 (before: 82, 89, 93);
+  - paragraphs ending in a single word: 3 of 117;
+  - skip link on hover: lime-7 on lime, 15.3:1;
+  - Impeccable reports no line-length or one-word findings on the privacy notice, Cómo trabajamos or Sitios web.
 - **1. Line length:** `--measure: 68ch` holds about 85–90 Spanish characters per line in Montserrat (measured on the legal pages, Cómo trabajamos and Sitios web). /estandar/ promises 60–75 (#7). **Proposal:** about `56ch` (≈ 72 characters, to verify on screen).
 - **2. Skip-link hover:** the global `a:hover` link color turns the skip link's text light violet on lime (1.3:1) when it is focused and hovered. **Proposal:** `.skip-link:hover { color: var(--lime-7); }`.
 - **3. One-word last lines (optional):** `p, li { text-wrap: pretty; }` avoids most single words left on a paragraph's last line (progressive enhancement; browsers that don't support it are unaffected).

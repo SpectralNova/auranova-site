@@ -94,11 +94,15 @@
 - **Honesty:** demos use a generic "Tu negocio". Any demo with numbers is labelled "Datos de ejemplo"/"Ejemplo" and carries a footnote (docs/CLAIMS.md). The quality report on Sitios web is the only real number set, and it comes from `npm run measure`.
 - **Cost:** about 6 KB of JavaScript in total (demos, roadmap, parallax, menu, tabs). Lighthouse mobile: 99–100 performance on every page.
 
-## ADR-012 · Design system v1.3
+## ADR-012 · Design system v1.3 (and v1.4)
 - **Status:** Approved by David (CP1.2 review, "Q30: Recommended") and applied 2026-10-20: changed upstream first (`Resources/AuraNova/Design System/`, changelog bumped), then `npm run sync:ds`. The local stand-ins are gone.
   1. **`.tag` on light backgrounds** measured 4.43:1 (violet-5 on its own 20% tint, 12 px) → text in `--color-link-hover` (violet-6), ≈ 8:1.
   2. **`.theme-dark` utility**: the dark semantic tokens inside a light section (the service demos are dark product windows).
   3. **`--font-mono`**: the system monospace, never downloaded, only for code and terminal text inside mockups. The 3-family rule is unchanged.
+- **v1.4 (2026-10-23, Q37, approved by David):** found by Impeccable, applied upstream first and then synced the same way.
+  1. `--measure` goes from 68ch to 54ch, so body lines hold 60–75 characters (non-negotiable #7).
+  2. `.skip-link:hover` keeps lime-7 (it was 1.3:1).
+  3. `p, li { text-wrap: pretty; }`.
 
 ## ADR-013 · Options decided; the alternatives are retired
 - **Status:** Implemented for CP1.3 · 2026-10-20

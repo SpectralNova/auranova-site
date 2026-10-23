@@ -1,7 +1,7 @@
 /* Synced from Resources/AuraNova/Design System/tokens.css by scripts/sync-design-system.mjs.
    Do not edit here: change upstream, bump its changelog, then run `npm run sync:ds`. */
 /* ==========================================================================
-   AuraNova — design tokens v1.3 (2026-10-20)
+   AuraNova — design tokens v1.4 (2026-10-23)
    Source of truth for every colour, type size, space, radius, shadow and
    motion value. Components never use raw values: only these variables.
    Palette: Resources/AuraNova/Brand Colors.pdf (exact hex, nothing added
@@ -130,7 +130,9 @@
   --tracking-display: -0.01em;
   --tracking-caps: 0.08em; /* buttons, eyebrows (uppercase) */
 
-  --measure: 68ch;
+  /* Body line length. Montserrat fits about 1.2 characters per ch, so 54ch gives 60–75 characters per line
+     (non-negotiable #7), measured on the site at 1440 px. It was 68ch (about 82, up to 93) until v1.4. */
+  --measure: 54ch;
 
   /* ---------- Space (4px base) ---------- */
   --space-1: 0.25rem;  /*   4 */
