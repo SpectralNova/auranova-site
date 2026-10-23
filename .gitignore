@@ -23,3 +23,8 @@ Thumbs.db
 
 # wrangler local state
 .wrangler/
+
+# per-machine Claude and Impeccable state (the shared .impeccable/config.json and design.json are committed)
+.claude/settings.local.json
+.impeccable/config.local.json
+.impeccable/hook.cache.json

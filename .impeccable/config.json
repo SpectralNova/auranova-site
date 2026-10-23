@@ -1,0 +1,42 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "montserrat",
+        "createdAt": "2026-10-23T17:01:25.804Z",
+        "reason": "David approved: AuraNova brand fonts, design system v1.3 §3 (Resources/AuraNova/Design System)"
+      },
+      {
+        "rule": "overused-font",
+        "value": "roboto",
+        "createdAt": "2026-10-23T17:01:25.953Z",
+        "reason": "David approved: AuraNova brand fonts, design system v1.3 §3 (Resources/AuraNova/Design System)"
+      },
+      {
+        "rule": "overused-font",
+        "value": "roboto condensed",
+        "createdAt": "2026-10-23T17:01:26.077Z",
+        "reason": "David approved: AuraNova brand fonts, design system v1.3 §3 (Resources/AuraNova/Design System)"
+      },
+      {
+        "rule": "codex-grid-background",
+        "value": "*",
+        "files": [
+          "src/styles/components.css"
+        ],
+        "createdAt": "2026-10-23T17:01:26.213Z",
+        "reason": "David approved: the hero engineering grid (.bg-grid) is a brand motif, design system v1.3 §6 and §7"
+      }
+    ]
+  },
+  "hook": {
+    "enabled": true,
+    "limits": {
+      "maxFindings": 5,
+      "maxChars": 8000
+    }
+  }
+}

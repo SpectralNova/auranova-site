@@ -1,0 +1,549 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-23T17:01:56+00:00",
+  "title": "Design System: AuraNova",
+  "extensions": {
+    "colorMeta": {
+      "nova-lime": {
+        "role": "primary",
+        "displayName": "Nova Lime",
+        "tonalRamp": [
+          "#151A01",
+          "#323C05",
+          "#52620E",
+          "#728717",
+          "#91AA20",
+          "#B4D32A",
+          "#D8FD34"
+        ]
+      },
+      "nova-lime-hover": {
+        "role": "primary",
+        "displayName": "Nova Lime, pressed",
+        "tonalRamp": [
+          "#151A01",
+          "#323C05",
+          "#52620E",
+          "#728717",
+          "#91AA20",
+          "#B4D32A",
+          "#D8FD34"
+        ]
+      },
+      "lime-ink": {
+        "role": "primary",
+        "displayName": "Lime Ink",
+        "tonalRamp": [
+          "#151A01",
+          "#323C05",
+          "#52620E",
+          "#728717",
+          "#91AA20",
+          "#B4D32A",
+          "#D8FD34"
+        ]
+      },
+      "lime-deep": {
+        "role": "primary",
+        "displayName": "Deep Lime",
+        "tonalRamp": [
+          "#151A01",
+          "#323C05",
+          "#52620E",
+          "#728717",
+          "#91AA20",
+          "#B4D32A",
+          "#D8FD34"
+        ]
+      },
+      "aura-violet": {
+        "role": "secondary",
+        "displayName": "Aura Violet",
+        "tonalRamp": [
+          "#1E016B",
+          "#3C05BB",
+          "#5934FD",
+          "#7877FD",
+          "#9DA4FE",
+          "#CBD0FE",
+          "#FBFBFF"
+        ]
+      },
+      "violet-mist": {
+        "role": "secondary",
+        "displayName": "Violet Mist",
+        "tonalRamp": [
+          "#1E016B",
+          "#3C05BB",
+          "#5934FD",
+          "#7877FD",
+          "#9DA4FE",
+          "#CBD0FE",
+          "#FBFBFF"
+        ]
+      },
+      "violet-haze": {
+        "role": "secondary",
+        "displayName": "Violet Haze",
+        "tonalRamp": [
+          "#1E016B",
+          "#3C05BB",
+          "#5934FD",
+          "#7877FD",
+          "#9DA4FE",
+          "#CBD0FE",
+          "#FBFBFF"
+        ]
+      },
+      "violet-ink": {
+        "role": "secondary",
+        "displayName": "Violet Ink",
+        "tonalRamp": [
+          "#1E016B",
+          "#3C05BB",
+          "#5934FD",
+          "#7877FD",
+          "#9DA4FE",
+          "#CBD0FE",
+          "#FBFBFF"
+        ]
+      },
+      "violet-night": {
+        "role": "secondary",
+        "displayName": "Violet Night",
+        "tonalRamp": [
+          "#1E016B",
+          "#3C05BB",
+          "#5934FD",
+          "#7877FD",
+          "#9DA4FE",
+          "#CBD0FE",
+          "#FBFBFF"
+        ]
+      },
+      "starlight-paper": {
+        "role": "neutral",
+        "displayName": "Starlight Paper",
+        "tonalRamp": [
+          "#1E016B",
+          "#3C05BB",
+          "#5934FD",
+          "#7877FD",
+          "#9DA4FE",
+          "#CBD0FE",
+          "#FBFBFF"
+        ]
+      },
+      "night-sky": {
+        "role": "neutral",
+        "displayName": "Night Sky",
+        "tonalRamp": [
+          "#191B1C",
+          "#383B3D",
+          "#595F61",
+          "#7B8285",
+          "#9BA3A8",
+          "#C2C9CC",
+          "#EDEFF0"
+        ]
+      },
+      "night-surface": {
+        "role": "neutral",
+        "displayName": "Night Surface",
+        "tonalRamp": [
+          "#191B1C",
+          "#383B3D",
+          "#595F61",
+          "#7B8285",
+          "#9BA3A8",
+          "#C2C9CC",
+          "#EDEFF0"
+        ]
+      },
+      "night-surface-raised": {
+        "role": "neutral",
+        "displayName": "Night Surface, raised",
+        "tonalRamp": [
+          "#191B1C",
+          "#383B3D",
+          "#595F61",
+          "#7B8285",
+          "#9BA3A8",
+          "#C2C9CC",
+          "#EDEFF0"
+        ]
+      },
+      "night-hairline": {
+        "role": "neutral",
+        "displayName": "Night Hairline",
+        "tonalRamp": [
+          "#191B1C",
+          "#383B3D",
+          "#595F61",
+          "#7B8285",
+          "#9BA3A8",
+          "#C2C9CC",
+          "#EDEFF0"
+        ]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "tonalRamp": [
+          "#191B1C",
+          "#383B3D",
+          "#595F61",
+          "#7B8285",
+          "#9BA3A8",
+          "#C2C9CC",
+          "#EDEFF0"
+        ]
+      },
+      "slate": {
+        "role": "neutral",
+        "displayName": "Slate",
+        "tonalRamp": [
+          "#191B1C",
+          "#383B3D",
+          "#595F61",
+          "#7B8285",
+          "#9BA3A8",
+          "#C2C9CC",
+          "#EDEFF0"
+        ]
+      },
+      "steel": {
+        "role": "neutral",
+        "displayName": "Steel",
+        "tonalRamp": [
+          "#191B1C",
+          "#383B3D",
+          "#595F61",
+          "#7B8285",
+          "#9BA3A8",
+          "#C2C9CC",
+          "#EDEFF0"
+        ]
+      },
+      "comet-gray": {
+        "role": "neutral",
+        "displayName": "Comet Gray",
+        "tonalRamp": [
+          "#191B1C",
+          "#383B3D",
+          "#595F61",
+          "#7B8285",
+          "#9BA3A8",
+          "#C2C9CC",
+          "#EDEFF0"
+        ]
+      },
+      "frost": {
+        "role": "neutral",
+        "displayName": "Frost",
+        "tonalRamp": [
+          "#191B1C",
+          "#383B3D",
+          "#595F61",
+          "#7B8285",
+          "#9BA3A8",
+          "#C2C9CC",
+          "#EDEFF0"
+        ]
+      },
+      "paper-white": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "tonalRamp": [
+          "#191B1C",
+          "#383B3D",
+          "#595F61",
+          "#7B8285",
+          "#9BA3A8",
+          "#C2C9CC",
+          "#EDEFF0"
+        ]
+      },
+      "signal-red-dark": {
+        "role": "neutral",
+        "displayName": "Signal Red (dark)",
+        "tonalRamp": [
+          "#FF7A7A"
+        ]
+      },
+      "signal-red-light": {
+        "role": "neutral",
+        "displayName": "Signal Red (light)",
+        "tonalRamp": [
+          "#C4122F"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "H1 only, one per page."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "H2, one per section, under its eyebrow."
+      },
+      "stat": {
+        "displayName": "Stat",
+        "purpose": "Measured numbers in stat cards, each with a source."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "H3, group titles, card titles."
+      },
+      "subtitle": {
+        "displayName": "Subtitle",
+        "purpose": "H4."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Intro paragraph under a section heading, muted."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text: 16 px minimum, within the measure."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons (uppercase)."
+      },
+      "eyebrow": {
+        "displayName": "Eyebrow",
+        "purpose": "Eyebrow chips, tags, small labels and legal fine print (uppercase)."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "System monospace: code inside product mockups and the preview-only PENDIENTE marker."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shadow-lg",
+        "value": "0 18px 40px -12px rgb(0 0 0 / 0.75)",
+        "purpose": "Float on dark: mockup windows, report cards."
+      },
+      {
+        "name": "shadow-lg-light",
+        "value": "0 18px 40px -16px rgb(25 27 28 / 0.25)",
+        "purpose": "Float on light: the ink primary button, cards that lift."
+      },
+      {
+        "name": "glow-accent",
+        "value": "0 0 28px -4px rgb(216 253 52 / 0.35)",
+        "purpose": "Lime aura: the primary CTA, the eyebrow dot, the active roadmap step."
+      },
+      {
+        "name": "glow-secondary",
+        "value": "0 0 40px -6px rgb(89 52 253 / 0.45)",
+        "purpose": "Violet aura: product mockup frames only."
+      },
+      {
+        "name": "inset-highlight",
+        "value": "inset 0 1.5px 0 rgb(255 255 255 / 0.45)",
+        "purpose": "Top highlight on the primary button."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.2, 0.8, 0.2, 1)",
+        "purpose": "The only easing."
+      },
+      {
+        "name": "dur-fast",
+        "value": "150ms",
+        "purpose": "Hover."
+      },
+      {
+        "name": "dur-base",
+        "value": "250ms",
+        "purpose": "UI state changes."
+      },
+      {
+        "name": "dur-slow",
+        "value": "500ms",
+        "purpose": "Section reveals. All durations are 0 under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "480px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one action per view: lime pill with the lime aura.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Agenda una llamada</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 48px; border-radius: var(--radius-pill); border: 1px solid transparent; cursor: pointer; font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase; line-height: 1; padding: var(--space-3) var(--space-6); text-decoration: none; background: var(--lime-1); color: var(--lime-7); box-shadow: var(--glow-accent), var(--inset-highlight); transition: transform var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out); } .ds-btn-primary:hover { background: var(--lime-2); } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }"
+    },
+    {
+      "name": "Primary Button on light",
+      "kind": "button",
+      "refersTo": "button-primary-on-light",
+      "description": "The primary CTA inside light sections: an ink pill with a lime label.",
+      "html": "<a class=\"ds-btn-ink\" href=\"#\">Agenda una llamada</a>",
+      "css": ".ds-btn-ink { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 48px; border-radius: var(--radius-pill); border: 1px solid transparent; cursor: pointer; font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase; line-height: 1; padding: var(--space-3) var(--space-6); text-decoration: none; background: var(--gray-7); color: var(--lime-1); box-shadow: 0 18px 40px -16px rgb(25 27 28 / 0.25); } .ds-btn-ink:hover { background: var(--gray-6); } .ds-btn-ink:focus-visible { outline: 2px solid var(--violet-5); outline-offset: 3px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Alternatives next to a primary, such as a download.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">Descargar la lista (PDF)</a>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 48px; border-radius: var(--radius-pill); border: 1px solid transparent; cursor: pointer; font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase; line-height: 1; padding: var(--space-3) var(--space-6); text-decoration: none; background: var(--color-surface); color: var(--color-text); border-color: var(--color-border); } .ds-btn-secondary:hover { background: var(--color-surface-2); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "\"See more\" links: no fill, accent label and an arrow.",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#\">Ver cómo lo medimos <span aria-hidden=\"true\">→</span></a>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 48px; border-radius: var(--radius-pill); border: 1px solid transparent; cursor: pointer; font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase; line-height: 1; padding: var(--space-3) var(--space-2); text-decoration: none; background: transparent; color: var(--color-accent); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }"
+    },
+    {
+      "name": "Eyebrow Chip",
+      "kind": "chip",
+      "refersTo": "eyebrow-chip",
+      "description": "One per section, above the H2, with the lime dot.",
+      "html": "<span class=\"ds-eyebrow\">Nuestro estándar</span>",
+      "css": ".ds-eyebrow { display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-1) var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-surface); color: var(--color-text); font-family: var(--font-body); font-size: var(--text-xs); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase; } .ds-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--lime-1); box-shadow: var(--glow-accent); }"
+    },
+    {
+      "name": "Tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Categories on case studies and articles.",
+      "html": "<span class=\"ds-tag\">Sitio web</span>",
+      "css": ".ds-tag { display: inline-block; padding: 2px var(--space-3); border-radius: var(--radius-pill); background: color-mix(in oklab, var(--violet-5), transparent 80%); color: var(--violet-3); font-family: var(--font-body); font-size: var(--text-xs); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Tonal surface with a hairline border; no shadow at rest.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card__title\">Accesibilidad</h3><p class=\"ds-card__text\">Cumplimos las pautas WCAG 2.2, nivel AA.</p></div>",
+      "css": ".ds-card { padding: var(--space-6); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); color: var(--color-text); transition: border-color var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out); } .ds-card:hover { border-color: var(--color-border-strong); transform: translateY(-2px); } .ds-card__title { margin: 0 0 var(--space-3); font-family: var(--font-heading); font-weight: var(--weight-heading); font-size: var(--text-xl); line-height: var(--leading-snug); } .ds-card__text { margin: 0; color: var(--color-text-muted); font-family: var(--font-body); }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Visible label above; 48 px field with a real UI border.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field__label\">Correo</span><input class=\"ds-field__input\" type=\"email\" autocomplete=\"email\" /></label>",
+      "css": ".ds-field { display: grid; gap: var(--space-2); font-family: var(--font-body); color: var(--color-text); } .ds-field__label { font-size: var(--text-sm); font-weight: var(--weight-strong); } .ds-field__input { min-height: 48px; padding: var(--space-3) var(--space-4); background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border-strong); border-radius: var(--radius-sm); font: inherit; } .ds-field__input:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }"
+    },
+    {
+      "name": "Floating Nav",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Translucent pill bar with backdrop blur, logo left, one primary CTA right.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav__logo\" href=\"#\">AuraNova</a><ul class=\"ds-nav__links\"><li><a href=\"#\">Servicios</a></li><li><a href=\"#\" aria-current=\"page\">Cómo trabajamos</a></li><li><a href=\"#\">Proyectos</a></li></ul><a class=\"ds-nav__cta\" href=\"#\">Agenda una llamada</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-2) var(--space-2) var(--space-2) var(--space-5); border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: color-mix(in oklab, var(--color-bg), transparent 15%); backdrop-filter: var(--nav-blur); } .ds-nav__logo { color: var(--color-text); text-decoration: none; font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-xl); } .ds-nav__links { display: flex; gap: var(--space-5); list-style: none; margin: 0; padding: 0; } .ds-nav__links a { color: var(--color-text); text-decoration: none; font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-strong); } .ds-nav__links a:hover, .ds-nav__links a[aria-current='page'] { color: var(--color-accent); } .ds-nav__cta { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 48px; border-radius: var(--radius-pill); border: 1px solid transparent; cursor: pointer; font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase; line-height: 1; padding: var(--space-3) var(--space-6); text-decoration: none; background: var(--lime-1); color: var(--lime-7); box-shadow: var(--glow-accent), var(--inset-highlight); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Night Observatory",
+    "overview": "**Creative North Star: \"The Night Observatory\"**\n\nAuraNova looks at the web the way an observatory looks at the sky. The field is dark (night sky, `night-sky`), a faint engineering grid fades out behind each hero like the reticle of an instrument, and one bright body draws the eye: the lime of the primary call to action. The name says the rest. A *nova* is a star that suddenly becomes far brighter and is seen from far away; an *aura* is the presence something gives off before anyone reads a word. The shine is earned by method, not added as decoration, so everything around the one bright thing stays calm, measured and legible.\n\nThe system is built for small and mid-size business owners, in Spanish (es-MX). Density is moderate: generous section rhythm, body text at 16 px or more, one primary action per view. Light sections (`starlight-paper`) break up long pages and carry reading-heavy content such as legal pages and case studies; a deep violet band can close a page at most once. The visual reference was atomato.co (dark base, single neon accent, floating pill nav, eyebrow chip with a dot), but the site must read as AuraNova at a glance, never as a clone: different fonts, copy, illustrations and layouts.",
+    "keyCharacteristics": [
+      "Dark-first, with alternating dark and light sections to separate topics.",
+      "One accent (`nova-lime`) and one glowing element per view.",
+      "Condensed, heavy display type over a calm geometric body face.",
+      "Pills for everything you press or that labels (buttons, eyebrows, tags); generous rounded cards with hairline borders.",
+      "Measured, never claimed: real numbers with sources, no invented stats, testimonials or logos.",
+      "Calm motion (opacity and transform only), always pausable, zero under reduced motion."
+    ],
+    "rules": [
+      {
+        "name": "The One Star Rule",
+        "body": "Nova Lime is the only accent on dark, and one element per view glows. If two things compete for the eye, one of them loses its color.",
+        "section": "colors"
+      },
+      {
+        "name": "The Daylight Rule",
+        "body": "On light sections lime is never text and violet is never washed out: lime becomes a highlighter mark, violet becomes the link color.",
+        "section": "colors"
+      },
+      {
+        "name": "The Logo-Only Gradient Rule",
+        "body": "The lime → violet gradient (`--brand-gradient`) belongs to the logo, the hero orb and at most one decorative divider per page. Never on text or buttons.",
+        "section": "colors"
+      },
+      {
+        "name": "The Token Rule",
+        "body": "Every color in code is a token. A raw hex outside `tokens.css` fails review.",
+        "section": "colors"
+      },
+      {
+        "name": "The Three Families Rule",
+        "body": "Roboto Condensed, Roboto and Montserrat. A fourth family never ships.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "Headlines are sentence case. Uppercase is allowed only on buttons, eyebrows and tags.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Highlight Rule",
+        "body": "At most one highlighted phrase per headline, and it carries the promise (\"que ==trabajan para tu negocio==\").",
+        "section": "typography"
+      },
+      {
+        "name": "The No Twins Rule",
+        "body": "Never two identical sections back to back.",
+        "section": "layout"
+      },
+      {
+        "name": "The Even Rows Rule",
+        "body": "Lists that don't fill a grid evenly become ledger rows, not cards with orphans.",
+        "section": "layout"
+      },
+      {
+        "name": "The Focused Aura Rule",
+        "body": "An aura is focused, not everywhere: the lime glow marks the one action, the violet glow marks a product object. Never glow the logo, text, or ordinary cards. (The brand master names only the CTA and the eyebrow dot; the violet mockup glow is the established exception from the service demos.)",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** keep Nova Lime as the single accent on dark, with one primary CTA per view.",
+      "**Do** alternate dark and light sections, and use light sections for reading-heavy pages.",
+      "**Do** use tokens for every value: color, size, space, radius, shadow and duration.",
+      "**Do** keep body text at 16 px or more, line-height 1.6, within the measure.",
+      "**Do** keep touch targets at 44 × 44 px for primary controls (24 × 24 minimum anywhere).",
+      "**Do** use one icon set, Lucide, inline and inheriting `currentColor`; brand logos only as monochrome Simple Icons.",
+      "**Do** self-host the woff2 subsets and preload only Montserrat 400 and Roboto Condensed 800.",
+      "**Do** animate only opacity and transform, and give every moving demo a pause control."
+    ],
+    "donts": [
+      "**Don't** set lime text on light backgrounds, or violet-5 text on dark.",
+      "**Don't** put two lime buttons side by side.",
+      "**Don't** use gradient text or gradient buttons.",
+      "**Don't** add a fourth font family or load the Google Fonts CDN.",
+      "**Don't** invent stats, testimonials or client logos; show client logos only with written permission.",
+      "**Don't** add entry pop-ups, autoplay with sound, scroll-jacking, parallax on text, or carousels without a pause button.",
+      "**Don't** recolor, re-angle, glow or stretch the logo mark, or place it on lime or violet-5 fills."
+    ]
+  }
+}

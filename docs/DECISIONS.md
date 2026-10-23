@@ -133,3 +133,13 @@
     - a fingerprint of the data, to `src/data/checklist.json`.
   - **Guard:** `npm run build` starts with `check-checklist.mjs`, which fails when the YAML changed after the PDF was made. The page and the PDF can't drift apart (the brief: "the two never disagree").
   - **Why committed:** Cloudflare's build has no browser to print the PDF.
+
+## ADR-018 · Impeccable: design detector and DESIGN.md
+- **Status:** Adopted · 2026-10-23
+- **Decision:** Impeccable 4.7.0 (pbakaus/impeccable, Apache-2.0) is installed as a **global** Claude skill (`~/.claude/skills/impeccable`, with its 4 agents in `~/.claude/agents`). Its automatic **hook runs in this project only**.
+  - **Registration:** `.claude/settings.local.json` (git-ignored) calls the global launcher through `$HOME`, so the 22 MB skill isn't copied into the repo.
+  - **When it runs:** after each Edit/Write on UI files it reports mechanical problems (overflow, contrast, glow, drift from the design system); at the end of each turn it runs a deeper pass. It reports and never blocks.
+  - **Turn it off:** `/impeccable hooks off`.
+- **Design context:** `DESIGN.md` (root) and `.impeccable/design.json` describe the incumbent system, derived from the brand master in `Resources/AuraNova/Design System` v1.3, which wins any disagreement. Creative north star: «The Night Observatory» (David, 2026-10-23).
+- **Exceptions** (`.impeccable/config.json`, each with its reason): the three brand fonts, and the hero grid in `components.css`. Nothing else is silenced.
+- **Calibration (2026-10-23):** in a real browser, its contrast and padding warnings didn't reproduce (axe agrees). The useful findings went to Q37. Its taste rules flag brand choices on purpose (lime glow, eyebrow chips, icon tiles): treat those as advisory, never as orders.
