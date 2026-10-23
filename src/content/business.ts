@@ -71,6 +71,8 @@ export const textFacts = {
   moneda: ok({ es: 'pesos mexicanos más IVA', en: '[[PENDIENTE: currency and taxes for US clients (Q27)]]' }), // Q7
   vigencia: ok({ es: '15 días', en: '15 days' }), // how long a quote is valid (David, 2026-10-21)
   garantia: ok({ es: '30 días hábiles', en: '30 business days' }), // Q11; business days (David, 2026-10-20)
+  // Free diagnoses a month, the ads' offer (archive DEC-0005, David, 2026-10-23). Kept by hand: David confirms each slot.
+  diagnosticosAlMes: ok('4'),
   correo: business.email,
   ciudad: business.city,
   // Legal pages only (Q2).

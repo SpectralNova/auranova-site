@@ -1,11 +1,13 @@
-// The site's Worker (ADR-002, ADR-003). Static pages are served by Cloudflare's assets layer and never reach
-// this code: wrangler.jsonc runs it first only for /api/*. One endpoint: the contact form.
+// The site's Worker (ADR-002, ADR-003, ADR-019). Static pages are served by Cloudflare's assets layer and never
+// reach this code: wrangler.jsonc runs it first only for /api/*. Two endpoints, one pipeline:
 //
-// POST /api/contacto → checks (origin, size, honeypot, fill time, fields, Turnstile) → HubSpot (contact +
-// deal in «Nuevo lead» + note) → lead email to contacto@ → auto-reply to the visitor (after responding).
+// POST /api/contacto     the contact form
+// POST /api/diagnostico  a free diagnosis request (/diagnostico-gratis/, archive DEC-0005)
+//   → checks (origin, size, honeypot, fill time, fields, Turnstile) → HubSpot (contact + deal in «Nuevo lead»
+//   + note) → lead email to contacto@ → auto-reply to the visitor (after responding).
 // Secrets live only in Cloudflare (Settings → Variables and Secrets): TURNSTILE_SECRET_KEY, RESEND_API_KEY,
 // HUBSPOT_SERVICE_KEY. Nothing is stored here: the lead lives in the inbox and in HubSpot.
-import { parseLead } from './lead.ts';
+import { parseLead, type Kind } from './lead.ts';
 import { syncLead, type SyncResult } from './hubspot.ts';
 import { autoReply, leadEmail, sendEmail } from './email.ts';
 
@@ -27,23 +29,29 @@ interface Ctx {
 const MAX_BODY = 32 * 1024;
 const MIN_FILL_MS = 3000;
 const TURNSTILE_VERIFY = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+/** Each form's endpoint, and where a post without JavaScript is sent back to. */
+const FORMS: Record<string, { kind: Kind; page: string }> = {
+  '/api/contacto': { kind: 'contacto', page: '/contacto/#escribenos' },
+  '/api/diagnostico': { kind: 'diagnostico', page: '/diagnostico-gratis/#solicitalo' },
+};
 
 export default {
   async fetch(request: Request, env: Env, ctx: Ctx): Promise<Response> {
     const { pathname } = new URL(request.url);
-    if (pathname === '/api/contacto' || pathname === '/api/contacto/') return contact(request, env, ctx);
+    const form = FORMS[pathname.replace(/\/$/, '')];
+    if (form) return submit(request, env, ctx, form.kind, form.page);
     if (pathname.startsWith('/api/')) return json({ ok: false, error: 'not_found' }, 404);
     return env.ASSETS.fetch(request);
   },
 };
 
-async function contact(request: Request, env: Env, ctx: Ctx): Promise<Response> {
+async function submit(request: Request, env: Env, ctx: Ctx, kind: Kind, page: string): Promise<Response> {
   if (request.method !== 'POST') return json({ ok: false, error: 'method' }, 405, { Allow: 'POST' });
 
   // The form sends with JavaScript (Turnstile needs it). A plain post, without JavaScript, goes back to the
   // form, whose <noscript> note offers the email instead.
   if (!(request.headers.get('Accept') ?? '').includes('application/json')) {
-    return Response.redirect(new URL('/contacto/#escribenos', request.url).href, 303);
+    return Response.redirect(new URL(page, request.url).href, 303);
   }
 
   const origin = request.headers.get('Origin');
@@ -62,13 +70,13 @@ async function contact(request: Request, env: Env, ctx: Ctx): Promise<Response> 
   const elapsed = Date.now() - Number(form.get('t') || NaN);
   if (String(form.get('sitio_web_2') ?? '').trim() || !(elapsed >= MIN_FILL_MS)) return json({ ok: true });
 
-  const { lead, invalid } = parseLead(form);
+  const { lead, invalid } = parseLead(form, kind);
   if (invalid.length) return json({ ok: false, error: 'invalid', fields: invalid }, 400);
 
   if (!env.TURNSTILE_SECRET_KEY || !env.RESEND_API_KEY || !env.HUBSPOT_SERVICE_KEY) {
     // Names only, never values: Workers Logs then says exactly which secret to add.
     const missing = (['TURNSTILE_SECRET_KEY', 'RESEND_API_KEY', 'HUBSPOT_SERVICE_KEY'] as const).filter((name) => !env[name]);
-    console.error(`contacto: missing secrets: ${missing.join(', ')}`);
+    console.error(`${kind}: missing secrets: ${missing.join(', ')}`);
     return json({ ok: false, error: 'config' }, 503);
   }
 
@@ -80,7 +88,7 @@ async function contact(request: Request, env: Env, ctx: Ctx): Promise<Response> 
   try {
     crm = await syncLead(lead, env.HUBSPOT_SERVICE_KEY);
   } catch (error) {
-    console.error('contacto: HubSpot sync failed', error);
+    console.error(`${kind}: HubSpot sync failed`, error);
     crm = { error: error instanceof Error ? error.message : String(error) };
   }
 
@@ -89,14 +97,14 @@ async function contact(request: Request, env: Env, ctx: Ctx): Promise<Response> 
     await sendEmail(env, { to: [env.LEAD_TO], replyTo: lead.correo, ...leadEmail(lead, crm, env.HUBSPOT_PORTAL_ID) });
   } catch (error) {
     mailed = false;
-    console.error('contacto: lead email failed', error);
+    console.error(`${kind}: lead email failed`, error);
   }
   // The lead is safe if it reached the inbox or HubSpot; only when both failed does the visitor try again.
   if (!mailed && !crm.dealId) return json({ ok: false, error: 'delivery' }, 502);
 
   ctx.waitUntil(
     sendEmail(env, { to: [lead.correo], replyTo: env.LEAD_TO, ...autoReply(lead, new URL(request.url).origin) }).catch((error) =>
-      console.error('contacto: auto-reply failed', error),
+      console.error(`${kind}: auto-reply failed`, error),
     ),
   );
   return json({ ok: true });

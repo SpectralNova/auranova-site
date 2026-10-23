@@ -83,9 +83,9 @@ function form(overrides: Record<string, string | null> = {}): FormData {
   return data;
 }
 
-async function send(body: FormData, headers: Record<string, string> = {}, e: Env = env) {
+async function send(body: FormData, headers: Record<string, string> = {}, e: Env = env, path = '/api/contacto') {
   const pending: Promise<unknown>[] = [];
-  const request = new Request('https://auranova.mx/api/contacto', {
+  const request = new Request(`https://auranova.mx${path}`, {
     method: 'POST',
     body,
     headers: { Accept: 'application/json', Origin: 'https://auranova.mx', ...headers },
@@ -241,6 +241,61 @@ describe('a valid lead', () => {
     const res = await send(form());
     assert.equal(res.status, 502);
     assert.equal(emails().length, 1); // the lead email was tried; no auto-reply
+  });
+});
+
+describe('a free diagnosis request (/api/diagnostico, archive DEC-0005)', () => {
+  // The diagnosis form has no service or budget fields; its message is the visitor's goal.
+  const diagnosis = (overrides: Record<string, string | null> = {}) =>
+    form({ tipo: null, presupuesto: null, mensaje: 'Que me contacten más clientes.', ...overrides });
+  const request = (overrides: Record<string, string | null> = {}, headers: Record<string, string> = {}) =>
+    send(diagnosis(overrides), headers, env, '/api/diagnostico');
+
+  it('needs the business and a website address to review', async () => {
+    const res = await request({ empresa: ' ', sitio: 'no tengo' });
+    assert.equal(res.status, 400);
+    assert.deepEqual((await res.json()).fields, ['empresa', 'sitio']);
+    assert.equal(calls.length, 0);
+  });
+
+  it('accepts an address with or without https://, and ignores a service sent anyway', async () => {
+    for (const sitio of ['pasteleriaana.mx', 'https://www.pasteleriaana.mx/menu']) {
+      calls = [];
+      assert.deepEqual(await (await request({ sitio, tipo: 'plataforma', presupuesto: 'Más de $50,000' })).json(), { ok: true });
+      const contact = calls.find((c) => c.method === 'POST' && c.url.endsWith('/contacts'))!;
+      assert.equal(contact.body.properties.servicio_de_interes, 'asesoria');
+      assert.equal('presupuesto_aproximado' in contact.body.properties, false);
+    }
+  });
+
+  it('files it in HubSpot by business, tells David to confirm the slot, and replies without a booking link', async () => {
+    const res = await request();
+    assert.deepEqual(await res.json(), { ok: true });
+
+    const deal = calls.find((c) => c.url.endsWith('/deals'))!;
+    assert.equal(deal.body.properties.dealname, 'Diagnóstico gratis · Pastelería Ana');
+    assert.equal(deal.body.properties.dealstage, '1464204206');
+    const note = calls.find((c) => c.url.endsWith('/notes'))!;
+    assert.match(note.body.properties.hs_note_body, /Solicitud de diagnóstico gratis/);
+    assert.doesNotMatch(note.body.properties.hs_note_body, /Presupuesto/);
+
+    const [lead, reply] = emails();
+    assert.equal(lead.body.subject, 'Nueva solicitud de diagnóstico: Ana Pérez López');
+    assert.match(lead.body.text, /Confírmale su lugar del mes \(hacemos 4 al mes\)/);
+    assert.match(lead.body.text, /Objetivo:\nQue me contacten más clientes\./);
+    assert.match(lead.body.text, /¿Qué necesita\?: Diagnóstico gratis \(Asesoría digital\)/);
+
+    assert.equal(to(reply), 'ana@empresa.com');
+    assert.equal(reply.body.subject, 'Recibimos tu solicitud de diagnóstico');
+    assert.match(reply.body.text, /^Hola, Ana:/);
+    assert.match(reply.body.text, /Hacemos 4 diagnósticos al mes/);
+    assert.doesNotMatch(reply.body.text, /cal\.com/);
+  });
+
+  it('sends a post without JavaScript back to the diagnosis form', async () => {
+    const res = await request({}, { Accept: 'text/html' });
+    assert.equal(res.status, 303);
+    assert.equal(res.headers.get('Location'), 'https://auranova.mx/diagnostico-gratis/#solicitalo');
   });
 });
 

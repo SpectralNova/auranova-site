@@ -2,7 +2,7 @@
 // to the visitor (template 1, «Respuesta del formulario», from AuraNova Archivo/plantillas/documentos/Correos).
 // Facts (response time, call length, booking link) come from business.ts, like the site's copy.
 import type { Env } from './index.ts';
-import { SERVICES, type Lead } from './lead.ts';
+import { serviceLabel, type Lead } from './lead.ts';
 import type { SyncResult } from './hubspot.ts';
 import { business, factValue, textFacts } from '../src/content/business.ts';
 
@@ -46,7 +46,14 @@ const page = (inner: string) =>
 /* ---------- Lead → contacto@ ---------- */
 
 export function leadEmail(lead: Lead, crm: SyncResult, portalId: string): Omit<Message, 'to' | 'replyTo'> {
-  const service = SERVICES[lead.tipo];
+  const diagnosis = lead.kind === 'diagnostico';
+  const service = serviceLabel(lead);
+  const heading = diagnosis ? 'Nueva solicitud de diagnóstico gratis' : 'Nuevo mensaje del formulario del sitio';
+  const messageLabel = diagnosis ? 'Objetivo' : 'Mensaje';
+  // The month's cap is kept by hand (DEC-0005): David confirms the slot, or offers next month's first one.
+  const todo = diagnosis
+    ? `Confírmale su lugar del mes (hacemos ${fact('diagnosticosAlMes')} al mes) o el primero del mes siguiente, y agenda la llamada de ${fact('duracionLlamada')} en la que le presentas el resultado.`
+    : '';
   const campaign = [lead.utm.source, lead.utm.medium, lead.utm.campaign, lead.utm.content].filter(Boolean).join(' / ');
   const when = new Intl.DateTimeFormat('es-MX', { dateStyle: 'long', timeStyle: 'short', timeZone: 'America/Monterrey' }).format(new Date());
   const rows: [string, string][] = [
@@ -55,7 +62,7 @@ export function leadEmail(lead: Lead, crm: SyncResult, portalId: string): Omit<M
     ['Empresa', lead.empresa],
     ['Sitio actual', lead.sitio],
     ['¿Qué necesita?', service],
-    ['Presupuesto', lead.presupuesto || 'Prefirió no decir'],
+    ['Presupuesto', diagnosis ? '' : lead.presupuesto || 'Prefirió no decir'],
     ['Novedades por correo', lead.novedades ? 'Sí, aceptó recibirlas' : 'No'],
   ];
   const origin: [string, string][] = [
@@ -74,20 +81,22 @@ export function leadEmail(lead: Lead, crm: SyncResult, portalId: string): Omit<M
       .map(([label, value]) => `<tr><td style="${BODY}${MUTED}padding:4px 16px 4px 0;vertical-align:top;white-space:nowrap;">${label}</td><td style="${BODY}padding:4px 0;">${esc(value)}</td></tr>`)
       .join('');
   const html = page(
-    `<tr><td style="${BODY}"><p style="margin:0 0 16px;font-size:18px;font-weight:600;">Nuevo mensaje del formulario del sitio</p>` +
+    `<tr><td style="${BODY}"><p style="margin:0 0 16px;font-size:18px;font-weight:600;">${heading}</p>` +
+      (todo ? `<p style="margin:0 0 16px;padding:12px 16px;border-left:4px solid #5934FD;background:#FBFBFF;">${esc(todo)}</p>` : '') +
       `<table role="presentation" cellpadding="0" cellspacing="0" border="0">${table(rows)}</table>` +
-      `<p style="margin:20px 0 6px;${MUTED}">Mensaje</p>` +
+      `<p style="margin:20px 0 6px;${MUTED}">${messageLabel}</p>` +
       `<div style="${BODY}white-space:pre-wrap;padding:12px 16px;background:#EDEFF0;border-radius:8px;">${esc(lead.mensaje)}</div>` +
       (origin.some(([, v]) => v) ? `<p style="margin:20px 0 6px;${MUTED}">Origen</p><table role="presentation" cellpadding="0" cellspacing="0" border="0">${table(origin)}</table>` : '') +
       `<p style="margin:20px 0 0;">${esc(crmText)}${dealUrl ? ` <a href="${dealUrl}" style="${LINK}">Abrir el trato</a>` : ''}</p>` +
       `<p style="margin:20px 0 0;${MUTED}font-size:13px;">Recibido el ${esc(when)}. Responde a este correo para contestarle directamente.</p></td></tr>`,
   );
   const text = [
-    'Nuevo mensaje del formulario del sitio',
+    heading,
+    ...(todo ? ['', todo] : []),
     '',
     ...rows.filter(([, v]) => v).map(([label, value]) => `${label}: ${value}`),
     '',
-    'Mensaje:',
+    `${messageLabel}:`,
     lead.mensaje,
     '',
     ...origin.filter(([, v]) => v).map(([label, value]) => `${label}: ${value}`),
@@ -95,7 +104,8 @@ export function leadEmail(lead: Lead, crm: SyncResult, portalId: string): Omit<M
     crmText + (dealUrl ? ` ${dealUrl}` : ''),
     `Recibido el ${when}. Responde a este correo para contestarle directamente.`,
   ].join('\n');
-  return { subject: oneLine(`Nuevo mensaje del sitio: ${lead.nombre}`, 120), html, text };
+  const subject = diagnosis ? `Nueva solicitud de diagnóstico: ${lead.nombre}` : `Nuevo mensaje del sitio: ${lead.nombre}`;
+  return { subject: oneLine(subject, 120), html, text };
 }
 
 /* ---------- Auto-reply → visitor ---------- */
@@ -108,6 +118,7 @@ function greeting(nombre: string): string {
 }
 
 export function autoReply(lead: Lead, siteOrigin: string): Omit<Message, 'to' | 'replyTo'> {
+  if (lead.kind === 'diagnostico') return diagnosisReply(lead, siteOrigin);
   const hello = greeting(lead.nombre);
   const p1 = `Gracias por escribirnos. Recibimos tu mensaje y te respondemos en ${fact('respuesta')} (de lunes a viernes, de 9:00 a 17:00, hora del centro).`;
   const p2 = `Si prefieres platicarlo de una vez, agenda una llamada de ${fact('duracionLlamada')}, sin costo:`;
@@ -119,6 +130,20 @@ export function autoReply(lead: Lead, siteOrigin: string): Omit<Message, 'to' | 
   );
   const text = [hello, '', p1, '', p2, BOOKING, '', 'Saludos,', '', 'AuraNova · Contacto', 'contacto@auranova.mx'].join('\n');
   return { subject: 'Recibimos tu mensaje', html, text };
+}
+
+/** A diagnosis request: no booking link yet, because the slot is confirmed first (the monthly cap, DEC-0005). */
+function diagnosisReply(lead: Lead, siteOrigin: string): Omit<Message, 'to' | 'replyTo'> {
+  const hello = greeting(lead.nombre);
+  const p1 = `Gracias por pedir tu diagnóstico gratis. Te escribimos en ${fact('respuesta')} (de lunes a viernes, de 9:00 a 17:00, hora del centro) para confirmar tu lugar y agendar la llamada de ${fact('duracionLlamada')} en la que te presentamos el resultado.`;
+  const p2 = `Hacemos ${fact('diagnosticosAlMes')} diagnósticos al mes. Si este mes ya están ocupados, te apartamos el primer lugar del siguiente.`;
+  const html = page(
+    `<tr><td style="${BODY}"><p style="margin:0 0 16px;">${esc(hello)}</p><p style="margin:0 0 16px;">${esc(p1)}</p>` +
+      `<p style="margin:0 0 16px;">${esc(p2)}</p><p style="margin:0 0 24px;">Saludos,</p></td></tr>` +
+      `<tr><td>${signature(`${siteOrigin}/firma/`)}</td></tr>`,
+  );
+  const text = [hello, '', p1, '', p2, '', 'Saludos,', '', 'AuraNova · Contacto', 'contacto@auranova.mx'].join('\n');
+  return { subject: 'Recibimos tu solicitud de diagnóstico', html, text };
 }
 
 /** The «Contacto» signature, light version (brand/firmas/firma-contacto-clara.html), with its images served

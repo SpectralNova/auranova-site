@@ -1,0 +1,103 @@
+title: "Diagnóstico gratis de tu sitio web · AuraNova"
+description: "Revisamos tu sitio en celular y computadora y, en una llamada de 30 minutos, te explicamos las 5 mejoras más importantes. Sin costo; hacemos 4 diagnósticos al mes."
+
+# The ads' offer (archive DEC-0005): 4 a month, presented in the free call, then the PDF.
+hero:
+  eyebrow: "Diagnóstico gratis"
+  title: "Descubre qué ==mejorar primero== en tu sitio"
+  lead: "Revisamos tu sitio en celular y computadora con las mismas pruebas que usamos en cada proyecto. En una llamada de {{duracionLlamada}} te explicamos las 5 mejoras más importantes, en orden. Sin costo."
+  button: "Pide tu diagnóstico"
+  note: "Hacemos {{diagnosticosAlMes}} diagnósticos al mes."
+
+includes:
+  eyebrow: "Qué revisamos"
+  title: "Lo que vemos ==en tu sitio=="
+  lead: "Tu página de inicio y hasta 2 páginas clave, como la de contacto o la de servicios."
+  items:
+    - icon: "gauge"
+      title: "Velocidad"
+      text: "La medimos con Lighthouse, la herramienta de Google, en celular y en computadora."
+    - icon: "list-checks"
+      title: "Nuestro estándar"
+      text: "Revisamos tu sitio con los [15 puntos](/estandar/) que cumple cada sitio que entregamos."
+    - icon: "shield-check"
+      title: "Lo básico"
+      text: "Conexión segura, títulos y descripciones para Google, uso en celular y qué tan fácil es contactarte."
+    - icon: "file-text"
+      title: "Tu resultado"
+      text: "Las 5 mejoras más importantes, en orden y en palabras sencillas, con un reporte en PDF."
+
+steps:
+  eyebrow: "Cómo funciona"
+  title: "De tu solicitud ==a tu resultado=="
+  items:
+    - title: "Pides tu diagnóstico"
+      text: "Llenas el formulario de abajo con tu nombre, tu negocio y la dirección de tu sitio."
+    - title: "Confirmamos tu lugar"
+      text: "Te escribimos en {{respuesta}} para confirmar tu lugar y agendar la llamada."
+    - title: "Revisamos tu sitio"
+      text: "Antes de la llamada medimos tu sitio y preparamos el resultado."
+    - title: "Te lo explicamos"
+      text: "En una llamada de {{duracionLlamada}} te mostramos el resultado, y después te mandamos el PDF."
+
+form:
+  eyebrow: "Solicítalo"
+  title: "Pide tu ==diagnóstico gratis=="
+  lead: "Te respondemos en {{respuesta}}."
+  who:
+    title: "Para quién es"
+    items:
+      - "Negocios en México que ya tienen sitio web."
+      - "Un diagnóstico por negocio."
+      - "¿Todavía no tienes sitio? Mejor [agenda una llamada](/contacto/#agenda): también es sin costo."
+  excludes:
+    title: "Qué no incluye"
+    items:
+      - "Revisar todas las páginas de tu sitio."
+      - "Investigar palabras clave o a tu competencia."
+      - "Pruebas de seguridad o revisión del código."
+      - "Arreglar lo que encontremos. Si quieres, te decimos cuánto costaría."
+  full: "Hacemos {{diagnosticosAlMes}} diagnósticos al mes para dedicarle a cada uno el tiempo que merece. Si este mes ya están ocupados, te apartamos el primer lugar del siguiente."
+  optional: "(opcional)"
+  fields:
+    name: "Nombre"
+    email: "Correo"
+    company: "Negocio"
+    website: "Sitio web"
+    websiteHint: "Por ejemplo, minegocio.com"
+    goal: "¿Qué te gustaría lograr con tu sitio?"
+    goalHint: "Por ejemplo: que te contacten más clientes, que cargue más rápido o que se vea mejor en el celular."
+    consent: "Leí y acepto el [aviso de privacidad](/aviso-de-privacidad/)."
+    # Secondary purpose (aviso §3.2): its own optional box, unchecked by default.
+    newsletter: "Quiero recibir novedades, contenido y promociones de AuraNova por correo. Puedes darte de baja cuando quieras."
+  # Aviso de privacidad simplificado: the same text as the contact form and the lawyer's draft.
+  notice: "AuraNova, nombre comercial de {{nombreLegal}}, usa tus datos para responder tu solicitud, hacer el diagnóstico de tu sitio si lo pides, agendar tu llamada y, si contratas, prestar el servicio y facturarlo. Con tu consentimiento, también los usa para enviarte novedades y medir sus anuncios; puedes negarte a esto último sin que afecte tu solicitud. Consulta el [aviso de privacidad integral](/aviso-de-privacidad/)."
+  submit: "Pedir mi diagnóstico"
+  sending: "Enviando…"
+  noscript: "Para enviar el formulario necesitas JavaScript. También puedes pedir tu diagnóstico escribiendo a contacto@auranova.mx."
+  status:
+    sent: "Recibimos tu solicitud. Te escribimos en {{respuesta}} para confirmar tu lugar y agendar la llamada, y te mandamos una confirmación a tu correo."
+    verify: "Para enviar tu solicitud, completa la verificación de arriba."
+    challenge: "No pudimos confirmar que eres una persona. Inténtalo de nuevo."
+    failed: "No pudimos enviar tu solicitud. Inténtalo de nuevo en unos minutos o escríbenos a contacto@auranova.mx."
+  errors:
+    required: "Este campo es obligatorio."
+    email: "Escribe un correo válido, por ejemplo nombre@empresa.com."
+    website: "Escribe la dirección de tu sitio, por ejemplo minegocio.com."
+    consent: "Necesitamos tu consentimiento para poder responderte."
+    summary: "Revisa los campos marcados."
+
+faq:
+  eyebrow: "Preguntas"
+  title: "Lo que ==nos preguntan=="
+  items:
+    - q: "¿De verdad es gratis?"
+      a: "Sí. No te pedimos datos de pago ni te comprometes a nada. Si después quieres que hagamos las mejoras, te mandamos una cotización por escrito, con precio fijo."
+    - q: "¿Por qué sólo {{diagnosticosAlMes}} al mes?"
+      a: "Porque cada diagnóstico lo preparamos con calma y te lo explicamos en una llamada. Si este mes ya no hay lugar, te apartamos el primero del siguiente."
+    - q: "¿Qué necesito tener listo?"
+      a: "Sólo la dirección de tu sitio. No necesitamos tus contraseñas ni acceso a tu hosting: revisamos lo que cualquier visitante puede ver."
+    - q: "¿Qué pasa en la llamada?"
+      a: "Compartimos pantalla, te mostramos las mediciones y te explicamos las 5 mejoras más importantes. Al final te mandamos el reporte en PDF."
+    - q: "¿Y si mi sitio ya está bien?"
+      a: "También te lo decimos. Si no encontramos nada urgente, te lo decimos así, sin inventar problemas."

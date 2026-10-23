@@ -55,7 +55,7 @@ form:
     # Secondary purpose (aviso §3.2): its own optional box, unchecked by default.
     newsletter: "Quiero recibir novedades, contenido y promociones de AuraNova por correo. Puedes darte de baja cuando quieras."
   # Aviso de privacidad simplificado (the draft's wording; the lawyer confirms it).
-  notice: "AuraNova, nombre comercial de {{nombreLegal}}, usa tus datos para responder tu solicitud, agendar tu llamada y, si contratas, prestar el servicio y facturarlo. Con tu consentimiento, también los usa para enviarte novedades y medir sus anuncios; puedes negarte a esto último sin que afecte tu solicitud. Consulta el [aviso de privacidad integral](/aviso-de-privacidad/)."
+  notice: "AuraNova, nombre comercial de {{nombreLegal}}, usa tus datos para responder tu solicitud, hacer el diagnóstico de tu sitio si lo pides, agendar tu llamada y, si contratas, prestar el servicio y facturarlo. Con tu consentimiento, también los usa para enviarte novedades y medir sus anuncios; puedes negarte a esto último sin que afecte tu solicitud. Consulta el [aviso de privacidad integral](/aviso-de-privacidad/)."
   submit: "Enviar mensaje"
   sending: "Enviando…"
   noscript: "Para enviar el formulario necesitas JavaScript. También puedes escribirnos a contacto@auranova.mx."

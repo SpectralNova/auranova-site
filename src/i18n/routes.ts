@@ -19,6 +19,8 @@ export const routes = {
   contacto: { es: '/contacto/', en: '/en/contact/' },
   aviso: { es: '/aviso-de-privacidad/', en: '/en/privacy/' },
   terminos: { es: '/terminos/', en: '/en/terms/' },
+  // The ads' free diagnosis (archive DEC-0005, ADR-019). Not in the nav: ads and links lead here.
+  diagnostico: { es: '/diagnostico-gratis/', en: '/en/free-diagnosis/' },
   // Articles and videos (Q22, David, 2026-10-22: «Aprende»). Reserved: not built until it has its first pieces.
   aprende: { es: '/aprende/', en: '/en/learn/' },
 } as const satisfies Record<string, Record<Lang, string>>;
@@ -43,6 +45,7 @@ export const built: Record<Lang, readonly RouteKey[]> = {
     'contacto',
     'estandar',
     'recursos',
+    'diagnostico',
     'aviso',
     'terminos',
   ],

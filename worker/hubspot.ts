@@ -1,7 +1,7 @@
 // Writes a form lead to HubSpot Free with the CRM API (ADR-003, update 2): the contact by email (updated if it
 // exists), a deal in «Pipeline de ventas» → «Nuevo lead», and the message as a note on both. Authenticated by
 // the service key (scopes: contacts and deals, read and write).
-import { SERVICES, type Lead } from './lead.ts';
+import { DIAGNOSIS, serviceLabel, type Lead } from './lead.ts';
 
 const API = 'https://api.hubapi.com';
 const PIPELINE = 'default'; // «Pipeline de ventas»
@@ -85,11 +85,13 @@ async function upsertContact(key: string, lead: Lead): Promise<string> {
 }
 
 export async function syncLead(lead: Lead, key: string): Promise<SyncResult> {
-  const serviceLabel = SERVICES[lead.tipo];
+  const service = serviceLabel(lead);
   const contactId = await upsertContact(key, lead);
+  // A diagnosis is named after the business (one per business), so the month's requests are easy to count.
+  const dealname = lead.kind === 'diagnostico' ? `${DIAGNOSIS} · ${lead.empresa}` : `${lead.nombre} · ${service}`;
   const deal = await hubspot(key, 'POST', '/crm/v3/objects/deals', {
     properties: {
-      dealname: `${lead.nombre} · ${serviceLabel}`.slice(0, 200),
+      dealname: dealname.slice(0, 200),
       pipeline: PIPELINE,
       dealstage: STAGE_NEW_LEAD,
       description: lead.mensaje,
@@ -99,7 +101,7 @@ export async function syncLead(lead: Lead, key: string): Promise<SyncResult> {
   const result: SyncResult = { contactId, dealId: deal.id };
   try {
     await hubspot(key, 'POST', '/crm/v3/objects/notes', {
-      properties: { hs_timestamp: new Date().toISOString(), hs_note_body: noteBody(lead, serviceLabel) },
+      properties: { hs_timestamp: new Date().toISOString(), hs_note_body: noteBody(lead, service) },
       associations: [assoc(contactId, NOTE_TO_CONTACT), assoc(deal.id, NOTE_TO_DEAL)],
     });
   } catch (error) {
@@ -111,10 +113,11 @@ export async function syncLead(lead: Lead, key: string): Promise<SyncResult> {
 
 const esc = (s: string) => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
-function noteBody(lead: Lead, serviceLabel: string): string {
+function noteBody(lead: Lead, service: string): string {
+  const diagnosis = lead.kind === 'diagnostico';
   const rows = [
-    ['Servicio', serviceLabel],
-    ['Presupuesto', lead.presupuesto || 'Prefirió no decir'],
+    ['Servicio', service],
+    ['Presupuesto', diagnosis ? '' : lead.presupuesto || 'Prefirió no decir'],
     ['Empresa', lead.empresa],
     ['Sitio actual', lead.sitio],
     ['Novedades por correo', lead.novedades ? 'Sí, aceptó' : 'No'],
@@ -122,7 +125,7 @@ function noteBody(lead: Lead, serviceLabel: string): string {
     ['Página de llegada', lead.landing],
   ].filter(([, value]) => value);
   return (
-    `<p><strong>Formulario del sitio</strong></p><p>${esc(lead.mensaje).replaceAll('\n', '<br>')}</p>` +
+    `<p><strong>${diagnosis ? 'Solicitud de diagnóstico gratis' : 'Formulario del sitio'}</strong></p><p>${esc(lead.mensaje).replaceAll('\n', '<br>')}</p>` +
     `<p>${rows.map(([label, value]) => `<strong>${label}:</strong> ${esc(value)}`).join('<br>')}</p>`
   );
 }

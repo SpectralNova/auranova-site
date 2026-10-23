@@ -1,0 +1,180 @@
+---
+// Diagnóstico gratis (archive DEC-0005, ADR-019): the ads' offer. 4 a month, presented in the free call, then a
+// PDF. Its form posts to /api/diagnostico through the shared lead-form logic. Not in the nav: ads and links lead here.
+import { getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import Cards from '../components/Cards.astro';
+import FAQ from '../components/FAQ.astro';
+import Icon from '../components/Icon.astro';
+import { href } from '../i18n/routes';
+import { t } from '../i18n/ui';
+import { plain, rich } from '../lib/rich';
+import { breadcrumbJsonLd, faqJsonLd } from '../lib/jsonld';
+import { TURNSTILE_SITE_KEY } from '../lib/env';
+
+const lang = 'es';
+const page = await getEntry('pages', 'es/diagnostico-gratis');
+if (!page) throw new Error('Missing src/content/pages/es/diagnostico-gratis.yaml');
+const c = page.data as any;
+const f = c.form.fields;
+const status = c.form.status;
+const site = Astro.site!;
+const crumbs = breadcrumbJsonLd([
+  { name: t(lang).breadcrumbHome, url: new URL(href('inicio', lang), site).href },
+  { name: c.hero.eyebrow, url: new URL(href('diagnostico', lang), site).href },
+]);
+// Same rule as the Worker (worker/lead.ts WEBSITE): a host with a dot, https:// optional. `v`-flag safe.
+const websitePattern = String.raw`(https?:\/\/)?[^\s\/@]+\.[^\s\/@]{2,}(\/\S*)?`;
+---
+
+<Layout lang={lang} route="diagnostico" title={c.title} description={c.description} jsonLd={[crumbs, faqJsonLd(c.faq.items, lang)]}>
+  <section class="section hero" aria-labelledby="hero-title">
+    <div class="bg-grid hero__grid" aria-hidden="true"></div>
+    <div class="container">
+      <span class="eyebrow">{c.hero.eyebrow}</span>
+      <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
+      <p class="lead" set:html={rich(c.hero.lead, lang)} />
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#solicitalo" data-track="cta_click" data-track-location="diagnostico">{c.hero.button}</a>
+      </div>
+      <p class="hero__note muted" set:html={rich(c.hero.note, lang)} />
+    </div>
+  </section>
+
+  <Section lang={lang} theme="light" id="que-revisamos" eyebrow={c.includes.eyebrow} title={c.includes.title} lead={c.includes.lead}>
+    <ul class="card-grid card-grid--4" role="list">
+      {
+        c.includes.items.map((x: any) => (
+          <li class="card">
+            <span class="icon-tile">
+              <Icon name={x.icon} />
+            </span>
+            <h3 class="card__title">{x.title}</h3>
+            <p class="muted" set:html={rich(x.text, lang)} />
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section lang={lang} id="como-funciona" eyebrow={c.steps.eyebrow} title={c.steps.title}>
+    <Cards lang={lang} items={c.steps.items} cols={4} numbered />
+  </Section>
+
+  <Section lang={lang} theme="light" id="solicitalo" eyebrow={c.form.eyebrow} title={c.form.title} lead={c.form.lead}>
+    <div class="card-grid card-grid--2 dx-terms">
+      {
+        [c.form.who, c.form.excludes].map((block: any, i: number) => (
+          <div class="card">
+            <h3 class="card__title">{block.title}</h3>
+            <ul class:list={['check-list', { 'check-list--no': i === 1 }]}>
+              {block.items.map((li: string) => (
+                <li set:html={rich(li, lang)} />
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+    <p class="dx-full" set:html={rich(c.form.full, lang)} />
+
+    <form
+      class="form"
+      id="diagnosis-form"
+      action="/api/diagnostico"
+      method="post"
+      novalidate
+      data-form="diagnostico"
+      data-error-summary={c.form.errors.summary}
+      data-sending={c.form.sending}
+      data-sent={plain(status.sent, lang)}
+      data-verify={plain(status.verify, lang)}
+      data-challenge={plain(status.challenge, lang)}
+      data-failed={plain(status.failed, lang)}
+      data-sitekey={TURNSTILE_SITE_KEY}>
+      <div class="field">
+        <label for="d-name">{f.name}</label>
+        <input id="d-name" name="nombre" type="text" autocomplete="name" required aria-describedby="d-name-err" />
+        <p class="field__error" id="d-name-err" data-msg={c.form.errors.required} hidden></p>
+      </div>
+      <div class="field">
+        <label for="d-email">{f.email}</label>
+        <input id="d-email" name="correo" type="email" autocomplete="email" inputmode="email" required aria-describedby="d-email-err" />
+        <p class="field__error" id="d-email-err" data-msg={c.form.errors.email} hidden></p>
+      </div>
+      <div class="field">
+        <label for="d-company">{f.company}</label>
+        <input id="d-company" name="empresa" type="text" autocomplete="organization" required aria-describedby="d-company-err" />
+        <p class="field__error" id="d-company-err" data-msg={c.form.errors.required} hidden></p>
+      </div>
+      <div class="field">
+        <label for="d-website">{f.website}</label>
+        {/* type=text, not url: browsers reject «minegocio.com» without https://, which most people type. */}
+        <input
+          id="d-website"
+          name="sitio"
+          type="text"
+          inputmode="url"
+          autocomplete="url"
+          spellcheck="false"
+          autocapitalize="off"
+          required
+          pattern={websitePattern}
+          aria-describedby="d-website-hint d-website-err"
+        />
+        <p class="field__hint" id="d-website-hint">{f.websiteHint}</p>
+        <p class="field__error" id="d-website-err" data-msg={c.form.errors.website} hidden></p>
+      </div>
+      <div class="field form__full">
+        <label for="d-goal">{f.goal}</label>
+        <textarea id="d-goal" name="mensaje" rows="3" required aria-describedby="d-goal-hint d-goal-err"></textarea>
+        <p class="field__hint" id="d-goal-hint">{f.goalHint}</p>
+        <p class="field__error" id="d-goal-err" data-msg={c.form.errors.required} hidden></p>
+      </div>
+      <div class="hp" aria-hidden="true">
+        <label for="d-hp">No llenes este campo</label>
+        <input id="d-hp" name="sitio_web_2" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+      {/* Filled by the script: when the form appeared (bots send instantly) and where the visit came from. */}
+      {['t', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'landing', 'referrer'].map((name) => <input type="hidden" name={name} />)}
+      <p class="form__full caption muted" set:html={rich(c.form.notice, lang)} />
+      <div class="field form__full">
+        <div class="field--check">
+          <input id="d-consent" name="consentimiento" type="checkbox" required aria-describedby="d-consent-err" />
+          <label for="d-consent" set:html={rich(f.consent, lang)} />
+        </div>
+        <p class="field__error" id="d-consent-err" data-msg={c.form.errors.consent} hidden></p>
+      </div>
+      <div class="field form__full">
+        <div class="field--check">
+          <input id="d-news" name="novedades" type="checkbox" />
+          <label for="d-news">{f.newsletter} <span class="muted">{c.form.optional}</span></label>
+        </div>
+      </div>
+      <div class="form__full form__turnstile"></div>
+      <div class="form__actions form__full">
+        <button class="btn btn--primary" type="submit" data-label={c.form.submit}>{c.form.submit}</button>
+        <p class="form__status" role="status" tabindex="-1"></p>
+      </div>
+      <noscript class="form__full"><p class="caption">{c.form.noscript}</p></noscript>
+    </form>
+  </Section>
+
+  <Section lang={lang} id="preguntas" eyebrow={c.faq.eyebrow} title={c.faq.title}>
+    <FAQ lang={lang} items={c.faq.items} />
+  </Section>
+</Layout>
+
+<style>
+  .dx-terms { margin-bottom: var(--space-5); }
+  .dx-terms .check-list { margin-top: var(--space-3); }
+  .dx-full { margin: 0 0 var(--space-7); }
+</style>
+
+<script>
+  // Diagnosis request: the shared lead-form logic, posting to /api/diagnostico.
+  import { initLeadForm } from '../lib/lead-form';
+  const form = document.querySelector<HTMLFormElement>('#diagnosis-form');
+  if (form) initLeadForm(form);
+</script>

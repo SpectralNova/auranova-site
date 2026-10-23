@@ -17,6 +17,7 @@ const pages = [
   '/contacto/',
   '/estandar/',
   '/recursos/',
+  '/diagnostico-gratis/',
   '/aviso-de-privacidad/',
   '/terminos/',
   '/no-existe/',
@@ -141,6 +142,50 @@ test('roadmap: pinned on desktop, tabs jump to a step from the keyboard; plain t
   await page.setViewportSize({ width: 390, height: 844 });
   await expect(roadmap).not.toHaveAttribute('data-pinned', '');
   await expect(page.locator('.rm__step').nth(4)).toBeVisible();
+});
+
+test('diagnosis form: needs the business and a real site address, then posts to /api/diagnostico', async ({ page }) => {
+  await stubTurnstile(page);
+  let sent = '';
+  await page.route('**/api/diagnostico', (route) => {
+    sent = route.request().postData() ?? '';
+    return route.fulfill({ json: { ok: true } });
+  });
+  await page.goto('/diagnostico-gratis/');
+  await page.locator('#diagnosis-form button[type=submit]').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#d-name')).toBeFocused();
+  for (const id of ['d-name', 'd-email', 'd-company', 'd-website', 'd-goal', 'd-consent']) {
+    await expect(page.locator(`#${id}`)).toHaveAttribute('aria-invalid', 'true');
+  }
+
+  await page.keyboard.type('Ana Pérez');
+  await page.locator('#d-email').focus();
+  await page.keyboard.type('ana@empresa.com');
+  await page.locator('#d-company').focus();
+  await page.keyboard.type('Pastelería Ana');
+  // Not a site address: the field says so, in words, before anything is sent.
+  await page.locator('#d-website').focus();
+  await page.keyboard.type('no tengo');
+  await page.locator('#d-goal').focus();
+  await page.keyboard.type('Que me contacten más clientes.');
+  await page.locator('#d-consent').focus();
+  await page.keyboard.press('Space');
+  await page.locator('#diagnosis-form button[type=submit]').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#d-website')).toBeFocused();
+  await expect(page.locator('#d-website-err')).toContainText('minegocio.com');
+  expect(sent).toBe('');
+
+  // Without https://, as most people type it.
+  await page.locator('#d-website').fill('pasteleriaana.mx');
+  await page.locator('#diagnosis-form button[type=submit]').focus();
+  await page.keyboard.press('Enter');
+  const status = page.locator('#diagnosis-form .form__status');
+  await expect(status).toBeFocused();
+  await expect(status).toContainText('Recibimos tu solicitud');
+  expect(sent).toContain('pasteleriaana.mx');
+  expect(sent).toContain('XXXX.DUMMY.TOKEN.XXXX');
 });
 
 test('contact form: keyboard only, errors announced, then sent (Turnstile only after the first interaction)', async ({ page }) => {

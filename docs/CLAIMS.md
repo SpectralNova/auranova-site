@@ -21,6 +21,10 @@
 | «A este sitio le pedimos todavía más: 95 o más en Lighthouse» | Nuestro estándar (hero) | `scripts/lighthouse.mjs` budget 95; measured 99–100 on 8 pages (2026-10-22, `site-scores.json`) | ✅ |
 | «Revisa tu sitio web en 10 minutos» | Recursos, checklist PDF | Our estimate for 15 yes/no questions; the lead says «unos 10 minutos» | ✅ by rule (an estimate, worded as one) |
 | «Llamada sin costo de 30 minutos» | Checklist PDF | Q16 + Q36 | ✅ |
+| «Hacemos 4 diagnósticos al mes» (`{{diagnosticosAlMes}}`); first slot of next month when full | Diagnóstico gratis, its emails | Archive DEC-0005 (David, 2026-10-23) | ✅ |
+| Diagnosis scope: home + up to 2 key pages, phone and desktop, Lighthouse, the 15-point standard, the 5 most important fixes, a PDF | Diagnóstico gratis | DEC-0005 | ✅ |
+| «No necesitamos tus contraseñas ni acceso a tu hosting: revisamos lo que cualquier visitante puede ver» | Diagnóstico gratis (FAQ), report | How `diagnostico-medir.mjs` works (public pages only) | ✅ |
+| «Te mandamos una cotización por escrito, con precio fijo» | Diagnóstico gratis (FAQ), report | Q6 | ✅ |
 | Demo numbers (KPIs, positions, response time, matrix) | Posicionamiento, Mantenimiento, Asesoría demos | none: **sample data**, labelled "Datos de ejemplo" / "Ejemplo" in the window and in a footnote; never presented as client results | ✅ by rule (ADR-011) |
 | Precio fijo por proyecto; no cobramos por hora; no publicamos precios genéricos | Inicio FAQ, Servicio, Cómo trabajamos | Q6 | ✅ |
 | Pagos 40% / 30% (al aprobar el diseño) / 30% (antes del lanzamiento); MXN + IVA | Inicio, Servicio, Cómo trabajamos | Q7 | ✅ |

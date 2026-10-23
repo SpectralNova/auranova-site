@@ -20,6 +20,7 @@
 | `/contacto/` | Contacto (form interface; delivery in Phase 2) | built |
 | `/estandar/` | Nuestro estándar: the 15 (ledger rows by topic) · this site, measured · además · the checklist | built |
 | `/recursos/` | Recursos: the free checklist PDF (15 yes/no questions, same data as /estandar/) | built |
+| `/diagnostico-gratis/` | Diagnóstico gratis: the ads' offer (4 a month, archive DEC-0005, ADR-019); not in the nav | built |
 | `/aviso-de-privacidad/`, `/terminos/` | Footer pages (legal) | built; lawyer review pending |
 | `/aprende/` | Aprende: articles and videos (Q22) | reserved; built with its first pieces |
 | 404 | Recovery page | built |

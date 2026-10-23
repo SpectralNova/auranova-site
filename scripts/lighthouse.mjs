@@ -11,6 +11,16 @@ import * as chromeLauncher from 'chrome-launcher';
 import { startPreview } from './preview-server.mjs';
 import { writeFile, mkdir } from 'node:fs/promises';
 import { createRequire } from 'node:module';
+import { createServer } from 'node:net';
+
+/** A free local port. With Edge 155, chrome-launcher can't read a dynamic port (port 0) from its log, so we pick one. */
+const freePort = () =>
+  new Promise((resolve, reject) => {
+    const server = createServer().once('error', reject).listen(0, '127.0.0.1', () => {
+      const { port } = server.address();
+      server.close(() => resolve(port));
+    });
+  });
 
 const args = process.argv.slice(2);
 const opt = (name, fallback) => {
@@ -26,7 +36,7 @@ const EDGE = process.env.CHROME_PATH ?? 'C:/Program Files (x86)/Microsoft/Edge/A
 const PORT = 4329;
 
 async function runOnce(url) {
-  const chrome = await chromeLauncher.launch({ chromePath: EDGE, chromeFlags: ['--headless=new', '--no-first-run', '--disable-extensions'] });
+  const chrome = await chromeLauncher.launch({ port: await freePort(), chromePath: EDGE, chromeFlags: ['--headless=new', '--no-first-run', '--disable-extensions'] });
   try {
     const { lhr } = await lighthouse(url, { port: chrome.port, output: 'json', logLevel: 'error' });
     const c = lhr.categories;

@@ -46,6 +46,7 @@
 | Q35 | Service illustration style (A / B / C) | ✅ A | — |
 | Q36 | Is the 30-minute call free? | ✅ yes | — |
 | Q37 | Design system v1.4: line length, skip-link hover, one-word last lines | ✅ applied (2026-10-23) | — |
+| Q38 | Where the site links to «Diagnóstico gratis» | 🟡 proposed: from Asesoría digital and the /recursos/ closing CTA; not in the nav | David |
 
 **Still open after CP1.2** (most blocking first): Q12 (Vista's OK in writing), Q15 (my reading: no WhatsApp/socials at launch), Q2 (domicilio for the aviso). Before CP2 as well: Q18 (analytics). Phase 2: Q20 contract version. (Business email ✅ contacto@auranova.mx and Cal.com link ✅, 2026-10-20.)
 
@@ -289,3 +290,12 @@
 - **1. Line length:** `--measure: 68ch` holds about 85–90 Spanish characters per line in Montserrat (measured on the legal pages, Cómo trabajamos and Sitios web). /estandar/ promises 60–75 (#7). **Proposal:** about `56ch` (≈ 72 characters, to verify on screen).
 - **2. Skip-link hover:** the global `a:hover` link color turns the skip link's text light violet on lime (1.3:1) when it is focused and hovered. **Proposal:** `.skip-link:hover { color: var(--lime-7); }`.
 - **3. One-word last lines (optional):** `p, li { text-wrap: pretty; }` avoids most single words left on a paragraph's last line (progressive enhancement; browsers that don't support it are unaffected).
+
+## Q38 · Where the site links to the free diagnosis (2026-10-23)
+- **Status:** 🟡. `/diagnostico-gratis/` exists for the ads (ADR-019), and nothing on the site links to it yet.
+- **Proposal:**
+  - from **Asesoría digital** (its «Auditoría de tu sitio» item: start with the free diagnosis);
+  - from the **closing call to action on /recursos/** («¿Tu sitio no pasó la revisión?»), as a second option next to the call.
+
+  Keep it out of the nav. Organic content never links to it (DEC-0004: organic doesn't sell).
+

@@ -13,7 +13,15 @@ export const SERVICES = {
 } as const;
 export type Service = keyof typeof SERVICES;
 
+/** Which form sent it: the contact form, or a free diagnosis request (the ads' offer; archive DEC-0005).
+ *  A diagnosis is always about the visitor's current site, so it is filed under «Asesoría digital». */
+export type Kind = 'contacto' | 'diagnostico';
+export const DIAGNOSIS = 'Diagnóstico gratis';
+
+export const serviceLabel = (lead: Lead) => (lead.kind === 'diagnostico' ? `${DIAGNOSIS} (Asesoría digital)` : SERVICES[lead.tipo]);
+
 export interface Lead {
+  kind: Kind;
   nombre: string;
   correo: string;
   empresa: string;
@@ -28,17 +36,22 @@ export interface Lead {
 }
 
 const EMAIL = /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/;
+/** A website address, with or without https://: a host with a dot, then an optional path. */
+const WEBSITE = /^(https?:\/\/)?[^\s/@]+\.[^\s/@]{2,}(\/\S*)?$/i;
 
-/** Reads and checks the form. `invalid` lists the fields to fix, by name. */
-export function parseLead(form: FormData): { lead: Lead; invalid: string[] } {
+/** Reads and checks the form. `invalid` lists the fields to fix, by name, in the form's order. */
+export function parseLead(form: FormData, kind: Kind = 'contacto'): { lead: Lead; invalid: string[] } {
   const field = (name: string, max: number) => String(form.get(name) ?? '').trim().slice(0, max);
+  const diagnosis = kind === 'diagnostico';
   const lead: Lead = {
+    kind,
     nombre: field('nombre', 100),
     correo: field('correo', 254).toLowerCase(),
     empresa: field('empresa', 120),
     sitio: field('sitio', 200),
-    tipo: field('tipo', 40) as Service,
-    presupuesto: field('presupuesto', 40),
+    // The diagnosis form doesn't ask what they need or their budget.
+    tipo: (diagnosis ? 'asesoria' : field('tipo', 40)) as Service,
+    presupuesto: diagnosis ? '' : field('presupuesto', 40),
     mensaje: field('mensaje', 5000),
     novedades: form.get('novedades') === 'on',
     utm: {
@@ -53,7 +66,11 @@ export function parseLead(form: FormData): { lead: Lead; invalid: string[] } {
   const invalid: string[] = [];
   if (!lead.nombre) invalid.push('nombre');
   if (!EMAIL.test(lead.correo)) invalid.push('correo');
-  if (!Object.hasOwn(SERVICES, lead.tipo)) invalid.push('tipo');
+  if (diagnosis) {
+    // One diagnosis per business, and there must be a site to review.
+    if (!lead.empresa) invalid.push('empresa');
+    if (!WEBSITE.test(lead.sitio)) invalid.push('sitio');
+  } else if (!Object.hasOwn(SERVICES, lead.tipo)) invalid.push('tipo');
   if (!lead.mensaje) invalid.push('mensaje');
   if (form.get('consentimiento') !== 'on') invalid.push('consentimiento');
   return { lead, invalid };

@@ -147,3 +147,17 @@
 - **Design context:** `DESIGN.md` (root) and `.impeccable/design.json` describe the incumbent system, derived from the brand master in `Resources/AuraNova/Design System` v1.3, which wins any disagreement. Creative north star: «The Night Observatory» (David, 2026-10-23).
 - **Exceptions** (`.impeccable/config.json`, each with its reason): the three brand fonts, and the hero grid in `components.css`. Nothing else is silenced.
 - **Calibration (2026-10-23):** in a real browser, its contrast and padding warnings didn't reproduce (axe agrees). The useful findings went to Q37. Its taste rules flag brand choices on purpose (lime glow, eyebrow chips, icon tiles): treat those as advisory, never as orders.
+
+## ADR-019 · The free diagnosis: a second form on the same pipeline
+- **Status:** Built (preview) · 2026-10-23 · archive DEC-0005
+- **What it is:** `/diagnostico-gratis/` is the ads' offer: 4 a month, presented in the free 30-minute call, then a PDF.
+  - Not in the nav: ads and chosen links lead there.
+  - Its form posts to **`/api/diagnostico`**, the same Worker pipeline as `/api/contacto`: origin, size, honeypot, fill time, fields, Turnstile → HubSpot → lead email → auto-reply.
+  - `worker/lead.ts` gains a `kind`. A diagnosis requires the business and a website address (with or without https://, the same rule in the browser and the Worker), and is filed under `asesoria`, where audits live.
+- **No HubSpot changes:** the deal is «Diagnóstico gratis · {negocio}» in the existing «Nuevo lead» stage. A dedicated stage can come later, with David's approval.
+- **The monthly cap is kept by hand:**
+  - David confirms each slot (email template 23) or holds next month's first one (template 24). The page says so, with no counter and no fake urgency.
+  - The auto-reply has no booking link: the call is booked once the slot is confirmed.
+- **Shared form logic:** the contact page's form script moved to `src/lib/lead-form.ts`, scoped to its own `<form>` (status, Turnstile slot), and both forms use it. `form_submit` now carries `{ form: 'contacto' | 'diagnostico' }`; Zaraz maps both to Lead at launch.
+- **Reports** are made in the business archive: `diagnostico-medir.mjs` (Lighthouse 13.5, the median of 3 runs on phone and desktop, plus the basics) and the generator's `diagnostico` type, which reads the 15 from this repo's `estandar.yaml`.
+- **Also fixed:** with Edge 155, chrome-launcher can't read a dynamic debugging port. `scripts/lighthouse.mjs` now picks a free port first.
