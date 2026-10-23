@@ -10,11 +10,11 @@ tools: ["astro", "nextdotjs", "wordpress", "woocommerce", "cloudflare"]
 
 page:
   title: "Diseño de páginas web para negocios · AuraNova"
-  description: "Sitios web nuevos, rediseños, páginas de aterrizaje y tiendas en línea para pequeños y medianos negocios. Rápidos, claros y tuyos desde el primer día."
+  description: "Sitios web nuevos, rediseños, landing pages y tiendas en línea para pequeños y medianos negocios. Rápidos, claros y tuyos desde el primer día."
   hero:
     eyebrow: "Sitios web"
     title: "Sitios web hechos para ==que te contacten=="
-    lead: "Sitios nuevos, rediseños, páginas de aterrizaje y tiendas en línea para pequeños y medianos negocios. Rápidos en el celular, fáciles de actualizar y tuyos desde el primer día."
+    lead: "Sitios nuevos, rediseños, landing pages y tiendas en línea para pequeños y medianos negocios. Rápidos en el celular, fáciles de actualizar y tuyos desde el primer día."
 
   # Signature demo (src/components/demos/DemoSitios.astro). Illustrative: a generic "Tu negocio".
   demo:
