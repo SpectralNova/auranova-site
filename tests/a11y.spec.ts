@@ -324,14 +324,12 @@ test('events: a sent form reports form_submit to Zaraz (which applies the consen
   expect(await zarazCalls(page)).toContain('track:form_submit');
 });
 
-test('social links and the checklist: real profiles, YouTube waits for its link, the PDF downloads', async ({ page, request }) => {
+test('social links and the checklist: real profiles, the PDF downloads', async ({ page, request }) => {
   await page.goto('/recursos/');
   const footer = page.locator('.site-footer .social');
   await expect(footer.getByRole('link', { name: 'AuraNova en Instagram' })).toHaveAttribute('href', 'https://www.instagram.com/auranova.mx/');
   await expect(footer.getByRole('link', { name: 'AuraNova en Facebook' })).toHaveAttribute('href', /facebook\.com\/profile\.php\?id=61595699520565/);
-  // No channel yet: a dimmed placeholder in previews (production builds leave it out), never a dead link.
-  await expect(footer.getByRole('img', { name: 'YouTube (próximamente)' })).toBeVisible();
-  await expect(footer.getByRole('link', { name: /YouTube/ })).toHaveCount(0);
+  await expect(footer.getByRole('link', { name: 'AuraNova en YouTube' })).toHaveAttribute('href', 'https://www.youtube.com/@AuraNovamx');
 
   const download = page.getByRole('link', { name: 'Descargar la lista (PDF)' });
   const href = await download.getAttribute('href');
@@ -339,4 +337,21 @@ test('social links and the checklist: real profiles, YouTube waits for its link,
   expect(pdf.ok()).toBe(true);
   expect(pdf.headers()['content-type']).toContain('application/pdf');
   expect((await pdf.body()).subarray(0, 5).toString()).toBe('%PDF-');
+});
+
+test('«Aprende» video: nothing from YouTube loads until play; then the privacy-enhanced player gets the focus', async ({ page }) => {
+  const youtube: string[] = [];
+  page.on('request', (r) => { if (/youtube|ytimg|googlevideo/.test(r.url())) youtube.push(r.url()); });
+  await page.route('https://www.youtube-nocookie.com/**', (route) => route.fulfill({ contentType: 'text/html', body: '<!doctype html><title>player</title>' }));
+  await page.goto('/aprende/auditoria-pagina-web-celular/');
+  await page.waitForLoadState('networkidle');
+  expect(youtube).toEqual([]);
+
+  const play = page.getByRole('button', { name: /^Reproducir el video: / });
+  await play.focus();
+  await page.keyboard.press('Enter');
+  const frame = page.locator('.yt iframe');
+  await expect(frame).toHaveAttribute('src', /^https:\/\/www\.youtube-nocookie\.com\/embed\/mLkWjO2A_2I\?/);
+  await expect(frame).toBeFocused();
+  await expect(play).toHaveCount(0);
 });

@@ -209,3 +209,20 @@
   - **Tests:** axe 55/55, including the new pages at 390 and 1440 px.
   - **Lighthouse:** /aprende/ and the first piece score 99/100/100/100. /proyectos/ scores SEO 69 only because it's noindex by design.
   - **Layout:** no horizontal overflow.
+
+## ADR-022 · «Aprende» videos from YouTube, behind a click-to-load poster
+- **Status:** Built · 2026-10-24 (David: "embed the YouTube Short for the Aprende video")
+- **Decision:** a piece can set `youtube: <id>` instead of a self-hosted `video`. `YouTubeFacade.astro` shows our own cover as the poster, with a play button (bottom-right, like the cards).
+  - **On the visitor's click only:** the button turns into an iframe from **youtube-nocookie.com** (privacy-enhanced mode, `autoplay=1&playsinline=1&rel=0`), which takes the focus.
+  - **Nothing from YouTube loads with the page**, so "no third-party script on page load" holds. The CSP adds that one origin to `frame-src`.
+  - **JSON-LD:** VideoObject with `embedUrl`, and our cover as the thumbnail.
+  - **A note under the player** says it comes from YouTube and links to the notice.
+- **Why YouTube:** the views count on the channel (@AuraNovamx), and the site no longer ships a 5 MB file.
+  - The self-hosted path stays for videos that aren't on YouTube (byte ranges in `worker/video.ts`, ADR-021).
+  - Episode 01's MP4 is no longer served.
+- **Privacy notice:** §4 and §9 now say that playing an «Aprende» video loads YouTube (Google), which then receives visit data and may use cookies. This is a change to the text the lawyer is reviewing; flag it to him.
+- **Also:** the YouTube channel link is set (@AuraNovamx, checked with YouTube's oEmbed), so its icon is live in the nav and footer (Q15, ADR-016).
+- **Verified:**
+  - **Test:** no request to YouTube before play; Enter on the button inserts the nocookie iframe with the focus (56/56 tests).
+  - **Real browser:** in Edge under `wrangler dev` with the real CSP, the Short plays with no CSP errors.
+

@@ -23,6 +23,8 @@ piece:
   transcriptTitle: "Transcripción del video"
   transcriptToggle: "Ver la transcripción"
   sourcesTitle: "Fuentes"
+  play: "Reproducir el video"
+  youtubeNote: "Al reproducirlo, el video se carga desde YouTube. Más en el [aviso de privacidad](/aviso-de-privacidad/#cookies)."
   back: "Ver todo en Aprende"
 
 cta:

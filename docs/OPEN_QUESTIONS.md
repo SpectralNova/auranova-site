@@ -23,7 +23,7 @@
 | Q12 | Portfolio permissions | ✅ · 🟡 Vista in writing (case hidden meanwhile, ADR-021) | week of 2026-10-26 |
 | Q13 | Photos | ✅ none; company, not person | — |
 | Q14 | Voice | ✅ nosotros | — |
-| Q15 | Channels | ✅ email · ✅ Instagram + Facebook · 🔴 YouTube link | when the channel exists |
+| Q15 | Channels | ✅ email · ✅ Instagram + Facebook · ✅ YouTube @AuraNovamx (2026-10-24) | — |
 | Q16 | Booking tool | ✅ Cal.com · ✅ 30 min · ✅ link | CP1.2 |
 | Q17 | Lead magnet | ✅ built (PDF from /estandar/ data) | — |
 | Q18 | Analytics | ✅ Cloudflare Web Analytics | — |

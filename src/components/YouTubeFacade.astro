@@ -1,0 +1,69 @@
+---
+// A YouTube video that loads only on demand (ADR-022). The page shows our own poster and a play button; nothing
+// from YouTube loads until the visitor presses it ("no third-party script on page load"). Then the player comes
+// from youtube-nocookie.com (privacy-enhanced mode), the one frame source the CSP allows besides Turnstile.
+import Icon from './Icon.astro';
+import { rich } from '../lib/rich';
+import type { Lang } from '../content/business';
+
+interface Props {
+  lang: Lang;
+  /** The YouTube video id (the part after /shorts/ or ?v=). */
+  id: string;
+  title: string;
+  poster: { src: string; width: number; height: number };
+  /** Button label, e.g. "Reproducir el video". */
+  playLabel: string;
+  /** The line under the player saying the video comes from YouTube (markdown allowed). */
+  note: string;
+}
+
+const { lang, id, title, poster, playLabel, note } = Astro.props;
+---
+
+<div class="yt" data-yt-id={id} data-yt-title={title}>
+  <button type="button" class="yt__play" aria-label={`${playLabel}: ${title}`}>
+    <img src={poster.src} width={poster.width} height={poster.height} alt="" decoding="async" />
+    <span class="yt__icon" aria-hidden="true"><Icon name="play" size={34} /></span>
+  </button>
+</div>
+<p class="yt__note" set:html={rich(note, lang)} />
+
+<script>
+  // Swap the poster for YouTube's player on the visitor's click, and hand it the focus.
+  for (const box of document.querySelectorAll<HTMLElement>('.yt')) {
+    const button = box.querySelector('button');
+    button?.addEventListener(
+      'click',
+      () => {
+        const frame = document.createElement('iframe');
+        frame.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(box.dataset.ytId ?? '')}?autoplay=1&playsinline=1&rel=0`;
+        frame.title = box.dataset.ytTitle ?? '';
+        frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        frame.allowFullscreen = true;
+        frame.referrerPolicy = 'strict-origin-when-cross-origin';
+        button.replaceWith(frame);
+        frame.focus();
+      },
+      { once: true },
+    );
+  }
+</script>
+
+<style>
+  .yt { position: relative; aspect-ratio: 9 / 16; overflow: hidden; border-radius: var(--radius-lg); background: var(--color-surface); }
+  .yt__play { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+  .yt__play img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .yt__icon {
+    /* Bottom-right, like the play badge on the «Aprende» cards: the centre of a cover is its title. */
+    position: absolute; right: var(--space-5); bottom: var(--space-5);
+    display: grid; place-items: center; width: 4.5rem; height: 4.5rem; border-radius: var(--radius-pill);
+    background: var(--color-accent); color: var(--color-on-accent); box-shadow: var(--shadow-lg);
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  .yt__play:hover .yt__icon { transform: scale(1.06); }
+  .yt__play:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+  .yt :global(iframe) { display: block; width: 100%; height: 100%; border: 0; }
+  .yt__note { margin-top: var(--space-3); font-size: var(--text-sm); color: var(--color-text-muted); }
+  @media (prefers-reduced-motion: reduce) { .yt__icon { transition: none; } }
+</style>

@@ -78,7 +78,9 @@ const aprende = defineCollection({
     /** The series cover in src/assets/aprende/ (1080×1920): the video's poster; cards show its 3:4 centre,
      *  the same crop as the Instagram grid. */
     cover: z.string(),
-    /** Self-hosted video under public/ (H.264, faststart) and its length in seconds. */
+    /** The video on YouTube (its id), shown with a click-to-load player (ADR-022)… */
+    youtube: z.string().optional(),
+    /** …or a self-hosted file under public/ (H.264, faststart; byte ranges via worker/video.ts). Length in seconds. */
     video: z.string().optional(),
     duration: z.number().optional(),
     takeaways: z.array(z.string()),

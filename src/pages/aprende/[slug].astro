@@ -1,13 +1,14 @@
 ---
-// One «Aprende» piece (ADR-021): the video, self-hosted (no third-party player, so the CSP and the "no third-party
-// script on page load" rule hold), what it covers, the test, the transcript, the sources and any required credits.
-// Spanish only: the canonical is its own path and the nav highlights Aprende.
+// One «Aprende» piece (ADR-021, ADR-022): the video (YouTube, behind a click-to-load poster, or a self-hosted file),
+// what it covers, the test, the transcript, the sources and any required credits. Nothing from a third party loads
+// with the page. Spanish only: the canonical is its own path and the nav highlights Aprende.
 import type { GetStaticPaths } from 'astro';
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 import { getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Section from '../../components/Section.astro';
 import CtaBlock from '../../components/CtaBlock.astro';
+import YouTubeFacade from '../../components/YouTubeFacade.astro';
 import { href } from '../../i18n/routes';
 import { t } from '../../i18n/ui';
 import { rich } from '../../lib/rich';
@@ -32,7 +33,8 @@ const crumbs = breadcrumbJsonLd([
   { name: c.hero.eyebrow, url: new URL(href('aprende', lang), site).href },
   { name: p.title, url: new URL(path, site).href },
 ]);
-const videoLd = p.video && {
+const hasVideo = Boolean(p.youtube || p.video);
+const videoLd = hasVideo && {
   '@context': 'https://schema.org',
   '@type': 'VideoObject',
   name: p.title,
@@ -40,7 +42,7 @@ const videoLd = p.video && {
   thumbnailUrl: new URL(poster.src, site).href,
   uploadDate: iso,
   ...(p.duration ? { duration: `PT${p.duration}S` } : {}),
-  contentUrl: new URL(p.video, site).href,
+  ...(p.youtube ? { embedUrl: `https://www.youtube.com/embed/${p.youtube}` } : { contentUrl: new URL(p.video!, site).href }),
   inLanguage: 'es-MX',
 };
 ---
@@ -59,11 +61,22 @@ const videoLd = p.video && {
   <Section lang={lang} theme="light" id="contenido" srTitle={c.piece.videoTitle}>
     <div class="piece">
       {
-        p.video && (
+        hasVideo && (
           <figure class="piece__video">
-            <video controls preload="none" playsinline poster={poster.src} width="1080" height="1920">
-              <source src={p.video} type="video/mp4" />
-            </video>
+            {p.youtube ? (
+              <YouTubeFacade
+                lang={lang}
+                id={p.youtube}
+                title={p.title}
+                poster={{ src: poster.src, width: poster.attributes.width ?? 720, height: poster.attributes.height ?? 1280 }}
+                playLabel={c.piece.play}
+                note={c.piece.youtubeNote}
+              />
+            ) : (
+              <video controls preload="none" playsinline poster={poster.src} width="1080" height="1920">
+                <source src={p.video} type="video/mp4" />
+              </video>
+            )}
             {p.credits && <figcaption class="piece__credits">{p.credits.join(' ')}</figcaption>}
           </figure>
         )

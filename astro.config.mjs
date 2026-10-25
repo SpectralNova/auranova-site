@@ -29,7 +29,8 @@ function siteFiles() {
         const csp = [
           "default-src 'self'",
           `script-src 'self' ${turnstile} https://static.cloudflareinsights.com`,
-          `frame-src ${turnstile}`,
+          // YouTube's privacy-enhanced player, loaded only when a visitor presses play on an «Aprende» video (ADR-022).
+          `frame-src ${turnstile} https://www.youtube-nocookie.com`,
           "style-src 'self' 'unsafe-inline'",
           "img-src 'self' data:",
           "font-src 'self'",

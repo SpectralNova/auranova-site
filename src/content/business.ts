@@ -46,8 +46,8 @@ export const business = {
   social: {
     instagram: ok('https://www.instagram.com/auranova.mx/'),
     facebook: ok('https://www.facebook.com/profile.php?id=61595699520565'),
-    // The channel isn't set up yet: its icon shows in previews and stays out of production until the link exists.
-    youtube: pending({ es: 'liga del canal de YouTube (Q15)', en: 'YouTube channel link (Q15)' }),
+    // Channel @AuraNovamx (David's first Short, 2026-10-24; checked with YouTube's oEmbed).
+    youtube: ok('https://www.youtube.com/@AuraNovamx'),
   },
 };
 

@@ -1,5 +1,6 @@
 # First «Aprende» piece (David, 2026-10-24). The video is episode 01 (Projects/AuraNova Videos,
-# EP01_Por-que-tarda-tu-sitio_v3_VOZ.mp4) re-encoded for the web; the cover is its series cover («cuaderno»).
+# EP01_Por-que-tarda-tu-sitio_v3_VOZ.mp4), embedded from its YouTube Short (David, 2026-10-24, ADR-022);
+# the cover is its series cover («cuaderno»).
 # Every claim is the video's own, with its sources; the transcript is what David says.
 date: 2026-10-24
 kind: video
@@ -7,7 +8,7 @@ title: "Auditoría para tu Página web en CELULAR"
 description: "Una prueba que puedes hacer hoy desde tu celular: qué mide Google primero, su meta de 2.5 segundos y tres cosas que tu sitio debe cumplir."
 summary: "Qué mide Google primero, su meta de 2.5 segundos y una prueba de tres puntos que puedes hacer hoy desde tu celular."
 cover: "auditoria-pagina-web-celular.png"
-video: "/aprende/auditoria-pagina-web-celular.mp4"
+youtube: "mLkWjO2A_2I"
 duration: 60
 
 takeaways:

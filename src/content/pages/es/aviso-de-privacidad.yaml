@@ -97,6 +97,7 @@ sections:
           - "**Anthropic:** Claude, el asistente de inteligencia artificial con el que diseñamos, desarrollamos y administramos los proyectos."
       - "Algunos de estos proveedores guardan información fuera de México, por ejemplo en Estados Unidos. Todos están obligados a protegerla."
       - "Si aceptas las cookies de publicidad, Meta Platforms recibe datos de tu visita para medir nuestros anuncios y mostrarte publicidad de AuraNova, conforme a su propio aviso de privacidad."
+      - "Si reproduces uno de los videos de «Aprende», el reproductor se carga desde YouTube (Google) en ese momento, y Google recibe datos de tu visita, como tu dirección IP, conforme a su propio aviso de privacidad. Antes de que lo reproduzcas, la página no carga nada de YouTube."
       - "También podemos comunicar tus datos a autoridades competentes cuando la ley lo exija."
 
   - id: tu-sitio
@@ -148,6 +149,7 @@ sections:
     title: "9. Cookies y tecnologías similares"
     body:
       - "Nuestro sitio mide sus visitas con una herramienta que no instala cookies (Cloudflare Web Analytics)."
+      - "Los videos de «Aprende» usan el modo de privacidad mejorada de YouTube (youtube-nocookie.com) y sólo se cargan si das clic en reproducir. A partir de ese momento, YouTube puede usar cookies o tecnologías similares conforme a sus propias políticas."
       - "Sólo si las aceptas en el aviso de cookies, usamos el **Pixel de Meta** y su API de conversiones para medir y mejorar nuestros anuncios en Facebook e Instagram. Puedes cambiar tu elección en cualquier momento desde «Preferencias de cookies», al pie del sitio, y también bloquear las cookies desde tu navegador."
 
   - id: menores
