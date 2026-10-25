@@ -226,3 +226,17 @@
   - **Test:** no request to YouTube before play; Enter on the button inserts the nocookie iframe with the focus (56/56 tests).
   - **Real browser:** in Edge under `wrangler dev` with the real CSP, the Short plays with no CSP errors.
 
+## ADR-023 · Links to other websites open in a new tab
+- **Status:** Built · 2026-10-24 (David: "the hyperlinks that lead to other websites on our site open a new window")
+- **Decision:** a build step (`scripts/external-links.mjs`, wired in `astro.config.mjs` after `siteFiles`) marks every `<a>` whose `href` is http(s) on another host. It covers links from YAML copy, components and markdown alike.
+  - It adds `target="_blank"` and `rel="noopener"`, merging with any existing rel, e.g. `me noopener` on the social profiles.
+  - **Screen readers hear «(se abre en una pestaña nueva)»** (WCAG technique G201): appended to the `aria-label` when the link has one (icons), otherwise as `.sr-only` text inside the link.
+  - **Left alone:** our own hosts (auranova.mx, www, the preview), relative links, `#`, `mailto:` and `tel:`.
+- **Today that covers:**
+  - the Instagram, Facebook and YouTube profiles (nav, menu sheet, footer);
+  - the Cal.com booking button on /contacto/;
+  - the sources on «Aprende» pages.
+- **Verified:**
+  - **Tests:** a new test checks a source, a social icon and the booking button, and that no internal or email link has a target (57/57).
+  - **axe** is still clean.
+

@@ -1,13 +1,15 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import { writeFile } from 'node:fs/promises';
+import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 import { readdirSync, readFileSync } from 'node:fs';
 import { parse } from 'yaml';
 
 // Preview or production, the noindex switch and the canonical base all come from site-env.mjs (ADR-002, ADR-020):
 // any build not explicitly production is noindex, and only `main` can be production.
 import { INDEXABLE, PRODUCTION, SITE_URL } from './site-env.mjs';
+import { markExternalLinks } from './scripts/external-links.mjs';
 
 // /proyectos/ leaves the sitemap while no project is visible (ADR-021: it's noindex then, and out of the nav).
 const projectsDir = new URL('./src/content/projects/es/', import.meta.url);
@@ -65,6 +67,27 @@ function siteFiles() {
   };
 }
 
+/** Links to other websites open in a new tab, with a screen-reader hint (ADR-023, scripts/external-links.mjs). */
+function externalLinks() {
+  return {
+    name: 'auranova-external-links',
+    hooks: {
+      /** @param {{ dir: URL }} options */
+      'astro:build:done': async ({ dir }) => {
+        const own = [...new Set([new URL(SITE_URL).host, 'auranova.mx', 'www.auranova.mx'])];
+        const root = fileURLToPath(dir);
+        for (const file of await readdir(root, { recursive: true })) {
+          if (!file.endsWith('.html')) continue;
+          const path = `${root}/${file}`;
+          const html = await readFile(path, 'utf8');
+          const marked = markExternalLinks(html, own);
+          if (marked !== html) await writeFile(path, marked);
+        }
+      },
+    },
+  };
+}
+
 export default defineConfig({
   site: SITE_URL,
   output: 'static',
@@ -81,6 +104,7 @@ export default defineConfig({
       filter: (page) => anyProjectVisible || !new URL(page).pathname.startsWith('/proyectos/'),
     }),
     siteFiles(),
+    externalLinks(),
   ],
   // Never inline scripts or assets: the CSP allows only same-origin files (script-src 'self').
   vite: { build: { assetsInlineLimit: 0 } },

@@ -355,3 +355,20 @@ test('«Aprende» video: nothing from YouTube loads until play; then the privacy
   await expect(frame).toBeFocused();
   await expect(play).toHaveCount(0);
 });
+
+test('links to other websites open in a new tab and say so; our own pages and email stay in place', async ({ page }) => {
+  await page.goto('/aprende/auditoria-pagina-web-celular/');
+  const source = page.getByRole('link', { name: /^web\.dev · Largest Contentful Paint \(LCP\) \(se abre en una pestaña nueva\)$/ });
+  await expect(source).toHaveAttribute('target', '_blank');
+  await expect(source).toHaveAttribute('rel', /noopener/);
+  const social = page.locator('.site-footer').getByRole('link', { name: 'AuraNova en YouTube (se abre en una pestaña nueva)' });
+  await expect(social).toHaveAttribute('target', '_blank');
+  await expect(social).toHaveAttribute('rel', 'me noopener');
+
+  await page.goto('/contacto/');
+  const booking = page.locator('main').getByRole('link', { name: 'Agenda una llamada (se abre en una pestaña nueva)' });
+  await expect(booking).toHaveAttribute('target', '_blank');
+
+  // Internal and email links never get a target.
+  expect(await page.locator('a[href^="/"][target], a[href^="#"][target], a[href^="mailto:"][target]').count()).toBe(0);
+});
