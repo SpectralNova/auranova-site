@@ -84,6 +84,6 @@ Per ADR-015, step 07:
   - regenerate them with the production base: `python brand/firmas/build_firmas.py "<DS>/logo/auranova-mark-1024.png" brand/firmas https://auranova.mx/firma/ a vertical`;
   - David re-pastes both in Zoho (Insert HTML).
 - **Instagram and Facebook:** change the profile link from Cal.com to https://auranova.mx.
-- **The business archive:** log version WEB-010, the first production release, with the live scores (`negocio/sitio/versiones.md`).
+- **The business archive:** log the first production release with the live scores (`negocio/sitio/versiones.md`, next WEB id from `archivo.py siguiente WEB`).
 - **Keep workers.dev on:** Cloudflare's branch previews (Version URLs) depend on it. The production build's canonical keeps search engines on auranova.mx.
 - **From now on:** changes go to the `preview` branch first (ADR-020). Merge to `main` = live.
