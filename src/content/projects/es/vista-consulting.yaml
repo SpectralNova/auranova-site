@@ -1,4 +1,8 @@
-# Permission: David, 2026-10-19 (Q12). Pending: Vista's OK in writing.
+# Permission: David, 2026-10-19 (Q12). Pending: Vista's OK in writing. Hidden until it arrives (David,
+# 2026-10-24: he asks them the week of 2026-10-26). While hidden, its screenshot waits in
+# src/assets/projects/_hidden/ so it never reaches the build. To show it: move the image back to
+# src/assets/projects/ and set visible: true (ADR-021).
+visible: false
 # "Lo que hicimos" comes from David's project report (Informe del proyecto web, Oct 2026). Public facts only:
 # no Pixel ID, no internal reviewers, no figures Vista still has to confirm.
 order: 1

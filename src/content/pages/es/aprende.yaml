@@ -1,0 +1,29 @@
+# «Aprende» (Q22, DEC-0003): videos and articles to understand your website. Opened with its first piece
+# (David, 2026-10-24, ADR-021). The pieces live in src/content/aprende/es/. Organic content never sells
+# (DEC-0004): the only call to action is the site's closing block.
+title: "Aprende: videos y artículos sobre tu sitio web · AuraNova"
+description: "Videos cortos y artículos para entender tu sitio web sin tecnicismos: velocidad, celulares, Google y las herramientas de tu negocio."
+
+hero:
+  eyebrow: "Aprende"
+  title: "Entiende tu sitio web, ==sin tecnicismos=="
+  lead: "Videos cortos y artículos sobre velocidad, celulares, Google y las herramientas de tu negocio, para que tomes mejores decisiones sobre tu sitio."
+  listTitle: "Videos y artículos"
+
+labels:
+  video: "Video"
+  articulo: "Artículo"
+  minutes: "min"
+  watch: "Ver el video"
+  read: "Leer el artículo"
+
+piece:
+  videoTitle: "El video"
+  takeawaysTitle: "Lo que vas a aprender"
+  transcriptTitle: "Transcripción del video"
+  transcriptToggle: "Ver la transcripción"
+  sourcesTitle: "Fuentes"
+  back: "Ver todo en Aprende"
+
+cta:
+  note: "¿Quieres que revisemos tu sitio? Pide tu [diagnóstico gratis](/diagnostico-gratis/) o agenda una llamada."

@@ -20,13 +20,18 @@ interface Props {
   description: string;
   /** Extra JSON-LD objects for this page (FAQPage, BreadcrumbList…). */
   jsonLd?: object[];
+  /** Keep this page out of search engines even in production (e.g. /proyectos/ while it's empty, ADR-021). */
+  noindex?: boolean;
+  /** A page inside a section (an «Aprende» piece): its own path for the canonical and og:url, while `route`
+   *  stays the section's key for the nav. Such pages are Spanish only, so no hreflang. */
+  path?: string;
 }
 
-const { lang, route, title, description, jsonLd = [] } = Astro.props;
+const { lang, route, title, description, jsonLd = [], noindex = false, path } = Astro.props;
 const ui = t(lang);
 const site = Astro.site ?? new URL('https://auranova.mx');
-const canonical = route ? new URL(href(route, lang), site).href : undefined;
-const alternates = route
+const canonical = path ? new URL(path, site).href : route ? new URL(href(route, lang), site).href : undefined;
+const alternates = route && !path
   ? (['es', 'en'] as const).filter((l) => built[l].includes(route)).map((l) => ({ lang: l, url: new URL(routes[route][l], site).href }))
   : [];
 
@@ -70,7 +75,7 @@ const organization = {
         alternates.map((a) => <link rel="alternate" hreflang={t(a.lang).htmlLang} href={a.url} />)
     }
     {alternates.length > 1 && <link rel="alternate" hreflang="x-default" href={alternates.find((a) => a.lang === 'es')?.url} />}
-    {!INDEXABLE && <meta name="robots" content="noindex, nofollow" />}
+    {(!INDEXABLE || noindex) && <meta name="robots" content="noindex, nofollow" />}
     <link rel="preload" href="/fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/roboto-condensed-800.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

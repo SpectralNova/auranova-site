@@ -10,7 +10,7 @@
 | ID | Topic | Status | Next ask |
 |---|---|---|---|
 | Q1 | Brand name / wordmark | ✅ | — |
-| Q2 | Legal identity | ✅ persona física · 🔴 domicilio | CP1.1 |
+| Q2 | Legal identity | ✅ persona física · 🔴 domicilio (location + email meanwhile, ADR-021) | virtual office |
 | Q3 | City and service area | ✅ (city only on Nosotros) | — |
 | Q4 | Audience scope + language | ⏸ EN + US on hold | — |
 | Q5 | Services list | ✅ 6 services (CP1) | — |
@@ -20,7 +20,7 @@
 | Q9 | Revision rounds | ✅ | — |
 | Q10 | Late payment, pause, cancellation | ✅ (CP1.2 review) | — |
 | Q11 | Warranty, training, maintenance | ✅ (plans: fixed plan offered at the end of each project) | — |
-| Q12 | Portfolio permissions | ✅ · 🟡 Vista in writing | CP1.1 |
+| Q12 | Portfolio permissions | ✅ · 🟡 Vista in writing (case hidden meanwhile, ADR-021) | week of 2026-10-26 |
 | Q13 | Photos | ✅ none; company, not person | — |
 | Q14 | Voice | ✅ nosotros | — |
 | Q15 | Channels | ✅ email · ✅ Instagram + Facebook · 🔴 YouTube link | when the channel exists |
@@ -30,7 +30,7 @@
 | Q19 | Domain + hosting | ✅ (bought 2026-10-20) | — |
 | Q20 | Contract update | ✅ will update · ✅ date (1 nov 2026) | — |
 | Q21 | Social-proof numbers | ✅ omit | — |
-| Q22 | Blog → «Aprende» | ✅ name and route (2026-10-22) · 🔴 content plan | David is sharing it |
+| Q22 | Blog → «Aprende» | ✅ built with its first piece (2026-10-24, ADR-021) · 🔴 content plan | David is sharing it |
 | Q23 | Trademark check | ✅ run | see result |
 | Q24 | Upstream docs: logo file names | ✅ fixed | — |
 | Q25 | Typical timelines | ✅ interim answer · 🔴 details later | — |
@@ -60,6 +60,7 @@
 - **Question:** Persona física or moral? Name or razón social, address for legal notices?
 - **Answer:** ✅ **persona física**. (2026-10-19)
 - **Still open 🔴:** tax regime (for invoices; not published) and a **domicilio** for the aviso de privacidad.
+- **Update (David, 2026-10-24):** the site launches before the lawyer's review and before the virtual office. Until the address exists, section 1 of the notice shows the location and says notifications go to the contact email (ADR-021).
 - **Consequence:** as a persona física, the aviso and the términos name **you** (David Rodrigo Contreras Morales, legal name confirmed 2026-10-21) as the responsible party, with "AuraNova" as the commercial name, even though every marketing page speaks as a company (Q13, Q14). The lawyer confirms the exact wording.
 
 - **Decision (David, 2026-10-21):** the privacy notice uses a **virtual office** address, to be contracted (listings seen at about MXN 800–2,500/month; prices to confirm with providers). David's fiscal address is private: it appears only in contracts and invoices, never on the site or in public documents. Using a virtual office as the SAT fiscal address is a question for his accountant.
@@ -111,6 +112,7 @@
   - **vistaconsulting.mx:** published; 100% David's work. Can be shown now. (Built with Astro, served by Cloudflare.)
   - **LOGOS** and **FERREMAG:** can be shown (logos and cases) **once each is published**.
 - **Consequence:** /proyectos is built at launch with Vista Consulting, and "Proyectos" stays in the main nav.
+- **Update (David, 2026-10-24):** the case stays **hidden** until Vista's OK in writing (he asks them the week of 2026-10-26). Proyectos leaves the nav, the footer and the sitemap and shows a holding text (ADR-021). To restore it, see ADR-021.
 - **To confirm 🟡:** Vista's OK in writing (an email or WhatsApp message from them is enough), covering their name, logo, screenshots and the measured numbers.
 
 ## Q13 · Photos
@@ -167,6 +169,7 @@
   - **Topics:** programming tools, databases, AI and models, connectors, Claude and other AI tools; and, for business owners, why a proper website matters, mobile vs. desktop, and similar.
   - **Name: «Aprende»** at `/aprende/`, chosen over Ideas, Lab and Blog: it covers articles and videos and tells an owner what they get. `/blog/` will redirect to it.
   - **Status:** reserved in `routes.ts`. It gets built, and goes into the nav, once it has its first pieces.
+  - **Built (2026-10-24, ADR-021):** /aprende/ with its first piece, «Auditoría para tu Página web en CELULAR» (video 01), in the nav and the footer; `/blog/` redirects there.
   - **Open 🔴:** the rest of David's content plan (formats, cadence, who writes or records what).
 
 ## Q23 · Trademark check

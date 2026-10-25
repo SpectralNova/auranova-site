@@ -1,6 +1,8 @@
 ---
-// Only published, permitted work (Q12): Vista Consulting now; LOGOS and FERREMAG once published.
-import { getCollection, getEntry } from 'astro:content';
+// Only published, permitted work (Q12): Vista Consulting once its OK in writing arrives; LOGOS and FERREMAG once
+// published. While no project is visible, the page shows its holding text, is noindex and leaves the nav,
+// the footer and the sitemap (ADR-021).
+import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Section from '../components/Section.astro';
 import CtaBlock from '../components/CtaBlock.astro';
@@ -9,12 +11,15 @@ import { href } from '../i18n/routes';
 import { t } from '../i18n/ui';
 import { rich } from '../lib/rich';
 import { breadcrumbJsonLd } from '../lib/jsonld';
+import { visibleProjects } from '../lib/projects';
 
 const lang = 'es';
 const page = await getEntry('pages', 'es/proyectos');
 if (!page) throw new Error('Missing src/content/pages/es/proyectos.yaml');
 const c = page.data as any;
-const projects = (await getCollection('projects', (p) => p.id.startsWith('es/'))).sort((a, b) => a.data.order - b.data.order);
+const projects = await visibleProjects(lang);
+const empty = projects.length === 0;
+const hero = empty ? { ...c.hero, ...c.empty } : c.hero;
 const site = Astro.site!;
 const crumbs = breadcrumbJsonLd([
   { name: t(lang).breadcrumbHome, url: new URL(href('inicio', lang), site).href },
@@ -22,18 +27,18 @@ const crumbs = breadcrumbJsonLd([
 ]);
 ---
 
-<Layout lang={lang} route="proyectos" title={c.title} description={c.description} jsonLd={[crumbs]}>
+<Layout lang={lang} route="proyectos" title={c.title} description={c.description} jsonLd={[crumbs]} noindex={empty}>
   <section class="section hero" aria-labelledby="hero-title">
     <div class="bg-grid hero__grid" aria-hidden="true"></div>
     <div class="container">
-      <span class="eyebrow">{c.hero.eyebrow}</span>
-      <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
-      <p class="lead" set:html={rich(c.hero.lead, lang)} />
+      <span class="eyebrow">{hero.eyebrow}</span>
+      <h1 id="hero-title" set:html={rich(hero.title, lang)} />
+      <p class="lead" set:html={rich(hero.lead, lang)} />
     </div>
   </section>
 
   <Section lang={lang} theme="light" id="lista" srTitle={c.hero.listTitle}>
-    <div class="case-list">{projects.map((p) => <CaseCard lang={lang} project={p} showDetails />)}</div>
+    {!empty && <div class="case-list">{projects.map((p) => <CaseCard lang={lang} project={p} showDetails />)}</div>}
     <CtaBlock lang={lang} note={c.cta.note} />
   </Section>
 </Layout>

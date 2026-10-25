@@ -29,6 +29,7 @@ export const ui = {
       ['servicios', 'Servicios'],
       ['como', 'Cómo trabajamos'],
       ['proyectos', 'Proyectos'],
+      ['aprende', 'Aprende'],
       ['nosotros', 'Nosotros'],
     ] as [RouteKey, string][],
     footer: {
@@ -46,6 +47,7 @@ export const ui = {
           ['servicios', 'Servicios'],
           ['como', 'Cómo trabajamos'],
           ['proyectos', 'Proyectos'],
+          ['aprende', 'Aprende'],
           ['nosotros', 'Nosotros'],
           ['contacto', 'Contacto'],
         ] as [RouteKey, string][],
@@ -91,6 +93,7 @@ export const ui = {
       ['servicios', 'Services'],
       ['como', 'How we work'],
       ['proyectos', 'Projects'],
+      ['aprende', 'Learn'],
       ['nosotros', 'About'],
     ] as [RouteKey, string][],
     footer: {
@@ -108,6 +111,7 @@ export const ui = {
           ['servicios', 'Services'],
           ['como', 'How we work'],
           ['proyectos', 'Projects'],
+          ['aprende', 'Learn'],
           ['nosotros', 'About'],
           ['contacto', 'Contact'],
         ] as [RouteKey, string][],

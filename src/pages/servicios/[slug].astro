@@ -23,6 +23,7 @@ import { href, type RouteKey } from '../../i18n/routes';
 import { t } from '../../i18n/ui';
 import { rich } from '../../lib/rich';
 import { breadcrumbJsonLd, faqJsonLd } from '../../lib/jsonld';
+import { visibleProjects } from '../../lib/projects';
 
 export const getStaticPaths = (async () => {
   const services = await getCollection('services', (s) => s.id.startsWith('es/'));
@@ -39,7 +40,7 @@ const s = service.data;
 const route = s.route as RouteKey;
 const c = s.page as any;
 const shared = (await getEntry('pages', 'es/servicios'))!.data as any;
-const projects = s.proof ? (await getCollection('projects', (p) => p.id.startsWith('es/'))).sort((a, b) => a.data.order - b.data.order) : [];
+const projects = s.proof ? await visibleProjects(lang) : [];
 const ui = t(lang);
 const site = Astro.site!;
 const crumbs = breadcrumbJsonLd([

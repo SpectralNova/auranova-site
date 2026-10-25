@@ -2,10 +2,18 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { writeFile } from 'node:fs/promises';
+import { readdirSync, readFileSync } from 'node:fs';
+import { parse } from 'yaml';
 
 // Preview or production, the noindex switch and the canonical base all come from site-env.mjs (ADR-002, ADR-020):
 // any build not explicitly production is noindex, and only `main` can be production.
 import { INDEXABLE, PRODUCTION, SITE_URL } from './site-env.mjs';
+
+// /proyectos/ leaves the sitemap while no project is visible (ADR-021: it's noindex then, and out of the nav).
+const projectsDir = new URL('./src/content/projects/es/', import.meta.url);
+const anyProjectVisible = readdirSync(projectsDir)
+  .filter((f) => f.endsWith('.yaml'))
+  .some((f) => parse(readFileSync(new URL(f, projectsDir), 'utf8')).visible !== false);
 
 /** Writes Cloudflare Pages `_headers` and `robots.txt` for the current SITE_ENV. */
 function siteFiles() {
@@ -67,7 +75,10 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   integrations: [
-    sitemap({ i18n: { defaultLocale: 'es', locales: { es: 'es-MX', en: 'en-US' } } }),
+    sitemap({
+      i18n: { defaultLocale: 'es', locales: { es: 'es-MX', en: 'en-US' } },
+      filter: (page) => anyProjectVisible || !new URL(page).pathname.startsWith('/proyectos/'),
+    }),
     siteFiles(),
   ],
   // Never inline scripts or assets: the CSP allows only same-origin files (script-src 'self').

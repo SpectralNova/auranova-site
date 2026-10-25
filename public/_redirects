@@ -1,0 +1,4 @@
+# «Aprende» replaced the blog (Q22, DEC-0003, ADR-021). Served by Cloudflare static assets.
+/blog /aprende/ 301
+/blog/ /aprende/ 301
+/blog/* /aprende/ 301

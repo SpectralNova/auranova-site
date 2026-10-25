@@ -180,3 +180,31 @@
   - An 8-case matrix of branch × `SITE_ENV` × `SITE_INDEXABLE`.
   - A real branch build with `SITE_ENV=production` came out as a preview: `X-Robots-Tag: noindex`, robots `Disallow: /`, a noindex meta, no HSTS.
   - `main` with `SITE_ENV=production` is refused while the 4 legal blanks remain.
+
+## ADR-021 · Launch before the legal review; Vista hidden until its written OK; «Aprende» opened
+- **Status:** Built · 2026-10-24 (David)
+- **Legal pages go live as they are:**
+  - David's lawyer is still reviewing, so the privacy notice and the terms are published as written. His changes land in both pages, and in the archive's drafts, when they arrive.
+  - The review notices are gone. The Monterrey courts clause stays as written (Q3), and the lawyer may change it.
+  - **The address (Q2):** the virtual office isn't hired yet. Section 1 of the notice shows the location and says notifications go to the contact email. The `domicilio` fact stays 🔴 and is no longer rendered. David's home address is never published: a production build is scanned for it (docs/LAUNCH.md §6).
+- **Vista is hidden until its OK in writing (Q12; David asks them the week of 2026-10-26):**
+  - A project with `visible: false` disappears everywhere through `src/lib/projects.ts`: /proyectos/, the services' proof sections, the nav, the footer and the sitemap.
+  - With none visible, /proyectos/ shows a holding text and is noindex (a new `noindex` prop on Layout).
+  - Its screenshot waits in `src/assets/projects/_hidden/`, outside CaseCard's glob, so no Vista material reaches the build.
+  - **To restore:** move the image back to `src/assets/projects/` and set `visible: true`.
+- **«Aprende» is open (Q22, DEC-0003):**
+  - **Content:** the `aprende` collection holds one YAML per piece; the file name is the slug.
+  - **/aprende/:** cards with the series cover's 3:4 centre (the same crop as the Instagram grid), newest first.
+  - **/aprende/<slug>/:**
+    - the video, self-hosted (H.264, faststart, `preload="none"`, the cover as poster), so there's no third-party player and the CSP stays as it is;
+    - the takeaways, the test, the transcript (the spoken words), the sources and the required credits;
+    - VideoObject and breadcrumb JSON-LD.
+  - **Canonical:** pieces pass Layout a new `path` prop, so their canonical is their own URL while the nav highlights Aprende.
+  - **Nav:** Aprende sits between Cómo trabajamos and Nosotros, and in the footer. `/blog/` redirects to /aprende/ (`public/_redirects`).
+- **Verified 2026-10-24:**
+  - **Production build:** passes, with no blanks left; robots `Allow`, HSTS, canonicals on auranova.mx.
+  - **Sitemap:** 18 URLs, without /proyectos/.
+  - **Address scan:** clean.
+  - **Tests:** axe 55/55, including the new pages at 390 and 1440 px.
+  - **Lighthouse:** /aprende/ and the first piece score 99/100/100/100. /proyectos/ scores SEO 69 only because it's noindex by design.
+  - **Layout:** no horizontal overflow.

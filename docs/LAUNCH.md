@@ -9,22 +9,17 @@ The order to take the site from the workers.dev preview to https://auranova.mx. 
 - the HubSpot service key, Cal.com, the Meta domain verification;
 - the Turnstile widget, created for auranova.mx and the workers.dev preview (`src/lib/env.ts`).
 
-## 0. Before the day: blockers (David)
+## 0. Before the day: the decisions that cleared the blockers (David, 2026-10-24, ADR-021)
 
-A production build refuses to run while any of these remains (`npm run build` lists them):
+- **Legal pages:** the privacy notice and the terms go live as they are. The lawyer's changes land when his review arrives (both pages carry their «Última actualización» date).
+- **Address (Q2):** until the virtual office exists, the notice shows the location and the contact email for notifications. David's home address never goes on the site.
+- **Vista (Q12):** the case is hidden until their OK in writing; to restore it, see ADR-021.
+- **The build:** `npm run build` reports «no blanks left», so a production build runs.
 
-1. Lawyer's review of the privacy notice (`aviso-de-privacidad.yaml` → `review`).
-2. Lawyer's review of the terms of use (`terminos.yaml` → `review`). The same review confirms or changes the courts clause (Q3), and the contract date the site cites, 1 November 2026.
-3. The virtual office's address for the notice (`business.ts` → `domicilio`, Q2). David's home address never goes on the site.
+## 1. Before flipping (Claude)
 
-And one that isn't a build blank but must not be skipped:
-
-4. Vista's written OK to show their case (Q12). Without it, take the case off /proyectos/ before launch.
-
-## 1. Clear the blanks (Claude)
-
-- Write the lawyer's changes and the address into the content files.
-- Commit to `main`, then confirm the preview build reports `check:pending: no blanks left`.
+- **Final preview check:** confirm the preview build is current (`main`) and looks right on the workers.dev URL.
+- **When the lawyer's review arrives:** apply it to both pages and the archive's drafts, then re-publish (any push to `main` after launch goes live).
 
 ## 2. Flip the switch (David, ~1 min)
 

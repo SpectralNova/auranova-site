@@ -17,6 +17,8 @@ const pages = [
   '/contacto/',
   '/estandar/',
   '/recursos/',
+  '/aprende/',
+  '/aprende/auditoria-pagina-web-celular/',
   '/diagnostico-gratis/',
   '/aviso-de-privacidad/',
   '/terminos/',

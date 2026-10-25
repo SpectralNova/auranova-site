@@ -1,0 +1,96 @@
+---
+// «Aprende» (Q22, DEC-0003, ADR-021): videos and articles, newest first. Each card shows the series cover's 3:4
+// centre, the same crop as the Instagram grid, so the site and the profiles look like one set.
+import { getCollection, getEntry } from 'astro:content';
+import { Picture } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import Section from '../../components/Section.astro';
+import CtaBlock from '../../components/CtaBlock.astro';
+import Icon from '../../components/Icon.astro';
+import { href } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import { rich } from '../../lib/rich';
+import { breadcrumbJsonLd } from '../../lib/jsonld';
+import { aprendeCovers, pieceMeta } from '../../lib/aprende';
+
+const lang = 'es';
+const page = await getEntry('pages', 'es/aprende');
+if (!page) throw new Error('Missing src/content/pages/es/aprende.yaml');
+const c = page.data as any;
+const pieces = (await getCollection('aprende', (p) => p.id.startsWith(`${lang}/`)))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .map((p) => ({ ...p.data, url: `${href('aprende', lang)}${p.id.slice(lang.length + 1)}/`, image: aprendeCovers(p.data.cover), meta: pieceMeta(p.data, c.labels) }));
+const site = Astro.site!;
+const crumbs = breadcrumbJsonLd([
+  { name: t(lang).breadcrumbHome, url: new URL(href('inicio', lang), site).href },
+  { name: c.hero.eyebrow, url: new URL(href('aprende', lang), site).href },
+]);
+---
+
+<Layout lang={lang} route="aprende" title={c.title} description={c.description} jsonLd={[crumbs]}>
+  <section class="section hero" aria-labelledby="hero-title">
+    <div class="bg-grid hero__grid" aria-hidden="true"></div>
+    <div class="container">
+      <span class="eyebrow">{c.hero.eyebrow}</span>
+      <h1 id="hero-title" set:html={rich(c.hero.title, lang)} />
+      <p class="lead" set:html={rich(c.hero.lead, lang)} />
+    </div>
+  </section>
+
+  <Section lang={lang} theme="light" id="lista" srTitle={c.hero.listTitle}>
+    <ul class="learn-list" role="list">
+      {
+        pieces.map((p) => (
+          <li class="card card--interactive learn-card">
+            <a class="learn-card__link" href={p.url}>
+              <span class="learn-card__cover">
+                <Picture
+                  src={p.image}
+                  formats={['avif', 'webp']}
+                  fallbackFormat="webp"
+                  widths={[360, 540, 720]}
+                  sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                {p.kind === 'video' && (
+                  <span class="learn-card__play" aria-hidden="true">
+                    <Icon name="play" size={26} />
+                  </span>
+                )}
+              </span>
+              <span class="learn-card__meta">{p.meta}</span>
+              <h3 class="card__title learn-card__title">{p.title}</h3>
+              <p class="muted">{p.summary}</p>
+              <span class="learn-card__more">
+                {p.kind === 'video' ? c.labels.watch : c.labels.read} <span aria-hidden="true">→</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <CtaBlock lang={lang} location="aprende" note={c.cta.note} />
+  </Section>
+</Layout>
+
+<style>
+  .learn-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--grid-gap); grid-template-columns: repeat(auto-fill, minmax(min(100%, 18.75rem), 1fr)); }
+  @media (min-width: 1024px) { .learn-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .learn-card { padding: 0; overflow: hidden; }
+  .learn-card__link { display: grid; gap: var(--space-2); height: 100%; padding-bottom: var(--space-5); color: inherit; text-decoration: none; }
+  .learn-card__link > :not(.learn-card__cover) { padding-inline: var(--space-5); }
+  .learn-card__cover { position: relative; display: block; aspect-ratio: 3 / 4; margin-bottom: var(--space-3); overflow: hidden; background: var(--color-surface); }
+  .learn-card__cover :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .learn-card__play {
+    position: absolute; right: var(--space-4); bottom: var(--space-4);
+    display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: var(--radius-pill);
+    background: var(--color-accent); color: var(--color-on-accent);
+  }
+  .learn-card__meta { font-size: var(--text-sm); font-weight: var(--weight-strong); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--color-text-muted); }
+  .learn-card__title { margin: 0; }
+  .learn-card__more { margin-top: auto; padding-top: var(--space-2); font-weight: var(--weight-strong); color: var(--color-secondary); }
+  .learn-card__link:focus-visible { outline: none; }
+  .learn-card:has(.learn-card__link:focus-visible) { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+</style>

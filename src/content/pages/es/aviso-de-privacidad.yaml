@@ -1,7 +1,8 @@
 # Aviso de privacidad integral (Q2). Text from the draft for the lawyer
-# (AuraNova Archivo/plantillas/documentos/_generador/aviso_privacidad.cjs, 2026-10-21), adapted to the web:
-# the domicilio is the virtual office's (never the fiscal address), and the page stays blocked for
-# production until the lawyer's review, the address and the cookie banner exist.
+# (AuraNova Archivo/plantillas/documentos/_generador/aviso_privacidad.cjs, 2026-10-21), adapted to the web.
+# Published before the lawyer's review (David, 2026-10-24, ADR-021): his changes land here when they arrive.
+# Until the virtual office exists, section 1 shows the location and the email for notifications; the
+# fiscal/home address is never published.
 title: "Aviso de privacidad · AuraNova"
 description: "Qué datos personales trata AuraNova, para qué los usa, con quién los comparte y cómo ejercer tus derechos ARCO."
 
@@ -9,9 +10,7 @@ hero:
   eyebrow: "Aviso de privacidad"
   title: "Aviso de privacidad ==integral=="
   lead: "En AuraNova cuidamos tus datos personales. Este aviso te explica qué datos tratamos, para qué, con quién los compartimos y cómo ejercer tus derechos, conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares, publicada en el Diario Oficial de la Federación el 20 de marzo de 2025 (la «Ley»)."
-  updated: "Última actualización: 23 de octubre de 2026"
-  # The cookie banner with «Preferencias de cookies» exists since 2026-10-21; only the review is left.
-  review: "[[PENDIENTE: revisión del aviso por un abogado, antes de publicarlo]]"
+  updated: "Última actualización: 24 de octubre de 2026"
 
 sections:
   - id: responsable
@@ -19,7 +18,7 @@ sections:
     title: "1. Quién es responsable de tus datos"
     body:
       - "AuraNova es el nombre comercial de {{nombreLegal}}, persona física con actividad empresarial en México (en adelante, «AuraNova» o «nosotros»), responsable del tratamiento de tus datos personales."
-      - "**Domicilio para oír y recibir notificaciones:** {{domicilio}}."
+      - "**Ubicación:** {{ubicacion}}. Para oír y recibir notificaciones sobre este aviso, escríbenos al correo de contacto."
       - "**Correo de contacto:** [contacto@auranova.mx](mailto:contacto@auranova.mx)"
 
   - id: datos

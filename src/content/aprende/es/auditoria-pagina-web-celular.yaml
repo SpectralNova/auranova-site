@@ -1,0 +1,38 @@
+# First «Aprende» piece (David, 2026-10-24). The video is episode 01 (Projects/AuraNova Videos,
+# EP01_Por-que-tarda-tu-sitio_v3_VOZ.mp4) re-encoded for the web; the cover is its series cover («cuaderno»).
+# Every claim is the video's own, with its sources; the transcript is what David says.
+date: 2026-10-24
+kind: video
+title: "Auditoría para tu Página web en CELULAR"
+description: "Una prueba que puedes hacer hoy desde tu celular: qué mide Google primero, su meta de 2.5 segundos y tres cosas que tu sitio debe cumplir."
+summary: "Qué mide Google primero, su meta de 2.5 segundos y una prueba de tres puntos que puedes hacer hoy desde tu celular."
+cover: "auditoria-pagina-web-celular.png"
+video: "/aprende/auditoria-pagina-web-celular.mp4"
+duration: 60
+
+takeaways:
+  - "Google se fija en cuánto tarda en aparecer lo principal de tu página. Su meta: 2.5 segundos o menos."
+  - "Para decidir dónde apareces, Google usa la versión para celular de tu sitio, no la de computadora."
+  - "Si en el celular tu sitio tarda 4 o 5 segundos en cargar y no está hecho para pantallas pequeñas, todavía le falta para cumplir con las buenas prácticas."
+
+test:
+  title: "Haz la prueba desde tu celular"
+  items:
+    - "Tu sitio carga rápido."
+    - "Se lee sin hacer zoom."
+    - "Los botones son fáciles de tocar."
+
+transcript:
+  - "¿Tu sitio web tarda en cargar? Aquí te va la importancia de por qué esto puede hacer que estés recibiendo menos tráfico. Y no, no tiene nada que ver con tu diseño."
+  - "Los motores de búsqueda como Google se fijan en cuánto se tarda en aparecer tu página principal, y su meta es bastante clara: dos segundos y medio o menos."
+  - "También, mucha gente cree que su sitio tiene que verse bien solamente en computadora. Pero no: Google usa la versión móvil de tu sitio para decidir en dónde apareces."
+  - "Entonces, si en el celular tu sitio tarda 4 o 5 segundos en cargar y tu layout no está optimizado para celulares, todavía te falta para poder estar en los estándares de sitios con buenas prácticas de Google."
+  - "Haz esta prueba hoy desde tu celular: que tu sitio cargue rápido, que se lea sin hacer zoom y que los botones sean fáciles de tocar."
+  - "Y si no, esto es lo primero que debes atender al momento de pensar en rediseñar o auditar tu página web. Te veo en el siguiente video."
+
+sources:
+  - { label: "web.dev · Largest Contentful Paint (LCP)", url: "https://web.dev/lcp" }
+  - { label: "Google Search Central · Indexación mobile-first", url: "https://developers.google.com/search/mobile-sites/faq" }
+
+credits:
+  - "Música: «George Street Shuffle», de Kevin MacLeod (incompetech.com), con licencia Creative Commons Atribución 4.0."

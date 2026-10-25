@@ -7,5 +7,10 @@ hero:
   lead: "Sólo mostramos proyectos en línea y con autorización de cada cliente. Los números son medidos, nunca inventados."
   listTitle: "Proyectos publicados"
 
+# While no project is visible (Vista's OK in writing is pending, Q12), the hero shows this instead (ADR-021).
+empty:
+  title: "Muy pronto, los trabajos que ==ya están activos y funcionando=="
+  lead: "Sólo mostramos proyectos en línea y con la autorización por escrito de cada cliente."
+
 cta:
   note: "¿Tu negocio es el siguiente? Te decimos qué necesitas y qué no."

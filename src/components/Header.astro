@@ -7,9 +7,10 @@ import CTA from './CTA.astro';
 import Icon from './Icon.astro';
 import SocialLinks from './SocialLinks.astro';
 import type { Lang } from '../content/business';
-import { built, href, routes, type RouteKey } from '../i18n/routes';
+import { built, href, isBuilt, routes, type RouteKey } from '../i18n/routes';
 import { t } from '../i18n/ui';
 import { rich } from '../lib/rich';
+import { visibleProjects } from '../lib/projects';
 
 interface Props {
   lang: Lang;
@@ -21,7 +22,11 @@ const ui = t(lang);
 const other: Lang = lang === 'es' ? 'en' : 'es';
 const otherUrl = route && built[other].includes(route) ? routes[route][other] : undefined;
 const current = route?.split('/')[0];
-const links = ui.nav.map(([key, label]) => ({ key, label, url: href(key, lang), current: key === current }));
+// Only built pages, and Proyectos only while a project is visible (ADR-021).
+const hasProjects = (await visibleProjects(lang)).length > 0;
+const links = ui.nav
+  .filter(([key]) => isBuilt(key, lang) && (key !== 'proyectos' || hasProjects))
+  .map(([key, label]) => ({ key, label, url: href(key, lang), current: key === current }));
 const services = (await getCollection('services', (s) => s.id.startsWith(`${lang}/`)))
   .sort((a, b) => a.data.order - b.data.order)
   .map(({ data }) => ({ ...data, url: href(data.route as RouteKey, lang), current: data.route === route }));

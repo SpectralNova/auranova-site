@@ -1,0 +1,121 @@
+---
+// One «Aprende» piece (ADR-021): the video, self-hosted (no third-party player, so the CSP and the "no third-party
+// script on page load" rule hold), what it covers, the test, the transcript, the sources and any required credits.
+// Spanish only: the canonical is its own path and the nav highlights Aprende.
+import type { GetStaticPaths } from 'astro';
+import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import { getImage } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import Section from '../../components/Section.astro';
+import CtaBlock from '../../components/CtaBlock.astro';
+import { href } from '../../i18n/routes';
+import { t } from '../../i18n/ui';
+import { rich } from '../../lib/rich';
+import { breadcrumbJsonLd } from '../../lib/jsonld';
+import { aprendeCovers, pieceDate, pieceMeta } from '../../lib/aprende';
+
+export const getStaticPaths = (async () => {
+  const pieces = await getCollection('aprende', (p) => p.id.startsWith('es/'));
+  return pieces.map((piece) => ({ params: { slug: piece.id.slice(3) }, props: { piece } }));
+}) satisfies GetStaticPaths;
+
+const lang = 'es';
+const { piece } = Astro.props as { piece: CollectionEntry<'aprende'> };
+const p = piece.data;
+const c = (await getEntry('pages', 'es/aprende'))!.data as any;
+const site = Astro.site!;
+const path = `${href('aprende', lang)}${piece.id.slice(3)}/`;
+const poster = await getImage({ src: aprendeCovers(p.cover), width: 720, format: 'webp' });
+const iso = p.date.toISOString().slice(0, 10);
+const crumbs = breadcrumbJsonLd([
+  { name: t(lang).breadcrumbHome, url: new URL(href('inicio', lang), site).href },
+  { name: c.hero.eyebrow, url: new URL(href('aprende', lang), site).href },
+  { name: p.title, url: new URL(path, site).href },
+]);
+const videoLd = p.video && {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: p.title,
+  description: p.description,
+  thumbnailUrl: new URL(poster.src, site).href,
+  uploadDate: iso,
+  ...(p.duration ? { duration: `PT${p.duration}S` } : {}),
+  contentUrl: new URL(p.video, site).href,
+  inLanguage: 'es-MX',
+};
+---
+
+<Layout lang={lang} route="aprende" path={path} title={`${p.title} · AuraNova`} description={p.description} jsonLd={videoLd ? [crumbs, videoLd] : [crumbs]}>
+  <section class="section hero" aria-labelledby="hero-title">
+    <div class="bg-grid hero__grid" aria-hidden="true"></div>
+    <div class="container">
+      <a class="eyebrow piece__crumb" href={href('aprende', lang)}>{c.hero.eyebrow}</a>
+      <h1 id="hero-title" class="piece__title">{p.title}</h1>
+      <p class="lead">{p.description}</p>
+      <p class="hero__note muted"><time datetime={iso}>{pieceDate(p.date)}</time> · {pieceMeta(p, c.labels)}</p>
+    </div>
+  </section>
+
+  <Section lang={lang} theme="light" id="contenido" srTitle={c.piece.videoTitle}>
+    <div class="piece">
+      {
+        p.video && (
+          <figure class="piece__video">
+            <video controls preload="none" playsinline poster={poster.src} width="1080" height="1920">
+              <source src={p.video} type="video/mp4" />
+            </video>
+            {p.credits && <figcaption class="piece__credits">{p.credits.join(' ')}</figcaption>}
+          </figure>
+        )
+      }
+      <div class="piece__notes">
+        <h2 class="piece__h2">{c.piece.takeawaysTitle}</h2>
+        <ul class="check-list">{p.takeaways.map((item) => <li set:html={rich(item, lang)} />)}</ul>
+        {
+          p.test && (
+            <>
+              <h2 class="piece__h2">{p.test.title}</h2>
+              <ol class="piece__test">{p.test.items.map((item) => <li set:html={rich(item, lang)} />)}</ol>
+            </>
+          )
+        }
+        {
+          p.transcript && (
+            <details class="piece__transcript">
+              <summary>{c.piece.transcriptToggle}</summary>
+              <h2 class="sr-only">{c.piece.transcriptTitle}</h2>
+              {p.transcript.map((para) => <p set:html={rich(para, lang)} />)}
+            </details>
+          )
+        }
+        <h2 class="piece__h2">{c.piece.sourcesTitle}</h2>
+        <ul class="piece__sources">
+          {p.sources.map((s) => <li><a href={s.url} rel="noopener">{s.label}</a></li>)}
+        </ul>
+        <p class="piece__back"><a class="btn btn--ghost" href={href('aprende', lang)}>{c.piece.back} <span aria-hidden="true">→</span></a></p>
+      </div>
+    </div>
+    <CtaBlock lang={lang} location="aprende-pieza" note={c.cta.note} />
+  </Section>
+</Layout>
+
+<style>
+  .piece__crumb { text-decoration: none; }
+  .piece__title { max-width: 20ch; }
+  .piece { display: grid; gap: var(--space-8); align-items: start; }
+  @media (min-width: 1024px) { .piece { grid-template-columns: minmax(0, 25rem) minmax(0, 1fr); gap: var(--space-9); } }
+  .piece__video { margin: 0; max-width: 25rem; width: 100%; justify-self: center; }
+  .piece__video video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; border-radius: var(--radius-lg); background: var(--color-surface); }
+  .piece__credits { margin-top: var(--space-3); font-size: var(--text-sm); color: var(--color-text-muted); }
+  .piece__notes { max-width: var(--measure); }
+  .piece__h2 { font-size: var(--text-2xl); margin: var(--space-7) 0 var(--space-4); }
+  .piece__notes > .piece__h2:first-child { margin-top: 0; }
+  .piece__test { margin: 0; padding-left: var(--space-6); }
+  .piece__test li { margin-bottom: var(--space-2); }
+  .piece__transcript { margin-top: var(--space-7); border-top: 1px solid var(--color-border); padding-top: var(--space-5); }
+  .piece__transcript summary { cursor: pointer; font-weight: var(--weight-strong); color: var(--color-secondary); }
+  .piece__transcript p { margin-top: var(--space-4); }
+  .piece__sources { margin: 0; padding-left: var(--space-6); }
+  .piece__sources li { margin-bottom: var(--space-2); }
+  .piece__back { margin-top: var(--space-7); }
+</style>
