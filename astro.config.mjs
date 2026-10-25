@@ -3,13 +3,9 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { writeFile } from 'node:fs/promises';
 
-// SITE_ENV defaults to "preview": any build not explicitly marked production is noindex (ADR-002).
-// SITE_INDEXABLE=1 drops noindex for a LOCAL measurement build only (Lighthouse SEO); never deploy it.
-const SITE_ENV = process.env.SITE_ENV ?? 'preview';
-const PRODUCTION = SITE_ENV === 'production';
-const INDEXABLE = PRODUCTION || process.env.SITE_INDEXABLE === '1';
-// Domain auranova.mx (Q19), registered 2026-10-20 in Cloudflare Registrar; previews override SITE_URL with their own URL.
-const SITE_URL = process.env.SITE_URL ?? 'https://auranova.mx';
+// Preview or production, the noindex switch and the canonical base all come from site-env.mjs (ADR-002, ADR-020):
+// any build not explicitly production is noindex, and only `main` can be production.
+import { INDEXABLE, PRODUCTION, SITE_URL } from './site-env.mjs';
 
 /** Writes Cloudflare Pages `_headers` and `robots.txt` for the current SITE_ENV. */
 function siteFiles() {

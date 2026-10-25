@@ -15,6 +15,6 @@ Astro (static) + plain CSS on the AuraNova design system (synced from `Resources
 | `npm run measure` | Same, and writes the scores shown on the site (`SITE_INDEXABLE=1 npm run build` first, then rebuild) |
 | `npm run screenshots` | Full-page screenshots at 320/375/390/768/1024/1440 + overflow check |
 
-Deploy: Cloudflare Workers Builds runs `npm run build`, then `npx wrangler deploy` (static assets only, see `wrangler.jsonc`).
+Deploy: Cloudflare Workers Builds runs `npm run build`, then `npx wrangler deploy` (static assets only, see `wrangler.jsonc`). `main` is the production branch; other branches are previews.
 
-Environment: `SITE_ENV` (`preview` by default, `production` at launch) · `SITE_URL` (canonical base; set it to the preview URL on preview deploys). Windows + Git Bash: prefix commands that take `/paths` with `MSYS_NO_PATHCONV=1`.
+Environment (ADR-020, `site-env.mjs`): `SITE_ENV` (`preview` by default; `production` only counts on `main`, set as a Cloudflare build variable at launch) · `SITE_URL` (canonical base for previews; production is always https://auranova.mx). Launch steps: `docs/LAUNCH.md`. Windows + Git Bash: prefix commands that take `/paths` with `MSYS_NO_PATHCONV=1`.

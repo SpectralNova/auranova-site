@@ -2,8 +2,8 @@
 // Preview builds only report them.
 import { readdir, readFile } from 'node:fs/promises';
 import { join, relative, sep } from 'node:path';
+import { PRODUCTION } from '../site-env.mjs';
 
-const PRODUCTION = (process.env.SITE_ENV ?? 'preview') === 'production';
 const MARKER = /\[\[(PENDIENTE|CONFIRMAR):\s*([^\]]+?)\]\]/g;
 
 async function* walk(dir) {

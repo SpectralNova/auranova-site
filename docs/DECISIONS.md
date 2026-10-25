@@ -161,3 +161,22 @@
 - **Shared form logic:** the contact page's form script moved to `src/lib/lead-form.ts`, scoped to its own `<form>` (status, Turnstile slot), and both forms use it. `form_submit` now carries `{ form: 'contacto' | 'diagnostico' }`; Zaraz maps both to Lead at launch.
 - **Reports** are made in the business archive: `diagnostico-medir.mjs` (Lighthouse 13.5, the median of 3 runs on phone and desktop, plus the basics) and the generator's `diagnostico` type, which reads the 15 from this repo's `estandar.yaml`.
 - **Also fixed:** with Edge 155, chrome-launcher can't read a dynamic debugging port. `scripts/lighthouse.mjs` now picks a free port first.
+
+## ADR-020 · Production only from `main` behind a launch switch; every other branch is a preview
+- **Status:** Built · 2026-10-24 · flips at CP3 (docs/LAUNCH.md)
+- **Decision:** `site-env.mjs` holds the one rule. `astro.config.mjs`, `src/lib/env.ts` and `scripts/check-pending.mjs` read it.
+  - **Production** needs both the `main` branch (Workers Builds sets `WORKERS_CI_BRANCH`) and `SITE_ENV=production`, a build variable David sets on the Worker at CP3. Until then `main` keeps building the noindex preview.
+  - **Any other branch** builds a preview, whatever `SITE_ENV` says. Local builds have no branch variable and follow `SITE_ENV` as before.
+  - **`SITE_INDEXABLE`** is for local Lighthouse runs only and is ignored on Cloudflare.
+  - **The production canonical** is always `https://auranova.mx`, even if a `SITE_URL` build variable is left over from the preview days.
+- **Why:**
+  - After launch every push to `main` goes live, so changes need a hidden place to be reviewed first.
+  - Build variables apply to every branch, so no setting can be allowed to publish a branch or index a preview.
+- **Previews after launch:**
+  - Work on the `preview` branch, or any other.
+  - With «Enable Preview Builds» on (Worker → Settings → Build → Branch control), Cloudflare builds the branch and serves it on a workers.dev Version URL, noindex.
+  - Cloudflare's branch previews are new and have open bug reports (October 2026). If they misbehave, review locally (`npm run build` + `npm run preview` or `npm run screenshots`), then merge.
+- **Tested 2026-10-24:**
+  - An 8-case matrix of branch × `SITE_ENV` × `SITE_INDEXABLE`.
+  - A real branch build with `SITE_ENV=production` came out as a preview: `X-Robots-Tag: noindex`, robots `Disallow: /`, a noindex meta, no HSTS.
+  - `main` with `SITE_ENV=production` is refused while the 4 legal blanks remain.
