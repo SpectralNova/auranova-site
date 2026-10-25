@@ -1,5 +1,6 @@
-// The site's Worker (ADR-002, ADR-003, ADR-019). Static pages are served by Cloudflare's assets layer and never
-// reach this code: wrangler.jsonc runs it first only for /api/*. Two endpoints, one pipeline:
+// The site's Worker (ADR-002, ADR-003, ADR-019, ADR-021). Static pages are served by Cloudflare's assets layer and
+// never reach this code: wrangler.jsonc runs it first only for /api/* and the «Aprende» videos (byte ranges, video.ts).
+// Two endpoints, one pipeline:
 //
 // POST /api/contacto     the contact form
 // POST /api/diagnostico  a free diagnosis request (/diagnostico-gratis/, archive DEC-0005)
@@ -10,6 +11,7 @@
 import { parseLead, type Kind } from './lead.ts';
 import { syncLead, type SyncResult } from './hubspot.ts';
 import { autoReply, leadEmail, sendEmail } from './email.ts';
+import { serveVideo } from './video.ts';
 
 export interface Env {
   ASSETS: { fetch(request: Request): Promise<Response> };
@@ -41,6 +43,7 @@ export default {
     const form = FORMS[pathname.replace(/\/$/, '')];
     if (form) return submit(request, env, ctx, form.kind, form.page);
     if (pathname.startsWith('/api/')) return json({ ok: false, error: 'not_found' }, 404);
+    if (pathname.endsWith('.mp4')) return serveVideo(request, env);
     return env.ASSETS.fetch(request);
   },
 };

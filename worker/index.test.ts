@@ -316,3 +316,40 @@ describe('what the visitor can put in our emails', () => {
     assert.doesNotMatch(emails()[0].body.subject, /[\r\n]/);
   });
 });
+
+describe('«Aprende» videos: byte ranges for Safari on iPhone (ADR-021)', () => {
+  const bytes = Uint8Array.from({ length: 100 }, (_, i) => i);
+  const venv: Env = { ...env, ASSETS: { fetch: async () => new Response(bytes, { headers: { 'Content-Type': 'video/mp4' } }) } };
+  const ctx = { waitUntil() {} };
+  const get = (range?: string, method = 'GET') =>
+    worker.fetch(new Request('https://auranova.mx/aprende/video.mp4', { method, headers: range ? { Range: range } : {} }), venv, ctx);
+
+  it('answers a range with 206 and just those bytes', async () => {
+    const res = await get('bytes=0-9');
+    assert.equal(res.status, 206);
+    assert.equal(res.headers.get('Content-Range'), 'bytes 0-9/100');
+    assert.equal(res.headers.get('Content-Length'), '10');
+    assert.equal(res.headers.get('Content-Type'), 'video/mp4');
+    assert.deepEqual([...new Uint8Array(await res.arrayBuffer())], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  });
+  it('handles open-ended and suffix ranges', async () => {
+    assert.equal((await get('bytes=95-')).headers.get('Content-Range'), 'bytes 95-99/100');
+    assert.equal((await get('bytes=-10')).headers.get('Content-Range'), 'bytes 90-99/100');
+    assert.equal((await get('bytes=90-500')).headers.get('Content-Range'), 'bytes 90-99/100');
+  });
+  it('sends the whole file with Accept-Ranges when no range is asked', async () => {
+    const res = await get();
+    assert.equal(res.status, 200);
+    assert.equal(res.headers.get('Accept-Ranges'), 'bytes');
+    assert.equal((await res.arrayBuffer()).byteLength, 100);
+  });
+  it('refuses a range past the end with 416', async () => {
+    const res = await get('bytes=200-');
+    assert.equal(res.status, 416);
+    assert.equal(res.headers.get('Content-Range'), 'bytes */100');
+  });
+  it('serves several ranges at once as the whole file, and refuses other methods', async () => {
+    assert.equal((await get('bytes=0-1,5-6')).status, 200);
+    assert.equal((await get(undefined, 'POST')).status, 405);
+  });
+});

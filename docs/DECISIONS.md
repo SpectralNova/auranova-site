@@ -201,6 +201,7 @@
     - VideoObject and breadcrumb JSON-LD.
   - **Canonical:** pieces pass Layout a new `path` prop, so their canonical is their own URL while the nav highlights Aprende.
   - **Nav:** Aprende sits between Cómo trabajamos and Nosotros, and in the footer. `/blog/` redirects to /aprende/ (`public/_redirects`).
+  - **Video byte ranges:** Cloudflare's static assets answer every request with 200, the whole file and no `Accept-Ranges`, and Safari on iPhone won't play an MP4 without 206 responses. So `run_worker_first` adds `/aprende/*.mp4`, and `worker/video.ts` serves single ranges with 206: open-ended, suffix, and 416 past the end; several ranges at once get the whole file. Pages never pass through the Worker; under `wrangler dev` their CSP header was still served.
 - **Verified 2026-10-24:**
   - **Production build:** passes, with no blanks left; robots `Allow`, HSTS, canonicals on auranova.mx.
   - **Sitemap:** 18 URLs, without /proyectos/.

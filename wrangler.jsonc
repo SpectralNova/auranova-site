@@ -1,5 +1,6 @@
-// Cloudflare Worker for the site (ADR-002, ADR-003). Cloudflare's static assets serve dist/ as-is; the Worker
-// code (worker/index.ts) runs only for /api/* (the contact form). No Astro adapter: with this file present,
+// Cloudflare Worker for the site (ADR-002, ADR-003, ADR-021). Cloudflare's static assets serve dist/ as-is; the
+// Worker code (worker/index.ts) runs only for /api/* (the forms) and the «Aprende» videos, which need byte ranges
+// for Safari on iPhone (worker/video.ts). No Astro adapter: with this file present,
 // `wrangler deploy` uploads dist/ unchanged instead of auto-configuring the project.
 // _headers (CSP, noindex on previews…) in dist/ is applied by Cloudflare's static assets.
 // Secrets are NOT here: TURNSTILE_SECRET_KEY, RESEND_API_KEY and HUBSPOT_SERVICE_KEY are set in the
@@ -13,7 +14,7 @@
     "binding": "ASSETS",
     "not_found_handling": "404-page",
     "html_handling": "force-trailing-slash",
-    "run_worker_first": ["/api/*"]
+    "run_worker_first": ["/api/*", "/aprende/*.mp4"]
   },
   "vars": {
     "LEAD_TO": "contacto@auranova.mx",
