@@ -21,21 +21,24 @@ The order to take the site from the workers.dev preview to https://auranova.mx. 
 - **Final preview check:** confirm the preview build is current (`main`) and looks right on the workers.dev URL.
 - **When the lawyer's review arrives:** apply it to both pages and the archive's drafts, then re-publish (any push to `main` after launch goes live).
 
-## 2. Flip the switch (David, ~1 min)
+## 2. Connect the domain first, while the build is still the hidden preview (David, done 2026-10-28)
 
-- Cloudflare → Workers & Pages → `auranova-site` → Settings → Build → **Build variables and secrets** → add `SITE_ENV` = `production`.
-- Then **Retry deployment** on the latest `main` build, or push any commit.
-- The build now produces the indexable site. Its canonical is https://auranova.mx no matter what `SITE_URL` says.
-- Check on the workers.dev URL that it built, before the domain points at it.
+- **Custom domain:** Worker `auranova-site` → Settings → **Domains & Routes** → Add → **Custom domain** → `auranova.mx`.
+  - Cloudflare creates the DNS record and the certificate (Google Trust Services); the email records (MX, TXT) are not touched.
+- **www:** DNS → a `CNAME www → auranova.mx`, **proxied**. Then Rules → **Redirect Rules** → template «Redirect from WWW to Root» (301, keeps the path and query).
+- **HTTPS only:** SSL/TLS → Edge Certificates → **Always Use HTTPS** = On. Without it, http:// answers 200.
+- **Turnstile:** the widget's hostnames include `auranova.mx`.
+- **Checked from here:**
+  - https://auranova.mx answers 200 with the CSP, still noindex;
+  - www → apex is a 301 with the path and query;
+  - http → https is a 301.
+  - A machine that had looked the name up before the record existed keeps a negative DNS cache for a while; check through `curl --doh-url https://1.1.1.1/dns-query`.
 
-## 3. Connect the domain (David, ~2 min)
+## 3. Flip the switch (David, ~1 min)
 
-- Same Worker → Settings → **Domains & Routes** → Add → **Custom domain** → `auranova.mx`.
-  - Cloudflare creates the DNS record and the certificate.
-  - The email records (MX, TXT) are not touched.
-- **www:**
-  - Rules → **Redirect Rules** → template «Redirect from WWW to Root» (301, keep the path and query).
-  - It needs a proxied DNS record for `www`; Claude gives the exact record on the day.
+- Worker → Settings → Build → **Variables and secrets** (build variables) → add `SITE_ENV` = `production`.
+- The next build of `main` is the indexable site. Trigger it by pushing any commit, or with **Retry deployment**.
+- Its canonical is https://auranova.mx, no matter what `SITE_URL` says.
 
 ## 4. Meta Pixel through Zaraz (David, with Claude's values)
 
