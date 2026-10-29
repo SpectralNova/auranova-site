@@ -9,8 +9,9 @@
   // The site's token (Web Analytics → auranova.mx → Manage site). Public by design: it ships in every page.
   const TOKEN = 'af2b761cb2e24f92a3822a1826a73b8c';
   const start = () => {
+    // As in Cloudflare's snippet: a module script with its token in data-cf-beacon.
     const beacon = document.createElement('script');
-    beacon.defer = true;
+    beacon.type = 'module';
     beacon.src = 'https://static.cloudflareinsights.com/beacon.min.js';
     beacon.dataset.cfBeacon = JSON.stringify({ token: TOKEN });
     document.body.append(beacon);
