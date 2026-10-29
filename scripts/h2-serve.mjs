@@ -47,9 +47,12 @@ server.on('stream', async (stream, headers) => {
       cache.set(key, br ? brotliCompressSync(raw, { params: { [constants.BROTLI_PARAM_QUALITY]: 5 } }) : raw);
     }
     if (Number(delay)) await new Promise((r) => setTimeout(r, Number(delay)));
+    // The browser may have dropped the request meanwhile (Lighthouse closes pages mid-load).
+    if (stream.destroyed) return;
     stream.respond({ ':status': 200, 'content-type': types[ext] ?? 'application/octet-stream', ...(br ? { 'content-encoding': 'br' } : {}) });
     stream.end(cache.get(key));
   } catch {
+    if (stream.destroyed || stream.headersSent) return;
     stream.respond({ ':status': 404 });
     stream.end();
   }
