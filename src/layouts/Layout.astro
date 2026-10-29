@@ -7,10 +7,11 @@ import '../styles/motion.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CookieConsent from '../components/CookieConsent.astro';
+import WebAnalytics from '../components/WebAnalytics.astro';
 import { business, factText, factValue, type Lang } from '../content/business';
 import { built, href, routes, type RouteKey } from '../i18n/routes';
 import { t } from '../i18n/ui';
-import { INDEXABLE } from '../lib/env';
+import { INDEXABLE, PRODUCTION } from '../lib/env';
 
 interface Props {
   lang: Lang;
@@ -107,6 +108,7 @@ const organization = {
       <slot />
     </main>
     <Footer lang={lang} />
+    {PRODUCTION && <WebAnalytics />}
     <script>
       // Where the visit came from, for the contact form (ADR-003 → HubSpot utm_* fields): the first page of the
       // visit keeps its campaign tags, its path and the referring site. This tab only (sessionStorage).

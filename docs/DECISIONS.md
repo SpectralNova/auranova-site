@@ -240,3 +240,23 @@
   - **Tests:** a new test checks a source, a social icon and the booking button, and that no internal or email link has a target (57/57).
   - **axe** is still clean.
 
+
+## ADR-024 · The Web Analytics beacon loads after the page
+- **Status:** Built · 2026-10-28 (David: "go ahead with the speed up"). Live once David switches Web Analytics to manual and `main` is merged.
+- **Problem:** on the live site, Lighthouse mobile put Sitios web at LCP 2.34–2.58 s, over the 2.5 s target. The same build served locally scored 1.35 s.
+- **Cause, measured:** the beacon Cloudflare injected on auranova.mx (automatic setup, Q18). It is a module script from another host (`static.cloudflareinsights.com`), so on a slow phone network its extra connection competes with the page itself.
+  - The live HTML, served locally over HTTP/2 + Brotli: LCP ~1.95 s on Sitios web and on the home page.
+  - The same HTML without the beacon: ~1.50 s and ~1.28 s.
+  - Without Zaraz's inline script instead: no change.
+- **Decision:** `WebAnalytics.astro`, rendered by the layout in production builds only, adds the beacon after the `load` event, once the browser is idle (3 s at most).
+  - It still reports the visit and the Web Vitals: checked in a browser, it sends its report after load.
+  - **Cloudflare's injection must be off** (Web Analytics → Manage site → «Enable with JS Snippet installation»), or every visit counts twice. Same site token, public by design.
+- **Measured** (Lighthouse mobile, local HTTP/2 + Brotli, median of 3): Sitios web 1.95 → 1.36 s, home 1.95 → 1.20 s. The live numbers go to the business archive after the release.
+- **Tried and dropped:**
+  - **Inlining all CSS** (`build.inlineStylesheets: 'always'`): 150 ms slower over HTTP/2, because the document grows and the separate stylesheets already load in parallel on one connection. It only looked faster on the HTTP/1.1 preview server.
+  - **A preload for the hero image:** no change. The browser already finds it early, with high priority.
+  - **`content-visibility: auto`** on the sections below the hero: it halved style and layout work but didn't move LCP, and it clips anything drawn outside a section.
+- **Tools:**
+  - `scripts/h2-serve.mjs` serves a build over HTTP/2 + Brotli, the way Cloudflare does. `astro preview` speaks HTTP/1.1, which overprices every request in Lighthouse's simulation.
+  - `scripts/lcp-diagnose.mjs` prints the LCP element and its timing, the render-blocking files, the main-thread work and the request list. `--insecure` accepts the local certificate; `--block-rum` keeps test runs from reporting to Cloudflare.
+- **Also:** the one exception to «no third-party script on page load» (Q18) now loads after the page.

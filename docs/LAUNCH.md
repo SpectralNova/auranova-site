@@ -55,8 +55,8 @@ Per ADR-015, step 07:
 
 ## 5. Web Analytics (David)
 
-- Cloudflare → Web Analytics → add `auranova.mx` with automatic setup (Q18).
-- If the beacon doesn't appear on the pages, switch to manual setup. The snippet then goes in the layout, production builds only.
+- Cloudflare → Web Analytics → add `auranova.mx` (Q18), then **Manage site → «Enable with JS Snippet installation»**: Cloudflare must not inject the beacon itself.
+- The site loads the beacon after the page has loaded (`WebAnalytics.astro`, production builds only, ADR-024). Cloudflare's injection at load cost ~0.5 s of LCP on phones.
 
 ## 6. Verify (Claude)
 

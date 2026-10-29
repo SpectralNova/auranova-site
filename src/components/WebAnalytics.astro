@@ -1,0 +1,21 @@
+---
+// Cloudflare Web Analytics (Q18): cookieless, production builds only (Layout). Its beacon loads once the page
+// has finished loading, so on a phone it never competes with the page itself: injected by Cloudflare at load,
+// its extra connection cost Sitios web ~0.5 s of LCP in Lighthouse (ADR-024). Cloudflare's own injection is
+// off for this to work (Web Analytics → Manage site → «Enable with JS Snippet installation»).
+---
+
+<script>
+  // The site's token (Web Analytics → auranova.mx → Manage site). Public by design: it ships in every page.
+  const TOKEN = 'af2b761cb2e24f92a3822a1826a73b8c';
+  const start = () => {
+    const beacon = document.createElement('script');
+    beacon.defer = true;
+    beacon.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    beacon.dataset.cfBeacon = JSON.stringify({ token: TOKEN });
+    document.body.append(beacon);
+  };
+  const whenIdle = () => ('requestIdleCallback' in window ? requestIdleCallback(start, { timeout: 3000 }) : setTimeout(start, 200));
+  if (document.readyState === 'complete') whenIdle();
+  else addEventListener('load', whenIdle, { once: true });
+</script>
