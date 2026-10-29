@@ -31,6 +31,7 @@ for (const path of paths) {
   const flags = ['--headless=new', '--no-first-run', '--disable-extensions'];
   if (args.includes('--insecure')) flags.push('--ignore-certificate-errors');
   if (args.includes('--block-rum')) flags.push('--host-resolver-rules=MAP cloudflareinsights.com ~NOTFOUND');
+  if (args.includes('--h2')) flags.push('--disable-quic'); // see scripts/lighthouse.mjs
   const chrome = await chromeLauncher.launch({ port: await freePort(), chromePath: EDGE, chromeFlags: flags });
   try {
     const { lhr } = await lighthouse(new URL(path, base).href, { port: chrome.port, output: 'json', logLevel: 'error' });
@@ -51,7 +52,7 @@ for (const path of paths) {
     const reqs = (a['network-requests']?.details?.items ?? []).filter((r) => r.resourceType !== 'Other');
     console.log('requests:');
     for (const r of reqs)
-      console.log(`  ${String(Math.round(r.networkRequestTime)).padStart(5)}→${String(Math.round(r.networkEndTime)).padStart(5)}ms  ${String(Math.round((r.transferSize ?? 0) / 1024)).padStart(4)}KB  ${(r.priority ?? '').padEnd(8)} ${r.resourceType.padEnd(10)} ${r.url.replace(base, '')}`);
+      console.log(`  ${String(Math.round(r.networkRequestTime)).padStart(5)}→${String(Math.round(r.networkEndTime)).padStart(5)}ms  ${String(Math.round((r.transferSize ?? 0) / 1024)).padStart(4)}KB  ${(r.priority ?? '').padEnd(8)} ${(r.protocol ?? '').padEnd(4)} ${r.resourceType.padEnd(10)} ${r.url.replace(base, '')}`);
   } finally {
     await chrome.kill();
   }

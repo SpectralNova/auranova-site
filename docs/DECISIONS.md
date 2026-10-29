@@ -260,3 +260,8 @@
   - `scripts/h2-serve.mjs` serves a build over HTTP/2 + Brotli, the way Cloudflare does. `astro preview` speaks HTTP/1.1, which overprices every request in Lighthouse's simulation.
   - `scripts/lcp-diagnose.mjs` prints the LCP element and its timing, the render-blocking files, the main-thread work and the request list. `--insecure` accepts the local certificate; `--block-rum` keeps test runs from reporting to Cloudflare.
 - **Also:** the one exception to «no third-party script on page load» (Q18) now loads after the page.
+- **Measuring the live site (found after the release, 1e5d916):** Lighthouse's simulator treats only HTTP/2 as multiplexed (`ConnectionPool.js` in Lantern: `protocol === 'h2'`). auranova.mx is served over HTTP/3, Cloudflare's default, so Lighthouse prices every request as if it needed its own connection, the way HTTP/1.1 works. That flips the same page between ~1.56 s (HTTP/2) and ~2.5 s (HTTP/3) of LCP, and it is what kept Sitios web «over» 2.5 s at launch.
+  - **Measure the live site with `--h2`** (`scripts/lighthouse.mjs`, `lcp-diagnose.mjs`): the test browser turns QUIC off.
+  - **HTTP/3 stays on:** it serves real phones at least as well as HTTP/2. Turning it off would trade real visitors' speed for a lab number. PageSpeed Insights may show the HTTP/3 number (still green, ~96).
+  - **Live after the release** (`--h2`, median of 3, 6 pages): performance 100 on all; LCP 1.23–1.54 s (Sitios web 1.54 s, from 2.58 s at launch); accessibility, best practices and SEO 100.
+  - **Real visitors' numbers** come from Web Analytics (Core Web Vitals), now that it reports again.

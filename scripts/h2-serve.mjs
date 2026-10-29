@@ -1,6 +1,7 @@
 // Serves a built dist/ over HTTP/2 + TLS with Brotli, close to how Cloudflare delivers the site, so Lighthouse's
 // simulated load can be compared between builds without deploying (HTTP/1.1 previews overprice every request).
-//   node scripts/h2-serve.mjs <dist-dir> <port>   (self-signed cert: run Lighthouse with --ignore-certificate-errors)
+//   node scripts/h2-serve.mjs <dist-dir> <port> [delay-ms]   (self-signed cert: run Lighthouse with --ignore-certificate-errors)
+// delay-ms holds every response, like the live server's own time per request (~60 ms on auranova.mx, 2026-10-28).
 import http2 from 'node:http2';
 import { readFile, stat } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
@@ -9,7 +10,7 @@ import { join, extname, resolve } from 'node:path';
 import { brotliCompressSync, constants } from 'node:zlib';
 import { tmpdir } from 'node:os';
 
-const [dir = 'dist', port = '4443'] = process.argv.slice(2);
+const [dir = 'dist', port = '4443', delay = '0'] = process.argv.slice(2);
 const root = resolve(dir);
 const certDir = join(tmpdir(), 'auranova-h2-cert');
 if (!existsSync(join(certDir, 'cert.pem'))) {
@@ -45,6 +46,7 @@ server.on('stream', async (stream, headers) => {
       const raw = await readFile(file);
       cache.set(key, br ? brotliCompressSync(raw, { params: { [constants.BROTLI_PARAM_QUALITY]: 5 } }) : raw);
     }
+    if (Number(delay)) await new Promise((r) => setTimeout(r, Number(delay)));
     stream.respond({ ':status': 200, 'content-type': types[ext] ?? 'application/octet-stream', ...(br ? { 'content-encoding': 'br' } : {}) });
     stream.end(cache.get(key));
   } catch {

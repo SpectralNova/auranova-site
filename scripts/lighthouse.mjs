@@ -3,6 +3,12 @@
 //   npm run test:lh                 serve dist/ locally, print scores, fail if any category < 95 (brief §5)
 //   npm run measure                 same, and write src/data/site-scores.json for "Nuestro estándar"
 //   node scripts/lighthouse.mjs --base https://example.com --paths / --out example-scores
+//   node scripts/lighthouse.mjs --base https://auranova.mx --h2 --block-rum   (the live site; see below)
+//
+// --h2: Lighthouse's simulator treats only HTTP/2 as multiplexed, so over HTTP/3 (Cloudflare's default) it prices every
+// request like HTTP/1.1 and adds ~1 s to LCP (ADR-024). --h2 turns QUIC off in the test browser for a fair number.
+// --block-rum: the beacon still loads but can't report, so test runs don't count as visits (Best practices then
+// flags the failed report as a console error).
 //
 // For this site's own scores, measure an indexable local build (preview builds are noindex, which
 // Lighthouse's SEO audit penalizes):  SITE_INDEXABLE=1 npm run build && npm run measure && npm run build
@@ -36,7 +42,7 @@ const EDGE = process.env.CHROME_PATH ?? 'C:/Program Files (x86)/Microsoft/Edge/A
 const PORT = 4329;
 
 async function runOnce(url) {
-  const chrome = await chromeLauncher.launch({ port: await freePort(), chromePath: EDGE, chromeFlags: ['--headless=new', '--no-first-run', '--disable-extensions'] });
+  const chrome = await chromeLauncher.launch({ port: await freePort(), chromePath: EDGE, chromeFlags: ['--headless=new', '--no-first-run', '--disable-extensions', ...(args.includes('--h2') ? ['--disable-quic'] : []), ...(args.includes('--block-rum') ? ['--host-resolver-rules=MAP cloudflareinsights.com ~NOTFOUND'] : [])] });
   try {
     const { lhr } = await lighthouse(url, { port: chrome.port, output: 'json', logLevel: 'error' });
     const c = lhr.categories;
